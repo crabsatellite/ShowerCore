@@ -2,7 +2,7 @@ package mod.crabmod.showercore.registers;
 
 import java.util.function.Supplier;
 import mod.crabmod.showercore.ShowerCore;
-import mod.crabmod.showercore.block.bath_core.ShowerHeadBlock;
+import mod.crabmod.showercore.block.ShowerHeadBlock;
 import mod.crabmod.showercore.block.bath_core.herbal_bath_core.HerbalBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.honey_bath_core.HoneyBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.hot_water_core.HotWaterCoreBlock;

@@ -8,10 +8,7 @@ import mod.crabmod.showercore.block.bath_core.hot_water_core.HotWaterCoreBlockEn
 import mod.crabmod.showercore.block.bath_core.milk_bath_core.MilkBathCoreBlockEntity;
 import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlockEntity;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEntity;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -74,6 +71,17 @@ public class BlockEntitiesRegister {
               () ->
                   BlockEntityType.Builder.of(
                           RoseBathCoreBlockEntity::new, BlocksRegister.ROSE_BATH_CORE.get())
+                      .build(null));
+
+  public static final RegistryObject<BlockEntityType<ShowerHeadContainerEntity>>
+      SHOWER_HEAD_CONTAINER =
+          BLOCK_ENTITIES.register(
+              "shower_head_container",
+              () ->
+                  BlockEntityType.Builder.of(
+                          ShowerHeadContainerEntity::new,
+                          BlocksRegister.SHOWER_HEAD_BLACK.get(),
+                          BlocksRegister.SHOWER_HEAD_WHITE.get())
                       .build(null));
 
   public static void register(IEventBus eventBus) {
