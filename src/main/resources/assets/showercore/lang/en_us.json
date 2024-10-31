@@ -1,10 +1,10 @@
 {
-  "block.showercore:hot_water_core": "Hot Water Core",
-  "block.showercore:herbal_bath_core": "Herbal Bath Core",
-  "block.showercore:honey_bath_core": "Honey Bath Core",
-  "block.showercore:milk_bath_core": "Milk Bath Core",
-  "block.showercore:rose_bath_core": "Rose Bath Core",
-  "block.showercore:peony_bath_core": "Peony Bath Core",
-  "block.showercore:shower_head_black": "Shower Head (Black)",
-  "block.showercore:shower_head_white": "Shower Head (White)"
+  "block.showercore.hot_water_core": "Hot Water Core",
+  "block.showercore.herbal_bath_core": "Herbal Bath Core",
+  "block.showercore.honey_bath_core": "Honey Bath Core",
+  "block.showercore.milk_bath_core": "Milk Bath Core",
+  "block.showercore.rose_bath_core": "Rose Bath Core",
+  "block.showercore.peony_bath_core": "Peony Bath Core",
+  "block.showercore.shower_head_black": "Shower Head (Black)",
+  "block.showercore.shower_head_white": "Shower Head (White)"
 }

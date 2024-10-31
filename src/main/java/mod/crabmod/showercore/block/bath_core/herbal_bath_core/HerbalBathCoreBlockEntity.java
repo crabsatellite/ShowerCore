@@ -156,7 +156,7 @@ public class HerbalBathCoreBlockEntity extends BlockEntity {
 
   private static boolean isBathCoreFrame(
       BlockState state, LevelReader level, BlockPos pos, BlockPos conduit) {
-    for (Block block : Config.blocks) {
+    for (Block block : Config.herbalBathCoreBlocks) {
       if (state.getBlock() == block) {
         return true;
       }
