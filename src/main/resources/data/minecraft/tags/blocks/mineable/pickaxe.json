@@ -1,0 +1,10 @@
+{
+  "values": [
+    "showercore:hot_water_core",
+    "showercore:herbal_bath_core",
+    "showercore:honey_bath_core",
+    "showercore:milk_bath_core",
+    "showercore:rose_bath_core",
+    "showercore:peony_bath_core"
+  ]
+}
