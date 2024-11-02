@@ -27,7 +27,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
 
   @Override
   protected VoxelShape getBaseShape() {
-    return Shapes.or(box(4.5, -6, 4, 11.5, 25, 16));
+    return Shapes.or(box(2.75, 0, 5.5, 13, 31, 16));
   }
 
   @Override
