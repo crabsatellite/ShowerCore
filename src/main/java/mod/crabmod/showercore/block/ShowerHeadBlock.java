@@ -1,3 +1,4 @@
+// ShowerHeadBlock.java
 package mod.crabmod.showercore.block;
 
 import mod.crabmod.showercore.base.RotatableBlock;
@@ -34,16 +35,15 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
 
   @Override
   public InteractionResult use(
-          BlockState state,
-          Level level,
-          BlockPos pos,
-          Player player,
-          InteractionHand hand,
-          BlockHitResult hit) {
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hit) {
 
     boolean isShiftDown = player.isShiftKeyDown();
 
-    // 确保主手为空时才触发逻辑
     if (!player.getMainHandItem().isEmpty()) {
       return InteractionResult.PASS;
     }
@@ -55,12 +55,13 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
 
     if (level.isClientSide) {
       if (!isShiftDown) {
-        // 切换粒子效果的开启/关闭状态
         showerEntity.toggleEffect();
+        BathEffectUtils bathEffectUtils = showerEntity.getBathEffectUtils();
+
         if (showerEntity.isEffectActive()) {
-          BathEffectUtils.renderBathWater(level, pos);
+          bathEffectUtils.renderBathWater(level, pos);
         } else {
-          BathEffectUtils.stopBathEffect();
+          bathEffectUtils.stopBathEffect();
         }
         return InteractionResult.SUCCESS;
       } else {
