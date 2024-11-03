@@ -13,6 +13,7 @@ import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlock
 import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreModelLayers;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEntityRenderer;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLayers;
+import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.client.Minecraft;
@@ -33,13 +34,17 @@ public class ClientEvent {
   public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
     // HotWater Core Layers
     event.registerLayerDefinition(
-        HotWaterCoreModelLayers.HOT_WATER_CORE_CAGE, HotWaterCoreBlockEntityRenderer::createCageLayer);
+        HotWaterCoreModelLayers.HOT_WATER_CORE_CAGE,
+        HotWaterCoreBlockEntityRenderer::createCageLayer);
     event.registerLayerDefinition(
-        HotWaterCoreModelLayers.HOT_WATER_CORE_WIND, HotWaterCoreBlockEntityRenderer::createWindLayer);
+        HotWaterCoreModelLayers.HOT_WATER_CORE_WIND,
+        HotWaterCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        HotWaterCoreModelLayers.HOT_WATER_CORE_EYE, HotWaterCoreBlockEntityRenderer::createEyeLayer);
+        HotWaterCoreModelLayers.HOT_WATER_CORE_EYE,
+        HotWaterCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
-        HotWaterCoreModelLayers.HOT_WATER_CORE_SHELL, HotWaterCoreBlockEntityRenderer::createShellLayer);
+        HotWaterCoreModelLayers.HOT_WATER_CORE_SHELL,
+        HotWaterCoreBlockEntityRenderer::createShellLayer);
 
     // Herbal Bath Core Layers
     event.registerLayerDefinition(
@@ -49,49 +54,64 @@ public class ClientEvent {
         HerbalBathCoreModelLayers.HERBAL_BATH_CORE_WIND,
         HerbalBathCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        HerbalBathCoreModelLayers.HERBAL_BATH_CORE_EYE, HerbalBathCoreBlockEntityRenderer::createEyeLayer);
+        HerbalBathCoreModelLayers.HERBAL_BATH_CORE_EYE,
+        HerbalBathCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
         HerbalBathCoreModelLayers.HERBAL_BATH_CORE_SHELL,
         HerbalBathCoreBlockEntityRenderer::createShellLayer);
 
     // Milk Bath Core Layers
     event.registerLayerDefinition(
-        MilkBathCoreModelLayers.MILK_BATH_CORE_CAGE, MilkBathCoreBlockEntityRenderer::createCageLayer);
+        MilkBathCoreModelLayers.MILK_BATH_CORE_CAGE,
+        MilkBathCoreBlockEntityRenderer::createCageLayer);
     event.registerLayerDefinition(
-        MilkBathCoreModelLayers.MILK_BATH_CORE_WIND, MilkBathCoreBlockEntityRenderer::createWindLayer);
+        MilkBathCoreModelLayers.MILK_BATH_CORE_WIND,
+        MilkBathCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        MilkBathCoreModelLayers.MILK_BATH_CORE_EYE, MilkBathCoreBlockEntityRenderer::createEyeLayer);
+        MilkBathCoreModelLayers.MILK_BATH_CORE_EYE,
+        MilkBathCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
-        MilkBathCoreModelLayers.MILK_BATH_CORE_SHELL, MilkBathCoreBlockEntityRenderer::createShellLayer);
+        MilkBathCoreModelLayers.MILK_BATH_CORE_SHELL,
+        MilkBathCoreBlockEntityRenderer::createShellLayer);
 
     // Honey Bath Core Layers
     event.registerLayerDefinition(
-        HoneyBathCoreModelLayers.HONEY_BATH_CORE_CAGE, HoneyBathCoreBlockEntityRenderer::createCageLayer);
+        HoneyBathCoreModelLayers.HONEY_BATH_CORE_CAGE,
+        HoneyBathCoreBlockEntityRenderer::createCageLayer);
     event.registerLayerDefinition(
-        HoneyBathCoreModelLayers.HONEY_BATH_CORE_WIND, HoneyBathCoreBlockEntityRenderer::createWindLayer);
+        HoneyBathCoreModelLayers.HONEY_BATH_CORE_WIND,
+        HoneyBathCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        HoneyBathCoreModelLayers.HONEY_BATH_CORE_EYE, HoneyBathCoreBlockEntityRenderer::createEyeLayer);
+        HoneyBathCoreModelLayers.HONEY_BATH_CORE_EYE,
+        HoneyBathCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
         HoneyBathCoreModelLayers.HONEY_BATH_CORE_SHELL,
         HoneyBathCoreBlockEntityRenderer::createShellLayer);
 
     // Rose Bath Core Layers
     event.registerLayerDefinition(
-        RoseBathCoreModelLayers.ROSE_BATH_CORE_CAGE, RoseBathCoreBlockEntityRenderer::createCageLayer);
+        RoseBathCoreModelLayers.ROSE_BATH_CORE_CAGE,
+        RoseBathCoreBlockEntityRenderer::createCageLayer);
     event.registerLayerDefinition(
-        RoseBathCoreModelLayers.ROSE_BATH_CORE_WIND, RoseBathCoreBlockEntityRenderer::createWindLayer);
+        RoseBathCoreModelLayers.ROSE_BATH_CORE_WIND,
+        RoseBathCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        RoseBathCoreModelLayers.ROSE_BATH_CORE_EYE, RoseBathCoreBlockEntityRenderer::createEyeLayer);
+        RoseBathCoreModelLayers.ROSE_BATH_CORE_EYE,
+        RoseBathCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
-        RoseBathCoreModelLayers.ROSE_BATH_CORE_SHELL, RoseBathCoreBlockEntityRenderer::createShellLayer);
+        RoseBathCoreModelLayers.ROSE_BATH_CORE_SHELL,
+        RoseBathCoreBlockEntityRenderer::createShellLayer);
 
     // Peony Bath Core Layers
     event.registerLayerDefinition(
-        PeonyBathCoreModelLayers.PEONY_BATH_CORE_CAGE, PeonyBathCoreBlockEntityRenderer::createCageLayer);
+        PeonyBathCoreModelLayers.PEONY_BATH_CORE_CAGE,
+        PeonyBathCoreBlockEntityRenderer::createCageLayer);
     event.registerLayerDefinition(
-        PeonyBathCoreModelLayers.PEONY_BATH_CORE_WIND, PeonyBathCoreBlockEntityRenderer::createWindLayer);
+        PeonyBathCoreModelLayers.PEONY_BATH_CORE_WIND,
+        PeonyBathCoreBlockEntityRenderer::createWindLayer);
     event.registerLayerDefinition(
-        PeonyBathCoreModelLayers.PEONY_BATH_CORE_EYE, PeonyBathCoreBlockEntityRenderer::createEyeLayer);
+        PeonyBathCoreModelLayers.PEONY_BATH_CORE_EYE,
+        PeonyBathCoreBlockEntityRenderer::createEyeLayer);
     event.registerLayerDefinition(
         PeonyBathCoreModelLayers.PEONY_BATH_CORE_SHELL,
         PeonyBathCoreBlockEntityRenderer::createShellLayer);
@@ -127,5 +147,13 @@ public class ClientEvent {
         .register(
             ParticleRegister.BATH_CORE_PARTICLE.get(),
             EnchantmentTableParticle.NautilusProvider::new);
+
+    event.registerSpriteSet(
+        ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+  }
+
+  public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+    event.registerSpriteSet(
+        ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
   }
 }

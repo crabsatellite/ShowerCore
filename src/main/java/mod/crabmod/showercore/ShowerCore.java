@@ -3,6 +3,7 @@ package mod.crabmod.showercore;
 import com.crabmod.hotbath.item.ItemGroup;
 import com.mojang.logging.LogUtils;
 import mod.crabmod.showercore.effect.ModEffects;
+import mod.crabmod.showercore.event.ClientEvent;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.registers.BlocksRegister;
 import mod.crabmod.showercore.registers.ItemRegister;
@@ -68,6 +69,8 @@ public class ShowerCore {
   @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
   public static class ClientModEvents {
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {}
+    public static void onClientSetup(FMLClientSetupEvent event) {
+      MinecraftForge.EVENT_BUS.addListener(ClientEvent::registerParticleFactories);
+    }
   }
 }

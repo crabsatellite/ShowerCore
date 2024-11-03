@@ -15,6 +15,9 @@ public class ParticleRegister {
   public static final RegistryObject<SimpleParticleType> BATH_CORE_PARTICLE =
       PARTICLE_TYPES.register("bath_core_particle", () -> new SimpleParticleType(true));
 
+  public static final RegistryObject<SimpleParticleType> HOT_WATER_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("hot_water_shower_particle", () -> new SimpleParticleType(true));
+
   public static void register(IEventBus eventBus) {
     PARTICLE_TYPES.register(eventBus);
   }
