@@ -14,12 +14,12 @@ import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class BaseShowerHeadContainerBlockEntity extends BaseContainerBlockEntity {
+public abstract class BaseShowerHeadBlockEntity extends BaseContainerBlockEntity {
 
   // Holds items for the container
   protected NonNullList<ItemStack> items;
 
-  public BaseShowerHeadContainerBlockEntity(
+  public BaseShowerHeadBlockEntity(
           BlockEntityType<?> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
     // Creates a container with a single slot
@@ -99,10 +99,10 @@ public abstract class BaseShowerHeadContainerBlockEntity extends BaseContainerBl
 
   // Custom menu for a single-slot container
   private static class SingleSlotMenu extends AbstractContainerMenu {
-    private final BaseShowerHeadContainerBlockEntity blockEntity;
+    private final BaseShowerHeadBlockEntity blockEntity;
 
     public SingleSlotMenu(
-            int id, Inventory playerInventory, BaseShowerHeadContainerBlockEntity blockEntity) {
+            int id, Inventory playerInventory, BaseShowerHeadBlockEntity blockEntity) {
       super(MenuType.GENERIC_9x1, id);
       this.blockEntity = blockEntity;
     }
