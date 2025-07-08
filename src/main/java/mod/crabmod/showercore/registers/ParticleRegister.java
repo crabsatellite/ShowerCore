@@ -18,6 +18,21 @@ public class ParticleRegister {
   public static final RegistryObject<SimpleParticleType> HOT_WATER_SHOWER_PARTICLE =
       PARTICLE_TYPES.register("hot_water_shower_particle", () -> new SimpleParticleType(true));
 
+  public static final RegistryObject<SimpleParticleType> HERBAL_BATH_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("herbal_bath_shower_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> HONEY_BATH_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("honey_bath_shower_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> MILK_BATH_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("milk_bath_shower_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> PEONY_BATH_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("peony_bath_shower_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> ROSE_BATH_SHOWER_PARTICLE =
+      PARTICLE_TYPES.register("rose_bath_shower_particle", () -> new SimpleParticleType(true));
+
   public static void register(IEventBus eventBus) {
     PARTICLE_TYPES.register(eventBus);
   }
