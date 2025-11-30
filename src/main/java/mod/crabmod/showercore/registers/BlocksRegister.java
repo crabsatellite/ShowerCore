@@ -52,6 +52,20 @@ public class BlocksRegister {
           .noCollission()
           .lightLevel(state -> 14);
 
+  private static final BlockBehaviour.Properties COMMON_PROPERTIES_STONE_NO_COLLISION =
+      BlockBehaviour.Properties.of()
+          .strength(1.5F)
+          .sound(SoundType.STONE)
+          .noOcclusion()
+          .noCollission();
+
+  private static final BlockBehaviour.Properties COMMON_PROPERTIES_METAL_NO_COLLISION =
+      BlockBehaviour.Properties.of()
+          .strength(2.0F)
+          .sound(SoundType.METAL)
+          .noOcclusion()
+          .noCollission();
+
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
 
@@ -62,6 +76,75 @@ public class BlocksRegister {
   public static final RegistryObject<Block> SHOWER_HEAD_WHITE =
       registerBlock(
           "shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_OAK =
+      registerBlock(
+          "shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_SPRUCE =
+      registerBlock(
+          "shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_BIRCH =
+      registerBlock(
+          "shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_JUNGLE =
+      registerBlock(
+          "shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_ACACIA =
+      registerBlock(
+          "shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_DARK_OAK =
+      registerBlock(
+          "shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_MANGROVE =
+      registerBlock(
+          "shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_CHERRY =
+      registerBlock(
+          "shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_BAMBOO =
+      registerBlock(
+          "shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_CRIMSON =
+      registerBlock(
+          "shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_WARPED =
+      registerBlock(
+          "shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_STONE =
+      registerBlock(
+          "shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_COBBLESTONE =
+      registerBlock(
+          "shower_head_cobblestone",
+          () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_IRON =
+      registerBlock(
+          "shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_GOLD =
+      registerBlock(
+          "shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_COPPER =
+      registerBlock(
+          "shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+
+  public static final RegistryObject<Block> SHOWER_HEAD_DIAMOND =
+      registerBlock(
+          "shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
   public static final RegistryObject<Block> HOT_WATER_CORE =
       registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));

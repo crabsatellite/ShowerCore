@@ -1,14 +1,14 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "minecraft:block/white_concrete",
+    "0": "minecraft:block/bamboo_planks",
     "1": "showercore:block/showerpom",
     "2": "minecraft:block/red_concrete",
     "3": "minecraft:block/blue_concrete",
-    "4": "minecraft:block/white_concrete",
-    "5": "minecraft:block/white_concrete",
-    "6": "minecraft:block/white_concrete",
-    "particle": "minecraft:block/white_concrete"
+    "4": "minecraft:block/stripped_bamboo_block",
+    "5": "minecraft:block/bamboo_planks",
+    "6": "minecraft:block/stripped_bamboo_block",
+    "particle": "minecraft:block/bamboo_planks"
   },
   "elements": [
     {

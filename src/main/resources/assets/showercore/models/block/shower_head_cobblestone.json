@@ -1,14 +1,14 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "minecraft:block/white_concrete",
+    "0": "minecraft:block/cobblestone",
     "1": "showercore:block/showerpom",
     "2": "minecraft:block/red_concrete",
     "3": "minecraft:block/blue_concrete",
-    "4": "minecraft:block/white_concrete",
-    "5": "minecraft:block/white_concrete",
-    "6": "minecraft:block/white_concrete",
-    "particle": "minecraft:block/white_concrete"
+    "4": "minecraft:block/stone",
+    "5": "minecraft:block/cobblestone",
+    "6": "minecraft:block/stone",
+    "particle": "minecraft:block/cobblestone"
   },
   "elements": [
     {

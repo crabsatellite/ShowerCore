@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "showercore:block/shower_head_dark_oak"
+    },
+    "facing=east": {
+      "model": "showercore:block/shower_head_dark_oak",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "showercore:block/shower_head_dark_oak",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "showercore:block/shower_head_dark_oak",
+      "y": 270
+    }
+  }
+}
