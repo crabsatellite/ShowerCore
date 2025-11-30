@@ -79,6 +79,10 @@ public class BathEffectUtils {
                         return; // 如果效果已停用，跳过任务
                     }
 
+                    if (Minecraft.getInstance().isPaused()) {
+                        return;
+                    }
+
                     Minecraft.getInstance().execute(() -> {
                         // 设置相对高度范围
                         double invisibleHeightMin = pos.getY() + invisibleHeightMinOffset;
@@ -129,6 +133,10 @@ public class BathEffectUtils {
                         return; // 如果效果已停用，跳过任务
                     }
 
+                    if (Minecraft.getInstance().isPaused()) {
+                        return;
+                    }
+
                     Minecraft.getInstance().execute(() -> {
                         level.playLocalSound(
                                 pos.getX(),
@@ -136,7 +144,7 @@ public class BathEffectUtils {
                                 pos.getZ(),
                                 SoundEvents.WEATHER_RAIN,
                                 SoundSource.BLOCKS,
-                                1.0F,
+                                0.2F,
                                 1.0F,
                                 false
                         );
