@@ -51,6 +51,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import java.util.Optional;
+import mod.crabmod.showercore.Config;
+import net.minecraft.world.level.material.Fluid;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -379,7 +381,24 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   @Override
   public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
     LiquidType liquid = state.getValue(LIQUID);
-    if (liquid != LiquidType.EMPTY && liquid != LiquidType.WATER && random.nextInt(10) == 0) {
+    boolean produceSteam = false;
+
+    if (liquid == LiquidType.CUSTOM) {
+         BlockEntity be = level.getBlockEntity(pos);
+         if (be instanceof BathtubBlockEntity bathtubBe) {
+             FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
+             if (!fluidStack.isEmpty()) {
+                 Fluid fluid = fluidStack.getFluid();
+                 if (Config.steamFluids.contains(fluid)) {
+                     produceSteam = true;
+                 }
+             }
+         }
+    } else if (liquid != LiquidType.EMPTY && liquid != LiquidType.WATER) {
+        produceSteam = true;
+    }
+
+    if (produceSteam && random.nextInt(10) == 0) {
       double x = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       double y = (double) pos.getY() + 0.9D;
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;

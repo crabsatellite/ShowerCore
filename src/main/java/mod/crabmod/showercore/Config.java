@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -70,33 +71,24 @@ public class Config {
           .defineListAllowEmpty(
               "herbal_bath_core_blocks",
               List.of(
-                  "minecraft:oak_log",
-                  "minecraft:stripped_oak_log",
-                  "minecraft:oak_leaves",
-                  "minecraft:spruce_log",
-                  "minecraft:stripped_spruce_log",
-                  "minecraft:spruce_leaves",
-                  "minecraft:birch_log",
-                  "minecraft:stripped_birch_log",
-                  "minecraft:birch_leaves",
-                  "minecraft:jungle_log",
-                  "minecraft:stripped_jungle_log",
-                  "minecraft:jungle_leaves",
-                  "minecraft:acacia_log",
-                  "minecraft:stripped_acacia_log",
-                  "minecraft:acacia_leaves",
-                  "minecraft:dark_oak_log",
-                  "minecraft:stripped_dark_oak_log",
-                  "minecraft:dark_oak_leaves",
-                  "minecraft:azalea_leaves",
-                  "minecraft:flowering_azalea_leaves",
-                  "minecraft:mangrove_log",
-                  "minecraft:stripped_mangrove_log",
-                  "minecraft:mangrove_leaves",
-                  "minecraft:cherry_log",
-                  "minecraft:stripped_cherry_log",
-                  "minecraft:cherry_leaves"),
+                  "minecraft:mossy_cobblestone", "minecraft:moss_block",
+                  "minecraft:vine", "minecraft:oak_leaves",
+                  "minecraft:spruce_leaves", "minecraft:birch_leaves",
+                  "minecraft:jungle_leaves", "minecraft:acacia_leaves",
+                  "minecraft:dark_oak_leaves", "minecraft:mangrove_leaves",
+                  "minecraft:cherry_leaves", "minecraft:azalea_leaves",
+                  "minecraft:flowering_azalea_leaves"),
               Config::validateBlockName);
+
+  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> STEAM_FLUIDS =
+      BUILDER
+          .comment("Fluids that produce steam in the bathtub.",
+                   "Add fluid registry names here, e.g., 'minecraft:lava' or 'some_mod:hot_spring_water'.",
+                   "Default: empty (only built-in hot fluids produce steam)")
+          .defineListAllowEmpty(
+              "steam_fluids",
+              List.of(),
+              Config::validateFluidName);
 
   static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -106,10 +98,16 @@ public class Config {
   public static Set<Block> roseBathCoreBlocks;
   public static Set<Block> peonyBathCoreBlocks;
   public static Set<Block> herbalBathCoreBlocks;
+  public static Set<Fluid> steamFluids;
 
   private static boolean validateBlockName(final Object obj) {
     return obj instanceof final String blockName
         && ForgeRegistries.BLOCKS.containsKey(new ResourceLocation(blockName));
+  }
+
+  private static boolean validateFluidName(final Object obj) {
+    return obj instanceof final String fluidName
+        && ForgeRegistries.FLUIDS.containsKey(new ResourceLocation(fluidName));
   }
 
   @SubscribeEvent
@@ -142,6 +140,11 @@ public class Config {
     herbalBathCoreBlocks =
         HERBAL_BATH_CORE_BLOCKS.get().stream()
             .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .collect(Collectors.toSet());
+
+    steamFluids =
+        STEAM_FLUIDS.get().stream()
+            .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
             .collect(Collectors.toSet());
   }
 }
