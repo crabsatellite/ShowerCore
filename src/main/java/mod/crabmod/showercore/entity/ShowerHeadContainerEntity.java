@@ -61,4 +61,20 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     super.saveAdditional(tag);
     tag.putBoolean("EffectActive", this.effectActive);
   }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    if (this.level != null && this.level.isClientSide && this.effectActive) {
+      this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+    }
+  }
+
+  @Override
+  public void setRemoved() {
+    super.setRemoved();
+    if (this.level != null && this.level.isClientSide) {
+      this.bathEffectUtils.shutdown();
+    }
+  }
 }

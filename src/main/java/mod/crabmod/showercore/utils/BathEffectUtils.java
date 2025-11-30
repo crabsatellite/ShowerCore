@@ -18,12 +18,17 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 
 public class BathEffectUtils {
-    private final ScheduledExecutorService scheduler;
+    private ScheduledExecutorService scheduler;
     private final AtomicBoolean isEffectActive;
 
     public BathEffectUtils() {
-        this.scheduler = Executors.newScheduledThreadPool(2);
         this.isEffectActive = new AtomicBoolean(false);
+    }
+
+    private void ensureScheduler() {
+        if (this.scheduler == null || this.scheduler.isShutdown()) {
+            this.scheduler = Executors.newScheduledThreadPool(2);
+        }
     }
 
     public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
@@ -71,6 +76,7 @@ public class BathEffectUtils {
             return;
         }
         isEffectActive.set(true);
+        ensureScheduler();
 
         // 定期生成粒子效果
         scheduler.scheduleAtFixedRate(
@@ -126,6 +132,7 @@ public class BathEffectUtils {
     }
 
     public void playBathSound(Level level, int soundInterval, BlockPos pos) {
+        ensureScheduler();
         // 定期播放声音效果
         scheduler.scheduleAtFixedRate(
                 () -> {
@@ -159,5 +166,12 @@ public class BathEffectUtils {
     // 停止粒子效果
     public void stopBathEffect() {
         isEffectActive.set(false);
+    }
+
+    public void shutdown() {
+        stopBathEffect();
+        if (scheduler != null) {
+            scheduler.shutdown();
+        }
     }
 }
