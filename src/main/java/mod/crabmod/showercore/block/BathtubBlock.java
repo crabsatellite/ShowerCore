@@ -290,7 +290,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
     LiquidType liquid = state.getValue(LIQUID);
     if (liquid != LiquidType.EMPTY && liquid != LiquidType.WATER && random.nextInt(10) == 0) {
       double x = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
-      double y = (double) pos.getY() + 0.6D;
+      double y = (double) pos.getY() + 0.9D;
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       level.addParticle((ParticleOptions) ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
     }
