@@ -1,6 +1,7 @@
 package mod.crabmod.showercore.registers;
 
 import mod.crabmod.showercore.ShowerCore;
+import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,6 +17,11 @@ public class EntityRegister {
             () -> EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC)
                     .sized(0.0F, 0.0F)
                     .build("seat"));
+
+    public static final RegistryObject<EntityType<FaucetInteractionEntity>> FAUCET_ENTITY = ENTITY_TYPES.register("faucet",
+            () -> EntityType.Builder.<FaucetInteractionEntity>of(FaucetInteractionEntity::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .build("faucet"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

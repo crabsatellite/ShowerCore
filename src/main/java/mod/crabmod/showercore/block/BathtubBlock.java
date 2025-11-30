@@ -1,9 +1,11 @@
 package mod.crabmod.showercore.block;
 
 import javax.annotation.Nullable;
+import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,6 +38,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.phys.Vec3;
 import java.util.Optional;
 
 public class BathtubBlock extends HorizontalDirectionalBlock {
@@ -169,6 +172,23 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
       level.setBlock(blockpos, state.setValue(PART, BedPart.HEAD), 3);
       level.blockUpdated(pos, Blocks.AIR);
       state.updateNeighbourShapes(level, pos, 3);
+
+      // Spawn Faucet Entity
+      Direction facing = state.getValue(FACING);
+      double x = blockpos.getX();
+      double y = blockpos.getY();
+      double z = blockpos.getZ();
+      
+      switch (facing) {
+          case NORTH: x += 0.5; y += 0.78; z += 0.125; break;
+          case SOUTH: x += 0.5; y += 0.78; z += 0.875; break;
+          case WEST: x += 0.125; y += 0.78; z += 0.5; break;
+          case EAST: x += 0.875; y += 0.78; z += 0.5; break;
+          default: break;
+      }
+      
+      FaucetInteractionEntity faucet = new FaucetInteractionEntity(level, x, y, z);
+      level.addFreshEntity(faucet);
     }
   }
 
@@ -187,22 +207,56 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
     return part == BedPart.FOOT ? direction : direction.getOpposite();
   }
 
+  private boolean isHittingFaucet(BlockState state, BlockHitResult hit, BlockPos pos) {
+       Direction facing = state.getValue(FACING);
+       Vec3 loc = hit.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
+       
+       double minX = 0.4375;
+       double maxX = 0.5625;
+       double minY = 0.6875;
+       double maxY = 0.875;
+       double minZ = 0.0;
+       double maxZ = 0.25;
+
+       switch (facing) {
+           case NORTH:
+               return loc.x >= minX && loc.x <= maxX && loc.y >= minY && loc.y <= maxY && loc.z >= minZ && loc.z <= maxZ;
+           case SOUTH:
+               return loc.x >= minX && loc.x <= maxX && loc.y >= minY && loc.y <= maxY && loc.z >= (1 - maxZ) && loc.z <= (1 - minZ);
+           case WEST:
+               return loc.x >= minZ && loc.x <= maxZ && loc.y >= minY && loc.y <= maxY && loc.z >= minX && loc.z <= maxX;
+           case EAST:
+               return loc.x >= (1 - maxZ) && loc.x <= (1 - minZ) && loc.y >= minY && loc.y <= maxY && loc.z >= minX && loc.z <= maxX;
+           default:
+               return false;
+       }
+   }
+
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
       ItemStack itemstack = player.getItemInHand(hand);
       LiquidType currentLiquid = state.getValue(LIQUID);
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
-          if (!level.isClientSide) {
-              boolean isRunning = state.getValue(RUNNING);
-              if (!isRunning && currentLiquid != LiquidType.EMPTY) {
-                  level.setBlock(pos, state.setValue(RUNNING, true), 3);
-                  level.playSound(null, pos, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
-              } else {
-                  level.setBlock(pos, state.setValue(RUNNING, false), 3);
+          if (isHittingFaucet(state, hit, pos)) {
+              if (!level.isClientSide) {
+                  boolean isRunning = state.getValue(RUNNING);
+                  if (!isRunning && currentLiquid != LiquidType.EMPTY) {
+                      level.setBlock(pos, state.setValue(RUNNING, true), 3);
+                      level.playSound(null, pos, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                  } else {
+                      level.setBlock(pos, state.setValue(RUNNING, false), 3);
+                  }
               }
+              return InteractionResult.sidedSuccess(level.isClientSide);
+          } else {
+              if (!level.isClientSide) {
+                  SeatEntity seat = new SeatEntity(level, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
+                  level.addFreshEntity(seat);
+                  player.startRiding(seat);
+              }
+              return InteractionResult.sidedSuccess(level.isClientSide);
           }
-          return InteractionResult.sidedSuccess(level.isClientSide);
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.FOOT) {
@@ -302,7 +356,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
 
   @Override
   public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-    if (!level.isClientSide && player.isCreative()) {
+    if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
       if (bedpart == BedPart.FOOT) {
         BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
@@ -311,6 +365,9 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
           level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
           level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
         }
+      } else {
+          // Remove Faucet Entity if HEAD is broken
+          level.getEntitiesOfClass(FaucetInteractionEntity.class, new net.minecraft.world.phys.AABB(pos)).forEach(Entity::discard);
       }
     }
     super.playerWillDestroy(level, pos, state, player);
