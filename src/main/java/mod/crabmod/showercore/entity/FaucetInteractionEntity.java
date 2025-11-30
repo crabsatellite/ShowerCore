@@ -47,6 +47,10 @@ public class FaucetInteractionEntity extends Entity {
 
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
+        if (!player.isShiftKeyDown() || !player.getItemInHand(hand).isEmpty()) {
+            return InteractionResult.PASS;
+        }
+
         if (this.level().isClientSide) return InteractionResult.SUCCESS;
         
         BlockPos pos = this.blockPosition();
