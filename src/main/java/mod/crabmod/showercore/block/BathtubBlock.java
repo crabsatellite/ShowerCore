@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.util.RandomSource;
+import com.crabmod.hotbath.registers.ParticleRegister;
 
 public class BathtubBlock extends HorizontalDirectionalBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -158,6 +161,16 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
       }
     }
     super.playerWillDestroy(level, pos, state, player);
+  }
+
+  @Override
+  public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    if (random.nextInt(10) == 0) {
+      double x = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
+      double y = (double) pos.getY() + 0.6D;
+      double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
+      level.addParticle((ParticleOptions) ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
+    }
   }
 
   @Override
