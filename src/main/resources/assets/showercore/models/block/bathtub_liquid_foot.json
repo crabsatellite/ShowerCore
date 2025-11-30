@@ -1,0 +1,17 @@
+{
+  "credit": "Made with Blockbench",
+  "render_type": "translucent",
+  "textures": {
+    "particle": "minecraft:block/white_concrete"
+  },
+  "elements": [
+    {
+      "from": [2, 10, 0],
+      "to": [14, 10, 14],
+      "faces": {
+        "up": { "uv": [2, 2, 14, 16], "texture": "#fluid" },
+        "down": { "uv": [2, 2, 14, 16], "texture": "#fluid" }
+      }
+    }
+  ]
+}

@@ -4,7 +4,6 @@
   "textures": {
     "0": "minecraft:block/white_concrete",
     "1": "minecraft:block/black_concrete",
-    "fluid": "minecraft:block/water_still",
     "particle": "minecraft:block/white_concrete"
   },
   "elements": [
@@ -54,14 +53,6 @@
         "west": { "uv": [2, 4, 16, 12], "texture": "#0" },
         "up": { "uv": [14, 2, 16, 16], "texture": "#0" },
         "down": { "uv": [14, 2, 16, 16], "texture": "#0" }
-      }
-    },
-    {
-      "from": [2, 10, 0],
-      "to": [14, 10, 14],
-      "faces": {
-        "up": { "uv": [2, 2, 14, 16], "texture": "#fluid", "tintindex": 0 },
-        "down": { "uv": [2, 2, 14, 16], "texture": "#fluid", "tintindex": 0 }
       }
     }
   ]

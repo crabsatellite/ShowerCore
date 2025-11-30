@@ -20,15 +20,51 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EnchantmentTableParticle;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import com.crabmod.hotbath.fluid_details.FluidsColor;
+import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.registers.BlocksRegister;
+import net.minecraft.client.renderer.BiomeColors;
 
 @Mod.EventBusSubscriber(
     modid = ShowerCore.MODID,
     bus = Mod.EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
+
+  @SubscribeEvent
+  public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+    event.register(
+        (state, world, pos, tintIndex) -> {
+          if (world != null && pos != null && tintIndex == 0) {
+            BathtubBlock.LiquidType liquid = state.getValue(BathtubBlock.LIQUID);
+            switch (liquid) {
+              case WATER:
+                return BiomeColors.getAverageWaterColor(world, pos);
+              case HOT_WATER:
+                return FluidsColor.HOT_WATER_COLOR;
+              case HERBAL_BATH:
+                return FluidsColor.HERBAL_BATH_COLOR;
+              case HONEY_BATH:
+                return FluidsColor.HONEY_BATH_COLOR;
+              case MILK_BATH:
+                return FluidsColor.MILK_BATH_COLOR;
+              case PEONY_BATH:
+                return FluidsColor.PEONY_BATH_COLOR;
+              case ROSE_BATH:
+                return FluidsColor.ROSE_BATH_COLOR;
+              default:
+                return -1;
+            }
+          }
+          return -1;
+        },
+        BlocksRegister.BATHTUB_WHITE.get());
+  }
 
   @SubscribeEvent
   public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -176,4 +212,6 @@ public class ClientEvent {
     event.registerSpriteSet(
         ParticleRegister.ROSE_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
   }
+
+
 }

@@ -24,9 +24,46 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import com.crabmod.hotbath.registers.ParticleRegister;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
+import java.util.Optional;
 
 public class BathtubBlock extends HorizontalDirectionalBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
+  public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
+
+  public enum LiquidType implements StringRepresentable {
+      EMPTY("empty"),
+      WATER("water"),
+      HOT_WATER("hot_water"),
+      HERBAL_BATH("herbal_bath"),
+      HONEY_BATH("honey_bath"),
+      MILK_BATH("milk_bath"),
+      PEONY_BATH("peony_bath"),
+      ROSE_BATH("rose_bath");
+
+      private final String name;
+
+      private LiquidType(String name) {
+         this.name = name;
+      }
+
+      public String toString() {
+         return this.name;
+      }
+
+      public String getSerializedName() {
+         return this.name;
+      }
+   }
 
   // Shapes for FOOT part (The part you place)
   protected static final VoxelShape FOOT_NORTH_SHAPE = Shapes.or(
@@ -82,7 +119,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
 
   public BathtubBlock(Properties properties) {
     super(properties);
-    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT));
+    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT).setValue(LIQUID, LiquidType.EMPTY));
   }
 
   @Override
@@ -148,6 +185,91 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
   }
 
   @Override
+  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+      ItemStack itemstack = player.getItemInHand(hand);
+      LiquidType currentLiquid = state.getValue(LIQUID);
+
+      if (currentLiquid == LiquidType.EMPTY) {
+         if (itemstack.is(Items.WATER_BUCKET)) {
+            if (!level.isClientSide) {
+               updateBothParts(level, pos, state, LiquidType.WATER);
+               if (!player.isCreative()) {
+                  player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+               }
+               level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+         } else {
+             ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(itemstack.getItem());
+             if (itemId != null && itemId.getNamespace().equals("hotbath")) {
+                 LiquidType newLiquid = null;
+                 String path = itemId.getPath();
+                 if (path.equals("hot_water_bucket")) newLiquid = LiquidType.HOT_WATER;
+                 else if (path.equals("herbal_bath_bucket")) newLiquid = LiquidType.HERBAL_BATH;
+                 else if (path.equals("honey_bath_bucket")) newLiquid = LiquidType.HONEY_BATH;
+                 else if (path.equals("milk_bath_bucket")) newLiquid = LiquidType.MILK_BATH;
+                 else if (path.equals("peony_bath_bucket")) newLiquid = LiquidType.PEONY_BATH;
+                 else if (path.equals("rose_bath_bucket")) newLiquid = LiquidType.ROSE_BATH;
+
+                 if (newLiquid != null) {
+                     if (!level.isClientSide) {
+                         updateBothParts(level, pos, state, newLiquid);
+                         if (!player.isCreative()) {
+                            player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                         }
+                         level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                     }
+                     return InteractionResult.sidedSuccess(level.isClientSide);
+                 }
+             }
+         }
+      } else {
+         if (itemstack.is(Items.BUCKET)) {
+            if (!level.isClientSide) {
+               Item filledBucket = Items.WATER_BUCKET;
+               if (currentLiquid != LiquidType.WATER) {
+                   String bucketName = "hot_water_bucket";
+                   switch (currentLiquid) {
+                       case HERBAL_BATH: bucketName = "herbal_bath_bucket"; break;
+                       case HONEY_BATH: bucketName = "honey_bath_bucket"; break;
+                       case MILK_BATH: bucketName = "milk_bath_bucket"; break;
+                       case PEONY_BATH: bucketName = "peony_bath_bucket"; break;
+                       case ROSE_BATH: bucketName = "rose_bath_bucket"; break;
+                       default: break;
+                   }
+                   filledBucket = ForgeRegistries.ITEMS.getValue(new ResourceLocation("hotbath", bucketName));
+               }
+               
+               updateBothParts(level, pos, state, LiquidType.EMPTY);
+
+               if (!player.isCreative()) {
+                   itemstack.shrink(1);
+                   if (itemstack.isEmpty()) {
+                       player.setItemInHand(hand, new ItemStack(filledBucket));
+                   } else if (!player.getInventory().add(new ItemStack(filledBucket))) {
+                       player.drop(new ItemStack(filledBucket), false);
+                   }
+               }
+               level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+         }
+      }
+      return InteractionResult.PASS;
+   }
+
+   private void updateBothParts(Level level, BlockPos pos, BlockState state, LiquidType newLiquid) {
+       level.setBlock(pos, state.setValue(LIQUID, newLiquid), 3);
+       Direction direction = state.getValue(FACING);
+       BedPart part = state.getValue(PART);
+       BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
+       BlockState otherState = level.getBlockState(otherPos);
+       if (otherState.getBlock() == this && otherState.getValue(PART) != part) {
+           level.setBlock(otherPos, otherState.setValue(LIQUID, newLiquid), 3);
+       }
+   }
+
+  @Override
   public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
     if (!level.isClientSide && player.isCreative()) {
       BedPart bedpart = state.getValue(PART);
@@ -165,7 +287,8 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
 
   @Override
   public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-    if (random.nextInt(10) == 0) {
+    LiquidType liquid = state.getValue(LIQUID);
+    if (liquid != LiquidType.EMPTY && liquid != LiquidType.WATER && random.nextInt(10) == 0) {
       double x = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       double y = (double) pos.getY() + 0.6D;
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
@@ -175,6 +298,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(FACING, PART);
+    builder.add(FACING, PART, LIQUID);
   }
 }
