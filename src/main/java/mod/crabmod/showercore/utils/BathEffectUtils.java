@@ -27,7 +27,11 @@ public class BathEffectUtils {
 
     private void ensureScheduler() {
         if (this.scheduler == null || this.scheduler.isShutdown()) {
-            this.scheduler = Executors.newScheduledThreadPool(2);
+            this.scheduler = Executors.newScheduledThreadPool(2, r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true); // Ensure threads are daemon threads
+                return t;
+            });
         }
     }
 
@@ -85,6 +89,11 @@ public class BathEffectUtils {
                         return; // 如果效果已停用，跳过任务
                     }
 
+                    if (Minecraft.getInstance().level != level) {
+                        this.shutdown();
+                        return; // 如果世界已更改，停止任务
+                    }
+
                     if (Minecraft.getInstance().isPaused()) {
                         return;
                     }
@@ -140,11 +149,17 @@ public class BathEffectUtils {
                         return; // 如果效果已停用，跳过任务
                     }
 
+                    if (Minecraft.getInstance().level != level) {
+                        this.shutdown();
+                        return; // 如果世界已更改，停止任务
+                    }
+
                     if (Minecraft.getInstance().isPaused()) {
                         return;
                     }
 
                     Minecraft.getInstance().execute(() -> {
+                        if (Minecraft.getInstance().level == null) return;
                         level.playLocalSound(
                                 pos.getX(),
                                 pos.getY(),
@@ -171,7 +186,7 @@ public class BathEffectUtils {
     public void shutdown() {
         stopBathEffect();
         if (scheduler != null) {
-            scheduler.shutdown();
+            scheduler.shutdownNow();
         }
     }
 }

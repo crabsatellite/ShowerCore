@@ -25,6 +25,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   // 切换效果状态的方法
   public void toggleEffect() {
     effectActive = !effectActive;
+    this.setChanged();
   }
 
   // 获取当前效果状态的方法
@@ -54,6 +55,21 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public void load(net.minecraft.nbt.CompoundTag tag) {
     super.load(tag);
     this.effectActive = tag.getBoolean("EffectActive");
+    if (this.level != null && this.level.isClientSide) {
+      if (this.effectActive) {
+        this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+      } else {
+        this.bathEffectUtils.stopBathEffect();
+      }
+    }
+  }
+
+  @Override
+  public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt) {
+    net.minecraft.nbt.CompoundTag tag = pkt.getTag();
+    if (tag != null) {
+        this.load(tag);
+    }
   }
 
   @Override
@@ -65,8 +81,10 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   @Override
   public void onLoad() {
     super.onLoad();
-    if (this.level != null && this.level.isClientSide && this.effectActive) {
-      this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+    if (this.level != null && this.level.isClientSide) {
+        if (this.effectActive) {
+            this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+        }
     }
   }
 

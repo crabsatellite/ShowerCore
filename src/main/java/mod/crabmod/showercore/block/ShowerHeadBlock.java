@@ -1,18 +1,31 @@
 // ShowerHeadBlock.java
 package mod.crabmod.showercore.block;
 
+import java.util.Collections;
+import java.util.List;
+import javax.annotation.Nullable;
 import mod.crabmod.showercore.base.RotatableBlock;
 import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
 import mod.crabmod.showercore.utils.BathEffectUtils;
 import mod.crabmod.showercore.utils.CoreUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -115,6 +128,9 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
         }
         return InteractionResult.SUCCESS;
       }
+      
+      showerEntity.setChanged();
+      level.sendBlockUpdated(pos, state, state, 3);
       return InteractionResult.CONSUME;
     }
 
@@ -122,14 +138,52 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
   }
 
   @Override
+  public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+    if (!state.is(newState.getBlock())) {
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
+        if (level.isClientSide) {
+          showerEntity.getBathEffectUtils().shutdown();
+        }
+      }
+      super.onRemove(state, level, pos, newState, isMoving);
+    }
+  }
+
+  @Override
+  public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+    if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
+      ItemStack stack = new ItemStack(this);
+      CompoundTag tag = showerEntity.saveWithoutMetadata();
+      BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
+      return Collections.singletonList(stack);
+    }
+    return super.getDrops(state, params);
+  }
+
+  @Override
   public void appendHoverText(
-      net.minecraft.world.item.ItemStack stack,
-      @javax.annotation.Nullable net.minecraft.world.level.BlockGetter level,
-      java.util.List<net.minecraft.network.chat.Component> tooltip,
-      net.minecraft.world.item.TooltipFlag flag) {
-    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.install"));
-    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.toggle"));
-    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.remove"));
+      ItemStack stack,
+      @Nullable BlockGetter level,
+      List<Component> tooltip,
+      TooltipFlag flag) {
+    
+    CompoundTag tag = BlockItem.getBlockEntityData(stack);
+    if (tag != null) {
+        if (tag.contains("Items")) {
+            net.minecraft.core.NonNullList<ItemStack> items = net.minecraft.core.NonNullList.withSize(1, ItemStack.EMPTY);
+            ContainerHelper.loadAllItems(tag, items);
+            ItemStack core = items.get(0);
+            if (!core.isEmpty()) {
+                 tooltip.add(Component.translatable("tooltip.showercore.contains", core.getHoverName()).withStyle(ChatFormatting.GRAY));
+            }
+        }
+    }
+    
+    tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.install"));
+    tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.toggle"));
+    tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.remove"));
     super.appendHoverText(stack, level, tooltip, flag);
   }
 }

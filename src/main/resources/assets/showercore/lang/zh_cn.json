@@ -8,6 +8,7 @@
   "block.showercore.shower_head_black": "淋浴喷头（黑色）",
   "block.showercore.shower_head_white": "淋浴喷头（白色）",
   "message.showercore.need_core": "需要安装洗浴核心",
+  "tooltip.showercore.contains": "§7内含：§r%s",
   "tooltip.showercore.shower_head.usage.install": "§6手持核心右键：§r安装/替换核心",
   "tooltip.showercore.shower_head.usage.toggle": "§6空手右键：§r开关喷头",
   "tooltip.showercore.shower_head.usage.remove": "§6Shift + 空手右键：§r移除核心"

@@ -8,6 +8,7 @@
   "block.showercore.shower_head_black": "Shower Head (Black)",
   "block.showercore.shower_head_white": "Shower Head (White)",
   "message.showercore.need_core": "Requires a Bath Core",
+  "tooltip.showercore.contains": "§7Contains: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Right-click with Core:§r Install/Replace Core",
   "tooltip.showercore.shower_head.usage.toggle": "§6Right-click with Empty Hand:§r Toggle Shower",
   "tooltip.showercore.shower_head.usage.remove": "§6Shift + Right-click with Empty Hand:§r Remove Core"
