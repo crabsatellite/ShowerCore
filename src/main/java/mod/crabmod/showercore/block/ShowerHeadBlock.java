@@ -29,11 +29,20 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 
 public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
 
   public ShowerHeadBlock(Properties properties) {
     super(properties);
+  }
+
+  @javax.annotation.Nullable
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+    return type == BlockEntitiesRegister.SHOWER_HEAD_CONTAINER.get() ? (lvl, pos, st, be) -> ShowerHeadContainerEntity.tick(lvl, pos, st, (ShowerHeadContainerEntity) be) : null;
   }
 
   @Override
