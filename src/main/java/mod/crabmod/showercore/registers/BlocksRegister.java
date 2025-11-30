@@ -73,6 +73,18 @@ public class BlocksRegister {
           .sound(SoundType.STONE)
           .noOcclusion();
 
+  private static final BlockBehaviour.Properties COMMON_PROPERTIES_BATHTUB_WOOD =
+      BlockBehaviour.Properties.of()
+          .strength(1.0F)
+          .sound(SoundType.WOOD)
+          .noOcclusion();
+
+  private static final BlockBehaviour.Properties COMMON_PROPERTIES_BATHTUB_METAL =
+      BlockBehaviour.Properties.of()
+          .strength(2.0F)
+          .sound(SoundType.METAL)
+          .noOcclusion();
+
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
 
@@ -156,6 +168,78 @@ public class BlocksRegister {
   public static final RegistryObject<Block> BATHTUB_WHITE =
       registerBlock(
           "bathtub_white", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final RegistryObject<Block> BATHTUB_BLACK =
+      registerBlock(
+          "bathtub_black", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final RegistryObject<Block> BATHTUB_OAK =
+      registerBlock(
+          "bathtub_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_SPRUCE =
+      registerBlock(
+          "bathtub_spruce", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_BIRCH =
+      registerBlock(
+          "bathtub_birch", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_JUNGLE =
+      registerBlock(
+          "bathtub_jungle", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_ACACIA =
+      registerBlock(
+          "bathtub_acacia", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_DARK_OAK =
+      registerBlock(
+          "bathtub_dark_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_MANGROVE =
+      registerBlock(
+          "bathtub_mangrove", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_CHERRY =
+      registerBlock(
+          "bathtub_cherry", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_BAMBOO =
+      registerBlock(
+          "bathtub_bamboo", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_CRIMSON =
+      registerBlock(
+          "bathtub_crimson", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_WARPED =
+      registerBlock(
+          "bathtub_warped", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final RegistryObject<Block> BATHTUB_STONE =
+      registerBlock(
+          "bathtub_stone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final RegistryObject<Block> BATHTUB_COBBLESTONE =
+      registerBlock(
+          "bathtub_cobblestone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final RegistryObject<Block> BATHTUB_IRON =
+      registerBlock(
+          "bathtub_iron", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final RegistryObject<Block> BATHTUB_GOLD =
+      registerBlock(
+          "bathtub_gold", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final RegistryObject<Block> BATHTUB_COPPER =
+      registerBlock(
+          "bathtub_copper", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final RegistryObject<Block> BATHTUB_DIAMOND =
+      registerBlock(
+          "bathtub_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
   public static final RegistryObject<Block> HOT_WATER_CORE =
       registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));

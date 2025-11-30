@@ -80,6 +80,24 @@ public class ShowerCore {
       event.accept(BlocksRegister.SHOWER_HEAD_COPPER.get());
       event.accept(BlocksRegister.SHOWER_HEAD_DIAMOND.get());
       event.accept(BlocksRegister.BATHTUB_WHITE.get());
+      event.accept(BlocksRegister.BATHTUB_BLACK.get());
+      event.accept(BlocksRegister.BATHTUB_OAK.get());
+      event.accept(BlocksRegister.BATHTUB_SPRUCE.get());
+      event.accept(BlocksRegister.BATHTUB_BIRCH.get());
+      event.accept(BlocksRegister.BATHTUB_JUNGLE.get());
+      event.accept(BlocksRegister.BATHTUB_ACACIA.get());
+      event.accept(BlocksRegister.BATHTUB_DARK_OAK.get());
+      event.accept(BlocksRegister.BATHTUB_MANGROVE.get());
+      event.accept(BlocksRegister.BATHTUB_CHERRY.get());
+      event.accept(BlocksRegister.BATHTUB_BAMBOO.get());
+      event.accept(BlocksRegister.BATHTUB_CRIMSON.get());
+      event.accept(BlocksRegister.BATHTUB_WARPED.get());
+      event.accept(BlocksRegister.BATHTUB_STONE.get());
+      event.accept(BlocksRegister.BATHTUB_COBBLESTONE.get());
+      event.accept(BlocksRegister.BATHTUB_IRON.get());
+      event.accept(BlocksRegister.BATHTUB_GOLD.get());
+      event.accept(BlocksRegister.BATHTUB_COPPER.get());
+      event.accept(BlocksRegister.BATHTUB_DIAMOND.get());
     }
   }
 

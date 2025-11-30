@@ -1,0 +1,8 @@
+{
+  "parent": "showercore:block/bathtub_white_head_running",
+  "textures": {
+    "0": "minecraft:block/cobblestone",
+    "1": "minecraft:block/black_concrete",
+    "particle": "minecraft:block/cobblestone"
+  }
+}
