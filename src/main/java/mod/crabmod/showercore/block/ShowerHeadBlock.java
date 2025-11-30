@@ -7,7 +7,6 @@ import mod.crabmod.showercore.utils.BathEffectUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
@@ -42,39 +41,95 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
       InteractionHand hand,
       BlockHitResult hit) {
 
-    boolean isShiftDown = player.isShiftKeyDown();
-
-    if (!player.getMainHandItem().isEmpty()) {
-      return InteractionResult.PASS;
-    }
+    net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(hand);
 
     BlockEntity blockEntity = level.getBlockEntity(pos);
     if (!(blockEntity instanceof ShowerHeadContainerEntity showerEntity)) {
       return InteractionResult.PASS;
     }
 
-    if (level.isClientSide) {
-      if (!isShiftDown) {
-        showerEntity.toggleEffect();
+    if (isCoreItem(heldItem)) {
+      if (!level.isClientSide) {
+        net.minecraft.world.item.ItemStack existingItem = showerEntity.getItem(0);
+        if (!existingItem.isEmpty()) {
+          net.minecraft.world.level.block.Block.popResource(level, pos, existingItem.copy());
+        }
+
+        net.minecraft.world.item.ItemStack copy = heldItem.copy();
+        copy.setCount(1);
+        showerEntity.setItem(0, copy);
+        showerEntity.setChanged();
+        level.sendBlockUpdated(pos, state, state, 3);
+        if (!player.isCreative()) {
+          heldItem.shrink(1);
+        }
+        // Optional: Play a sound to indicate success
+        level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ITEM_FRAME_ADD_ITEM, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+      }
+      return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    if (heldItem.isEmpty()) {
+      // Shift + Empty Hand: Remove Core
+      if (player.isShiftKeyDown()) {
+        if (!showerEntity.isEmpty()) {
+          if (!level.isClientSide) {
+            net.minecraft.world.item.ItemStack existingItem = showerEntity.getItem(0);
+            net.minecraft.world.level.block.Block.popResource(level, pos, existingItem.copy());
+            showerEntity.setItem(0, net.minecraft.world.item.ItemStack.EMPTY);
+            
+            if (showerEntity.isEffectActive()) {
+              showerEntity.toggleEffect();
+            }
+            
+            showerEntity.setChanged();
+            level.sendBlockUpdated(pos, state, state, 3);
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ITEM_FRAME_REMOVE_ITEM, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+          } else {
+            if (showerEntity.isEffectActive()) {
+              showerEntity.toggleEffect();
+              showerEntity.getBathEffectUtils().stopBathEffect();
+            }
+          }
+          return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
+      }
+
+      if (showerEntity.isEmpty() && !showerEntity.isEffectActive()) {
+        return InteractionResult.SUCCESS;
+      }
+
+      showerEntity.toggleEffect();
+      if (level.isClientSide) {
         BathEffectUtils bathEffectUtils = showerEntity.getBathEffectUtils();
 
         if (showerEntity.isEffectActive()) {
-          bathEffectUtils.renderBathWater(level, pos);
+          bathEffectUtils.renderBathWater(level, pos, showerEntity.getParticleType());
         } else {
           bathEffectUtils.stopBathEffect();
         }
         return InteractionResult.SUCCESS;
-      } else {
-        return InteractionResult.PASS;
       }
-    }
-
-    if (isShiftDown) {
-      // 打开交互界面
-      player.openMenu((MenuProvider) showerEntity);
       return InteractionResult.CONSUME;
     }
 
     return InteractionResult.PASS;
+  }
+
+  private boolean isCoreItem(net.minecraft.world.item.ItemStack stack) {
+    if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem) {
+      net.minecraft.resources.ResourceLocation registryName = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(blockItem.getBlock());
+      if (registryName != null && registryName.getNamespace().equals(mod.crabmod.showercore.ShowerCore.MODID)) {
+        String path = registryName.getPath();
+        return path.equals("hot_water_core") ||
+               path.equals("herbal_bath_core") ||
+               path.equals("peony_bath_core") ||
+               path.equals("rose_bath_core") ||
+               path.equals("milk_bath_core") ||
+               path.equals("honey_bath_core");
+      }
+    }
+    return false;
   }
 }

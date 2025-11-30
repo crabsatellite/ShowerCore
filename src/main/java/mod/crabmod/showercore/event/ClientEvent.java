@@ -150,10 +150,30 @@ public class ClientEvent {
 
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.HERBAL_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.HONEY_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.MILK_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.PEONY_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.ROSE_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
   }
 
   public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.HERBAL_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.HONEY_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.MILK_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.PEONY_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.ROSE_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
   }
 }

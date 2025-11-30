@@ -26,8 +26,8 @@ public class BathEffectUtils {
         this.isEffectActive = new AtomicBoolean(false);
     }
 
-    public void renderBathWater(Level level, BlockPos pos) {
-        renderBathWater(level, pos, 2, 1.4, 5);
+    public void renderBathWater(Level level, BlockPos pos, ParticleOptions particleType) {
+        renderBathWater(level, pos, 2, 1.4, 5, particleType);
         playBathSound(level, 200, pos);
     }
 
@@ -65,7 +65,7 @@ public class BathEffectUtils {
         }
     }
 
-    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset) {
+    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, ParticleOptions particleType) {
         // 如果效果已激活，则返回，避免重复开启
         if (isEffectActive.get()) {
             return;
@@ -96,7 +96,7 @@ public class BathEffectUtils {
 
                             // 添加粒子
                             level.addParticle(
-                                    mod.crabmod.showercore.registers.ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(),
+                                    particleType,
                                     pos.getX() + offsetX,
                                     pos.getY() + offsetY,
                                     pos.getZ() + offsetZ,

@@ -34,4 +34,49 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public BathEffectUtils getBathEffectUtils() {
     return this.bathEffectUtils;
   }
+
+  public net.minecraft.core.particles.SimpleParticleType getParticleType() {
+    if (this.isEmpty()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get();
+    }
+    net.minecraft.world.item.Item item = this.getItem(0).getItem();
+    if (item == mod.crabmod.showercore.registers.BlocksRegister.HERBAL_BATH_CORE.get().asItem()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.HERBAL_BATH_SHOWER_PARTICLE.get();
+    }
+    if (item == mod.crabmod.showercore.registers.BlocksRegister.HONEY_BATH_CORE.get().asItem()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.HONEY_BATH_SHOWER_PARTICLE.get();
+    }
+    if (item == mod.crabmod.showercore.registers.BlocksRegister.MILK_BATH_CORE.get().asItem()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.MILK_BATH_SHOWER_PARTICLE.get();
+    }
+    if (item == mod.crabmod.showercore.registers.BlocksRegister.PEONY_BATH_CORE.get().asItem()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.PEONY_BATH_SHOWER_PARTICLE.get();
+    }
+    if (item == mod.crabmod.showercore.registers.BlocksRegister.ROSE_BATH_CORE.get().asItem()) {
+      return mod.crabmod.showercore.registers.ParticleRegister.ROSE_BATH_SHOWER_PARTICLE.get();
+    }
+    return mod.crabmod.showercore.registers.ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get();
+  }
+
+  @Override
+  public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
+    return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
+  }
+
+  @Override
+  public net.minecraft.nbt.CompoundTag getUpdateTag() {
+    return this.saveWithoutMetadata();
+  }
+
+  @Override
+  public void load(net.minecraft.nbt.CompoundTag tag) {
+    super.load(tag);
+    this.effectActive = tag.getBoolean("EffectActive");
+  }
+
+  @Override
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag) {
+    super.saveAdditional(tag);
+    tag.putBoolean("EffectActive", this.effectActive);
+  }
 }

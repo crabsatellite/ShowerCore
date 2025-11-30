@@ -97,6 +97,19 @@ public abstract class BaseShowerHeadBlockEntity extends BaseContainerBlockEntity
     items.clear();
   }
 
+  @Override
+  public void load(net.minecraft.nbt.CompoundTag tag) {
+    super.load(tag);
+    this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+    ContainerHelper.loadAllItems(tag, this.items);
+  }
+
+  @Override
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag) {
+    super.saveAdditional(tag);
+    ContainerHelper.saveAllItems(tag, this.items);
+  }
+
   // Custom menu for a single-slot container
   private static class SingleSlotMenu extends AbstractContainerMenu {
     private final BaseShowerHeadBlockEntity blockEntity;
