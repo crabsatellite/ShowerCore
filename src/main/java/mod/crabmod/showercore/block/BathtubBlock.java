@@ -31,12 +31,7 @@ import com.crabmod.hotbath.registers.ParticleRegister;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
@@ -47,12 +42,10 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import java.util.Optional;
 import mod.crabmod.showercore.Config;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -234,10 +227,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       ItemStack itemstack = player.getItemInHand(hand);
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
-          // Faucet interaction is handled by FaucetInteractionEntity now, but we keep this for safety or if entity is missing
-          // Actually, we removed isHittingFaucet logic from here in previous step, but let's check the context.
-          // The user wants sitting logic here.
-          
           if (!level.isClientSide) {
               // Check if HEAD is occupied
               List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class, new AABB(pos));
@@ -409,5 +398,26 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(FACING, PART, LIQUID, RUNNING);
+  }
+
+
+
+  @Override
+  public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+      if (state.getValue(LIQUID) == LiquidType.CUSTOM) {
+          BlockEntity be = level.getBlockEntity(pos);
+          if (be instanceof BathtubBlockEntity bathtubBe) {
+              FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
+              if (!fluidStack.isEmpty()) {
+                  Fluid fluid = fluidStack.getFluid();
+                  if (fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA) {
+                      // Apply lava effects manually
+                      entity.setSecondsOnFire(15);
+                      entity.hurt(level.damageSources().lava(), 4.0F);
+                  }
+              }
+          }
+      }
+      super.entityInside(state, level, pos, entity);
   }
 }
