@@ -38,8 +38,11 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.phys.Vec3;
-import java.util.Optional;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.phys.AABB;
+import java.util.List;
 
 public class BathtubBlock extends HorizontalDirectionalBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -207,30 +210,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
     return part == BedPart.FOOT ? direction : direction.getOpposite();
   }
 
-  private boolean isHittingFaucet(BlockState state, BlockHitResult hit, BlockPos pos) {
-       Direction facing = state.getValue(FACING);
-       Vec3 loc = hit.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
-       
-       double minX = 0.4375;
-       double maxX = 0.5625;
-       double minY = 0.6875;
-       double maxY = 0.875;
-       double minZ = 0.0;
-       double maxZ = 0.25;
 
-       switch (facing) {
-           case NORTH:
-               return loc.x >= minX && loc.x <= maxX && loc.y >= minY && loc.y <= maxY && loc.z >= minZ && loc.z <= maxZ;
-           case SOUTH:
-               return loc.x >= minX && loc.x <= maxX && loc.y >= minY && loc.y <= maxY && loc.z >= (1 - maxZ) && loc.z <= (1 - minZ);
-           case WEST:
-               return loc.x >= minZ && loc.x <= maxZ && loc.y >= minY && loc.y <= maxY && loc.z >= minX && loc.z <= maxX;
-           case EAST:
-               return loc.x >= (1 - maxZ) && loc.x <= (1 - minZ) && loc.y >= minY && loc.y <= maxY && loc.z >= minX && loc.z <= maxX;
-           default:
-               return false;
-       }
-   }
 
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
@@ -238,34 +218,70 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
       LiquidType currentLiquid = state.getValue(LIQUID);
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
-          if (isHittingFaucet(state, hit, pos)) {
-              if (!level.isClientSide) {
-                  boolean isRunning = state.getValue(RUNNING);
-                  if (!isRunning && currentLiquid != LiquidType.EMPTY) {
-                      level.setBlock(pos, state.setValue(RUNNING, true), 3);
-                      level.playSound(null, pos, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
-                  } else {
-                      level.setBlock(pos, state.setValue(RUNNING, false), 3);
+          // Faucet interaction is handled by FaucetInteractionEntity now, but we keep this for safety or if entity is missing
+          // Actually, we removed isHittingFaucet logic from here in previous step, but let's check the context.
+          // The user wants sitting logic here.
+          
+          if (!level.isClientSide) {
+              // Check if HEAD is occupied
+              List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class, new AABB(pos));
+              if (!seats.isEmpty() && !seats.get(0).getPassengers().isEmpty()) {
+                  Entity passenger = seats.get(0).getFirstPassenger();
+                  if (passenger instanceof Player occupant) {
+                      if (occupant != player) {
+                          player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                          
+                          Component accept = Component.literal("[Accept]")
+                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
+                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
+                          
+                          Component deny = Component.literal("[Reject]")
+                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
+                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+
+                          occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                              .append(accept).append(" ").append(deny));
+                      }
                   }
-              }
-              return InteractionResult.sidedSuccess(level.isClientSide);
-          } else {
-              if (!level.isClientSide) {
+              } else {
                   SeatEntity seat = new SeatEntity(level, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
                   level.addFreshEntity(seat);
                   player.startRiding(seat);
               }
-              return InteractionResult.sidedSuccess(level.isClientSide);
           }
+          return InteractionResult.sidedSuccess(level.isClientSide);
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.FOOT) {
           if (!level.isClientSide) {
               Direction direction = state.getValue(FACING);
               BlockPos headPos = pos.relative(direction);
-              SeatEntity seat = new SeatEntity(level, headPos.getX() + 0.5, headPos.getY() + 0.1, headPos.getZ() + 0.5);
-              level.addFreshEntity(seat);
-              player.startRiding(seat);
+              
+              // Check if HEAD is occupied
+              List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class, new AABB(headPos));
+              if (!seats.isEmpty() && !seats.get(0).getPassengers().isEmpty()) {
+                  Entity passenger = seats.get(0).getFirstPassenger();
+                  if (passenger instanceof Player occupant) {
+                      if (occupant != player) {
+                          player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                          
+                          Component accept = Component.literal("[Accept]")
+                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
+                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
+                          
+                          Component deny = Component.literal("[Reject]")
+                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
+                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+
+                          occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                              .append(accept).append(" ").append(deny));
+                      }
+                  }
+              } else {
+                  SeatEntity seat = new SeatEntity(level, headPos.getX() + 0.5, headPos.getY() + 0.1, headPos.getZ() + 0.5);
+                  level.addFreshEntity(seat);
+                  player.startRiding(seat);
+              }
           }
           return InteractionResult.sidedSuccess(level.isClientSide);
       }
