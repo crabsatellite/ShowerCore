@@ -4,6 +4,7 @@ package mod.crabmod.showercore.block;
 import mod.crabmod.showercore.base.RotatableBlock;
 import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
 import mod.crabmod.showercore.utils.BathEffectUtils;
+import mod.crabmod.showercore.utils.CoreUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -48,7 +49,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
       return InteractionResult.PASS;
     }
 
-    if (isCoreItem(heldItem)) {
+    if (CoreUtils.isCoreItem(heldItem)) {
       if (!level.isClientSide) {
         net.minecraft.world.item.ItemStack existingItem = showerEntity.getItem(0);
         if (!existingItem.isEmpty()) {
@@ -97,6 +98,9 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
       }
 
       if (showerEntity.isEmpty() && !showerEntity.isEffectActive()) {
+        if (level.isClientSide) {
+          player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.showercore.need_core"), true);
+        }
         return InteractionResult.SUCCESS;
       }
 
@@ -117,19 +121,15 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
     return InteractionResult.PASS;
   }
 
-  private boolean isCoreItem(net.minecraft.world.item.ItemStack stack) {
-    if (stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem) {
-      net.minecraft.resources.ResourceLocation registryName = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(blockItem.getBlock());
-      if (registryName != null && registryName.getNamespace().equals(mod.crabmod.showercore.ShowerCore.MODID)) {
-        String path = registryName.getPath();
-        return path.equals("hot_water_core") ||
-               path.equals("herbal_bath_core") ||
-               path.equals("peony_bath_core") ||
-               path.equals("rose_bath_core") ||
-               path.equals("milk_bath_core") ||
-               path.equals("honey_bath_core");
-      }
-    }
-    return false;
+  @Override
+  public void appendHoverText(
+      net.minecraft.world.item.ItemStack stack,
+      @javax.annotation.Nullable net.minecraft.world.level.BlockGetter level,
+      java.util.List<net.minecraft.network.chat.Component> tooltip,
+      net.minecraft.world.item.TooltipFlag flag) {
+    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.install"));
+    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.toggle"));
+    tooltip.add(net.minecraft.network.chat.Component.translatable("tooltip.showercore.shower_head.usage.remove"));
+    super.appendHoverText(stack, level, tooltip, flag);
   }
 }
