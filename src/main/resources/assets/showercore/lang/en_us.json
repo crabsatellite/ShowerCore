@@ -24,6 +24,7 @@
   "block.showercore.shower_head_gold": "Shower Head (Gold)",
   "block.showercore.shower_head_copper": "Shower Head (Copper)",
   "block.showercore.shower_head_diamond": "Shower Head (Diamond)",
+  "block.showercore.bathtub_white": "Bathtub (White)",
   "message.showercore.need_core": "Requires a Bath Core",
   "tooltip.showercore.contains": "§7Contains: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Right-click with Core:§r Install/Replace Core",

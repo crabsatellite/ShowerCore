@@ -3,6 +3,7 @@ package mod.crabmod.showercore.registers;
 import java.util.function.Supplier;
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.block.ShowerHeadBlock;
+import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.block.bath_core.herbal_bath_core.HerbalBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.honey_bath_core.HoneyBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.hot_water_core.HotWaterCoreBlock;
@@ -65,6 +66,12 @@ public class BlocksRegister {
           .sound(SoundType.METAL)
           .noOcclusion()
           .noCollission();
+
+  private static final BlockBehaviour.Properties COMMON_PROPERTIES_BATHTUB =
+      BlockBehaviour.Properties.of()
+          .strength(2.0F)
+          .sound(SoundType.STONE)
+          .noOcclusion();
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
@@ -145,6 +152,10 @@ public class BlocksRegister {
   public static final RegistryObject<Block> SHOWER_HEAD_DIAMOND =
       registerBlock(
           "shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+
+  public static final RegistryObject<Block> BATHTUB_WHITE =
+      registerBlock(
+          "bathtub_white", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
   public static final RegistryObject<Block> HOT_WATER_CORE =
       registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));

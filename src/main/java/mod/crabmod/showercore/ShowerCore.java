@@ -77,6 +77,7 @@ public class ShowerCore {
       event.accept(BlocksRegister.SHOWER_HEAD_GOLD.get());
       event.accept(BlocksRegister.SHOWER_HEAD_COPPER.get());
       event.accept(BlocksRegister.SHOWER_HEAD_DIAMOND.get());
+      event.accept(BlocksRegister.BATHTUB_WHITE.get());
     }
   }
 
