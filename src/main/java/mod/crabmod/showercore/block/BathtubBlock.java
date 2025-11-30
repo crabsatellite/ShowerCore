@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -38,6 +39,7 @@ import java.util.Optional;
 
 public class BathtubBlock extends HorizontalDirectionalBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
+  public static final BooleanProperty RUNNING = BooleanProperty.create("running");
   public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
 
   public enum LiquidType implements StringRepresentable {
@@ -189,6 +191,19 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
       ItemStack itemstack = player.getItemInHand(hand);
       LiquidType currentLiquid = state.getValue(LIQUID);
 
+      if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
+          if (!level.isClientSide) {
+              boolean isRunning = state.getValue(RUNNING);
+              if (!isRunning && currentLiquid != LiquidType.EMPTY) {
+                  level.setBlock(pos, state.setValue(RUNNING, true), 3);
+                  level.playSound(null, pos, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
+              } else {
+                  level.setBlock(pos, state.setValue(RUNNING, false), 3);
+              }
+          }
+          return InteractionResult.sidedSuccess(level.isClientSide);
+      }
+
       if (currentLiquid == LiquidType.EMPTY) {
          if (itemstack.is(Items.WATER_BUCKET)) {
             if (!level.isClientSide) {
@@ -259,13 +274,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
    }
 
    private void updateBothParts(Level level, BlockPos pos, BlockState state, LiquidType newLiquid) {
-       level.setBlock(pos, state.setValue(LIQUID, newLiquid), 3);
+       boolean running = state.getValue(RUNNING);
+       if (newLiquid == LiquidType.EMPTY) {
+           running = false;
+       }
+       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
        Direction direction = state.getValue(FACING);
        BedPart part = state.getValue(PART);
        BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
        BlockState otherState = level.getBlockState(otherPos);
        if (otherState.getBlock() == this && otherState.getValue(PART) != part) {
-           level.setBlock(otherPos, otherState.setValue(LIQUID, newLiquid), 3);
+           level.setBlock(otherPos, otherState.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
        }
    }
 
@@ -298,6 +317,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(FACING, PART, LIQUID);
+    builder.add(FACING, PART, LIQUID, RUNNING);
   }
 }
