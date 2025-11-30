@@ -16,6 +16,7 @@ import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLa
 import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
+import mod.crabmod.showercore.client.renderer.BathtubBlockEntityRenderer;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
@@ -66,7 +67,25 @@ public class ClientEvent {
           }
           return -1;
         },
-        BlocksRegister.BATHTUB_WHITE.get());
+        BlocksRegister.BATHTUB_WHITE.get(),
+        BlocksRegister.BATHTUB_BLACK.get(),
+        BlocksRegister.BATHTUB_OAK.get(),
+        BlocksRegister.BATHTUB_SPRUCE.get(),
+        BlocksRegister.BATHTUB_BIRCH.get(),
+        BlocksRegister.BATHTUB_JUNGLE.get(),
+        BlocksRegister.BATHTUB_ACACIA.get(),
+        BlocksRegister.BATHTUB_DARK_OAK.get(),
+        BlocksRegister.BATHTUB_MANGROVE.get(),
+        BlocksRegister.BATHTUB_CHERRY.get(),
+        BlocksRegister.BATHTUB_BAMBOO.get(),
+        BlocksRegister.BATHTUB_CRIMSON.get(),
+        BlocksRegister.BATHTUB_WARPED.get(),
+        BlocksRegister.BATHTUB_STONE.get(),
+        BlocksRegister.BATHTUB_COBBLESTONE.get(),
+        BlocksRegister.BATHTUB_IRON.get(),
+        BlocksRegister.BATHTUB_GOLD.get(),
+        BlocksRegister.BATHTUB_COPPER.get(),
+        BlocksRegister.BATHTUB_DIAMOND.get());
   }
 
   @SubscribeEvent
@@ -178,6 +197,10 @@ public class ClientEvent {
         BlockEntitiesRegister.PEONY_BATH_CORE_BLOCK_ENTITY.get(),
         PeonyBathCoreBlockEntityRenderer::new);
     
+    event.registerBlockEntityRenderer(
+        BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(),
+        BathtubBlockEntityRenderer::new);
+
     event.registerEntityRenderer(EntityRegister.SEAT_ENTITY.get(), SeatEntityRenderer::new);
     event.registerEntityRenderer(EntityRegister.FAUCET_ENTITY.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
   }

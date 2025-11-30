@@ -43,8 +43,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.AABB;
 import java.util.List;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import java.util.Optional;
 
-public class BathtubBlock extends HorizontalDirectionalBlock {
+public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
   public static final BooleanProperty RUNNING = BooleanProperty.create("running");
   public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
@@ -57,7 +65,8 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
       HONEY_BATH("honey_bath"),
       MILK_BATH("milk_bath"),
       PEONY_BATH("peony_bath"),
-      ROSE_BATH("rose_bath");
+      ROSE_BATH("rose_bath"),
+      CUSTOM("custom");
 
       private final String name;
 
@@ -129,6 +138,12 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
   public BathtubBlock(Properties properties) {
     super(properties);
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT).setValue(LIQUID, LiquidType.EMPTY));
+  }
+
+  @Nullable
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+      return new BathtubBlockEntity(pos, state);
   }
 
   @Override
@@ -215,7 +230,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
       ItemStack itemstack = player.getItemInHand(hand);
-      LiquidType currentLiquid = state.getValue(LIQUID);
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
           // Faucet interaction is handled by FaucetInteractionEntity now, but we keep this for safety or if entity is missing
@@ -286,89 +300,62 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
           return InteractionResult.sidedSuccess(level.isClientSide);
       }
 
-      if (currentLiquid == LiquidType.EMPTY) {
-         if (itemstack.is(Items.WATER_BUCKET)) {
-            if (!level.isClientSide) {
-               updateBothParts(level, pos, state, LiquidType.WATER);
-               if (!player.isCreative()) {
-                  player.setItemInHand(hand, new ItemStack(Items.BUCKET));
-               }
-               level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide);
-         } else {
-             ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(itemstack.getItem());
-             if (itemId != null && itemId.getNamespace().equals("hotbath")) {
-                 LiquidType newLiquid = null;
-                 String path = itemId.getPath();
-                 if (path.equals("hot_water_bucket")) newLiquid = LiquidType.HOT_WATER;
-                 else if (path.equals("herbal_bath_bucket")) newLiquid = LiquidType.HERBAL_BATH;
-                 else if (path.equals("honey_bath_bucket")) newLiquid = LiquidType.HONEY_BATH;
-                 else if (path.equals("milk_bath_bucket")) newLiquid = LiquidType.MILK_BATH;
-                 else if (path.equals("peony_bath_bucket")) newLiquid = LiquidType.PEONY_BATH;
-                 else if (path.equals("rose_bath_bucket")) newLiquid = LiquidType.ROSE_BATH;
-
-                 if (newLiquid != null) {
-                     if (!level.isClientSide) {
-                         updateBothParts(level, pos, state, newLiquid);
-                         if (!player.isCreative()) {
-                            player.setItemInHand(hand, new ItemStack(Items.BUCKET));
-                         }
-                         level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-                     }
-                     return InteractionResult.sidedSuccess(level.isClientSide);
-                 }
-             }
-         }
-      } else {
-         if (itemstack.is(Items.BUCKET)) {
-            if (!level.isClientSide) {
-               Item filledBucket = Items.WATER_BUCKET;
-               if (currentLiquid != LiquidType.WATER) {
-                   String bucketName = "hot_water_bucket";
-                   switch (currentLiquid) {
-                       case HERBAL_BATH: bucketName = "herbal_bath_bucket"; break;
-                       case HONEY_BATH: bucketName = "honey_bath_bucket"; break;
-                       case MILK_BATH: bucketName = "milk_bath_bucket"; break;
-                       case PEONY_BATH: bucketName = "peony_bath_bucket"; break;
-                       case ROSE_BATH: bucketName = "rose_bath_bucket"; break;
-                       default: break;
-                   }
-                   filledBucket = ForgeRegistries.ITEMS.getValue(new ResourceLocation("hotbath", bucketName));
-               }
-               
-               updateBothParts(level, pos, state, LiquidType.EMPTY);
-
-               if (!player.isCreative()) {
-                   itemstack.shrink(1);
-                   if (itemstack.isEmpty()) {
-                       player.setItemInHand(hand, new ItemStack(filledBucket));
-                   } else if (!player.getInventory().add(new ItemStack(filledBucket))) {
-                       player.drop(new ItemStack(filledBucket), false);
-                   }
-               }
-               level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide);
-         }
+      // Fluid interaction
+      if (!itemstack.isEmpty()) {
+          if (FluidUtil.getFluidHandler(itemstack).isPresent()) {
+              BlockEntity be = level.getBlockEntity(pos);
+              if (be instanceof BathtubBlockEntity bathtubBe) {
+                  boolean success = FluidUtil.interactWithFluidHandler(player, hand, level, pos, null);
+                  if (success) {
+                      if (!level.isClientSide) {
+                          FluidStack fluid = bathtubBe.getFluidTank().getFluid();
+                          syncFluidToOtherPart(level, pos, state, fluid);
+                          updateLiquidState(level, pos, state, fluid);
+                      }
+                      return InteractionResult.sidedSuccess(level.isClientSide);
+                  }
+              }
+          }
       }
       return InteractionResult.PASS;
    }
 
-   private void updateBothParts(Level level, BlockPos pos, BlockState state, LiquidType newLiquid) {
-       boolean running = state.getValue(RUNNING);
-       if (newLiquid == LiquidType.EMPTY) {
-           running = false;
-       }
-       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
+   private void syncFluidToOtherPart(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
        Direction direction = state.getValue(FACING);
        BedPart part = state.getValue(PART);
        BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
-       BlockState otherState = level.getBlockState(otherPos);
-       if (otherState.getBlock() == this && otherState.getValue(PART) != part) {
-           level.setBlock(otherPos, otherState.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
+       BlockEntity otherBe = level.getBlockEntity(otherPos);
+       if (otherBe instanceof BathtubBlockEntity bathtubBe) {
+           bathtubBe.getFluidTank().setFluid(fluid.copy());
+           BlockState otherState = level.getBlockState(otherPos);
+           if (otherState.getBlock() == this) {
+               updateLiquidState(level, otherPos, otherState, fluid);
+           }
        }
    }
+
+   private void updateLiquidState(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
+       LiquidType newLiquid = LiquidType.EMPTY;
+       if (!fluid.isEmpty()) {
+           String fluidName = ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).getPath();
+           if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
+           else if (fluidName.equals("hot_water_fluid") || fluidName.equals("hot_water_flowing")) newLiquid = LiquidType.HOT_WATER;
+           else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
+           else if (fluidName.contains("honey")) newLiquid = LiquidType.HONEY_BATH;
+           else if (fluidName.contains("milk")) newLiquid = LiquidType.MILK_BATH;
+           else if (fluidName.contains("peony")) newLiquid = LiquidType.PEONY_BATH;
+           else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
+           else newLiquid = LiquidType.CUSTOM;
+       }
+       
+       boolean running = state.getValue(RUNNING);
+       if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
+           running = false;
+       }
+       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
+   }
+
+
 
   @Override
   public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {

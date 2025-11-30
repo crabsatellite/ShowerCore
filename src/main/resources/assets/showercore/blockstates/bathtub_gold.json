@@ -815,6 +815,66 @@
       "textures": {
         "fluid": "hotbath:block/still_rose_bath"
       }
+    },
+    "facing=north,part=head,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_head_empty"
+    },
+    "facing=north,part=head,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_head_empty"
+    },
+    "facing=north,part=foot,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_foot_empty"
+    },
+    "facing=north,part=foot,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_foot_empty"
+    },
+    "facing=east,part=head,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 90
+    },
+    "facing=east,part=head,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 90
+    },
+    "facing=east,part=foot,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 90
+    },
+    "facing=east,part=foot,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 90
+    },
+    "facing=south,part=head,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 180
+    },
+    "facing=south,part=head,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 180
+    },
+    "facing=south,part=foot,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 180
+    },
+    "facing=south,part=foot,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 180
+    },
+    "facing=west,part=head,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 270
+    },
+    "facing=west,part=head,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_head_empty",
+      "y": 270
+    },
+    "facing=west,part=foot,liquid=custom,running=false": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 270
+    },
+    "facing=west,part=foot,liquid=custom,running=true": {
+      "model": "showercore:block/bathtub_gold_foot_empty",
+      "y": 270
     }
   }
 }
