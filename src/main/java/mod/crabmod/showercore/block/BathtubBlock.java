@@ -1,6 +1,7 @@
 package mod.crabmod.showercore.block;
 
 import javax.annotation.Nullable;
+import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -200,6 +201,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock {
               } else {
                   level.setBlock(pos, state.setValue(RUNNING, false), 3);
               }
+          }
+          return InteractionResult.sidedSuccess(level.isClientSide);
+      }
+
+      if (itemstack.isEmpty() && state.getValue(PART) == BedPart.FOOT) {
+          if (!level.isClientSide) {
+              Direction direction = state.getValue(FACING);
+              BlockPos headPos = pos.relative(direction);
+              SeatEntity seat = new SeatEntity(level, headPos.getX() + 0.5, headPos.getY() + 0.1, headPos.getZ() + 0.5);
+              level.addFreshEntity(seat);
+              player.startRiding(seat);
           }
           return InteractionResult.sidedSuccess(level.isClientSide);
       }

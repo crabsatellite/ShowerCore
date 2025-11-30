@@ -15,6 +15,8 @@ import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEn
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLayers;
 import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
+import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
+import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EnchantmentTableParticle;
@@ -174,6 +176,8 @@ public class ClientEvent {
     event.registerBlockEntityRenderer(
         BlockEntitiesRegister.PEONY_BATH_CORE_BLOCK_ENTITY.get(),
         PeonyBathCoreBlockEntityRenderer::new);
+    
+    event.registerEntityRenderer(EntityRegister.SEAT_ENTITY.get(), SeatEntityRenderer::new);
   }
 
   @SubscribeEvent
