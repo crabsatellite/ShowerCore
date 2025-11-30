@@ -26,8 +26,8 @@ public class BathEffectUtils {
         this.isEffectActive = new AtomicBoolean(false);
     }
 
-    public void renderBathWater(Level level, BlockPos pos, ParticleOptions particleType) {
-        renderBathWater(level, pos, 2, 1.4, 5, particleType);
+    public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
+        renderBathWater(level, pos, 2, 1.4, 5, particleTypeSupplier);
         playBathSound(level, 200, pos);
     }
 
@@ -65,7 +65,7 @@ public class BathEffectUtils {
         }
     }
 
-    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, ParticleOptions particleType) {
+    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
         // 如果效果已激活，则返回，避免重复开启
         if (isEffectActive.get()) {
             return;
@@ -96,7 +96,7 @@ public class BathEffectUtils {
 
                             // 添加粒子
                             level.addParticle(
-                                    particleType,
+                                    particleTypeSupplier.get(),
                                     pos.getX() + offsetX,
                                     pos.getY() + offsetY,
                                     pos.getZ() + offsetZ,

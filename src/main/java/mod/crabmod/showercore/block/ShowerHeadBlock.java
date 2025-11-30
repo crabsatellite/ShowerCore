@@ -109,7 +109,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock {
         BathEffectUtils bathEffectUtils = showerEntity.getBathEffectUtils();
 
         if (showerEntity.isEffectActive()) {
-          bathEffectUtils.renderBathWater(level, pos, showerEntity.getParticleType());
+          bathEffectUtils.renderBathWater(level, pos, showerEntity::getParticleType);
         } else {
           bathEffectUtils.stopBathEffect();
         }
