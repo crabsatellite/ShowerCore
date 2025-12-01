@@ -46,8 +46,15 @@
   "message.showercore.need_core": "Requires a Bath Core",
   "tooltip.showercore.contains": "§7Contains: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Right-click with Core:§r Install/Replace Core",
-  "tooltip.showercore.shower_head.usage.toggle": "§6Right-click with Empty Hand:§r Toggle Shower",
+  "tooltip.showercore.shower_head.usage.toggle": "§6Empty Hand Right Click: §rToggle Shower",
   "tooltip.showercore.shower_head.usage.remove": "§6Shift + Right-click with Empty Hand:§r Remove Core",
+  "tooltip.showercore.rubber_duck.usage.place": "§6Right Click: §rPlace on water/ground/bathtub",
+  "tooltip.showercore.rubber_duck.usage.push": "§6Right Click: §rPush Rubber Duck",
+  "tooltip.showercore.rubber_duck.usage.pickup": "§6Shift + Empty Hand Right Click: §rPick up Rubber Duck",
+  "tooltip.showercore.bathtub.usage.sit": "§6Empty Hand Right Click: §rSit in Bathtub",
+  "tooltip.showercore.bathtub.usage.toggle": "§6Shift + Empty Hand Right Click (Faucet): §rToggle Faucet",
+  "tooltip.showercore.bathtub.usage.fill": "§6Right Click with Bucket: §rFill/Empty Fluid",
+  "tooltip.showercore.bathtub.usage.duck": "§6Right Click with Rubber Duck: §rPlace Rubber Duck",
   "item.showercore.rubber_duck": "Rubber Duck",
   "entity.showercore.rubber_duck": "Rubber Duck"
 }

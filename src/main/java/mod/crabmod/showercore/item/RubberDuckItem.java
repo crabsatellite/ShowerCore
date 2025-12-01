@@ -21,12 +21,23 @@ import java.util.function.Predicate;
 
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.Nullable;
 
 public class RubberDuckItem extends Item {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
 
     public RubberDuckItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.place"));
+        tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.push"));
+        tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.pickup"));
+        super.appendHoverText(stack, level, tooltip, flag);
     }
 
     @Override

@@ -10,6 +10,7 @@ import mod.crabmod.showercore.block.bath_core.hot_water_core.HotWaterCoreBlock;
 import mod.crabmod.showercore.block.bath_core.milk_bath_core.MilkBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlock;
+import mod.crabmod.showercore.item.BathtubBlockItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -268,7 +269,13 @@ public class BlocksRegister {
   private static <T extends Block> RegistryObject<Item> registerBlockItem(
       String name, RegistryObject<T> block) {
     return ItemRegister.ITEMS.register(
-        name, () -> new BlockItem(block.get(), new Item.Properties()));
+        name, () -> {
+            T b = block.get();
+            if (b instanceof BathtubBlock) {
+                return new BathtubBlockItem(b, new Item.Properties());
+            }
+            return new BlockItem(b, new Item.Properties());
+        });
   }
 
   public static void register(IEventBus eventBus) {
