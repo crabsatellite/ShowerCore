@@ -226,6 +226,11 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
       ItemStack itemstack = player.getItemInHand(hand);
 
+      // Place Rubber Duck
+      if (itemstack.getItem() == mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get()) {
+          return InteractionResult.PASS;
+      }
+
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
           if (!level.isClientSide) {
               // Check if HEAD is occupied

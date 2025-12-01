@@ -179,4 +179,17 @@ public class RubberDuckEntity extends Entity {
         }
         return InteractionResult.CONSUME;
     }
+
+    @Override
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        if (player.isShiftKeyDown() && player.getItemInHand(hand).isEmpty()) {
+            if (!this.level().isClientSide) {
+                this.discard();
+                player.addItem(new net.minecraft.world.item.ItemStack(mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get()));
+                this.playSound(net.minecraft.sounds.SoundEvents.ITEM_PICKUP, 1.0F, 1.0F);
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+        return super.interact(player, hand);
+    }
 }
