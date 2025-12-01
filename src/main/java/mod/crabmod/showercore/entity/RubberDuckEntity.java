@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -16,6 +17,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 public class RubberDuckEntity extends Entity {
+
+    private float rotationalVelocity;
 
     public RubberDuckEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -73,6 +76,23 @@ public class RubberDuckEntity extends Entity {
                             fluidHeight = Math.max(fluidHeight, height - aabb.minY);
                         }
                     }
+
+                    net.minecraft.world.level.block.state.BlockState blockState = this.level().getBlockState(mutablePos);
+                    if (blockState.getBlock() instanceof mod.crabmod.showercore.block.BathtubBlock) {
+                        if (blockState.getValue(mod.crabmod.showercore.block.BathtubBlock.LIQUID) != mod.crabmod.showercore.block.BathtubBlock.LiquidType.EMPTY) {
+                             net.minecraft.world.level.block.entity.BlockEntity be = this.level().getBlockEntity(mutablePos);
+                             if (be instanceof mod.crabmod.showercore.block.entity.BathtubBlockEntity bathtubBe) {
+                                 if (mod.crabmod.showercore.Config.rubberDuckDestroyFluids.contains(bathtubBe.getFluidTank().getFluid().getFluid())) {
+                                     isDestroyFluid = true;
+                                 }
+                             }
+
+                             double height = (double)((float)l + 0.65F);
+                             if (height >= aabb.minY) {
+                                 fluidHeight = Math.max(fluidHeight, height - aabb.minY);
+                             }
+                        }
+                    }
                 }
             }
         }
@@ -89,10 +109,13 @@ public class RubberDuckEntity extends Entity {
         // Gravity
         this.setDeltaMovement(this.getDeltaMovement().add(0, -0.04D, 0));
 
+        this.setYRot(this.getYRot() + this.rotationalVelocity);
+        this.rotationalVelocity *= 0.85F;
+
         if (fluidHeight > 0) {
             // Buoyancy: proportional to submerged depth
             // Target: float higher
-            double buoyancy = fluidHeight * 2.5D;
+            double buoyancy = fluidHeight * 0.5D;
             this.setDeltaMovement(this.getDeltaMovement().add(0, buoyancy, 0));
             
             // Water drag, higher Y drag to prevent oscillation
@@ -128,10 +151,29 @@ public class RubberDuckEntity extends Entity {
     }
 
     @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
+    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
         if (!this.level().isClientSide) {
             Vec3 look = player.getLookAngle();
-            this.setDeltaMovement(look.x * 0.3, 0.1, look.z * 0.3);
+            
+            // Determine arm used
+            HumanoidArm arm = player.getMainArm();
+            if (hand == InteractionHand.OFF_HAND) {
+                arm = arm.getOpposite();
+            }
+            
+            // Add lateral force based on arm swing (Right arm swings Right->Left, so force is Left)
+            Vec3 rightVector = look.cross(new Vec3(0, 1, 0)).normalize();
+            Vec3 lateralForce = arm == HumanoidArm.RIGHT ? rightVector.scale(-0.5) : rightVector.scale(0.5);
+            
+            Vec3 force = look.add(lateralForce).normalize();
+
+            this.setDeltaMovement(force.x * 0.2, 0.05, force.z * 0.2);
+            
+            // Torque = r x F (Y component)
+            // vec is relative to entity
+            double torque = vec.z * force.x - vec.x * force.z;
+            this.rotationalVelocity -= (float)torque * 60.0F;
+            
             this.playSound(mod.crabmod.showercore.registers.SoundRegister.RUBBER_DUCK.get(), 1.0F, 1.0F);
             return InteractionResult.SUCCESS;
         }
