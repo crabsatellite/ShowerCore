@@ -1,6 +1,7 @@
 package mod.crabmod.showercore.entity;
 
 import mod.crabmod.showercore.registers.EntityRegister;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -43,18 +45,42 @@ public class RubberDuckEntity extends Entity {
     public void tick() {
         super.tick();
         
-        if (this.isInWater()) {
-            this.setDeltaMovement(this.getDeltaMovement().add(0, 0.01D, 0));
-            this.setDeltaMovement(this.getDeltaMovement().multiply(0.9, 0.9, 0.9));
-            if (this.getDeltaMovement().y > 0.05) {
-                 this.setDeltaMovement(this.getDeltaMovement().x, 0.05, this.getDeltaMovement().z);
+        double fluidHeight = this.getFluidHeight(FluidTags.WATER);
+        
+        // Gravity
+        this.setDeltaMovement(this.getDeltaMovement().add(0, -0.04D, 0));
+
+        if (fluidHeight > 0) {
+            // Buoyancy: proportional to submerged depth
+            // Target: float higher
+            double buoyancy = fluidHeight * 1.5D;
+            this.setDeltaMovement(this.getDeltaMovement().add(0, buoyancy, 0));
+            
+            // Water drag, higher Y drag to prevent oscillation
+            this.setDeltaMovement(this.getDeltaMovement().multiply(0.9, 0.75, 0.9));
+            
+            // Custom particles only when moving horizontally
+            if (this.level().isClientSide) {
+                Vec3 velocity = this.getDeltaMovement();
+                if (velocity.x * velocity.x + velocity.z * velocity.z > 0.001) {
+                     this.level().addParticle(ParticleTypes.SPLASH, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+                }
             }
         } else {
-            this.setDeltaMovement(this.getDeltaMovement().add(0, -0.04D, 0));
+            // Air drag
             this.setDeltaMovement(this.getDeltaMovement().multiply(0.98, 0.98, 0.98));
         }
         
         this.move(MoverType.SELF, this.getDeltaMovement());
+    }
+
+    @Override
+    public void updateSwimming() {
+        // Only allow vanilla swimming logic (particles) when moving horizontally
+        Vec3 velocity = this.getDeltaMovement();
+        if (velocity.x * velocity.x + velocity.z * velocity.z > 0.001) {
+            super.updateSwimming();
+        }
     }
 
     @Override
