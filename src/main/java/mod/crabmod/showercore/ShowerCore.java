@@ -23,6 +23,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import mod.crabmod.showercore.registers.SoundRegister;
+
 @Mod(ShowerCore.MODID)
 public class ShowerCore {
 
@@ -40,6 +42,7 @@ public class ShowerCore {
     BlockEntitiesRegister.register(modEventBus);
     EntityRegister.register(modEventBus);
     ParticleRegister.register(modEventBus);
+    SoundRegister.register(modEventBus);
 
     modEventBus.addListener(this::commonSetup);
 

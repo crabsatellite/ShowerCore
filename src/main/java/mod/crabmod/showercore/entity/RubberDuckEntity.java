@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -45,7 +44,47 @@ public class RubberDuckEntity extends Entity {
     public void tick() {
         super.tick();
         
-        double fluidHeight = this.getFluidHeight(FluidTags.WATER);
+        // Calculate fluid height for ANY fluid
+        net.minecraft.world.phys.AABB aabb = this.getBoundingBox().deflate(0.001D);
+        int minX = net.minecraft.util.Mth.floor(aabb.minX);
+        int maxX = net.minecraft.util.Mth.ceil(aabb.maxX);
+        int minY = net.minecraft.util.Mth.floor(aabb.minY);
+        int maxY = net.minecraft.util.Mth.ceil(aabb.maxY);
+        int minZ = net.minecraft.util.Mth.floor(aabb.minZ);
+        int maxZ = net.minecraft.util.Mth.ceil(aabb.maxZ);
+        
+        double fluidHeight = 0.0D;
+        boolean isDestroyFluid = false;
+        
+        net.minecraft.core.BlockPos.MutableBlockPos mutablePos = new net.minecraft.core.BlockPos.MutableBlockPos();
+        
+        for(int k = minX; k < maxX; ++k) {
+            for(int l = minY; l < maxY; ++l) {
+                for(int i1 = minZ; i1 < maxZ; ++i1) {
+                    mutablePos.set(k, l, i1);
+                    net.minecraft.world.level.material.FluidState fluidstate = this.level().getFluidState(mutablePos);
+                    if (!fluidstate.isEmpty()) {
+                        if (mod.crabmod.showercore.Config.rubberDuckDestroyFluids.contains(fluidstate.getType())) {
+                            isDestroyFluid = true;
+                        }
+                        
+                        double height = (double)((float)l + fluidstate.getHeight(this.level(), mutablePos));
+                        if (height >= aabb.minY) {
+                            fluidHeight = Math.max(fluidHeight, height - aabb.minY);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (isDestroyFluid) {
+             if (!this.level().isClientSide) {
+                this.discard();
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(), net.minecraft.sounds.SoundEvents.GENERIC_BURN, this.getSoundSource(), 1.0F, 1.0F);
+             }
+             this.level().addParticle(ParticleTypes.LAVA, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+             return;
+        }
         
         // Gravity
         this.setDeltaMovement(this.getDeltaMovement().add(0, -0.04D, 0));
@@ -53,7 +92,7 @@ public class RubberDuckEntity extends Entity {
         if (fluidHeight > 0) {
             // Buoyancy: proportional to submerged depth
             // Target: float higher
-            double buoyancy = fluidHeight * 1.5D;
+            double buoyancy = fluidHeight * 2.5D;
             this.setDeltaMovement(this.getDeltaMovement().add(0, buoyancy, 0));
             
             // Water drag, higher Y drag to prevent oscillation
@@ -93,6 +132,7 @@ public class RubberDuckEntity extends Entity {
         if (!this.level().isClientSide) {
             Vec3 look = player.getLookAngle();
             this.setDeltaMovement(look.x * 0.3, 0.1, look.z * 0.3);
+            this.playSound(mod.crabmod.showercore.registers.SoundRegister.RUBBER_DUCK.get(), 1.0F, 1.0F);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;

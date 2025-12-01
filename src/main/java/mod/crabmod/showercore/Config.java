@@ -90,6 +90,14 @@ public class Config {
               List.of(),
               Config::validateFluidName);
 
+  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RUBBER_DUCK_DESTROY_FLUIDS =
+      BUILDER
+          .comment("Fluids that will destroy the Rubber Duck (e.g. lava)")
+          .defineListAllowEmpty(
+              "rubber_duck_destroy_fluids",
+              List.of("minecraft:lava", "minecraft:flowing_lava"),
+              Config::validateFluidName);
+
   static final ForgeConfigSpec SPEC = BUILDER.build();
 
   public static Set<Block> hotWaterCoreBlocks;
@@ -99,6 +107,7 @@ public class Config {
   public static Set<Block> peonyBathCoreBlocks;
   public static Set<Block> herbalBathCoreBlocks;
   public static Set<Fluid> steamFluids;
+  public static Set<Fluid> rubberDuckDestroyFluids;
 
   private static boolean validateBlockName(final Object obj) {
     return obj instanceof final String blockName
@@ -144,6 +153,11 @@ public class Config {
 
     steamFluids =
         STEAM_FLUIDS.get().stream()
+            .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
+            .collect(Collectors.toSet());
+
+    rubberDuckDestroyFluids =
+        RUBBER_DUCK_DESTROY_FLUIDS.get().stream()
             .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
             .collect(Collectors.toSet());
   }
