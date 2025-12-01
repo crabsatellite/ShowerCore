@@ -23,6 +23,11 @@ public class EntityRegister {
                     .sized(0.25F, 0.25F)
                     .build("faucet"));
 
+    public static final RegistryObject<EntityType<mod.crabmod.showercore.entity.RubberDuckEntity>> RUBBER_DUCK = ENTITY_TYPES.register("rubber_duck",
+            () -> EntityType.Builder.<mod.crabmod.showercore.entity.RubberDuckEntity>of(mod.crabmod.showercore.entity.RubberDuckEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .build("rubber_duck"));
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

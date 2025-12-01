@@ -47,5 +47,7 @@
   "tooltip.showercore.contains": "§7Contains: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Right-click with Core:§r Install/Replace Core",
   "tooltip.showercore.shower_head.usage.toggle": "§6Right-click with Empty Hand:§r Toggle Shower",
-  "tooltip.showercore.shower_head.usage.remove": "§6Shift + Right-click with Empty Hand:§r Remove Core"
+  "tooltip.showercore.shower_head.usage.remove": "§6Shift + Right-click with Empty Hand:§r Remove Core",
+  "item.showercore.rubber_duck": "Rubber Duck",
+  "entity.showercore.rubber_duck": "Rubber Duck"
 }

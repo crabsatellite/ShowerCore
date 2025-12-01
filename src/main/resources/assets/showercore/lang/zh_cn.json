@@ -47,5 +47,7 @@
   "tooltip.showercore.contains": "§7内含：§r%s",
   "tooltip.showercore.shower_head.usage.install": "§6手持核心右键：§r安装/替换核心",
   "tooltip.showercore.shower_head.usage.toggle": "§6空手右键：§r开关喷头",
-  "tooltip.showercore.shower_head.usage.remove": "§6Shift + 空手右键：§r移除核心"
+  "tooltip.showercore.shower_head.usage.remove": "§6Shift + 空手右键：§r移除核心",
+  "item.showercore.rubber_duck": "橡皮鸭",
+  "entity.showercore.rubber_duck": "橡皮鸭"
 }

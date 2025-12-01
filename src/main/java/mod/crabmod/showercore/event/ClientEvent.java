@@ -203,6 +203,7 @@ public class ClientEvent {
 
     event.registerEntityRenderer(EntityRegister.SEAT_ENTITY.get(), SeatEntityRenderer::new);
     event.registerEntityRenderer(EntityRegister.FAUCET_ENTITY.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+    event.registerEntityRenderer(EntityRegister.RUBBER_DUCK.get(), mod.crabmod.showercore.client.renderer.RubberDuckRenderer::new);
   }
 
   @SubscribeEvent
