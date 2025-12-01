@@ -1,3 +1,8 @@
 {
-  "parent": "showercore:block/rubber_duck"
+  "parent": "showercore:block/rubber_duck",
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0]
+    }
+  }
 }

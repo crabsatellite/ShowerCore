@@ -19,11 +19,27 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.function.Predicate;
 
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.UseOnContext;
+
 public class RubberDuckItem extends Item {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
 
     public RubberDuckItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        if (!level.isClientSide) {
+            Vec3 pos = context.getClickLocation();
+            RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
+            duck.setYRot(context.getRotation());
+            level.addFreshEntity(duck);
+            context.getItemInHand().shrink(1);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
