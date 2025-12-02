@@ -214,6 +214,37 @@ public class ClientEvent {
             ParticleRegister.BATH_CORE_PARTICLE.get(),
             EnchantmentTableParticle.NautilusProvider::new);
 
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.HOT_WATER_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.HONEY_BATH_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.MILK_BATH_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.PEONY_BATH_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+    Minecraft.getInstance()
+        .particleEngine
+        .register(
+            ParticleRegister.ROSE_BATH_BATH_CORE_PARTICLE.get(),
+            EnchantmentTableParticle.NautilusProvider::new);
+
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
     event.registerSpriteSet(

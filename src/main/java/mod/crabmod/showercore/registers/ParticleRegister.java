@@ -15,6 +15,24 @@ public class ParticleRegister {
   public static final RegistryObject<SimpleParticleType> BATH_CORE_PARTICLE =
       PARTICLE_TYPES.register("bath_core_particle", () -> new SimpleParticleType(true));
 
+  public static final RegistryObject<SimpleParticleType> HERBAL_BATH_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("herbal_bath_bath_core_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> HOT_WATER_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("hot_water_bath_core_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> HONEY_BATH_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("honey_bath_bath_core_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> MILK_BATH_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("milk_bath_bath_core_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> PEONY_BATH_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("peony_bath_bath_core_particle", () -> new SimpleParticleType(true));
+
+  public static final RegistryObject<SimpleParticleType> ROSE_BATH_BATH_CORE_PARTICLE =
+      PARTICLE_TYPES.register("rose_bath_bath_core_particle", () -> new SimpleParticleType(true));
+
   public static final RegistryObject<SimpleParticleType> HOT_WATER_SHOWER_PARTICLE =
       PARTICLE_TYPES.register("hot_water_shower_particle", () -> new SimpleParticleType(true));
 

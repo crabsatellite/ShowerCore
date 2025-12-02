@@ -298,7 +298,7 @@ public class HerbalBathCoreBlockEntity extends BlockEntity {
         float f1 = -2.0F + randomsource.nextFloat() + (float) blockpos1.getY();
         float f2 = -0.5F + randomsource.nextFloat() + (float) blockpos1.getZ();
         pLevel.addParticle(
-            ParticleRegister.BATH_CORE_PARTICLE.get(),
+            ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
             vec3.x,
             vec3.y,
             vec3.z,
@@ -315,7 +315,7 @@ public class HerbalBathCoreBlockEntity extends BlockEntity {
       float f5 = (-0.5F + randomsource.nextFloat()) * (3.0F + pEntity.getBbWidth());
       Vec3 vec32 = new Vec3((double) f3, (double) f4, (double) f5);
       pLevel.addParticle(
-          ParticleRegister.BATH_CORE_PARTICLE.get(),
+          ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
           vec31.x,
           vec31.y,
           vec31.z,
