@@ -180,7 +180,7 @@ public class RubberDuckEntity extends Entity {
             
             // Torque = r x F (Y component)
             // vec is relative to entity
-            double torque = vec.z * force.x - vec.x * force.z;
+            double torque = vec.z * look.x - vec.x * look.z;
             this.rotationalVelocity -= (float)torque * 60.0F;
             
             this.playSound(mod.crabmod.showercore.registers.SoundRegister.RUBBER_DUCK.get(), 1.0F, 1.0F);
