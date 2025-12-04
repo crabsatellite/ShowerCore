@@ -1,0 +1,136 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "showercore:bathtub_white",
+      "showercore:bathtub_black",
+      "showercore:bathtub_oak",
+      "showercore:bathtub_spruce",
+      "showercore:bathtub_birch",
+      "showercore:bathtub_jungle",
+      "showercore:bathtub_acacia",
+      "showercore:bathtub_dark_oak",
+      "showercore:bathtub_mangrove",
+      "showercore:bathtub_cherry",
+      "showercore:bathtub_bamboo",
+      "showercore:bathtub_crimson",
+      "showercore:bathtub_warped",
+      "showercore:bathtub_stone",
+      "showercore:bathtub_cobblestone",
+      "showercore:bathtub_iron",
+      "showercore:bathtub_gold",
+      "showercore:bathtub_copper",
+      "showercore:bathtub_diamond",
+      "showercore:shower_head_white",
+      "showercore:shower_head_black",
+      "showercore:shower_head_oak",
+      "showercore:shower_head_spruce",
+      "showercore:shower_head_birch",
+      "showercore:shower_head_jungle",
+      "showercore:shower_head_acacia",
+      "showercore:shower_head_dark_oak",
+      "showercore:shower_head_mangrove",
+      "showercore:shower_head_cherry",
+      "showercore:shower_head_bamboo",
+      "showercore:shower_head_crimson",
+      "showercore:shower_head_warped",
+      "showercore:shower_head_stone",
+      "showercore:shower_head_cobblestone",
+      "showercore:shower_head_iron",
+      "showercore:shower_head_gold",
+      "showercore:shower_head_copper",
+      "showercore:shower_head_diamond",
+      "showercore:hot_water_core",
+      "showercore:herbal_bath_core",
+      "showercore:peony_bath_core",
+      "showercore:rose_bath_core",
+      "showercore:milk_bath_core",
+      "showercore:honey_bath_core",
+      "showercore:rubber_duck"
+    ]
+  },
+  "criteria": {
+    "has_hot_water_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:hot_water_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_honey_bath_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:honey_bath_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_milk_bath_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:milk_bath_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_rose_bath_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:rose_bath_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_peony_bath_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:peony_bath_bucket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_herbal_bath_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hotbath:herbal_bath_bucket"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_hot_water_bucket",
+      "has_honey_bath_bucket",
+      "has_milk_bath_bucket",
+      "has_rose_bath_bucket",
+      "has_peony_bath_bucket",
+      "has_herbal_bath_bucket"
+    ]
+  ]
+}
