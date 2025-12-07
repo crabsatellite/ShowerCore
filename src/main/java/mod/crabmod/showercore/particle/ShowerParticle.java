@@ -1,8 +1,10 @@
 package mod.crabmod.showercore.particle;
 
+import mod.crabmod.showercore.ClientConfig;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.WaterDropParticle;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -30,6 +32,9 @@ public class ShowerParticle extends WaterDropParticle {
     this.setSize(0.02F, 0.02F);
     this.lifetime = 40;
     this.setAlpha(0.0F);
+    this.rCol = 1.0F;
+    this.gCol = 1.0F;
+    this.bCol = 1.0F;
     this.invisibleHeightMin = invisibleHeightMin;
     this.invisibleHeightMax = invisibleHeightMax;
   }
@@ -43,10 +48,15 @@ public class ShowerParticle extends WaterDropParticle {
       this.setAlpha(
           0.0F); // Set the transparency to 0 when the particle is in the specified height range
     } else {
-      this.setAlpha(
-          0.5F); // Set the transparency to 0.5 when the particle is not in the specified height
-                 // range
+      this.setAlpha(ClientConfig.enableTranslucentParticles ? 0.6F : 1.0F);
     }
+  }
+
+  @Override
+  public ParticleRenderType getRenderType() {
+    return ClientConfig.enableTranslucentParticles
+        ? ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT
+        : ParticleRenderType.PARTICLE_SHEET_OPAQUE;
   }
 
   public static class Provider implements ParticleProvider<SimpleParticleType> {

@@ -51,6 +51,8 @@ public class ShowerCore {
 
     ModLoadingContext.get()
         .registerConfig(ModConfig.Type.COMMON, mod.crabmod.showercore.Config.SPEC);
+    ModLoadingContext.get()
+        .registerConfig(ModConfig.Type.CLIENT, mod.crabmod.showercore.ClientConfig.SPEC);
   }
 
   private void commonSetup(final FMLCommonSetupEvent event) {}
