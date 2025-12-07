@@ -121,6 +121,9 @@ public class Config {
 
   @SubscribeEvent
   static void onLoad(final ModConfigEvent event) {
+    if (event.getConfig().getSpec() != SPEC) {
+      return;
+    }
     hotWaterCoreBlocks =
         HOT_WATER_CORE_BLOCKS.get().stream()
             .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))

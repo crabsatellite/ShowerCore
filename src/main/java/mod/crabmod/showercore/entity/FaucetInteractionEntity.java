@@ -47,7 +47,7 @@ public class FaucetInteractionEntity extends Entity {
 
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-        if (!player.isShiftKeyDown() || !player.getItemInHand(hand).isEmpty()) {
+        if (!player.getItemInHand(hand).isEmpty()) {
             return InteractionResult.PASS;
         }
 

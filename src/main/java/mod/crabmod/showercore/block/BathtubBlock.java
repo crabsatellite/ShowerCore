@@ -46,6 +46,11 @@ import net.minecraftforge.fluids.FluidStack;
 import mod.crabmod.showercore.Config;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import java.util.Collections;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.nbt.CompoundTag;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -352,6 +357,18 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
    }
 
 
+
+  @Override
+  public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+    if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
+      ItemStack stack = new ItemStack(this);
+      CompoundTag tag = bathtubEntity.saveWithoutMetadata();
+      BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
+      return Collections.singletonList(stack);
+    }
+    return super.getDrops(state, params);
+  }
 
   @Override
   public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {

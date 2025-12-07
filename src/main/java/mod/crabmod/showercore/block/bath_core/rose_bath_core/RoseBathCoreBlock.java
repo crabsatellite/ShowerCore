@@ -15,6 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import java.util.Collections;
+import java.util.List;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 
 public class RoseBathCoreBlock extends BaseEntityBlock {
   public static final VoxelShape SHAPE = Block.box(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
@@ -27,6 +34,18 @@ public class RoseBathCoreBlock extends BaseEntityBlock {
   public VoxelShape getShape(
           BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
     return SHAPE;
+  }
+
+  @Override
+  public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+    if (blockEntity instanceof RoseBathCoreBlockEntity coreEntity) {
+      ItemStack stack = new ItemStack(this);
+      CompoundTag tag = coreEntity.saveWithoutMetadata();
+      BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
+      return Collections.singletonList(stack);
+    }
+    return super.getDrops(state, params);
   }
 
   @Override
