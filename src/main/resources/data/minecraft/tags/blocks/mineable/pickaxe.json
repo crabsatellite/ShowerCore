@@ -1,10 +1,29 @@
 {
   "values": [
-    "showercore:hot_water_core",
+    "showercore:bathtub_acacia",
+    "showercore:bathtub_bamboo",
+    "showercore:bathtub_birch",
+    "showercore:bathtub_black",
+    "showercore:bathtub_cherry",
+    "showercore:bathtub_cobblestone",
+    "showercore:bathtub_copper",
+    "showercore:bathtub_crimson",
+    "showercore:bathtub_dark_oak",
+    "showercore:bathtub_diamond",
+    "showercore:bathtub_gold",
+    "showercore:bathtub_iron",
+    "showercore:bathtub_jungle",
+    "showercore:bathtub_mangrove",
+    "showercore:bathtub_oak",
+    "showercore:bathtub_spruce",
+    "showercore:bathtub_stone",
+    "showercore:bathtub_warped",
+    "showercore:bathtub_white",
     "showercore:herbal_bath_core",
     "showercore:honey_bath_core",
+    "showercore:hot_water_core",
     "showercore:milk_bath_core",
-    "showercore:rose_bath_core",
-    "showercore:peony_bath_core"
+    "showercore:peony_bath_core",
+    "showercore:rose_bath_core"
   ]
 }
