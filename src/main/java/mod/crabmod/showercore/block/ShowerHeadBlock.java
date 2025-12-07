@@ -211,6 +211,17 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   }
 
   @Override
+  public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+      ItemStack stack = super.getCloneItemStack(level, pos, state);
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
+          CompoundTag tag = showerEntity.saveWithoutMetadata();
+          BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
+      }
+      return stack;
+  }
+
+  @Override
   public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {

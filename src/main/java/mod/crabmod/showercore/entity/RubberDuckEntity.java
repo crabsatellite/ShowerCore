@@ -146,6 +146,11 @@ public class RubberDuckEntity extends Entity {
     }
 
     @Override
+    public net.minecraft.world.item.ItemStack getPickResult() {
+        return new net.minecraft.world.item.ItemStack(mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get());
+    }
+
+    @Override
     public boolean isPickable() {
         return true;
     }
