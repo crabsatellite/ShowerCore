@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "M S",
+    "  S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "M": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "showercore:shower_head_b_iron"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["  I", "X X", "XXX"],
+  "key": {
+    "X": {
+      "item": "minecraft:gray_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "showercore:bathtub_gray"
+  }
+}
+

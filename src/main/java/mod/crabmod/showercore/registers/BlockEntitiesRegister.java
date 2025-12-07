@@ -81,12 +81,76 @@ public class BlockEntitiesRegister {
       SHOWER_HEAD_CONTAINER =
           BLOCK_ENTITIES.register(
               "shower_head_container",
-              () ->
-                  BlockEntityType.Builder.of(
-                          ShowerHeadContainerEntity::new,
-                          BlocksRegister.SHOWER_HEAD_BLACK.get(),
-                          BlocksRegister.SHOWER_HEAD_WHITE.get())
-                      .build(null));
+              () -> {
+                  List<Block> blocks = new ArrayList<>();
+                  blocks.add(BlocksRegister.SHOWER_HEAD_BLACK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_WHITE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_ORANGE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_MAGENTA.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_LIGHT_BLUE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_YELLOW.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_LIME.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_PINK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_GRAY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_LIGHT_GRAY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_CYAN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_PURPLE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_BLUE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_BROWN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_GREEN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_RED.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_OAK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_SPRUCE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_BIRCH.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_JUNGLE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_ACACIA.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_DARK_OAK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_MANGROVE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_CHERRY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_BAMBOO.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_CRIMSON.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_WARPED.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_STONE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_COBBLESTONE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_IRON.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_GOLD.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_COPPER.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_DIAMOND.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_BLACK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_WHITE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_ORANGE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_MAGENTA.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_LIGHT_BLUE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_YELLOW.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_LIME.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_PINK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_GRAY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_LIGHT_GRAY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_CYAN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_PURPLE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_BLUE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_BROWN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_GREEN.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_RED.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_OAK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_SPRUCE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_BIRCH.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_JUNGLE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_ACACIA.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_DARK_OAK.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_MANGROVE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_CHERRY.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_BAMBOO.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_CRIMSON.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_WARPED.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_STONE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_COBBLESTONE.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_IRON.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_GOLD.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_COPPER.get());
+                  blocks.add(BlocksRegister.SHOWER_HEAD_B_DIAMOND.get());
+                  return BlockEntityType.Builder.of(ShowerHeadContainerEntity::new, blocks.toArray(new Block[0])).build(null);
+              });
 
   public static final RegistryObject<BlockEntityType<BathtubBlockEntity>> BATHTUB_BLOCK_ENTITY =
       BLOCK_ENTITIES.register(
@@ -112,7 +176,20 @@ public class BlockEntitiesRegister {
              bathtubBlocks.add(BlocksRegister.BATHTUB_GOLD.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_COPPER.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_DIAMOND.get());
-             
+             bathtubBlocks.add(BlocksRegister.BATHTUB_ORANGE.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_MAGENTA.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_LIGHT_BLUE.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_YELLOW.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_LIME.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_PINK.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_GRAY.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_LIGHT_GRAY.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_CYAN.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_PURPLE.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_BLUE.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_BROWN.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_GREEN.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_RED.get());
              return BlockEntityType.Builder.of(BathtubBlockEntity::new, bathtubBlocks.toArray(new Block[0]))
                   .build(null);
           });

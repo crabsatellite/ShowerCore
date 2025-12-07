@@ -12,7 +12,7 @@ public class ClientConfig {
   public static final ForgeConfigSpec.BooleanValue ENABLE_TRANSLUCENT_PARTICLES =
       BUILDER
           .comment("Enable translucent rendering for shower particles")
-          .define("enable_translucent_particles", true);
+          .define("enable_translucent_particles", false);
 
   static final ForgeConfigSpec SPEC = BUILDER.build();
 
