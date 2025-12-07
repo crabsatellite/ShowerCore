@@ -5,9 +5,9 @@
     "1": "showercore:block/showerpom",
     "2": "minecraft:block/red_concrete",
     "3": "minecraft:block/blue_concrete",
-    "4": "minecraft:block/purple_concrete",
+    "4": "minecraft:block/purple_terracotta",
     "5": "minecraft:block/purple_concrete",
-    "6": "minecraft:block/purple_concrete",
+    "6": "minecraft:block/purple_terracotta",
     "particle": "minecraft:block/purple_concrete"
   },
   "elements": [
@@ -205,3 +205,4 @@
     }
   }
 }
+

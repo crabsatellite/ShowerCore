@@ -85,7 +85,21 @@ public class ClientEvent {
         BlocksRegister.BATHTUB_IRON.get(),
         BlocksRegister.BATHTUB_GOLD.get(),
         BlocksRegister.BATHTUB_COPPER.get(),
-        BlocksRegister.BATHTUB_DIAMOND.get());
+        BlocksRegister.BATHTUB_DIAMOND.get(),
+        BlocksRegister.BATHTUB_ORANGE.get(),
+        BlocksRegister.BATHTUB_MAGENTA.get(),
+        BlocksRegister.BATHTUB_LIGHT_BLUE.get(),
+        BlocksRegister.BATHTUB_YELLOW.get(),
+        BlocksRegister.BATHTUB_LIME.get(),
+        BlocksRegister.BATHTUB_PINK.get(),
+        BlocksRegister.BATHTUB_GRAY.get(),
+        BlocksRegister.BATHTUB_LIGHT_GRAY.get(),
+        BlocksRegister.BATHTUB_CYAN.get(),
+        BlocksRegister.BATHTUB_PURPLE.get(),
+        BlocksRegister.BATHTUB_BLUE.get(),
+        BlocksRegister.BATHTUB_BROWN.get(),
+        BlocksRegister.BATHTUB_GREEN.get(),
+        BlocksRegister.BATHTUB_RED.get());
   }
 
   @SubscribeEvent
