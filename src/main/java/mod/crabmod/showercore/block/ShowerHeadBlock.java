@@ -103,6 +103,20 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
 
     net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(hand);
 
+    if (heldItem.getItem() == net.minecraft.world.item.Items.WATER_BUCKET) {
+       if (!state.getValue(WATERLOGGED)) {
+          if (!level.isClientSide) {
+             if (!player.isCreative()) {
+                player.setItemInHand(hand, new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.BUCKET));
+             }
+             level.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
+             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+             level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BUCKET_EMPTY, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+          }
+          return InteractionResult.sidedSuccess(level.isClientSide);
+       }
+    }
+
     BlockEntity blockEntity = level.getBlockEntity(pos);
     if (!(blockEntity instanceof ShowerHeadContainerEntity showerEntity)) {
       return InteractionResult.PASS;
