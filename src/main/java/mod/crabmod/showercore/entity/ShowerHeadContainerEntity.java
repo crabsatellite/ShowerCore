@@ -73,7 +73,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     this.effectActive = tag.getBoolean("EffectActive");
     if (this.level != null && this.level.isClientSide) {
       if (this.effectActive) {
-        this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+        this.startEffect();
       } else {
         this.bathEffectUtils.stopBathEffect();
       }
@@ -99,9 +99,36 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     super.onLoad();
     if (this.level != null && this.level.isClientSide) {
         if (this.effectActive) {
-            this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType);
+            this.startEffect();
         }
     }
+  }
+
+  private void startEffect() {
+      if (this.level != null && this.level.isClientSide && this.effectActive) {
+            net.minecraft.world.level.block.Block block = this.getBlockState().getBlock();
+            String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
+            
+            double width, depth, centerX, centerZ, height;
+            
+            if (name.contains("compact_shower_head")) {
+                // Compact (Type B)
+                width = 0.375;
+                depth = 0.375;
+                centerX = 0.5;
+                centerZ = 0.53125;
+                height = 1.78;
+            } else {
+                // Rain (Type A) - Default
+                width = 0.5625;
+                depth = 0.3125;
+                centerX = 0.5;
+                centerZ = 0.5;
+                height = 1.78;
+            }
+
+            this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType, width, depth, centerX, centerZ, height);
+      }
   }
 
   @Override

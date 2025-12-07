@@ -38,9 +38,9 @@ public class BathEffectUtils {
         }
     }
 
-    public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
+    public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier, double width, double depth, double centerX, double centerZ, double height) {
         if (isEffectActive.get()) return;
-        renderBathWater(level, pos, 2, 1.4, 5, particleTypeSupplier);
+        renderBathWater(level, pos, 2, 1.4, 5, particleTypeSupplier, width, depth, centerX, centerZ, height);
         playBathSound(level, 200, pos);
     }
 
@@ -78,7 +78,7 @@ public class BathEffectUtils {
         }
     }
 
-    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
+    public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, java.util.function.Supplier<ParticleOptions> particleTypeSupplier, double width, double depth, double centerX, double centerZ, double height) {
         // 如果效果已激活，则返回，避免重复开启
         if (isEffectActive.get()) {
             return;
@@ -112,9 +112,9 @@ public class BathEffectUtils {
                         ShowerParticle.INVISIBLE_HEIGHT_MAX.set(invisibleHeightMax);
 
                         for (int i = 0; i < 1; i++) {
-                            double offsetX = 0.5 - (level.random.nextDouble() - 0.5) * 0.3;
-                            double offsetY = 2;
-                            double offsetZ = 0.5 - (level.random.nextDouble() - 0.5) * 0.3;
+                            double offsetX = centerX + (level.random.nextDouble() - 0.5) * width;
+                            double offsetY = height;
+                            double offsetZ = centerZ + (level.random.nextDouble() - 0.5) * depth;
                             double velocityY = -3;
 
                             // 添加粒子
