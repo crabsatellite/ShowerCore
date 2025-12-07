@@ -72,19 +72,22 @@ public class BlocksRegister {
       BlockBehaviour.Properties.of()
           .strength(2.0F)
           .sound(SoundType.STONE)
-          .noOcclusion();
+          .noOcclusion()
+          .requiresCorrectToolForDrops();
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_BATHTUB_WOOD =
       BlockBehaviour.Properties.of()
           .strength(1.0F)
           .sound(SoundType.WOOD)
-          .noOcclusion();
+          .noOcclusion()
+          .requiresCorrectToolForDrops();
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_BATHTUB_METAL =
       BlockBehaviour.Properties.of()
           .strength(2.0F)
           .sound(SoundType.METAL)
-          .noOcclusion();
+          .noOcclusion()
+          .requiresCorrectToolForDrops();
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
