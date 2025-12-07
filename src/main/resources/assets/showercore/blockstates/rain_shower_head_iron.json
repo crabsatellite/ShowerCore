@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "showercore:block/rain_shower_head_iron"
+    },
+    "facing=east": {
+      "model": "showercore:block/rain_shower_head_iron",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "showercore:block/rain_shower_head_iron",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "showercore:block/rain_shower_head_iron",
+      "y": 270
+    }
+  }
+}

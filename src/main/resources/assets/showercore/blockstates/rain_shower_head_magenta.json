@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "showercore:block/rain_shower_head_magenta"
+    },
+    "facing=east": {
+      "model": "showercore:block/rain_shower_head_magenta",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "showercore:block/rain_shower_head_magenta",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "showercore:block/rain_shower_head_magenta",
+      "y": 270
+    }
+  }
+}

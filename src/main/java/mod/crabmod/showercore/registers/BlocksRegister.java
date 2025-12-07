@@ -92,270 +92,270 @@ public class BlocksRegister {
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
 
-  public static final RegistryObject<Block> SHOWER_HEAD_BLACK =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BLACK =
       registerBlock(
-          "shower_head_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_WHITE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_WHITE =
       registerBlock(
-          "shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_ORANGE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_ORANGE =
       registerBlock(
-          "shower_head_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_MAGENTA =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_MAGENTA =
       registerBlock(
-          "shower_head_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_LIGHT_BLUE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIGHT_BLUE =
       registerBlock(
-          "shower_head_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_YELLOW =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_YELLOW =
       registerBlock(
-          "shower_head_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_LIME =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIME =
       registerBlock(
-          "shower_head_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_PINK =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_PINK =
       registerBlock(
-          "shower_head_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_GRAY =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GRAY =
       registerBlock(
-          "shower_head_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_LIGHT_GRAY =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIGHT_GRAY =
       registerBlock(
-          "shower_head_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_CYAN =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CYAN =
       registerBlock(
-          "shower_head_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_PURPLE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_PURPLE =
       registerBlock(
-          "shower_head_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_BLUE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BLUE =
       registerBlock(
-          "shower_head_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_BROWN =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BROWN =
       registerBlock(
-          "shower_head_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_GREEN =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GREEN =
       registerBlock(
-          "shower_head_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_RED =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_RED =
       registerBlock(
-          "shower_head_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_OAK =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_OAK =
       registerBlock(
-          "shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_SPRUCE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_SPRUCE =
       registerBlock(
-          "shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_BIRCH =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BIRCH =
       registerBlock(
-          "shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_JUNGLE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_JUNGLE =
       registerBlock(
-          "shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_ACACIA =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_ACACIA =
       registerBlock(
-          "shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_DARK_OAK =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_DARK_OAK =
       registerBlock(
-          "shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_MANGROVE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_MANGROVE =
       registerBlock(
-          "shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_CHERRY =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CHERRY =
       registerBlock(
-          "shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_BAMBOO =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BAMBOO =
       registerBlock(
-          "shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_CRIMSON =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CRIMSON =
       registerBlock(
-          "shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_WARPED =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_WARPED =
       registerBlock(
-          "shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "rain_shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_STONE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_STONE =
       registerBlock(
-          "shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
+          "rain_shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_COBBLESTONE =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_COBBLESTONE =
       registerBlock(
-          "shower_head_cobblestone",
+          "rain_shower_head_cobblestone",
           () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_IRON =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_IRON =
       registerBlock(
-          "shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "rain_shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_GOLD =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GOLD =
       registerBlock(
-          "shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "rain_shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_COPPER =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_COPPER =
       registerBlock(
-          "shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "rain_shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_DIAMOND =
+  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_DIAMOND =
       registerBlock(
-          "shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "rain_shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_STONE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_STONE =
       registerBlock(
-          "shower_head_b_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
+          "compact_shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_OAK =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_OAK =
       registerBlock(
-          "shower_head_b_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_IRON =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_IRON =
       registerBlock(
-          "shower_head_b_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "compact_shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_GOLD =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GOLD =
       registerBlock(
-          "shower_head_b_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "compact_shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_DIAMOND =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_DIAMOND =
       registerBlock(
-          "shower_head_b_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "compact_shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_BLACK =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BLACK =
       registerBlock(
-          "shower_head_b_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_WHITE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_WHITE =
       registerBlock(
-          "shower_head_b_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_ORANGE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_ORANGE =
       registerBlock(
-          "shower_head_b_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_MAGENTA =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_MAGENTA =
       registerBlock(
-          "shower_head_b_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_LIGHT_BLUE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIGHT_BLUE =
       registerBlock(
-          "shower_head_b_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_YELLOW =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_YELLOW =
       registerBlock(
-          "shower_head_b_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_LIME =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIME =
       registerBlock(
-          "shower_head_b_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_PINK =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_PINK =
       registerBlock(
-          "shower_head_b_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_GRAY =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GRAY =
       registerBlock(
-          "shower_head_b_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_LIGHT_GRAY =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIGHT_GRAY =
       registerBlock(
-          "shower_head_b_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_CYAN =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CYAN =
       registerBlock(
-          "shower_head_b_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_PURPLE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_PURPLE =
       registerBlock(
-          "shower_head_b_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_BLUE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BLUE =
       registerBlock(
-          "shower_head_b_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_BROWN =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BROWN =
       registerBlock(
-          "shower_head_b_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_GREEN =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GREEN =
       registerBlock(
-          "shower_head_b_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_RED =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_RED =
       registerBlock(
-          "shower_head_b_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_SPRUCE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_SPRUCE =
       registerBlock(
-          "shower_head_b_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_BIRCH =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BIRCH =
       registerBlock(
-          "shower_head_b_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_JUNGLE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_JUNGLE =
       registerBlock(
-          "shower_head_b_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_ACACIA =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_ACACIA =
       registerBlock(
-          "shower_head_b_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_DARK_OAK =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_DARK_OAK =
       registerBlock(
-          "shower_head_b_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_MANGROVE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_MANGROVE =
       registerBlock(
-          "shower_head_b_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_CHERRY =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CHERRY =
       registerBlock(
-          "shower_head_b_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_BAMBOO =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BAMBOO =
       registerBlock(
-          "shower_head_b_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_CRIMSON =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CRIMSON =
       registerBlock(
-          "shower_head_b_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_WARPED =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_WARPED =
       registerBlock(
-          "shower_head_b_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
+          "compact_shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_COBBLESTONE =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_COBBLESTONE =
       registerBlock(
-          "shower_head_b_cobblestone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
+          "compact_shower_head_cobblestone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> SHOWER_HEAD_B_COPPER =
+  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_COPPER =
       registerBlock(
-          "shower_head_b_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
+          "compact_shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
   public static final RegistryObject<Block> BATHTUB_WHITE =
       registerBlock(

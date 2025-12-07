@@ -79,7 +79,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   @javax.annotation.Nullable
   @Override
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-    return type == BlockEntitiesRegister.SHOWER_HEAD_CONTAINER.get() ? (lvl, pos, st, be) -> ShowerHeadContainerEntity.tick(lvl, pos, st, (ShowerHeadContainerEntity) be) : null;
+    return type == BlockEntitiesRegister.RAIN_SHOWER_HEAD_CONTAINER.get() ? (lvl, pos, st, be) -> ShowerHeadContainerEntity.tick(lvl, pos, st, (ShowerHeadContainerEntity) be) : null;
   }
 
   @Override

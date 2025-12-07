@@ -29,7 +29,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   private final Map<UUID, Integer> timeUnderShower = new HashMap<>();
 
   public ShowerHeadContainerEntity(BlockPos pos, BlockState state) {
-    super(BlockEntitiesRegister.SHOWER_HEAD_CONTAINER.get(), pos, state);
+    super(BlockEntitiesRegister.RAIN_SHOWER_HEAD_CONTAINER.get(), pos, state);
     this.bathEffectUtils = new BathEffectUtils();
   }
 
