@@ -1,6 +1,7 @@
 package mod.crabmod.showercore.item;
 
 import mod.crabmod.showercore.entity.RubberDuckEntity;
+import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -43,10 +44,20 @@ public class RubberDuckItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
+        Vec3 pos = context.getClickLocation();
+        Direction direction = context.getClickedFace();
+        if (direction.getAxis().isHorizontal()) {
+            pos = pos.add(direction.getStepX() * 0.25, 0, direction.getStepZ() * 0.25);
+        }
+
+        RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
+        duck.setYRot(context.getRotation());
+
+        if (!level.noCollision(duck, duck.getBoundingBox())) {
+            return InteractionResult.FAIL;
+        }
+
         if (!level.isClientSide) {
-            Vec3 pos = context.getClickLocation();
-            RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
-            duck.setYRot(context.getRotation());
             level.addFreshEntity(duck);
             context.getItemInHand().shrink(1);
         }
@@ -74,7 +85,14 @@ public class RubberDuckItem extends Item {
             }
 
             if (hitresult.getType() == HitResult.Type.BLOCK) {
-                RubberDuckEntity duck = new RubberDuckEntity(level, hitresult.getLocation().x, hitresult.getLocation().y, hitresult.getLocation().z);
+                net.minecraft.world.phys.BlockHitResult blockHitResult = (net.minecraft.world.phys.BlockHitResult) hitresult;
+                Direction direction = blockHitResult.getDirection();
+                Vec3 pos = hitresult.getLocation();
+                if (direction.getAxis().isHorizontal()) {
+                    pos = pos.add(direction.getStepX() * 0.25, 0, direction.getStepZ() * 0.25);
+                }
+
+                RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
                 duck.setYRot(player.getYRot());
                 if (!level.noCollision(duck, duck.getBoundingBox())) {
                     return InteractionResultHolder.fail(itemstack);
