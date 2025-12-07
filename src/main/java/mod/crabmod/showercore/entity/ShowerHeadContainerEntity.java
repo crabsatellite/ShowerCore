@@ -104,7 +104,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     }
   }
 
-  private void startEffect() {
+  public void startEffect() {
       if (this.level != null && this.level.isClientSide && this.effectActive) {
             net.minecraft.world.level.block.Block block = this.getBlockState().getBlock();
             String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
