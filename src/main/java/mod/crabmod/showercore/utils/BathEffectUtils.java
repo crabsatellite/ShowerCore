@@ -17,43 +17,16 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundEvent;
 
 public class BathEffectUtils {
     private ScheduledExecutorService scheduler;
     private final AtomicBoolean isEffectActive;
-    private ShowerSoundInstance activeSound;
+    private final List<FadeableSoundInstance> activeSounds = new ArrayList<>();
 
     public BathEffectUtils() {
         this.isEffectActive = new AtomicBoolean(false);
-    }
-
-    private static class ShowerSoundInstance extends AbstractTickableSoundInstance {
-        private boolean fadingOut = false;
-
-        public ShowerSoundInstance(net.minecraft.sounds.SoundEvent soundEvent, SoundSource source, RandomSource random, BlockPos pos) {
-            super(soundEvent, source, random);
-            this.looping = true;
-            this.delay = 0;
-            this.volume = 0.6F;
-            this.pitch = 1.0F;
-            this.x = pos.getX() + 0.5;
-            this.y = pos.getY() + 0.5;
-            this.z = pos.getZ() + 0.5;
-        }
-
-        public void fadeOut() {
-            this.fadingOut = true;
-        }
-
-        @Override
-        public void tick() {
-            if (this.fadingOut) {
-                this.volume -= 0.02F;
-                if (this.volume <= 0.0F) {
-                    this.stop();
-                }
-            }
-        }
     }
 
     private void ensureScheduler() {
@@ -69,7 +42,7 @@ public class BathEffectUtils {
     public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier) {
         if (isEffectActive.get()) return;
         renderBathWater(level, pos, 2, 1.4, 5, particleTypeSupplier);
-        playBathSound(level, pos);
+        playBathSound(level, 200, pos);
     }
 
     private void generateOuterSteamParticles(Level worldIn, BlockPos pos, RandomSource rand, int radius) {
@@ -172,13 +145,46 @@ public class BathEffectUtils {
         );
     }
 
-    public void playBathSound(Level level, BlockPos pos) {
-        if (activeSound != null) {
-            Minecraft.getInstance().getSoundManager().stop(activeSound);
-        }
+    public void playBathSound(Level level, int soundInterval, BlockPos pos) {
+        ensureScheduler();
+        // 定期播放声音效果
+        scheduler.scheduleAtFixedRate(
+                () -> {
+                    if (!isEffectActive.get()) {
+                        return; // 如果效果已停用，跳过任务
+                    }
 
-        activeSound = new ShowerSoundInstance(SoundEvents.WEATHER_RAIN, SoundSource.BLOCKS, RandomSource.create(), pos);
-        Minecraft.getInstance().getSoundManager().play(activeSound);
+                    if (Minecraft.getInstance().level != level) {
+                        this.shutdown();
+                        return; // 如果世界已更改，停止任务
+                    }
+
+                    if (Minecraft.getInstance().isPaused()) {
+                        return;
+                    }
+
+                    Minecraft.getInstance().execute(() -> {
+                        if (Minecraft.getInstance().level == null || !isEffectActive.get()) return;
+                        
+                        FadeableSoundInstance soundInstance = new FadeableSoundInstance(
+                                SoundEvents.WEATHER_RAIN,
+                                SoundSource.BLOCKS,
+                                0.2F,
+                                1.0F,
+                                RandomSource.create(),
+                                pos
+                        );
+                        Minecraft.getInstance().getSoundManager().play(soundInstance);
+                        activeSounds.add(soundInstance);
+                        
+                        // Cleanup inactive sounds
+                        activeSounds.removeIf(instance -> !Minecraft.getInstance().getSoundManager().isActive(instance));
+                    });
+                },
+                0,
+                soundInterval,
+                TimeUnit.MILLISECONDS
+        );
     }
 
     // 停止粒子效果
@@ -187,9 +193,45 @@ public class BathEffectUtils {
         if (scheduler != null) {
             scheduler.shutdownNow();
         }
-        if (activeSound != null) {
-            activeSound.fadeOut();
-            activeSound = null;
+        
+        Minecraft.getInstance().execute(() -> {
+            for (FadeableSoundInstance sound : activeSounds) {
+                sound.triggerFadeOut();
+            }
+            activeSounds.clear();
+        });
+    }
+
+    private static class FadeableSoundInstance extends AbstractTickableSoundInstance {
+        private boolean fadingOut = false;
+        private int fadeTicks = 0;
+        private final int fadeDuration = 20; // 1 second
+        private final float originalVolume;
+
+        public FadeableSoundInstance(SoundEvent sound, SoundSource source, float volume, float pitch, RandomSource random, BlockPos pos) {
+            super(sound, source, random);
+            this.volume = volume;
+            this.pitch = pitch;
+            this.x = pos.getX() + 0.5;
+            this.y = pos.getY() + 0.5;
+            this.z = pos.getZ() + 0.5;
+            this.originalVolume = volume;
+        }
+
+        @Override
+        public void tick() {
+            if (fadingOut) {
+                fadeTicks++;
+                if (fadeTicks >= fadeDuration) {
+                    this.stop();
+                } else {
+                    this.volume = originalVolume * (1.0f - (float)fadeTicks / fadeDuration);
+                }
+            }
+        }
+
+        public void triggerFadeOut() {
+            this.fadingOut = true;
         }
     }
 
