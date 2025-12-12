@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.UUID;
 import mod.crabmod.showercore.base.BaseShowerHeadBlockEntity;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
-import mod.crabmod.showercore.utils.BathEffectUtils;
+import mod.crabmod.showercore.client.ShowerHeadClientHelper;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.api.distmarker.Dist;
 import mod.crabmod.showercore.utils.CoreUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -25,12 +27,11 @@ import net.minecraft.world.effect.MobEffect;
 
 public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   private boolean effectActive = false;
-  private final BathEffectUtils bathEffectUtils;
+  private Object bathEffectUtils;
   private final Map<UUID, Integer> timeUnderShower = new HashMap<>();
 
   public ShowerHeadContainerEntity(BlockPos pos, BlockState state) {
     super(BlockEntitiesRegister.RAIN_SHOWER_HEAD_CONTAINER.get(), pos, state);
-    this.bathEffectUtils = new BathEffectUtils();
   }
 
   @Override
@@ -47,10 +48,6 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   // 获取当前效果状态的方法
   public boolean isEffectActive() {
     return effectActive;
-  }
-
-  public BathEffectUtils getBathEffectUtils() {
-    return this.bathEffectUtils;
   }
 
   public net.minecraft.core.particles.SimpleParticleType getParticleType() {
@@ -75,7 +72,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
       if (this.effectActive) {
         this.startEffect();
       } else {
-        this.bathEffectUtils.stopBathEffect();
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils));
       }
     }
   }
@@ -98,6 +95,11 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public void onLoad() {
     super.onLoad();
     if (this.level != null && this.level.isClientSide) {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            if (this.bathEffectUtils == null) {
+                this.bathEffectUtils = ShowerHeadClientHelper.createBathEffectUtils();
+            }
+        });
         if (this.effectActive) {
             this.startEffect();
         }
@@ -109,34 +111,37 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             net.minecraft.world.level.block.Block block = this.getBlockState().getBlock();
             String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
             
-            double width, depth, centerX, centerZ, height;
-            
-            if (name.contains("compact_shower_head")) {
-                // Compact (Type B)
-                width = 0.375;
-                depth = 0.375;
-                centerX = 0.5;
-                centerZ = 0.53125;
-                height = 1.78;
-            } else {
-                // Rain (Type A) - Default
-                width = 0.5625;
-                depth = 0.3125;
-                centerX = 0.5;
-                centerZ = 0.5;
-                height = 1.78;
-            }
+            final double width = name.contains("compact_shower_head") ? 0.375 : 0.5625;
+            final double depth = name.contains("compact_shower_head") ? 0.375 : 0.3125;
+            final double centerX = 0.5;
+            final double centerZ = name.contains("compact_shower_head") ? 0.53125 : 0.5;
+            final double height = 1.78;
 
-            this.bathEffectUtils.renderBathWater(this.level, this.worldPosition, this::getParticleType, width, depth, centerX, centerZ, height);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+                if (this.bathEffectUtils == null) {
+                    this.bathEffectUtils = ShowerHeadClientHelper.createBathEffectUtils();
+                }
+                ShowerHeadClientHelper.renderBathWater(this.bathEffectUtils, this.level, this.worldPosition, this::getParticleType, width, depth, centerX, centerZ, height);
+            });
       }
+  }
+
+  public void stopEffect() {
+    if (this.level != null && this.level.isClientSide) {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils));
+    }
+  }
+
+  public void shutdownEffect() {
+    if (this.level != null && this.level.isClientSide) {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.shutdown(this.bathEffectUtils));
+    }
   }
 
   @Override
   public void setRemoved() {
     super.setRemoved();
-    if (this.level != null && this.level.isClientSide) {
-      this.bathEffectUtils.shutdown();
-    }
+    this.shutdownEffect();
   }
 
   public static void tick(Level level, BlockPos pos, BlockState state, ShowerHeadContainerEntity entity) {

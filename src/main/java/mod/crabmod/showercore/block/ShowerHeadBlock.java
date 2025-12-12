@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 import mod.crabmod.showercore.base.RotatableBlock;
 import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
-import mod.crabmod.showercore.utils.BathEffectUtils;
 import mod.crabmod.showercore.utils.CoreUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -162,7 +161,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
           } else {
             if (showerEntity.isEffectActive()) {
               showerEntity.toggleEffect();
-              showerEntity.getBathEffectUtils().stopBathEffect();
+              showerEntity.stopEffect();
             }
           }
           return InteractionResult.sidedSuccess(level.isClientSide);
@@ -179,12 +178,10 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
 
       showerEntity.toggleEffect();
       if (level.isClientSide) {
-        BathEffectUtils bathEffectUtils = showerEntity.getBathEffectUtils();
-
         if (showerEntity.isEffectActive()) {
           showerEntity.startEffect();
         } else {
-          bathEffectUtils.stopBathEffect();
+          showerEntity.stopEffect();
         }
         return InteractionResult.SUCCESS;
       }
@@ -203,7 +200,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
       BlockEntity blockEntity = level.getBlockEntity(pos);
       if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
         if (level.isClientSide) {
-          showerEntity.getBathEffectUtils().shutdown();
+          showerEntity.shutdownEffect();
         }
       }
       super.onRemove(state, level, pos, newState, isMoving);
