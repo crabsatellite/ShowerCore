@@ -84,7 +84,8 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
 
   @Override
   protected VoxelShape getBaseShape() {
-    return Shapes.or(box(2.75, 0, 5.5, 13, 31, 16));
+    // Shifted down by 16 pixels (1 block) to allow placement above bathtub
+    return Shapes.or(box(2.75, -16, 5.5, 13, 15, 16));
   }
 
   @Override
