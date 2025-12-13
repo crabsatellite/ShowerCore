@@ -238,25 +238,37 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
           if (!level.isClientSide) {
+              Entity occupantToAsk = null;
               // Check if HEAD is occupied
               List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class, new AABB(pos));
               if (!seats.isEmpty() && !seats.get(0).getPassengers().isEmpty()) {
-                  Entity passenger = seats.get(0).getFirstPassenger();
-                  if (passenger instanceof Player occupant) {
-                      if (occupant != player) {
-                          player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
-                          
-                          Component accept = Component.literal("[Accept]")
-                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
-                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
-                          
-                          Component deny = Component.literal("[Reject]")
-                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
-                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+                  occupantToAsk = seats.get(0).getFirstPassenger();
+              } else {
+                  // HEAD is empty. Check FOOT.
+                  Direction direction = state.getValue(FACING);
+                  BlockPos footPos = pos.relative(direction.getOpposite());
+                  List<SeatEntity> footSeats = level.getEntitiesOfClass(SeatEntity.class, new AABB(footPos));
+                  
+                  if (!footSeats.isEmpty() && !footSeats.get(0).getPassengers().isEmpty()) {
+                      // Ask the passenger at FOOT
+                      occupantToAsk = footSeats.get(0).getFirstPassenger();
+                  }
+              }
 
-                          occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
-                              .append(accept).append(" ").append(deny));
-                      }
+              if (occupantToAsk instanceof Player occupant) {
+                  if (occupant != player) {
+                      player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                      
+                      Component accept = Component.literal("[Accept]")
+                          .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
+                          .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
+                      
+                      Component deny = Component.literal("[Reject]")
+                          .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
+                          .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+
+                      occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                          .append(accept).append(" ").append(deny));
                   }
               } else {
                   SeatEntity seat = new SeatEntity(level, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
@@ -271,26 +283,36 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           if (!level.isClientSide) {
               Direction direction = state.getValue(FACING);
               BlockPos headPos = pos.relative(direction);
+              Entity occupantToAsk = null;
               
               // Check if HEAD is occupied
               List<SeatEntity> seats = level.getEntitiesOfClass(SeatEntity.class, new AABB(headPos));
               if (!seats.isEmpty() && !seats.get(0).getPassengers().isEmpty()) {
-                  Entity passenger = seats.get(0).getFirstPassenger();
-                  if (passenger instanceof Player occupant) {
-                      if (occupant != player) {
-                          player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
-                          
-                          Component accept = Component.literal("[Accept]")
-                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
-                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
-                          
-                          Component deny = Component.literal("[Reject]")
-                              .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
-                              .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+                  occupantToAsk = seats.get(0).getFirstPassenger();
+              } else {
+                  // HEAD is empty. Check FOOT (current pos).
+                  List<SeatEntity> footSeats = level.getEntitiesOfClass(SeatEntity.class, new AABB(pos));
+                  
+                  if (!footSeats.isEmpty() && !footSeats.get(0).getPassengers().isEmpty()) {
+                      // Ask the passenger at FOOT
+                      occupantToAsk = footSeats.get(0).getFirstPassenger();
+                  }
+              }
 
-                          occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
-                              .append(accept).append(" ").append(deny));
-                      }
+              if (occupantToAsk instanceof Player occupant) {
+                  if (occupant != player) {
+                      player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                      
+                      Component accept = Component.literal("[Accept]")
+                          .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
+                          .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
+                      
+                      Component deny = Component.literal("[Reject]")
+                          .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
+                          .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
+
+                      occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                          .append(accept).append(" ").append(deny));
                   }
               } else {
                   SeatEntity seat = new SeatEntity(level, headPos.getX() + 0.5, headPos.getY() + 0.1, headPos.getZ() + 0.5);

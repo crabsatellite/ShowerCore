@@ -48,43 +48,34 @@ public class ModCommands {
                         // Find the bathtub the acceptor is sitting in
                         if (acceptor.getVehicle() instanceof SeatEntity seat) {
                             Level level = acceptor.level();
-                            BlockPos headPos = seat.blockPosition();
-                            // Assuming the seat is at the HEAD, the FOOT is adjacent.
-                            // We need to find the bathtub block to know the direction.
-                            // Actually, we can just search for a valid spot near the seat.
-                            // But better to check the block state.
-                            
-                            // The seat is at the center of the block, so blockPosition should be correct.
-                            // However, SeatEntity might be slightly offset.
+                            BlockPos seatPos = seat.blockPosition();
                             
                             // Let's try to find the BathtubBlock at the seat's position
-                            if (level.getBlockState(headPos).getBlock() instanceof mod.crabmod.showercore.block.BathtubBlock) {
-                                // Found it. Now find the FOOT position.
-                                // The seat is at HEAD.
-                                // We need to check the blockstate to find the FOOT.
-                                net.minecraft.world.level.block.state.BlockState state = level.getBlockState(headPos);
+                            if (level.getBlockState(seatPos).getBlock() instanceof mod.crabmod.showercore.block.BathtubBlock) {
+                                net.minecraft.world.level.block.state.BlockState state = level.getBlockState(seatPos);
                                 net.minecraft.core.Direction facing = state.getValue(mod.crabmod.showercore.block.BathtubBlock.FACING);
                                 net.minecraft.world.level.block.state.properties.BedPart part = state.getValue(mod.crabmod.showercore.block.BathtubBlock.PART);
                                 
-                                BlockPos footPos;
+                                BlockPos targetPos;
                                 if (part == net.minecraft.world.level.block.state.properties.BedPart.HEAD) {
-                                    footPos = headPos.relative(facing.getOpposite());
+                                    // Acceptor is at HEAD, put requester at FOOT
+                                    targetPos = seatPos.relative(facing.getOpposite());
                                 } else {
-                                    // Should not happen if seat is at HEAD, but just in case
-                                    footPos = headPos; 
+                                    // Acceptor is at FOOT, put requester at HEAD
+                                    targetPos = seatPos.relative(facing);
                                 }
 
-                                // Check if FOOT is already occupied?
-                                List<SeatEntity> existingSeats = level.getEntitiesOfClass(SeatEntity.class, new AABB(footPos));
+                                // Check if target position is already occupied?
+                                List<SeatEntity> existingSeats = level.getEntitiesOfClass(SeatEntity.class, new AABB(targetPos));
                                 if (!existingSeats.isEmpty() && !existingSeats.get(0).getPassengers().isEmpty()) {
-                                     context.getSource().sendFailure(Component.literal("The foot of the tub is already occupied!"));
+                                     context.getSource().sendFailure(Component.literal("The other side of the tub is already occupied!"));
                                      return 0;
                                 }
 
-                                // Spawn seat at FOOT
-                                SeatEntity footSeat = new SeatEntity(level, footPos.getX() + 0.5, footPos.getY() + 0.1, footPos.getZ() + 0.5);
-                                level.addFreshEntity(footSeat);
-                                requester.startRiding(footSeat);
+                                // Spawn seat at target position
+                                SeatEntity targetSeat = new SeatEntity(level, targetPos.getX() + 0.5, targetPos.getY() + 0.1, targetPos.getZ() + 0.5);
+                                level.addFreshEntity(targetSeat);
+                                requester.startRiding(targetSeat);
                                 
                                 acceptor.sendSystemMessage(Component.literal("Splish splash! " + requesterName + " joined the bath!"));
                                 requester.sendSystemMessage(Component.literal("You squeezed in!"));
