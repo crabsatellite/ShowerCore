@@ -21,11 +21,11 @@ version="${mod_version}" #mandatory
 # A display name for the mod
 displayName="${mod_name}" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
-updateJSONURL="https://raw.githubusercontent.com/crabsatellite/ShowerCore/main/update_log.json" #optional
+updateJSONURL="https://raw.githubusercontent.com/crabsatellite/ShowerCore/1.20.1/update_log.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="icon.png" #optional
 # A text field displayed in the mod UI
 #credits="" #optional
 # A text field displayed in the mod UI
