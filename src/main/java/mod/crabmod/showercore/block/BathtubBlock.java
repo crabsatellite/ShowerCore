@@ -267,17 +267,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
               if (occupantToAsk instanceof Player occupant) {
                   if (occupant != player) {
-                      player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                      player.sendSystemMessage(Component.translatable("message.showercore.ask_permission", occupant.getName()));
                       
-                      Component accept = Component.literal("[Accept]")
+                      Component accept = Component.translatable("message.showercore.accept")
                           .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
                           .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
                       
-                      Component deny = Component.literal("[Reject]")
+                      Component deny = Component.translatable("message.showercore.reject")
                           .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
                           .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
 
-                      occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                      occupant.sendSystemMessage(Component.translatable("message.showercore.request_join", player.getName())
                           .append(accept).append(" ").append(deny));
                   }
               } else {
@@ -311,17 +311,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
               if (occupantToAsk instanceof Player occupant) {
                   if (occupant != player) {
-                      player.sendSystemMessage(Component.literal("Asking " + occupant.getName().getString() + " for permission..."));
+                      player.sendSystemMessage(Component.translatable("message.showercore.ask_permission", occupant.getName()));
                       
-                      Component accept = Component.literal("[Accept]")
+                      Component accept = Component.translatable("message.showercore.accept")
                           .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.GREEN)
                           .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore accept_bath " + player.getName().getString())));
                       
-                      Component deny = Component.literal("[Reject]")
+                      Component deny = Component.translatable("message.showercore.reject")
                           .withStyle(Style.EMPTY.withColor(net.minecraft.ChatFormatting.RED)
                           .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/showercore deny_bath " + player.getName().getString())));
 
-                      occupant.sendSystemMessage(Component.literal("Hey! " + player.getName().getString() + " wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ")
+                      occupant.sendSystemMessage(Component.translatable("message.showercore.request_join", player.getName())
                           .append(accept).append(" ").append(deny));
                   }
               } else {

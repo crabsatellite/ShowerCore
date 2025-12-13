@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "Pommeau de Douche Compact (Carmin)",
   "block.showercore.compact_shower_head_warped": "Pommeau de Douche Compact (Biscornu)",
   "block.showercore.compact_shower_head_cobblestone": "Pommeau de Douche Compact (Pierres)",
-  "block.showercore.compact_shower_head_copper": "Pommeau de Douche Compact (Cuivre)"
+  "block.showercore.compact_shower_head_copper": "Pommeau de Douche Compact (Cuivre)",
+  "message.showercore.ask_permission": "Demande la permission à %s...",
+  "message.showercore.accept": "[Accepter]",
+  "message.showercore.reject": "[Refuser]",
+  "message.showercore.request_join": "Hé ! %s veut se serrer dans la baignoire avec toi. C'est un peu juste, mais... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Joueur introuvable ou hors ligne.",
+  "message.showercore.too_far": "Vous êtes trop loin !",
+  "message.showercore.already_occupied": "L'autre côté de la baignoire est déjà occupé !",
+  "message.showercore.joined_bath": "Plouf ! %s a rejoint le bain !",
+  "message.showercore.squeezed_in": "Tu t'es faufilé dedans !",
+  "message.showercore.not_in_bathtub": "Tu n'es pas dans une baignoire !",
+  "message.showercore.request_denied": "Ta demande a été refusée. C'est une séance privée.",
+  "message.showercore.denied_request": "Tu as refusé la demande."
 }

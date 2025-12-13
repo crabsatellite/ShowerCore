@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "コンパクトシャワーヘッド (クリムゾン)",
   "block.showercore.compact_shower_head_warped": "コンパクトシャワーヘッド (歪んだ)",
   "block.showercore.compact_shower_head_cobblestone": "コンパクトシャワーヘッド (丸石)",
-  "block.showercore.compact_shower_head_copper": "コンパクトシャワーヘッド (銅)"
+  "block.showercore.compact_shower_head_copper": "コンパクトシャワーヘッド (銅)",
+  "message.showercore.ask_permission": "%s に許可を求めています...",
+  "message.showercore.accept": "[承諾]",
+  "message.showercore.reject": "[拒否]",
+  "message.showercore.request_join": "ねえ！%s が一緒にお風呂に入りたがってるよ。ちょっと狭いけど... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "プレイヤーが見つからないか、オフラインです。",
+  "message.showercore.too_far": "離れすぎています！",
+  "message.showercore.already_occupied": "浴槽の反対側はすでに埋まっています！",
+  "message.showercore.joined_bath": "チャポン！%s がお風呂に入ってきました！",
+  "message.showercore.squeezed_in": "割り込みました！",
+  "message.showercore.not_in_bathtub": "浴槽の中にいません！",
+  "message.showercore.request_denied": "リクエストが拒否されました。プライベートな時間です。",
+  "message.showercore.denied_request": "リクエストを拒否しました。"
 }

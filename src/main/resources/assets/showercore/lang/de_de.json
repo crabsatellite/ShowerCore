@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "Kompakter Duschkopf (Karmesin)",
   "block.showercore.compact_shower_head_warped": "Kompakter Duschkopf (Wirr)",
   "block.showercore.compact_shower_head_cobblestone": "Kompakter Duschkopf (Bruchstein)",
-  "block.showercore.compact_shower_head_copper": "Kompakter Duschkopf (Kupfer)"
+  "block.showercore.compact_shower_head_copper": "Kompakter Duschkopf (Kupfer)",
+  "message.showercore.ask_permission": "Frage %s um Erlaubnis...",
+  "message.showercore.accept": "[Annehmen]",
+  "message.showercore.reject": "[Ablehnen]",
+  "message.showercore.request_join": "Hey! %s möchte mit dir in die Wanne. Es ist etwas eng, aber... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Spieler nicht gefunden oder offline.",
+  "message.showercore.too_far": "Ihr seid zu weit voneinander entfernt!",
+  "message.showercore.already_occupied": "Die andere Seite der Wanne ist bereits besetzt!",
+  "message.showercore.joined_bath": "Plitsch platsch! %s ist in die Wanne gehüpft!",
+  "message.showercore.squeezed_in": "Du hast dich reingequetscht!",
+  "message.showercore.not_in_bathtub": "Du bist nicht in einer Badewanne!",
+  "message.showercore.request_denied": "Deine Anfrage wurde abgelehnt. Das ist eine private Sitzung.",
+  "message.showercore.denied_request": "Du hast die Anfrage abgelehnt."
 }

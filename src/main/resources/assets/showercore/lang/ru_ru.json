@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "Компактная насадка для душа (Багровый)",
   "block.showercore.compact_shower_head_warped": "Компактная насадка для душа (Искаженный)",
   "block.showercore.compact_shower_head_cobblestone": "Компактная насадка для душа (Булыжник)",
-  "block.showercore.compact_shower_head_copper": "Компактная насадка для душа (Медь)"
+  "block.showercore.compact_shower_head_copper": "Компактная насадка для душа (Медь)",
+  "message.showercore.ask_permission": "Запрашиваем разрешение у %s...",
+  "message.showercore.accept": "[Принять]",
+  "message.showercore.reject": "[Отклонить]",
+  "message.showercore.request_join": "Эй! %s хочет залезть в ванну вместе с тобой. Тесновато, но... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Игрок не найден или не в сети.",
+  "message.showercore.too_far": "Вы слишком далеко друг от друга!",
+  "message.showercore.already_occupied": "Другая сторона ванны уже занята!",
+  "message.showercore.joined_bath": "Бултых! %s присоединяется к купанию!",
+  "message.showercore.squeezed_in": "Ты втиснулся!",
+  "message.showercore.not_in_bathtub": "Ты не в ванне!",
+  "message.showercore.request_denied": "Твой запрос отклонен. Это приватный сеанс.",
+  "message.showercore.denied_request": "Ты отклонил запрос."
 }
