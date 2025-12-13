@@ -48,7 +48,7 @@ public class ShowerParticle extends WaterDropParticle {
       this.setAlpha(
           0.0F); // Set the transparency to 0 when the particle is in the specified height range
     } else {
-      this.setAlpha(ClientConfig.enableTranslucentParticles ? 0.6F : 1.0F);
+      this.setAlpha(ClientConfig.enableTranslucentParticles ? 0.9F : 1.0F);
     }
   }
 
