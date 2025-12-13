@@ -378,16 +378,28 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
     if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
-      if (bedpart == BedPart.FOOT) {
-        if (player.isCreative()) {
+      
+      if (player.isCreative()) {
+          // Creative: Remove other part regardless of which part this is
+          Direction neighborDir = getNeighbourDirection(bedpart, state.getValue(FACING));
+          BlockPos neighborPos = pos.relative(neighborDir);
+          BlockState neighborState = level.getBlockState(neighborPos);
+          if (neighborState.is(this) && neighborState.getValue(PART) != bedpart) {
+              level.setBlock(neighborPos, Blocks.AIR.defaultBlockState(), 35);
+              level.levelEvent(player, 2001, neighborPos, Block.getId(neighborState));
+          }
+      } else {
+          if (bedpart == BedPart.FOOT) {
             BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
             BlockState blockstate = level.getBlockState(blockpos);
             if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
               level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
               level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             }
-        }
-      } else {
+          }
+      }
+
+      if (bedpart == BedPart.HEAD) {
           // Remove Faucet Entity if HEAD is broken
           level.getEntitiesOfClass(FaucetInteractionEntity.class, new net.minecraft.world.phys.AABB(pos)).forEach(Entity::discard);
       }

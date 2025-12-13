@@ -41,4 +41,19 @@ public class SeatEntity extends Entity {
             }
         }
     }
+
+    @Override
+    public net.minecraft.world.phys.Vec3 getDismountLocationForPassenger(net.minecraft.world.entity.LivingEntity passenger) {
+        net.minecraft.core.Direction direction = this.getDirection();
+        net.minecraft.core.Direction[] directions = {direction, direction.getClockWise(), direction.getCounterClockWise(), direction.getOpposite()};
+        
+        for (net.minecraft.core.Direction dir : directions) {
+            net.minecraft.world.phys.Vec3 vec3 = net.minecraft.world.entity.vehicle.DismountHelper.findSafeDismountLocation(passenger.getType(), this.level(), this.blockPosition().relative(dir), false);
+            if (vec3 != null) {
+                return vec3;
+            }
+        }
+        
+        return super.getDismountLocationForPassenger(passenger);
+    }
 }
