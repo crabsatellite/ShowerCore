@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "소형 샤워기 헤드 (진홍빛)",
   "block.showercore.compact_shower_head_warped": "소형 샤워기 헤드 (뒤틀린)",
   "block.showercore.compact_shower_head_cobblestone": "소형 샤워기 헤드 (조약돌)",
-  "block.showercore.compact_shower_head_copper": "소형 샤워기 헤드 (구리)"
+  "block.showercore.compact_shower_head_copper": "소형 샤워기 헤드 (구리)",
+  "message.showercore.ask_permission": "%s에게 허락을 구하는 중...",
+  "message.showercore.accept": "[수락]",
+  "message.showercore.reject": "[거절]",
+  "message.showercore.request_join": "저기! %s님이 같이 목욕하고 싶어해요. 좀 좁긴 하겠지만... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "플레이어를 찾을 수 없거나 오프라인입니다.",
+  "message.showercore.too_far": "너무 멀리 떨어져 있습니다!",
+  "message.showercore.already_occupied": "욕조 반대편에 이미 누군가 있습니다!",
+  "message.showercore.joined_bath": "첨벙! %s님이 목욕에 합류했습니다!",
+  "message.showercore.squeezed_in": "비집고 들어갔습니다!",
+  "message.showercore.not_in_bathtub": "욕조 안에 있지 않습니다!",
+  "message.showercore.request_denied": "요청이 거절되었습니다. 혼자만의 시간인가 봅니다.",
+  "message.showercore.denied_request": "요청을 거절했습니다."
 }

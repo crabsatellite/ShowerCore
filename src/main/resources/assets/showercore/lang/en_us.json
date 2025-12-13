@@ -117,5 +117,17 @@
   "block.showercore.compact_shower_head_crimson": "Compact Shower Head (Crimson)",
   "block.showercore.compact_shower_head_warped": "Compact Shower Head (Warped)",
   "block.showercore.compact_shower_head_cobblestone": "Compact Shower Head (Cobblestone)",
-  "block.showercore.compact_shower_head_copper": "Compact Shower Head (Copper)"
+  "block.showercore.compact_shower_head_copper": "Compact Shower Head (Copper)",
+  "message.showercore.ask_permission": "Asking %s for permission...",
+  "message.showercore.accept": "[Accept]",
+  "message.showercore.reject": "[Reject]",
+  "message.showercore.request_join": "Hey! %s wants to squeeze into the tub with you. It's a bit tight, but... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Player not found or offline.",
+  "message.showercore.too_far": "You are too far apart!",
+  "message.showercore.already_occupied": "The other side of the tub is already occupied!",
+  "message.showercore.joined_bath": "Splish splash! %s joined the bath!",
+  "message.showercore.squeezed_in": "You squeezed in!",
+  "message.showercore.not_in_bathtub": "You are not in a bathtub!",
+  "message.showercore.request_denied": "Your request was denied. It's a private session.",
+  "message.showercore.denied_request": "You denied the request."
 }

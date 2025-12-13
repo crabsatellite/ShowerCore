@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "Chuveiro Compacto (Carmesim)",
   "block.showercore.compact_shower_head_warped": "Chuveiro Compacto (Distorcido)",
   "block.showercore.compact_shower_head_cobblestone": "Chuveiro Compacto (Pedregulho)",
-  "block.showercore.compact_shower_head_copper": "Chuveiro Compacto (Cobre)"
+  "block.showercore.compact_shower_head_copper": "Chuveiro Compacto (Cobre)",
+  "message.showercore.ask_permission": "Pedindo permissão para %s...",
+  "message.showercore.accept": "[Aceitar]",
+  "message.showercore.reject": "[Rejeitar]",
+  "message.showercore.request_join": "Ei! %s quer entrar na banheira com você. É um pouco apertado, mas... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Jogador não encontrado ou offline.",
+  "message.showercore.too_far": "Vocês estão muito longe!",
+  "message.showercore.already_occupied": "O outro lado da banheira já está ocupado!",
+  "message.showercore.joined_bath": "Tchibum! %s entrou no banho!",
+  "message.showercore.squeezed_in": "Você se espremeu para entrar!",
+  "message.showercore.not_in_bathtub": "Você não está em uma banheira!",
+  "message.showercore.request_denied": "Seu pedido foi negado. É uma sessão privada.",
+  "message.showercore.denied_request": "Você negou o pedido."
 }

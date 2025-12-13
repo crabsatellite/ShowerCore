@@ -36,12 +36,12 @@ public class ModCommands {
                         ServerPlayer requester = context.getSource().getServer().getPlayerList().getPlayerByName(requesterName);
 
                         if (requester == null) {
-                            context.getSource().sendFailure(Component.literal("Player not found or offline."));
+                            context.getSource().sendFailure(Component.translatable("message.showercore.player_not_found"));
                             return 0;
                         }
 
                         if (acceptor.distanceToSqr(requester) > 25) {
-                            context.getSource().sendFailure(Component.literal("You are too far apart!"));
+                            context.getSource().sendFailure(Component.translatable("message.showercore.too_far"));
                             return 0;
                         }
 
@@ -68,7 +68,7 @@ public class ModCommands {
                                 // Check if target position is already occupied?
                                 List<SeatEntity> existingSeats = level.getEntitiesOfClass(SeatEntity.class, new AABB(targetPos));
                                 if (!existingSeats.isEmpty() && !existingSeats.get(0).getPassengers().isEmpty()) {
-                                     context.getSource().sendFailure(Component.literal("The other side of the tub is already occupied!"));
+                                     context.getSource().sendFailure(Component.translatable("message.showercore.already_occupied"));
                                      return 0;
                                 }
 
@@ -77,13 +77,13 @@ public class ModCommands {
                                 level.addFreshEntity(targetSeat);
                                 requester.startRiding(targetSeat);
                                 
-                                acceptor.sendSystemMessage(Component.literal("Splish splash! " + requesterName + " joined the bath!"));
-                                requester.sendSystemMessage(Component.literal("You squeezed in!"));
+                                acceptor.sendSystemMessage(Component.translatable("message.showercore.joined_bath", requesterName));
+                                requester.sendSystemMessage(Component.translatable("message.showercore.squeezed_in"));
                                 return 1;
                             }
                         }
 
-                        context.getSource().sendFailure(Component.literal("You are not in a bathtub!"));
+                        context.getSource().sendFailure(Component.translatable("message.showercore.not_in_bathtub"));
                         return 0;
                     }))
             )
@@ -93,9 +93,9 @@ public class ModCommands {
                         String requesterName = StringArgumentType.getString(context, "requester");
                         ServerPlayer requester = context.getSource().getServer().getPlayerList().getPlayerByName(requesterName);
                         if (requester != null) {
-                            requester.sendSystemMessage(Component.literal("Your request was denied. It's a private session."));
+                            requester.sendSystemMessage(Component.translatable("message.showercore.request_denied"));
                         }
-                        context.getSource().sendSuccess(() -> Component.literal("You denied the request."), false);
+                        context.getSource().sendSuccess(() -> Component.translatable("message.showercore.denied_request"), false);
                         return 1;
                     }))
             )

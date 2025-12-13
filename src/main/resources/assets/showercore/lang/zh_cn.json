@@ -117,5 +117,17 @@
   "block.showercore.compact_shower_head_crimson": "紧凑型花洒（绯红木）",
   "block.showercore.compact_shower_head_warped": "紧凑型花洒（诡异木）",
   "block.showercore.compact_shower_head_cobblestone": "紧凑型花洒（圆石）",
-  "block.showercore.compact_shower_head_copper": "紧凑型花洒（铜）"
+  "block.showercore.compact_shower_head_copper": "紧凑型花洒（铜）",
+  "message.showercore.ask_permission": "正在征求 %s 的同意...",
+  "message.showercore.accept": "[同意]",
+  "message.showercore.reject": "[拒绝]",
+  "message.showercore.request_join": "嘿！%s 想和你挤一挤。虽然有点窄，但是... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "找不到该玩家或玩家不在线。",
+  "message.showercore.too_far": "距离太远了！",
+  "message.showercore.already_occupied": "浴缸的另一头已经有人了！",
+  "message.showercore.joined_bath": "哗啦啦！%s 跳进了浴缸！",
+  "message.showercore.squeezed_in": "你挤进去了！",
+  "message.showercore.not_in_bathtub": "你不在浴缸里！",
+  "message.showercore.request_denied": "对方拒绝了你的请求。这是私人时间。",
+  "message.showercore.denied_request": "你拒绝了请求。"
 }

@@ -118,5 +118,17 @@
   "block.showercore.compact_shower_head_crimson": "Cabezal de Ducha Compacto (Carmesí)",
   "block.showercore.compact_shower_head_warped": "Cabezal de Ducha Compacto (Distorsionado)",
   "block.showercore.compact_shower_head_cobblestone": "Cabezal de Ducha Compacto (Adoquín)",
-  "block.showercore.compact_shower_head_copper": "Cabezal de Ducha Compacto (Cobre)"
+  "block.showercore.compact_shower_head_copper": "Cabezal de Ducha Compacto (Cobre)",
+  "message.showercore.ask_permission": "Pidiendo permiso a %s...",
+  "message.showercore.accept": "[Aceptar]",
+  "message.showercore.reject": "[Rechazar]",
+  "message.showercore.request_join": "¡Oye! %s quiere meterse en la bañera contigo. Está un poco apretado, pero... ( ͡° ͜ʖ ͡°) ",
+  "message.showercore.player_not_found": "Jugador no encontrado o desconectado.",
+  "message.showercore.too_far": "¡Estáis demasiado lejos!",
+  "message.showercore.already_occupied": "¡El otro lado de la bañera ya está ocupado!",
+  "message.showercore.joined_bath": "¡Chop, chop! ¡%s se ha unido al baño!",
+  "message.showercore.squeezed_in": "¡Te has colado dentro!",
+  "message.showercore.not_in_bathtub": "¡No estás en una bañera!",
+  "message.showercore.request_denied": "Tu solicitud fue denegada. Es una sesión privada.",
+  "message.showercore.denied_request": "Has denegado la solicitud."
 }
