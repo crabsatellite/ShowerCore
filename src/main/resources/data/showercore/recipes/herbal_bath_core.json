@@ -3,7 +3,7 @@
   "pattern": [" I ", "ICI", " I "],
   "key": {
     "I": {
-      "item": "minecraft:fern"
+      "item": "hotbath:bath_herb"
     },
     "C": {
       "item": "minecraft:conduit"

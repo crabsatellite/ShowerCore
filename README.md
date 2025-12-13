@@ -90,28 +90,28 @@ You can tweak the mod to your liking in the config files.
 
 ### Bath Cores
 
-| Item                 | Recipe                                                       | Ingredients                                                                    |
-| :------------------- | :----------------------------------------------------------- | :----------------------------------------------------------------------------- |
-| **Herbal Bath Core** | ![Herbal Bath Core Recipe](placeholder_herbal_bath_core.png) | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Fern (Cross Shape)        |
-| **Honey Bath Core**  | ![Honey Bath Core Recipe](placeholder_honey_bath_core.png)   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Honeycomb (Cross Shape)   |
-| **Hot Water Core**   | ![Hot Water Core Recipe](placeholder_hot_water_core.png)     | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Magma Cream (Cross Shape) |
-| **Milk Bath Core**   | ![Milk Bath Core Recipe](placeholder_milk_bath_core.png)     | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Milk Bucket (Cross Shape) |
-| **Peony Bath Core**  | ![Peony Bath Core Recipe](placeholder_peony_bath_core.png)   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Peony (Cross Shape)       |
-| **Rose Bath Core**   | ![Rose Bath Core Recipe](placeholder_rose_bath_core.png)     | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Rose Bush (Cross Shape)   |
+| Item                 | Recipe                                                                                                     | Ingredients                                                                          |
+| :------------------- | :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| **Herbal Bath Core** | <img src="https://s2.loli.net/2025/12/13/smGlzIifASH3FCc.png" width="150" alt="Herbal Bath Core Recipe" /> | **Center:** Conduit<br>**Top, Bottom, Left, Right:** hotbath:bath_herb (Cross Shape) |
+| **Honey Bath Core**  | <img src="https://s2.loli.net/2025/12/13/YRWjK3MbnB6va9x.png" width="150" alt="Honey Bath Core Recipe" />  | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Honeycomb (Cross Shape)         |
+| **Hot Water Core**   | <img src="https://s2.loli.net/2025/12/13/27wp1SMZj936HgX.png" width="150" alt="Hot Water Core Recipe" />   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Magma Cream (Cross Shape)       |
+| **Milk Bath Core**   | <img src="https://s2.loli.net/2025/12/13/6uweN5IRJM9LVH8.png" width="150" alt="Milk Bath Core Recipe" />   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Milk Bucket (Cross Shape)       |
+| **Peony Bath Core**  | <img src="https://s2.loli.net/2025/12/13/RYCEIUzTA1XWnbx.png" width="150" alt="Peony Bath Core Recipe" />  | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Peony (Cross Shape)             |
+| **Rose Bath Core**   | <img src="https://s2.loli.net/2025/12/13/sUpuyHzrGZWFKPR.png" width="150" alt="Rose Bath Core Recipe" />   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Rose Bush (Cross Shape)         |
 
 ### Bathtubs & Shower Heads
 
-| Item                                        | Recipe                                                             | Ingredients                                                                                                     |
-| :------------------------------------------ | :----------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| **Bathtub**<br>_(Example: Oak)_             | ![Bathtub Recipe](placeholder_bathtub.png)                         | **Shape:** U-shape (Bottom 2 rows)<br>**Materials:** Oak Planks (or other wood/stone) + Iron Nugget (Top Right) |
-| **Compact Shower Head**<br>_(Example: Oak)_ | ![Compact Shower Head Recipe](placeholder_compact_shower_head.png) | **Top Middle:** Bucket<br>**Middle:** Stick (Left), Planks (Right)                                              |
-| **Rain Shower Head**<br>_(Example: Oak)_    | ![Rain Shower Head Recipe](placeholder_rain_shower_head.png)       | **Top Middle:** Bucket<br>**Middle:** Stick (Left), Planks (Right)<br>**Bottom Left:** Stick                    |
+| Item                                           | Recipe                                                                                                        | Ingredients                                                                                                        |
+| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------- |
+| **Bathtub**<br>_(Example: Jungle)_             | <img src="https://s2.loli.net/2025/12/13/oyveJ1RlMD2TNGb.png" width="150" alt="Bathtub Recipe" />             | **Shape:** U-shape (Bottom 2 rows)<br>**Materials:** Jungle Planks (or other wood/stone) + Iron Nugget (Top Right) |
+| **Compact Shower Head**<br>_(Example: Jungle)_ | <img src="https://s2.loli.net/2025/12/13/m81Lg3HjUc7lJYQ.png" width="150" alt="Compact Shower Head Recipe" /> | **Top Middle:** Bucket<br>**Middle:** Stick (Left), Jungle Planks (Right)                                          |
+| **Rain Shower Head**<br>_(Example: Jungle)_    | <img src="https://s2.loli.net/2025/12/13/zjXch7KNHTw4ruq.png" width="150" alt="Rain Shower Head Recipe" />    | **Top Middle:** Bucket<br>**Middle:** Stick (Left), Jungle Planks (Right)<br>**Bottom Left:** Stick                |
 
 ### Others
 
-| Item            | Recipe                                             | Ingredients                                                                          |
-| :-------------- | :------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| **Rubber Duck** | ![Rubber Duck Recipe](placeholder_rubber_duck.png) | **Top/Bottom Rows:** Yellow Dye<br>**Middle Row:** Red Dye + Slime Ball + Yellow Dye |
+| Item            | Recipe                                                                                                | Ingredients                                                                          |
+| :-------------- | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| **Rubber Duck** | <img src="https://s2.loli.net/2025/12/13/muoV9zUkEHJ3bCP.png" width="150" alt="Rubber Duck Recipe" /> | **Top/Bottom Rows:** Yellow Dye<br>**Middle Row:** Red Dye + Slime Ball + Yellow Dye |
 
 ---
 
@@ -202,28 +202,28 @@ You can tweak the mod to your liking in the config files.
 
 ### 洗浴核心 (Bath Cores)
 
-| 物品                                 | 配方                                                         | 合成材料                                                                      |
-| :----------------------------------- | :----------------------------------------------------------- | :---------------------------------------------------------------------------- |
-| **草药浴核心**<br>(Herbal Bath Core) | ![Herbal Bath Core Recipe](placeholder_herbal_bath_core.png) | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 蕨 (Fern) (十字形)            |
-| **蜂蜜浴核心**<br>(Honey Bath Core)  | ![Honey Bath Core Recipe](placeholder_honey_bath_core.png)   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 蜜脾 (Honeycomb) (十字形)     |
-| **热水核心**<br>(Hot Water Core)     | ![Hot Water Core Recipe](placeholder_hot_water_core.png)     | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 岩浆膏 (Magma Cream) (十字形) |
-| **牛奶浴核心**<br>(Milk Bath Core)   | ![Milk Bath Core Recipe](placeholder_milk_bath_core.png)     | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 奶桶 (Milk Bucket) (十字形)   |
-| **牡丹浴核心**<br>(Peony Bath Core)  | ![Peony Bath Core Recipe](placeholder_peony_bath_core.png)   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 牡丹 (Peony) (十字形)         |
-| **玫瑰浴核心**<br>(Rose Bath Core)   | ![Rose Bath Core Recipe](placeholder_rose_bath_core.png)     | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 玫瑰丛 (Rose Bush) (十字形)   |
+| 物品                                 | 配方                                                                                                       | 合成材料                                                                               |
+| :----------------------------------- | :--------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| **草药浴核心**<br>(Herbal Bath Core) | <img src="https://s2.loli.net/2025/12/13/xPnEKvFAqt4O5kM.png" width="150" alt="Herbal Bath Core Recipe" /> | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 洗浴用药草(hotbath:bath_herb) (十字形) |
+| **蜂蜜浴核心**<br>(Honey Bath Core)  | <img src="https://s2.loli.net/2025/12/13/c3U41qvNLxbCGh5.png" width="150" alt="Honey Bath Core Recipe" />  | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 蜜脾 (Honeycomb) (十字形)              |
+| **热水核心**<br>(Hot Water Core)     | <img src="https://s2.loli.net/2025/12/13/tOILqnZyoE7JaPd.png" width="150" alt="Hot Water Core Recipe" />   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 岩浆膏 (Magma Cream) (十字形)          |
+| **牛奶浴核心**<br>(Milk Bath Core)   | <img src="https://s2.loli.net/2025/12/13/cOSirPfRwnpsEVm.png" width="150" alt="Milk Bath Core Recipe" />   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 奶桶 (Milk Bucket) (十字形)            |
+| **牡丹浴核心**<br>(Peony Bath Core)  | <img src="https://s2.loli.net/2025/12/13/cv2N4u7VF1sAozh.png" width="150" alt="Peony Bath Core Recipe" />  | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 牡丹 (Peony) (十字形)                  |
+| **玫瑰浴核心**<br>(Rose Bath Core)   | <img src="https://s2.loli.net/2025/12/13/JUaCEHetx1pr4vu.png" width="150" alt="Rose Bath Core Recipe" />   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 玫瑰丛 (Rose Bush) (十字形)            |
 
 ### 浴缸与喷头 (Bathtubs & Shower Heads)
 
-| 物品                                                      | 配方                                                               | 合成材料                                                                            |
-| :-------------------------------------------------------- | :----------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
-| **浴缸**<br>(Bathtub)<br>_(示例：橡木)_                   | ![Bathtub Recipe](placeholder_bathtub.png)                         | **形状：** U 型 (底部两排)<br>**材料：** 橡木木板 (或其他木材/石材) + 铁粒 (右上角) |
-| **紧凑型喷头**<br>(Compact Shower Head)<br>_(示例：橡木)_ | ![Compact Shower Head Recipe](placeholder_compact_shower_head.png) | **上中：** 桶<br>**中：** 木棍 (左), 木板 (右)                                      |
-| **雨淋式喷头**<br>(Rain Shower Head)<br>_(示例：橡木)_    | ![Rain Shower Head Recipe](placeholder_rain_shower_head.png)       | **上中：** 桶<br>**中：** 木棍 (左), 木板 (右)<br>**下左：** 木棍                   |
+| 物品                                                        | 配方                                                                                                          | 合成材料                                                                            |
+| :---------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------- |
+| **浴缸**<br>(Bathtub)<br>_(示例：丛林木)_                   | <img src="https://s2.loli.net/2025/12/13/xsmf5VUbKkEQ6w2.png" width="150" alt="Bathtub Recipe" />             | **形状：** U 型 (底部两排)<br>**材料：** 丛林木板 (或其他木材/石材) + 铁粒 (右上角) |
+| **紧凑型喷头**<br>(Compact Shower Head)<br>_(示例：丛林木)_ | <img src="https://s2.loli.net/2025/12/13/MRnypK2jqhNx3PE.png" width="150" alt="Compact Shower Head Recipe" /> | **上中：** 桶<br>**中：** 木棍 (左), 丛林木板 (右)                                  |
+| **雨淋式喷头**<br>(Rain Shower Head)<br>_(示例：丛林木)_    | <img src="https://s2.loli.net/2025/12/13/vZwtJ12rN3Wu8kF.png" width="150" alt="Rain Shower Head Recipe" />    | **上中：** 桶<br>**中：** 木棍 (左), 丛林木板 (右)<br>**下左：** 木棍               |
 
 ### 其他 (Others)
 
-| 物品                        | 配方                                               | 合成材料                                                          |
-| :-------------------------- | :------------------------------------------------- | :---------------------------------------------------------------- |
-| **橡皮鸭**<br>(Rubber Duck) | ![Rubber Duck Recipe](placeholder_rubber_duck.png) | **上/下排：** 黄色染料<br>**中排：** 红色染料 + 粘液球 + 黄色染料 |
+| 物品                        | 配方                                                                                                  | 合成材料                                                          |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- |
+| **橡皮鸭**<br>(Rubber Duck) | <img src="https://s2.loli.net/2025/12/13/qdRvPFoOJzL15pj.png" width="150" alt="Rubber Duck Recipe" /> | **上/下排：** 黄色染料<br>**中排：** 红色染料 + 粘液球 + 黄色染料 |
 
 ---
 
