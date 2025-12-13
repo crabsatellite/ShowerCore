@@ -19,7 +19,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = ShowerCore.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = ShowerCore.MODID)
 public class ModCommands {
 
     @SubscribeEvent

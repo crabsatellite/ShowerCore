@@ -14,7 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 // Config class to organize and configure blocks allowed for each specific core type
-@EventBusSubscriber(modid = ShowerCore.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ShowerCore.MODID)
 public class Config {
   private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
