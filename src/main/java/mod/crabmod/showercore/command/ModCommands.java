@@ -2,6 +2,7 @@ package mod.crabmod.showercore.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import net.minecraft.commands.arguments.EntityArgument;
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.commands.CommandSourceStack;
@@ -29,16 +30,11 @@ public class ModCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("showercore")
             .then(Commands.literal("accept_bath")
-                .then(Commands.argument("requester", StringArgumentType.string())
+                .then(Commands.argument("requester", EntityArgument.player())
                     .executes(context -> {
-                        String requesterName = StringArgumentType.getString(context, "requester");
+                        ServerPlayer requester = EntityArgument.getPlayer(context, "requester");
+                        String requesterName = requester.getName().getString();
                         ServerPlayer acceptor = context.getSource().getPlayerOrException();
-                        ServerPlayer requester = context.getSource().getServer().getPlayerList().getPlayerByName(requesterName);
-
-                        if (requester == null) {
-                            context.getSource().sendFailure(Component.translatable("message.showercore.player_not_found"));
-                            return 0;
-                        }
 
                         if (acceptor.distanceToSqr(requester) > 25) {
                             context.getSource().sendFailure(Component.translatable("message.showercore.too_far"));
@@ -88,13 +84,10 @@ public class ModCommands {
                     }))
             )
             .then(Commands.literal("deny_bath")
-                .then(Commands.argument("requester", StringArgumentType.string())
+                .then(Commands.argument("requester", EntityArgument.player())
                     .executes(context -> {
-                        String requesterName = StringArgumentType.getString(context, "requester");
-                        ServerPlayer requester = context.getSource().getServer().getPlayerList().getPlayerByName(requesterName);
-                        if (requester != null) {
-                            requester.sendSystemMessage(Component.translatable("message.showercore.request_denied"));
-                        }
+                        ServerPlayer requester = EntityArgument.getPlayer(context, "requester");
+                        requester.sendSystemMessage(Component.translatable("message.showercore.request_denied"));
                         context.getSource().sendSuccess(() -> Component.translatable("message.showercore.denied_request"), false);
                         return 1;
                     }))
