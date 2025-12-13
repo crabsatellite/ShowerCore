@@ -115,7 +115,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             final double depth = name.contains("compact_shower_head") ? 0.375 : 0.3125;
             final double centerX = 0.5;
             final double centerZ = name.contains("compact_shower_head") ? 0.53125 : 0.5;
-            final double height = 1.78;
+            final double height = 0.48;
 
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
                 if (this.bathEffectUtils == null) {
@@ -160,9 +160,11 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
 
     // Calculate the effective height of the shower
     int maxRange = 10;
-    double bottomY = pos.getY() - maxRange;
+    double bottomY = pos.getY() - 1 - maxRange;
     
     BlockPos.MutableBlockPos checkPos = pos.mutable();
+    checkPos.move(net.minecraft.core.Direction.DOWN);
+    
     for (int i = 1; i <= maxRange; i++) {
         checkPos.move(net.minecraft.core.Direction.DOWN);
         BlockState checkState = level.getBlockState(checkPos);
@@ -176,7 +178,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     // Define area: slightly smaller than 1x1 to avoid hitting entities through walls, but centered.
     AABB detectionBox = new AABB(
         pos.getX() + 0.2, bottomY, pos.getZ() + 0.2, 
-        pos.getX() + 0.8, pos.getY() + 0.5, pos.getZ() + 0.8
+        pos.getX() + 0.8, pos.getY() + 0.48, pos.getZ() + 0.8
     );
 
     List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, detectionBox);
