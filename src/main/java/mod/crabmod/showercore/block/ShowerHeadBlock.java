@@ -87,6 +87,11 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   }
 
   @Override
+  public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    return Shapes.empty();
+  }
+
+  @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
     return new ShowerHeadContainerEntity(pos, state);
   }
