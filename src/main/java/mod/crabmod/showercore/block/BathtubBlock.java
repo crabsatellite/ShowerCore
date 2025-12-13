@@ -360,6 +360,10 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
   @Override
   public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+    Entity entity = params.getOptionalParameter(LootContextParams.THIS_ENTITY);
+    if (entity instanceof Player player && player.isCreative()) {
+        return Collections.emptyList();
+    }
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
       ItemStack stack = new ItemStack(this);
@@ -375,11 +379,13 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
       if (bedpart == BedPart.FOOT) {
-        BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
-        BlockState blockstate = level.getBlockState(blockpos);
-        if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
-          level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
-          level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+        if (player.isCreative()) {
+            BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
+              level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+              level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+            }
         }
       } else {
           // Remove Faucet Entity if HEAD is broken
