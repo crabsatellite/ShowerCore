@@ -92,7 +92,7 @@ You can tweak the mod to your liking in the config files.
 
 | Item                 | Recipe                                                                                                     | Ingredients                                                                          |
 | :------------------- | :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
-| **Herbal Bath Core** | <img src="https://s2.loli.net/2025/12/13/smGlzIifASH3FCc.png" width="150" alt="Herbal Bath Core Recipe" /> | **Center:** Conduit<br>**Top, Bottom, Left, Right:** hotbath:bath_herb (Cross Shape) |
+| **Herbal Bath Core** | <img src="https://s2.loli.net/2025/12/13/i1G5AwNHYW8prao.png" width="150" alt="Herbal Bath Core Recipe" /> | **Center:** Conduit<br>**Top, Bottom, Left, Right:** hotbath:bath_herb (Cross Shape) |
 | **Honey Bath Core**  | <img src="https://s2.loli.net/2025/12/13/YRWjK3MbnB6va9x.png" width="150" alt="Honey Bath Core Recipe" />  | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Honeycomb (Cross Shape)         |
 | **Hot Water Core**   | <img src="https://s2.loli.net/2025/12/13/27wp1SMZj936HgX.png" width="150" alt="Hot Water Core Recipe" />   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Magma Cream (Cross Shape)       |
 | **Milk Bath Core**   | <img src="https://s2.loli.net/2025/12/13/6uweN5IRJM9LVH8.png" width="150" alt="Milk Bath Core Recipe" />   | **Center:** Conduit<br>**Top, Bottom, Left, Right:** Milk Bucket (Cross Shape)       |
@@ -204,7 +204,7 @@ You can tweak the mod to your liking in the config files.
 
 | 物品                                 | 配方                                                                                                       | 合成材料                                                                               |
 | :----------------------------------- | :--------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
-| **草药浴核心**<br>(Herbal Bath Core) | <img src="https://s2.loli.net/2025/12/13/xPnEKvFAqt4O5kM.png" width="150" alt="Herbal Bath Core Recipe" /> | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 洗浴用药草(hotbath:bath_herb) (十字形) |
+| **草药浴核心**<br>(Herbal Bath Core) | <img src="https://s2.loli.net/2025/12/13/PqXV7QUMyfRzgEL.png" width="150" alt="Herbal Bath Core Recipe" /> | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 洗浴用药草(hotbath:bath_herb) (十字形) |
 | **蜂蜜浴核心**<br>(Honey Bath Core)  | <img src="https://s2.loli.net/2025/12/13/c3U41qvNLxbCGh5.png" width="150" alt="Honey Bath Core Recipe" />  | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 蜜脾 (Honeycomb) (十字形)              |
 | **热水核心**<br>(Hot Water Core)     | <img src="https://s2.loli.net/2025/12/13/tOILqnZyoE7JaPd.png" width="150" alt="Hot Water Core Recipe" />   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 岩浆膏 (Magma Cream) (十字形)          |
 | **牛奶浴核心**<br>(Milk Bath Core)   | <img src="https://s2.loli.net/2025/12/13/cOSirPfRwnpsEVm.png" width="150" alt="Milk Bath Core Recipe" />   | **中心：** 潮涌核心 (Conduit)<br>**上下左右：** 奶桶 (Milk Bucket) (十字形)            |
