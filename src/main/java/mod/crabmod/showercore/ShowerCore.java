@@ -179,11 +179,10 @@ public class ShowerCore {
   @SubscribeEvent
   public void onServerStarting(ServerStartingEvent event) {}
 
-  @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
+  @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
   public static class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-      NeoForge.EVENT_BUS.addListener(ClientEvent::registerParticleFactories);
     }
   }
 }
