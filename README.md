@@ -16,6 +16,19 @@ The heart of your bathroom. It's not just for looks; it's for _power_.
 - **Turn On/Off:** Just **Right-click** it. It's that simple. Even a Creeper could do it (please don't let Creepers in your bathroom).
 - **Effect:** Stand under the running water to get buffs based on the installed core. No complex setup required!
 
+### 🌟 Shower Head Effect Details
+
+| Core Type     | Effects                                                                                          | Notes                                       |
+| :------------ | :----------------------------------------------------------------------------------------------- | :------------------------------------------ |
+| **Hot Water** | Speed II (10s refresh)                                                                           | Basic speed boost                           |
+| **Milk**      | Regeneration II (10s refresh) + Removes negative effects + Saturation (every 15s)                | Cleanses all negative status effects        |
+| **Herbal**    | Regeneration II + Resistance II (10s refresh) + Removes negative effects                         | Damages undead entities (1 HP every 2s)     |
+| **Peony**     | Regeneration II + Luck II + Haste II (10s refresh) + Removes Bad Omen + Removes negative effects | Triple buff combo                           |
+| **Honey**     | Regeneration II + Absorption IV (10s refresh) + Saturation (every 4s)                            | Provides golden hearts for extra protection |
+| **Rose**      | Regeneration II + Strength II (10s refresh) + Removes Bad Omen + Removes negative effects        | Combat-focused buffs                        |
+
+**Buff Stacking:** Effects stack up over time when continuously standing under the shower, providing increasing duration.
+
 ## 🔮 The Shower Core (Block)
 
 Wait, the core is also a block? Yes!
@@ -24,20 +37,21 @@ If you place the **Shower Core** down as a block (instead of putting it in a sho
 - **Activation (Feng Shui):** These Core Blocks are picky. They need specific "emotional support blocks" placed around them (in a frame structure) to activate.
 - **AOE Buffs:** Once activated, they grant buffs to everyone in a large radius.
 
-| Core Block    | Buffs                         | Activation Blocks (Frame)     |
-| :------------ | :---------------------------- | :---------------------------- |
-| **Hot Water** | Speed II                      | Prismarine, Prismarine Bricks |
-| **Milk**      | Regeneration II               | Quartz Blocks (All types)     |
-| **Herbal**    | Regen II + Resistance II      | Moss, Vines, Leaves           |
-| **Peony**     | Luck II + Haste II + Regen II | Pink Wool/Concrete/Terracotta |
-| **Honey**     | Regen II + Absorption IV      | Honeycomb Block, Honey Block  |
-| **Rose**      | Strength II + Regen II        | Red Wool/Concrete/Terracotta  |
+| Core Block    | Buffs (260 ticks/13s duration) | Activation Blocks (Frame)     |
+| :------------ | :----------------------------- | :---------------------------- |
+| **Hot Water** | Speed II                       | Prismarine, Prismarine Bricks |
+| **Milk**      | Saturation II                  | Quartz Blocks (All types)     |
+| **Herbal**    | Regeneration II                | Moss, Vines, Leaves           |
+| **Peony**     | Luck II                        | Pink Wool/Concrete/Terracotta |
+| **Honey**     | Absorption II                  | Honeycomb Block, Honey Block  |
+| **Rose**      | Strength II                    | Red Wool/Concrete/Terracotta  |
 
 ## 🛁 The Bathtub
 
 For when standing is just too much effort.
 
 - **Fill 'er up:** Right-click with a bucket of water (or lava, if you're crazy). You can use **HotBath** fluids here for effects!
+- **Visual Effects:** Hot water and HotBath fluids produce steam particles above the bathtub
 - **The Faucet:** **Sneak + Right-click** the faucet part to make it go _whoosh_. Purely visual, but very satisfying.
 - **Sit Down:** Right-click the head or foot of the tub to relax.
 - **Shared Bath (Ooh la la):**
@@ -119,9 +133,15 @@ You can tweak the mod to your liking in the config files.
 - **开关**：**右键**点击即可。简单到连苦力怕都会用（但请千万别让它进浴室）。
 - **效果**：只要站在喷头的水流下，就能获得对应核心的 Buff。**不需要**搭建复杂的激活结构！
 
-## 🔮 洗浴核心 (方块形态)
+### 🌟 喷头效果详细说明
 
-等等，核心也是个方块？没错！
+| 核心类型             | 效果                                                                      | 备注                                    |
+| :------------------- | :------------------------------------------------------------------------ | :-------------------------------------- |
+| **热水** (Hot Water) | 速度 II (10 秒刷新)                                                       | 基础速度提升                            |
+| **牛奶** (Milk)      | 生命恢复 II (10 秒刷新) + 清除负面效果 + 饱和度 (每 15 秒)                | 清除所有负面状态效果                    |
+| **草药** (Herbal)    | 生命恢复 II + 抗性提升 II (10 秒刷新) + 清除负面效果                      | 对亡灵生物造成伤害 (每 2 秒 1 点生命值) |
+| **牡丹** (Peony)     | 生命恢复 II + 幸运 II + 急迫 II (10 秒刷新) + 移除不祥之兆 + 清除负面效果 | 三重增益组合                            |
+
 如果你把**洗浴核心**直接放置在地上（而不是塞进喷头里），它就会变成一个类似**潮涌核心 (Conduit)** 的装置。
 
 - **激活 (风水)**：作为方块时，核心很矫情。它们需要特定的“风水宝地”（在周围搭建特定方块的框架）才能激活。
@@ -140,7 +160,8 @@ You can tweak the mod to your liking in the config files.
 
 站着洗澡太累？那就躺着！
 
-- **加水**：拿水桶（或者岩浆桶，如果你头铁的话）右键加满。你可以使用 **HotBath** 的液体来获得效果！
+- **加水**：拿水桶（或者岩浆桶，如果你头铁的话）右键加满。你可以使用 **[HotBath](https://www.curseforge.com/minecraft/mc-mods/hotbath)** 的液体来获得他们的效果！
+- **视觉效果**：热水和 HotBath 液体会在浴缸上方产生蒸汽粒子效果
 - **水龙头**：**空手蹲下 + 右键** 点击水龙头，享受哗啦啦的流水声。虽然只是视觉效果，但很解压。
 - **坐下**：右键点击浴缸头或尾，舒舒服服躺下。
 - **鸳鸯浴 (Shared Bath)**：
