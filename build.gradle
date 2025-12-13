@@ -170,6 +170,10 @@ tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
+
+    from(project.projectDir) {
+        include 'icon.png'
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
