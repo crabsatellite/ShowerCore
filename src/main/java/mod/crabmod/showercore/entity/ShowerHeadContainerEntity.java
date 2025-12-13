@@ -115,8 +115,6 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             final double depth = name.contains("compact_shower_head") ? 0.375 : 0.3125;
             final double centerX = 0.5;
             final double centerZ = name.contains("compact_shower_head") ? 0.53125 : 0.5;
-            // Adjusted height to account for the model being shifted down by 1 block (16 pixels)
-            // Original height was 1.78, now it should be 1.78 - 1.0 = 0.78
             final double height = 0.78;
 
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -162,11 +160,9 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
 
     // Calculate the effective height of the shower
     int maxRange = 10;
-    // Start checking from 1 block below the current position (which is where the shower head visually is now)
     double bottomY = pos.getY() - 1 - maxRange;
     
     BlockPos.MutableBlockPos checkPos = pos.mutable();
-    // Move down 1 block first to account for visual offset
     checkPos.move(net.minecraft.core.Direction.DOWN);
     
     for (int i = 1; i <= maxRange; i++) {
@@ -179,8 +175,6 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
         }
     }
     
-    // Define area: slightly smaller than 1x1 to avoid hitting entities through walls, but centered.
-    // Adjusted Y range to start from the visual bottom of the shower head (pos.getY() - 0.5)
     AABB detectionBox = new AABB(
         pos.getX() + 0.2, bottomY, pos.getZ() + 0.2, 
         pos.getX() + 0.8, pos.getY() - 0.5, pos.getZ() + 0.8

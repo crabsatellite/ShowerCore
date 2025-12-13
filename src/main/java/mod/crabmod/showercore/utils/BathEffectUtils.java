@@ -40,9 +40,6 @@ public class BathEffectUtils {
 
     public void renderBathWater(Level level, BlockPos pos, java.util.function.Supplier<ParticleOptions> particleTypeSupplier, double width, double depth, double centerX, double centerZ, double height) {
         if (isEffectActive.get()) return;
-        // Adjusted invisible height offsets to account for the model being shifted down by 1 block
-        // Original: 1.4 and 5
-        // New: 0.4 and 4 (shifted down by 1.0)
         renderBathWater(level, pos, 2, 0.4, 4, particleTypeSupplier, width, depth, centerX, centerZ, height);
         playBathSound(level, 200, pos);
     }

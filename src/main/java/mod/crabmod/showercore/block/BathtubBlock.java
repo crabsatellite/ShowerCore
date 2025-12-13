@@ -380,7 +380,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       BedPart bedpart = state.getValue(PART);
       
       if (player.isCreative()) {
-          // Creative: Remove other part regardless of which part this is
           Direction neighborDir = getNeighbourDirection(bedpart, state.getValue(FACING));
           BlockPos neighborPos = pos.relative(neighborDir);
           BlockState neighborState = level.getBlockState(neighborPos);
