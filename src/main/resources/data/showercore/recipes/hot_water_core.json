@@ -1,16 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " I ",
-    "ICI",
-    " I "
-  ],
+  "pattern": [" I ", "ICI", " I "],
   "key": {
     "I": {
-      "item": "minecraft:iron_nugget"
+      "item": "minecraft:magma_cream"
     },
     "C": {
-      "item": "minecraft:magma_cream"
+      "item": "minecraft:conduit"
     }
   },
   "result": {
