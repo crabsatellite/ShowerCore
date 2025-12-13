@@ -15,6 +15,12 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 base {
@@ -83,8 +89,6 @@ neoForge {
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             logLevel = org.slf4j.event.Level.DEBUG
-
-            programArgument '--mixin.config=mixins.showercore.json'
         }
     }
 
@@ -112,8 +116,10 @@ configurations {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "curse.maven:hotbath-859412:7300421"
     // Example of adding a dependency.
     // implementation 'com.some:library:1.0.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

@@ -1,13 +1,12 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "mod.crabmod.showercore.mixin",
-  "refmap": "mixins.showercore.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "CustomFluidHandlerMixin"
-  ],
+  "refmap": "mixins.showercore.refmap.json",
+  "mixins": ["CustomFluidHandlerMixin"],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "minVersion": "0.8.5"
 }
