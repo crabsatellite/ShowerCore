@@ -1,0 +1,153 @@
+# ShowerCore 🚿
+
+**[English]**
+
+Welcome to **ShowerCore**! Tired of smelling like a zombie after a long mining trip? Want to gain superpowers just by standing under some water? You've come to the right place. This mod turns your boring hygiene routine into a magical, buff-granting experience.
+
+> **Note:** This mod requires **[HotBath](https://www.curseforge.com/minecraft/mc-mods/hotbath)** to work properly. HotBath provides the basic bath fluids used in this mod.
+
+## 🚿 The Shower Head
+
+The heart of your bathroom. It's not just for looks; it's for _power_.
+
+- **Install Core:** Slap a **Shower Core (Item)** in it (Right-click).
+- **Swap Core:** Don't like that core? Slap another one in. The old one pops out.
+- **Remove Core:** Regret your life choices? **Sneak + Right-click** with an empty hand to pop the core out.
+- **Turn On/Off:** Just **Right-click** it. It's that simple. Even a Creeper could do it (please don't let Creepers in your bathroom).
+- **Effect:** Stand under the running water to get buffs based on the installed core. No complex setup required!
+
+## 🔮 The Shower Core (Block)
+
+Wait, the core is also a block? Yes!
+If you place the **Shower Core** down as a block (instead of putting it in a shower head), it acts like a **Conduit**.
+
+- **Activation (Feng Shui):** These Core Blocks are picky. They need specific "emotional support blocks" placed around them (in a frame structure) to activate.
+- **AOE Buffs:** Once activated, they grant buffs to everyone in a large radius.
+
+| Core Block    | Buffs                         | Activation Blocks (Frame)     |
+| :------------ | :---------------------------- | :---------------------------- |
+| **Hot Water** | Speed II                      | Prismarine, Prismarine Bricks |
+| **Milk**      | Regeneration II               | Quartz Blocks (All types)     |
+| **Herbal**    | Regen II + Resistance II      | Moss, Vines, Leaves           |
+| **Peony**     | Luck II + Haste II + Regen II | Pink Wool/Concrete/Terracotta |
+| **Honey**     | Regen II + Absorption IV      | Honeycomb Block, Honey Block  |
+| **Rose**      | Strength II + Regen II        | Red Wool/Concrete/Terracotta  |
+
+## 🛁 The Bathtub
+
+For when standing is just too much effort.
+
+- **Fill 'er up:** Right-click with a bucket of water (or lava, if you're crazy). You can use **HotBath** fluids here for effects!
+- **The Faucet:** **Sneak + Right-click** the faucet part to make it go _whoosh_. Purely visual, but very satisfying.
+- **Sit Down:** Right-click the head or foot of the tub to relax.
+- **Shared Bath (Ooh la la):**
+  - Lonely? Right-click an occupied tub to ask nicely.
+  - The person inside gets an `[Accept]` / `[Reject]` prompt in chat. **Press 'T' to open chat and click it!**
+  - (Or use commands: `/showercore accept_bath <player>` / `/showercore deny_bath <player>`)
+  - **Note:** Don't run away! You must be within **5 blocks** to join.
+  - If they accept, things get cozy. If they reject... well, awkward.
+
+## 🦆 The Rubber Duck
+
+The true boss of this mod.
+
+- **Physics:** It floats! It bobs! It's adorable!
+- **Spin:** Poke it (Right-click) to make it spin.
+- **Pickup:** **Sneak + Right-click** to take your buddy home.
+- **DANGER:** **DO NOT** throw it in lava. It will scream. You will feel bad. You monster.
+
+## ⚙️ Configuration
+
+You can tweak the mod to your liking in the config files.
+
+- **Activation Blocks:** Change which blocks activate the Core Blocks (e.g., make Dirt activate the Hot Water Core if you're cheap).
+- **Steam Fluids:** Define which _extra_ fluids (like Lava or modded fluids) make the bathtub steamy. (HotBath fluids steam automatically!)
+- **Duck Destroyers:** Decide which fluids are dangerous for your rubber duck.
+- **Client Visuals:** Toggle translucent particles for a mistier look.
+
+## 🚫 Known Incompatibilities
+
+- **Chunk Animator:** This mod messes with block rendering, limiting some features:
+  - **Custom Fluids:** You can't pour custom fluids (from other mods) into the bathtub.
+  - **Invincible Ducks:** The "Duck Destroyers" config breaks, so your duck won't die in dangerous fluids. (Wait, is that a bad thing?)
+  - _Note: HotBath fluids still render fine._
+
+---
+
+**[中文]**
+
+# ShowerCore 🚿
+
+欢迎来到 **ShowerCore**！还在为挖矿归来一身僵尸味而烦恼吗？想洗个澡就能变强吗？那你来对地方了。本模组致力于将你枯燥的卫生习惯变成一场充满魔法和 Buff 的奇妙体验。
+
+> **注意：** 本模组需要 **[HotBath](https://www.curseforge.com/minecraft/mc-mods/hotbath)** 作为前置模组。HotBath 提供了基础的洗浴液体。
+
+## 🚿 洗浴喷头 (Shower Head)
+
+浴室的灵魂。它不只是个装饰，它是力量的源泉！
+
+- **安装核心**：把**洗浴核心 (物品)** 塞进去（右键）。
+- **替换核心**：喜新厌旧？直接拿新核心怼上去，旧的会自动弹出来。
+- **移除核心**：后悔了？**空手蹲下 + 右键** 把它扣出来。
+- **开关**：**右键**点击即可。简单到连苦力怕都会用（但请千万别让它进浴室）。
+- **效果**：只要站在喷头的水流下，就能获得对应核心的 Buff。**不需要**搭建复杂的激活结构！
+
+## 🔮 洗浴核心 (方块形态)
+
+等等，核心也是个方块？没错！
+如果你把**洗浴核心**直接放置在地上（而不是塞进喷头里），它就会变成一个类似**潮涌核心 (Conduit)** 的装置。
+
+- **激活 (风水)**：作为方块时，核心很矫情。它们需要特定的“风水宝地”（在周围搭建特定方块的框架）才能激活。
+- **范围 Buff**：一旦激活，它会给大范围内的所有玩家提供 Buff。
+
+| 核心方块             | 增益效果 (Buff)             | 风水宝地 (激活方块)   |
+| :------------------- | :-------------------------- | :-------------------- |
+| **热水** (Hot Water) | 速度 II                     | 海晶石、海晶石砖      |
+| **牛奶** (Milk)      | 生命恢复 II                 | 石英块 (各种)         |
+| **草药** (Herbal)    | 生命恢复 II + 抗性 II       | 苔藓、藤蔓、树叶      |
+| **牡丹** (Peony)     | 幸运 II + 急迫 II + 恢复 II | 粉色 羊毛/混凝土/陶瓦 |
+| **蜂蜜** (Honey)     | 恢复 II + 伤害吸收 IV       | 蜜脾块、蜂蜜块        |
+| **玫瑰** (Rose)      | 力量 II + 恢复 II           | 红色 羊毛/混凝土/陶瓦 |
+
+## 🛁 浴缸 (Bathtub)
+
+站着洗澡太累？那就躺着！
+
+- **加水**：拿水桶（或者岩浆桶，如果你头铁的话）右键加满。你可以使用 **HotBath** 的液体来获得效果！
+- **水龙头**：**空手蹲下 + 右键** 点击水龙头，享受哗啦啦的流水声。虽然只是视觉效果，但很解压。
+- **坐下**：右键点击浴缸头或尾，舒舒服服躺下。
+- **鸳鸯浴 (Shared Bath)**：
+  - 一个人洗澡太寂寞？右键点击已经有人的浴缸发起“共浴申请”。
+  - 缸里的人会收到 `[Accept]` (接受) 和 `[Reject]` (拒绝) 的选项。**按 T 打开聊天栏点击它！**
+  - (或者使用指令：`/showercore accept_bath <玩家名>` / `/showercore deny_bath <玩家名>`)
+  - **注意**：别跑太远！必须在 **5 格** 范围内才能加入。
+  - 如果对方接受，恭喜你，挤一挤更健康。如果对方拒绝……呃，这就很尴尬了。
+
+## 🦆 橡皮鸭 (Rubber Duck)
+
+本模组真正的霸主。
+
+- **物理学**：它会漂！它会浮！它超级可爱！
+- **互动**：戳它（右键）让它转圈圈。
+- **带走**：**空手蹲下 + 右键** 把你的洗澡搭子带回家。
+- **警告**：**千万不要** 把它扔进岩浆里。它会发出凄惨的叫声。你会良心不安的。你这个残忍的怪物。
+
+## ⚙️ 配置文件 (Configuration)
+
+你可以通过配置文件来调整模组的设定。
+
+- **激活方块 (Activation Blocks)**：自定义每种核心方块需要什么方块来激活（比如你可以把海晶石改成泥土，如果你很抠门的话）。
+- **蒸汽流体 (Steam Fluids)**：定义哪些*额外*的液体（比如岩浆或其他模组的液体）倒进浴缸会产生蒸汽效果。（HotBath 自带的洗澡水会自动产生蒸汽，不用配置！）
+- **鸭子杀手 (Duck Destroyers)**：定义哪些液体会销毁橡皮鸭。
+- **客户端视觉 (Client Visuals)**：开启/关闭半透明粒子效果，让水雾更逼真。
+
+## 🚫 已知不兼容 (Known Incompatibilities)
+
+- **Chunk Animator**：该模组修改了方块渲染方式，导致部分功能受限：
+  - **自定义液体**：无法将其他模组的液体倒进浴缸。
+  - **鸭子无敌**：“鸭子杀手”配置失效，鸭子在危险液体里不会被销毁。（这难道不是好事？）
+  - _注：HotBath 自带的液体渲染依然正常。_
+
+---
+
+_Enjoy your shower! 洗个痛快澡！_
