@@ -9,8 +9,8 @@ import java.util.UUID;
 import mod.crabmod.showercore.base.BaseShowerHeadBlockEntity;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.ShowerHeadClientHelper;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
 import mod.crabmod.showercore.utils.CoreUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -22,8 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.Holder;
 
 public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   private boolean effectActive = false;
@@ -109,7 +110,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public void startEffect() {
       if (this.level != null && this.level.isClientSide && this.effectActive) {
             net.minecraft.world.level.block.Block block = this.getBlockState().getBlock();
-            String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
+            String name = BuiltInRegistries.BLOCK.getKey(block).getPath();
             
             final double width = name.contains("compact_shower_head") ? 0.375 : 0.5625;
             final double depth = name.contains("compact_shower_head") ? 0.375 : 0.3125;
@@ -199,7 +200,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   }
 
   private static void applyEffects(LivingEntity entity, ItemStack core) {
-    String path = ForgeRegistries.ITEMS.getKey(core.getItem()).getPath();
+    String path = BuiltInRegistries.ITEM.getKey(core.getItem()).getPath();
     long gameTime = entity.level().getGameTime();
     CompoundTag data = entity.getPersistentData();
 
@@ -283,9 +284,9 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     }
   }
 
-  private static void addStackingEffect(LivingEntity entity, MobEffect effect, int durationIncrement, int amplifier) {
+  private static void addStackingEffect(LivingEntity entity, Holder<MobEffect> effect, int durationIncrement, int amplifier) {
     CompoundTag data = entity.getPersistentData();
-    String key = "showercore.last_stack." + effect.getDescriptionId();
+    String key = "showercore.last_stack." + effect.value().getDescriptionId();
     long gameTime = entity.level().getGameTime();
     
     // Prevent applying same effect multiple times in short window (e.g. 100 ticks)

@@ -9,18 +9,18 @@ import mod.crabmod.showercore.registers.BlocksRegister;
 import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ItemRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.ModContainer;
 import org.slf4j.Logger;
 
 import mod.crabmod.showercore.registers.SoundRegister;
@@ -31,9 +31,7 @@ public class ShowerCore {
   public static final String MODID = "showercore";
   private static final Logger LOGGER = LogUtils.getLogger();
 
-  public ShowerCore() {
-    IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+  public ShowerCore(IEventBus modEventBus, ModContainer modContainer) {
     ItemRegister.register(modEventBus);
     BlocksRegister.register(modEventBus);
 
@@ -46,13 +44,11 @@ public class ShowerCore {
 
     modEventBus.addListener(this::commonSetup);
 
-    MinecraftForge.EVENT_BUS.register(this);
+    NeoForge.EVENT_BUS.register(this);
     modEventBus.addListener(this::addCreative);
 
-    ModLoadingContext.get()
-        .registerConfig(ModConfig.Type.COMMON, mod.crabmod.showercore.Config.SPEC);
-    ModLoadingContext.get()
-        .registerConfig(ModConfig.Type.CLIENT, mod.crabmod.showercore.ClientConfig.SPEC);
+    modContainer.registerConfig(ModConfig.Type.COMMON, mod.crabmod.showercore.Config.SPEC);
+    modContainer.registerConfig(ModConfig.Type.CLIENT, mod.crabmod.showercore.ClientConfig.SPEC);
   }
 
   private void commonSetup(final FMLCommonSetupEvent event) {}
@@ -175,7 +171,7 @@ public class ShowerCore {
   public static class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-      MinecraftForge.EVENT_BUS.addListener(ClientEvent::registerParticleFactories);
+      NeoForge.EVENT_BUS.addListener(ClientEvent::registerParticleFactories);
     }
   }
 }

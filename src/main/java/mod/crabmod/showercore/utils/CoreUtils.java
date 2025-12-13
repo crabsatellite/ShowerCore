@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.minecraft.world.level.Level;
 import mod.crabmod.showercore.entity.SeatEntity;
@@ -103,7 +103,7 @@ public class CoreUtils {
 
     public static boolean isCoreItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
-        ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if (registryName != null && registryName.getNamespace().equals(ShowerCore.MODID)) {
              String path = registryName.getPath();
              return isCorePath(path);
@@ -125,7 +125,7 @@ public class CoreUtils {
             return ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get();
         }
         
-        ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if (registryName != null && registryName.getNamespace().equals(ShowerCore.MODID)) {
             String path = registryName.getPath();
             switch (path) {

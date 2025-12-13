@@ -17,14 +17,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraft.core.registries.Registries;
 
 public class BlocksRegister {
   public static final DeferredRegister<Block> BLOCKS =
-      DeferredRegister.create(ForgeRegistries.BLOCKS, ShowerCore.MODID);
+      DeferredRegister.create(Registries.BLOCK, ShowerCore.MODID);
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_WOOL =
       BlockBehaviour.Properties.of().strength(0.2F).sound(SoundType.WOOL).noOcclusion();
@@ -92,429 +92,429 @@ public class BlocksRegister {
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
       BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BLACK =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BLACK =
       registerBlock(
           "rain_shower_head_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_WHITE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_WHITE =
       registerBlock(
           "rain_shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_ORANGE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_ORANGE =
       registerBlock(
           "rain_shower_head_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_MAGENTA =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_MAGENTA =
       registerBlock(
           "rain_shower_head_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIGHT_BLUE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_LIGHT_BLUE =
       registerBlock(
           "rain_shower_head_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_YELLOW =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_YELLOW =
       registerBlock(
           "rain_shower_head_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIME =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_LIME =
       registerBlock(
           "rain_shower_head_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_PINK =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_PINK =
       registerBlock(
           "rain_shower_head_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GRAY =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_GRAY =
       registerBlock(
           "rain_shower_head_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_LIGHT_GRAY =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_LIGHT_GRAY =
       registerBlock(
           "rain_shower_head_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CYAN =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_CYAN =
       registerBlock(
           "rain_shower_head_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_PURPLE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_PURPLE =
       registerBlock(
           "rain_shower_head_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BLUE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BLUE =
       registerBlock(
           "rain_shower_head_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BROWN =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BROWN =
       registerBlock(
           "rain_shower_head_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GREEN =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_GREEN =
       registerBlock(
           "rain_shower_head_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_RED =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_RED =
       registerBlock(
           "rain_shower_head_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_OAK =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_OAK =
       registerBlock(
           "rain_shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_SPRUCE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_SPRUCE =
       registerBlock(
           "rain_shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BIRCH =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BIRCH =
       registerBlock(
           "rain_shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_JUNGLE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_JUNGLE =
       registerBlock(
           "rain_shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_ACACIA =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_ACACIA =
       registerBlock(
           "rain_shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_DARK_OAK =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_DARK_OAK =
       registerBlock(
           "rain_shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_MANGROVE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_MANGROVE =
       registerBlock(
           "rain_shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CHERRY =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_CHERRY =
       registerBlock(
           "rain_shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_BAMBOO =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BAMBOO =
       registerBlock(
           "rain_shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_CRIMSON =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_CRIMSON =
       registerBlock(
           "rain_shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_WARPED =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_WARPED =
       registerBlock(
           "rain_shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_STONE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_STONE =
       registerBlock(
           "rain_shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_COBBLESTONE =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_COBBLESTONE =
       registerBlock(
           "rain_shower_head_cobblestone",
           () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_IRON =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_IRON =
       registerBlock(
           "rain_shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_GOLD =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_GOLD =
       registerBlock(
           "rain_shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_COPPER =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_COPPER =
       registerBlock(
           "rain_shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> RAIN_SHOWER_HEAD_DIAMOND =
+  public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_DIAMOND =
       registerBlock(
           "rain_shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_STONE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_STONE =
       registerBlock(
           "compact_shower_head_stone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_OAK =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_OAK =
       registerBlock(
           "compact_shower_head_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_IRON =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_IRON =
       registerBlock(
           "compact_shower_head_iron", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GOLD =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_GOLD =
       registerBlock(
           "compact_shower_head_gold", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_DIAMOND =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_DIAMOND =
       registerBlock(
           "compact_shower_head_diamond", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BLACK =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_BLACK =
       registerBlock(
           "compact_shower_head_black", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_WHITE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_WHITE =
       registerBlock(
           "compact_shower_head_white", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_ORANGE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_ORANGE =
       registerBlock(
           "compact_shower_head_orange", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_MAGENTA =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_MAGENTA =
       registerBlock(
           "compact_shower_head_magenta", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIGHT_BLUE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_LIGHT_BLUE =
       registerBlock(
           "compact_shower_head_light_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_YELLOW =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_YELLOW =
       registerBlock(
           "compact_shower_head_yellow", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIME =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_LIME =
       registerBlock(
           "compact_shower_head_lime", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_PINK =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_PINK =
       registerBlock(
           "compact_shower_head_pink", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GRAY =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_GRAY =
       registerBlock(
           "compact_shower_head_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_LIGHT_GRAY =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_LIGHT_GRAY =
       registerBlock(
           "compact_shower_head_light_gray", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CYAN =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_CYAN =
       registerBlock(
           "compact_shower_head_cyan", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_PURPLE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_PURPLE =
       registerBlock(
           "compact_shower_head_purple", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BLUE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_BLUE =
       registerBlock(
           "compact_shower_head_blue", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BROWN =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_BROWN =
       registerBlock(
           "compact_shower_head_brown", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_GREEN =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_GREEN =
       registerBlock(
           "compact_shower_head_green", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_RED =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_RED =
       registerBlock(
           "compact_shower_head_red", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_SPRUCE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_SPRUCE =
       registerBlock(
           "compact_shower_head_spruce", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BIRCH =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_BIRCH =
       registerBlock(
           "compact_shower_head_birch", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_JUNGLE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_JUNGLE =
       registerBlock(
           "compact_shower_head_jungle", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_ACACIA =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_ACACIA =
       registerBlock(
           "compact_shower_head_acacia", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_DARK_OAK =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_DARK_OAK =
       registerBlock(
           "compact_shower_head_dark_oak", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_MANGROVE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_MANGROVE =
       registerBlock(
           "compact_shower_head_mangrove", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CHERRY =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_CHERRY =
       registerBlock(
           "compact_shower_head_cherry", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_BAMBOO =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_BAMBOO =
       registerBlock(
           "compact_shower_head_bamboo", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_CRIMSON =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_CRIMSON =
       registerBlock(
           "compact_shower_head_crimson", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_WARPED =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_WARPED =
       registerBlock(
           "compact_shower_head_warped", () -> new ShowerHeadBlock(COMMON_PROPERTIES_WOOD_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_COBBLESTONE =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_COBBLESTONE =
       registerBlock(
           "compact_shower_head_cobblestone", () -> new ShowerHeadBlock(COMMON_PROPERTIES_STONE_NO_COLLISION));
 
-  public static final RegistryObject<Block> COMPACT_SHOWER_HEAD_COPPER =
+  public static final DeferredHolder<Block, Block> COMPACT_SHOWER_HEAD_COPPER =
       registerBlock(
           "compact_shower_head_copper", () -> new ShowerHeadBlock(COMMON_PROPERTIES_METAL_NO_COLLISION));
 
-  public static final RegistryObject<Block> BATHTUB_WHITE =
+  public static final DeferredHolder<Block, Block> BATHTUB_WHITE =
       registerBlock(
           "bathtub_white", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_ORANGE =
+  public static final DeferredHolder<Block, Block> BATHTUB_ORANGE =
       registerBlock(
           "bathtub_orange", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_MAGENTA =
+  public static final DeferredHolder<Block, Block> BATHTUB_MAGENTA =
       registerBlock(
           "bathtub_magenta", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_LIGHT_BLUE =
+  public static final DeferredHolder<Block, Block> BATHTUB_LIGHT_BLUE =
       registerBlock(
           "bathtub_light_blue", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_YELLOW =
+  public static final DeferredHolder<Block, Block> BATHTUB_YELLOW =
       registerBlock(
           "bathtub_yellow", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_LIME =
+  public static final DeferredHolder<Block, Block> BATHTUB_LIME =
       registerBlock(
           "bathtub_lime", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_PINK =
+  public static final DeferredHolder<Block, Block> BATHTUB_PINK =
       registerBlock(
           "bathtub_pink", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_GRAY =
+  public static final DeferredHolder<Block, Block> BATHTUB_GRAY =
       registerBlock(
           "bathtub_gray", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_LIGHT_GRAY =
+  public static final DeferredHolder<Block, Block> BATHTUB_LIGHT_GRAY =
       registerBlock(
           "bathtub_light_gray", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_CYAN =
+  public static final DeferredHolder<Block, Block> BATHTUB_CYAN =
       registerBlock(
           "bathtub_cyan", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_PURPLE =
+  public static final DeferredHolder<Block, Block> BATHTUB_PURPLE =
       registerBlock(
           "bathtub_purple", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_BLUE =
+  public static final DeferredHolder<Block, Block> BATHTUB_BLUE =
       registerBlock(
           "bathtub_blue", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_BROWN =
+  public static final DeferredHolder<Block, Block> BATHTUB_BROWN =
       registerBlock(
           "bathtub_brown", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_GREEN =
+  public static final DeferredHolder<Block, Block> BATHTUB_GREEN =
       registerBlock(
           "bathtub_green", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_RED =
+  public static final DeferredHolder<Block, Block> BATHTUB_RED =
       registerBlock(
           "bathtub_red", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_BLACK =
+  public static final DeferredHolder<Block, Block> BATHTUB_BLACK =
       registerBlock(
           "bathtub_black", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_OAK =
+  public static final DeferredHolder<Block, Block> BATHTUB_OAK =
       registerBlock(
           "bathtub_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_SPRUCE =
+  public static final DeferredHolder<Block, Block> BATHTUB_SPRUCE =
       registerBlock(
           "bathtub_spruce", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_BIRCH =
+  public static final DeferredHolder<Block, Block> BATHTUB_BIRCH =
       registerBlock(
           "bathtub_birch", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_JUNGLE =
+  public static final DeferredHolder<Block, Block> BATHTUB_JUNGLE =
       registerBlock(
           "bathtub_jungle", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_ACACIA =
+  public static final DeferredHolder<Block, Block> BATHTUB_ACACIA =
       registerBlock(
           "bathtub_acacia", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_DARK_OAK =
+  public static final DeferredHolder<Block, Block> BATHTUB_DARK_OAK =
       registerBlock(
           "bathtub_dark_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_MANGROVE =
+  public static final DeferredHolder<Block, Block> BATHTUB_MANGROVE =
       registerBlock(
           "bathtub_mangrove", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_CHERRY =
+  public static final DeferredHolder<Block, Block> BATHTUB_CHERRY =
       registerBlock(
           "bathtub_cherry", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_BAMBOO =
+  public static final DeferredHolder<Block, Block> BATHTUB_BAMBOO =
       registerBlock(
           "bathtub_bamboo", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_CRIMSON =
+  public static final DeferredHolder<Block, Block> BATHTUB_CRIMSON =
       registerBlock(
           "bathtub_crimson", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_WARPED =
+  public static final DeferredHolder<Block, Block> BATHTUB_WARPED =
       registerBlock(
           "bathtub_warped", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
 
-  public static final RegistryObject<Block> BATHTUB_STONE =
+  public static final DeferredHolder<Block, Block> BATHTUB_STONE =
       registerBlock(
           "bathtub_stone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_COBBLESTONE =
+  public static final DeferredHolder<Block, Block> BATHTUB_COBBLESTONE =
       registerBlock(
           "bathtub_cobblestone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
-  public static final RegistryObject<Block> BATHTUB_IRON =
+  public static final DeferredHolder<Block, Block> BATHTUB_IRON =
       registerBlock(
           "bathtub_iron", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
-  public static final RegistryObject<Block> BATHTUB_GOLD =
+  public static final DeferredHolder<Block, Block> BATHTUB_GOLD =
       registerBlock(
           "bathtub_gold", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
-  public static final RegistryObject<Block> BATHTUB_COPPER =
+  public static final DeferredHolder<Block, Block> BATHTUB_COPPER =
       registerBlock(
           "bathtub_copper", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
-  public static final RegistryObject<Block> BATHTUB_DIAMOND =
+  public static final DeferredHolder<Block, Block> BATHTUB_DIAMOND =
       registerBlock(
           "bathtub_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
-  public static final RegistryObject<Block> HOT_WATER_CORE =
-      registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));
+  public static final DeferredHolder<Block, Block> HOT_WATER_CORE =
+      registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_WOOD));
 
-  public static final RegistryObject<Block> HERBAL_BATH_CORE =
+  public static final DeferredHolder<Block, Block> HERBAL_BATH_CORE =
       registerBlock("herbal_bath_core", () -> new HerbalBathCoreBlock(COMMON_PROPERTIES_CORE));
 
-  public static final RegistryObject<Block> PEONY_BATH_CORE =
+  public static final DeferredHolder<Block, Block> PEONY_BATH_CORE =
       registerBlock("peony_bath_core", () -> new PeonyBathCoreBlock(COMMON_PROPERTIES_CORE));
 
-  public static final RegistryObject<Block> ROSE_BATH_CORE =
+  public static final DeferredHolder<Block, Block> ROSE_BATH_CORE =
       registerBlock("rose_bath_core", () -> new RoseBathCoreBlock(COMMON_PROPERTIES_CORE));
 
-  public static final RegistryObject<Block> MILK_BATH_CORE =
+  public static final DeferredHolder<Block, Block> MILK_BATH_CORE =
       registerBlock("milk_bath_core", () -> new MilkBathCoreBlock(COMMON_PROPERTIES_CORE));
 
-  public static final RegistryObject<Block> HONEY_BATH_CORE =
+  public static final DeferredHolder<Block, Block> HONEY_BATH_CORE =
       registerBlock("honey_bath_core", () -> new HoneyBathCoreBlock(COMMON_PROPERTIES_CORE));
 
-  private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
-    RegistryObject<T> toReturn = BLOCKS.register(name, block);
+  private static <T extends Block> DeferredHolder<Block, T> registerBlock(String name, Supplier<T> block) {
+    DeferredHolder<Block, T> toReturn = BLOCKS.register(name, block);
     registerBlockItem(name, toReturn);
     return toReturn;
   }
 
-  private static <T extends Block> RegistryObject<Item> registerBlockItem(
-      String name, RegistryObject<T> block) {
+  private static <T extends Block> DeferredHolder<Item, Item> registerBlockItem(
+      String name, DeferredHolder<Block, T> block) {
     return ItemRegister.ITEMS.register(
         name, () -> {
             T b = block.get();

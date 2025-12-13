@@ -12,18 +12,18 @@ import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlock
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEntity;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class BlockEntitiesRegister {
   public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-      DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
+      DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
 
-  public static final RegistryObject<BlockEntityType<HotWaterCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HotWaterCoreBlockEntity>>
       HOT_WATER_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "hot_water_core_block_entity",
@@ -32,7 +32,7 @@ public class BlockEntitiesRegister {
                           HotWaterCoreBlockEntity::new, BlocksRegister.HOT_WATER_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<HerbalBathCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HerbalBathCoreBlockEntity>>
       HERBAL_BATH_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "herbal_bath_core_block_entity",
@@ -41,7 +41,7 @@ public class BlockEntitiesRegister {
                           HerbalBathCoreBlockEntity::new, BlocksRegister.HERBAL_BATH_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<HoneyBathCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HoneyBathCoreBlockEntity>>
       HONEY_BATH_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "honey_bath_core_block_entity",
@@ -50,7 +50,7 @@ public class BlockEntitiesRegister {
                           HoneyBathCoreBlockEntity::new, BlocksRegister.HONEY_BATH_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<MilkBathCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MilkBathCoreBlockEntity>>
       MILK_BATH_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "milk_bath_core_block_entity",
@@ -59,7 +59,7 @@ public class BlockEntitiesRegister {
                           MilkBathCoreBlockEntity::new, BlocksRegister.MILK_BATH_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<PeonyBathCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PeonyBathCoreBlockEntity>>
       PEONY_BATH_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "peony_bath_core_block_entity",
@@ -68,7 +68,7 @@ public class BlockEntitiesRegister {
                           PeonyBathCoreBlockEntity::new, BlocksRegister.PEONY_BATH_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<RoseBathCoreBlockEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RoseBathCoreBlockEntity>>
       ROSE_BATH_CORE_BLOCK_ENTITY =
           BLOCK_ENTITIES.register(
               "rose_bath_core_block_entity",
@@ -77,7 +77,7 @@ public class BlockEntitiesRegister {
                           RoseBathCoreBlockEntity::new, BlocksRegister.ROSE_BATH_CORE.get())
                       .build(null));
 
-  public static final RegistryObject<BlockEntityType<ShowerHeadContainerEntity>>
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ShowerHeadContainerEntity>>
       RAIN_SHOWER_HEAD_CONTAINER =
           BLOCK_ENTITIES.register(
               "rain_shower_head_container",
@@ -152,7 +152,7 @@ public class BlockEntitiesRegister {
                   return BlockEntityType.Builder.of(ShowerHeadContainerEntity::new, blocks.toArray(new Block[0])).build(null);
               });
 
-  public static final RegistryObject<BlockEntityType<BathtubBlockEntity>> BATHTUB_BLOCK_ENTITY =
+  public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BathtubBlockEntity>> BATHTUB_BLOCK_ENTITY =
       BLOCK_ENTITIES.register(
           "bathtub_block_entity",
           () -> {

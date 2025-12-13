@@ -31,7 +31,7 @@ import com.crabmod.hotbath.registers.ParticleRegister;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
@@ -41,8 +41,8 @@ import java.util.List;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.FluidStack;
 import mod.crabmod.showercore.Config;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -360,7 +360,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
    private void updateLiquidState(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
        LiquidType newLiquid = LiquidType.EMPTY;
        if (!fluid.isEmpty()) {
-           String fluidName = ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).getPath();
+           String fluidName = BuiltInRegistries.FLUID.getKey(fluid.getFluid()).getPath();
            if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
            else if (fluidName.equals("hot_water_fluid") || fluidName.equals("hot_water_flowing")) newLiquid = LiquidType.HOT_WATER;
            else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
