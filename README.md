@@ -1,3 +1,5 @@
+![showercore-cover.png](https://s2.loli.net/2025/12/13/xmgb3PjyoYD7UiC.png)
+
 # ShowerCore 🚿
 
 **[English]**
