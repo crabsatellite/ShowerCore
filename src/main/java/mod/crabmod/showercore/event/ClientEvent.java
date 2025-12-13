@@ -21,22 +21,23 @@ import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EnchantmentTableParticle;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.client.particle.SuspendedTownParticle;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
 
-import com.crabmod.hotbath.fluid_details.FluidsColor;
+import mod.crabmod.showercore.utils.FluidsColor;
 import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.registers.BlocksRegister;
 import net.minecraft.client.renderer.BiomeColors;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(
+@EventBusSubscriber(
     modid = ShowerCore.MODID,
-    bus = Mod.EventBusSubscriber.Bus.MOD,
+    bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
 
@@ -226,38 +227,38 @@ public class ClientEvent {
         .particleEngine
         .register(
             ParticleRegister.BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
 
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.HOT_WATER_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.HONEY_BATH_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.MILK_BATH_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.PEONY_BATH_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
     Minecraft.getInstance()
         .particleEngine
         .register(
             ParticleRegister.ROSE_BATH_BATH_CORE_PARTICLE.get(),
-            EnchantmentTableParticle.NautilusProvider::new);
+            SuspendedTownParticle.Provider::new);
 
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);

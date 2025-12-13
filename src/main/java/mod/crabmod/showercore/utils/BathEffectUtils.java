@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.crabmod.hotbath.registers.ParticleRegister;
+import mod.crabmod.showercore.registers.ParticleRegister;
 import mod.crabmod.showercore.particle.ShowerParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -47,23 +47,23 @@ public class BathEffectUtils {
     private void generateOuterSteamParticles(Level worldIn, BlockPos pos, RandomSource rand, int radius) {
         List<BlockPos> airPositions = new ArrayList<>();
 
-        // 遍历立方体范围，找到最外层的空气块，并存储到列表中
+        // Iterate through the cube range, find the outermost air blocks, and store them in the list
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
                 for (int dz = -radius; dz <= radius; dz++) {
-                    // 确定是否在最外层
+                    // Determine if it is on the outermost layer
                     if (dx == -radius || dx == radius || dy == -radius || dy == radius || dz == -radius || dz == radius) {
                         BlockPos checkPos = pos.offset(dx, dy, dz);
 
                         if (worldIn.getBlockState(checkPos).isAir()) {
-                            airPositions.add(checkPos); // 添加符合条件的位置
+                            airPositions.add(checkPos); // Add matching positions
                         }
                     }
                 }
             }
         }
 
-        // 如果找到符合条件的位置，则随机选择一个生成粒子
+        // If a matching position is found, randomly select one to generate a particle
         if (!airPositions.isEmpty()) {
             BlockPos selectedPos = airPositions.get(rand.nextInt(airPositions.size()));
             worldIn.addParticle(
@@ -79,23 +79,23 @@ public class BathEffectUtils {
     }
 
     public void renderBathWater(Level level, BlockPos pos, int particleInterval, double invisibleHeightMinOffset, double invisibleHeightMaxOffset, java.util.function.Supplier<ParticleOptions> particleTypeSupplier, double width, double depth, double centerX, double centerZ, double height) {
-        // 如果效果已激活，则返回，避免重复开启
+        // If the effect is already active, return to avoid duplicate start
         if (isEffectActive.get()) {
             return;
         }
         isEffectActive.set(true);
         ensureScheduler();
 
-        // 定期生成粒子效果
+        // Periodically generate particle effects
         scheduler.scheduleAtFixedRate(
                 () -> {
                     if (!isEffectActive.get()) {
-                        return; // 如果效果已停用，跳过任务
+                        return; // If the effect is deactivated, skip the task
                     }
 
                     if (Minecraft.getInstance().level != level) {
                         this.shutdown();
-                        return; // 如果世界已更改，停止任务
+                        return; // If the world has changed, stop the task
                     }
 
                     if (Minecraft.getInstance().isPaused()) {
@@ -103,11 +103,11 @@ public class BathEffectUtils {
                     }
 
                     Minecraft.getInstance().execute(() -> {
-                        // 设置相对高度范围
+                        // Set relative height range
                         double invisibleHeightMin = pos.getY() + invisibleHeightMinOffset;
                         double invisibleHeightMax = pos.getY() + invisibleHeightMaxOffset;
 
-                        // 将高度范围设置到 ThreadLocal
+                        // Set height range to ThreadLocal
                         ShowerParticle.INVISIBLE_HEIGHT_MIN.set(invisibleHeightMin);
                         ShowerParticle.INVISIBLE_HEIGHT_MAX.set(invisibleHeightMax);
 
@@ -116,7 +116,7 @@ public class BathEffectUtils {
                             double offsetY = height;
                             double offsetZ = centerZ + (level.random.nextDouble() - 0.5) * depth;
                             double velocityY = 3;
-                            // 添加粒子
+                            // Add particle
                             level.addParticle(
                                     particleTypeSupplier.get(),
                                     pos.getX() + offsetX,
@@ -132,7 +132,7 @@ public class BathEffectUtils {
                             }
                         }
 
-                        // 清理 ThreadLocal 防止数据泄漏
+                        // Clean up ThreadLocal to prevent memory leaks
                         ShowerParticle.INVISIBLE_HEIGHT_MIN.remove();
                         ShowerParticle.INVISIBLE_HEIGHT_MAX.remove();
                     });
@@ -145,16 +145,16 @@ public class BathEffectUtils {
 
     public void playBathSound(Level level, int soundInterval, BlockPos pos) {
         ensureScheduler();
-        // 定期播放声音效果
+        // Periodically play sound effects
         scheduler.scheduleAtFixedRate(
                 () -> {
                     if (!isEffectActive.get()) {
-                        return; // 如果效果已停用，跳过任务
+                        return; // If the effect is deactivated, skip the task
                     }
 
                     if (Minecraft.getInstance().level != level) {
                         this.shutdown();
-                        return; // 如果世界已更改，停止任务
+                        return; // If the world has changed, stop the task
                     }
 
                     if (Minecraft.getInstance().isPaused()) {
@@ -185,7 +185,7 @@ public class BathEffectUtils {
         );
     }
 
-    // 停止粒子效果
+    // Stop particle effects
     public void stopBathEffect() {
         isEffectActive.set(false);
         if (scheduler != null) {

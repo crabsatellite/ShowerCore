@@ -51,6 +51,9 @@ public class ParticleRegister {
   public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ROSE_BATH_SHOWER_PARTICLE =
       PARTICLE_TYPES.register("rose_bath_shower_particle", () -> new SimpleParticleType(true));
 
+  public static final DeferredHolder<ParticleType<?>, SimpleParticleType> STEAM_PARTICLE =
+      PARTICLE_TYPES.register("steam_particle", () -> new SimpleParticleType(true));
+
   public static void register(IEventBus eventBus) {
     PARTICLE_TYPES.register(eventBus);
   }

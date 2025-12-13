@@ -6,8 +6,15 @@ import mod.crabmod.showercore.utils.VoxelShapeHelper;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import com.mojang.serialization.MapCodec;
 
 public class RotatableBlock extends BaseRotatableBlock {
+  public static final MapCodec<RotatableBlock> CODEC = simpleCodec(RotatableBlock::new);
+
+  @Override
+  protected MapCodec<? extends BaseRotatableBlock> codec() {
+     return CODEC;
+  }
 
   public RotatableBlock(Properties properties) {
     super(properties);

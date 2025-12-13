@@ -28,10 +28,10 @@ neoForge {
     // Specify the version of NeoForge to use.
     version = project.neoforge_version
 
-    parchment {
-        mappingsVersion = project.mapping_version
-        minecraftVersion = project.minecraft_version
-    }
+    // parchment {
+    //    mappingsVersion = project.mapping_version
+    //    minecraftVersion = project.minecraft_version
+    // }
 
     // This line includes and enables the generated Access Transformer if it exists.
     // accessTransformer = project.file('src/main/resources/META-INF/accesstransformer.cfg')

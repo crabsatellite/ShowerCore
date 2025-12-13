@@ -98,16 +98,26 @@ public abstract class BaseShowerHeadBlockEntity extends BaseContainerBlockEntity
   }
 
   @Override
-  public void load(net.minecraft.nbt.CompoundTag tag) {
-    super.load(tag);
-    this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-    ContainerHelper.loadAllItems(tag, this.items);
+  protected NonNullList<ItemStack> getItems() {
+      return this.items;
   }
 
   @Override
-  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag) {
-    super.saveAdditional(tag);
-    ContainerHelper.saveAllItems(tag, this.items);
+  protected void setItems(NonNullList<ItemStack> items) {
+      this.items = items;
+  }
+
+  @Override
+  public void loadAdditional(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.loadAdditional(tag, registries);
+    this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+    ContainerHelper.loadAllItems(tag, this.items, registries);
+  }
+
+  @Override
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.saveAdditional(tag, registries);
+    ContainerHelper.saveAllItems(tag, this.items, registries);
   }
 
   // Custom menu for a single-slot container

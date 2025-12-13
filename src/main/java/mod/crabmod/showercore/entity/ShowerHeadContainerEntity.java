@@ -61,34 +61,36 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   }
 
   @Override
-  public net.minecraft.nbt.CompoundTag getUpdateTag() {
-    return this.saveWithoutMetadata();
+  public net.minecraft.nbt.CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
+    return this.saveWithoutMetadata(registries);
   }
 
   @Override
-  public void load(net.minecraft.nbt.CompoundTag tag) {
-    super.load(tag);
+  public void loadAdditional(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.loadAdditional(tag, registries);
     this.effectActive = tag.getBoolean("EffectActive");
     if (this.level != null && this.level.isClientSide) {
       if (this.effectActive) {
         this.startEffect();
       } else {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils));
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+             ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils);
+        }
       }
     }
   }
 
   @Override
-  public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt) {
+  public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt, net.minecraft.core.HolderLookup.Provider lookupProvider) {
     net.minecraft.nbt.CompoundTag tag = pkt.getTag();
     if (tag != null) {
-        this.load(tag);
+        this.loadWithComponents(tag, lookupProvider);
     }
   }
 
   @Override
-  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag) {
-    super.saveAdditional(tag);
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.saveAdditional(tag, registries);
     tag.putBoolean("EffectActive", this.effectActive);
   }
 
@@ -96,11 +98,11 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public void onLoad() {
     super.onLoad();
     if (this.level != null && this.level.isClientSide) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+        if (FMLEnvironment.dist == Dist.CLIENT) {
             if (this.bathEffectUtils == null) {
                 this.bathEffectUtils = ShowerHeadClientHelper.createBathEffectUtils();
             }
-        });
+        }
         if (this.effectActive) {
             this.startEffect();
         }
@@ -118,24 +120,28 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             final double centerZ = name.contains("compact_shower_head") ? 0.53125 : 0.5;
             final double height = 0.78;
 
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            if (FMLEnvironment.dist == Dist.CLIENT) {
                 if (this.bathEffectUtils == null) {
                     this.bathEffectUtils = ShowerHeadClientHelper.createBathEffectUtils();
                 }
                 ShowerHeadClientHelper.renderBathWater(this.bathEffectUtils, this.level, this.worldPosition, this::getParticleType, width, depth, centerX, centerZ, height);
-            });
+            }
       }
   }
 
   public void stopEffect() {
     if (this.level != null && this.level.isClientSide) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils));
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+             ShowerHeadClientHelper.stopBathEffect(this.bathEffectUtils);
+        }
     }
   }
 
   public void shutdownEffect() {
     if (this.level != null && this.level.isClientSide) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ShowerHeadClientHelper.shutdown(this.bathEffectUtils));
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+             ShowerHeadClientHelper.shutdown(this.bathEffectUtils);
+        }
     }
   }
 

@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -41,8 +42,20 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.CustomData;
+import com.mojang.serialization.MapCodec;
 
 public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, SimpleWaterloggedBlock {
+  public static final MapCodec<ShowerHeadBlock> CODEC = simpleCodec(ShowerHeadBlock::new);
+
+  @Override
+  protected MapCodec<? extends RotatableBlock> codec() {
+     return CODEC;
+  }
+
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public ShowerHeadBlock(Properties properties) {
@@ -98,15 +111,14 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   }
 
   @Override
-  public InteractionResult use(
+  protected ItemInteractionResult useItemOn(
+      ItemStack heldItem,
       BlockState state,
       Level level,
       BlockPos pos,
       Player player,
       InteractionHand hand,
       BlockHitResult hit) {
-
-    net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(hand);
 
     if (heldItem.getItem() == net.minecraft.world.item.Items.WATER_BUCKET) {
        if (!state.getValue(WATERLOGGED)) {
@@ -118,13 +130,13 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
              level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
              level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BUCKET_EMPTY, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
           }
-          return InteractionResult.sidedSuccess(level.isClientSide);
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
        }
     }
 
     BlockEntity blockEntity = level.getBlockEntity(pos);
     if (!(blockEntity instanceof ShowerHeadContainerEntity showerEntity)) {
-      return InteractionResult.PASS;
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     if (CoreUtils.isCoreItem(heldItem)) {
@@ -145,7 +157,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
         // Optional: Play a sound to indicate success
         level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ITEM_FRAME_ADD_ITEM, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
       }
-      return InteractionResult.sidedSuccess(level.isClientSide);
+      return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     if (heldItem.isEmpty()) {
@@ -170,16 +182,16 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
               showerEntity.stopEffect();
             }
           }
-          return InteractionResult.sidedSuccess(level.isClientSide);
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
 
       if (showerEntity.isEmpty() && !showerEntity.isEffectActive()) {
         if (level.isClientSide) {
           player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.showercore.need_core"), true);
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
       }
 
       showerEntity.toggleEffect();
@@ -189,15 +201,15 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
         } else {
           showerEntity.stopEffect();
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
       }
       
       showerEntity.setChanged();
       level.sendBlockUpdated(pos, state, state, 3);
-      return InteractionResult.CONSUME;
+      return ItemInteractionResult.CONSUME;
     }
 
-    return InteractionResult.PASS;
+    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
   }
 
   @Override
@@ -214,11 +226,11 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   }
 
   @Override
-  public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+  public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
       ItemStack stack = super.getCloneItemStack(level, pos, state);
       BlockEntity blockEntity = level.getBlockEntity(pos);
       if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
-          CompoundTag tag = showerEntity.saveWithoutMetadata();
+          CompoundTag tag = showerEntity.saveWithoutMetadata(level.registryAccess());
           BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
       }
       return stack;
@@ -229,7 +241,7 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
       ItemStack stack = new ItemStack(this);
-      CompoundTag tag = showerEntity.saveWithoutMetadata();
+      CompoundTag tag = showerEntity.saveWithoutMetadata(showerEntity.getLevel().registryAccess());
       BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
       return Collections.singletonList(stack);
     }
@@ -239,15 +251,16 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   @Override
   public void appendHoverText(
       ItemStack stack,
-      @Nullable BlockGetter level,
+      Item.TooltipContext context,
       List<Component> tooltip,
       TooltipFlag flag) {
     
-    CompoundTag tag = BlockItem.getBlockEntityData(stack);
-    if (tag != null) {
+    CustomData customData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+    if (customData != null) {
+        CompoundTag tag = customData.copyTag();
         if (tag.contains("Items")) {
             net.minecraft.core.NonNullList<ItemStack> items = net.minecraft.core.NonNullList.withSize(1, ItemStack.EMPTY);
-            ContainerHelper.loadAllItems(tag, items);
+            ContainerHelper.loadAllItems(tag, items, context.registries());
             ItemStack core = items.get(0);
             if (!core.isEmpty()) {
                  tooltip.add(Component.translatable("tooltip.showercore.contains", core.getHoverName()).withStyle(ChatFormatting.GRAY));
@@ -258,6 +271,6 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
     tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.install"));
     tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.toggle"));
     tooltip.add(Component.translatable("tooltip.showercore.shower_head.usage.remove"));
-    super.appendHoverText(stack, level, tooltip, flag);
+    super.appendHoverText(stack, context, tooltip, flag);
   }
 }

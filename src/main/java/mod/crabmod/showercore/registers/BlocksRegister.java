@@ -90,7 +90,7 @@ public class BlocksRegister {
           .requiresCorrectToolForDrops();
 
   private static final BlockBehaviour.Properties COMMON_PROPERTIES_CORE =
-      BlockBehaviour.Properties.copy(Blocks.CONDUIT).noOcclusion();
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CONDUIT).noOcclusion();
 
   public static final DeferredHolder<Block, Block> RAIN_SHOWER_HEAD_BLACK =
       registerBlock(

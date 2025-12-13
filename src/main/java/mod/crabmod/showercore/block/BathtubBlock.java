@@ -3,6 +3,7 @@ package mod.crabmod.showercore.block;
 import javax.annotation.Nullable;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.SeatEntity;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
-import com.crabmod.hotbath.registers.ParticleRegister;
+import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.phys.BlockHitResult;
@@ -51,8 +52,16 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.nbt.CompoundTag;
+import com.mojang.serialization.MapCodec;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
+  public static final MapCodec<BathtubBlock> CODEC = simpleCodec(BathtubBlock::new);
+
+  @Override
+  protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+     return CODEC;
+  }
+
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
   public static final BooleanProperty RUNNING = BooleanProperty.create("running");
   public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
@@ -227,13 +236,14 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
 
 
+
+
   @Override
-  public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-      ItemStack itemstack = player.getItemInHand(hand);
+  protected ItemInteractionResult useItemOn(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 
       // Place Rubber Duck
       if (itemstack.getItem() == mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get()) {
-          return InteractionResult.PASS;
+          return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
@@ -276,7 +286,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   player.startRiding(seat);
               }
           }
-          return InteractionResult.sidedSuccess(level.isClientSide);
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.FOOT) {
@@ -320,7 +330,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   player.startRiding(seat);
               }
           }
-          return InteractionResult.sidedSuccess(level.isClientSide);
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
       }
 
       // Fluid interaction
@@ -335,12 +345,12 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                           syncFluidToOtherPart(level, pos, state, fluid);
                           updateLiquidState(level, pos, state, fluid);
                       }
-                      return InteractionResult.sidedSuccess(level.isClientSide);
+                      return ItemInteractionResult.sidedSuccess(level.isClientSide);
                   }
               }
           }
       }
-      return InteractionResult.PASS;
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
    }
 
    private void syncFluidToOtherPart(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
@@ -389,7 +399,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
       ItemStack stack = new ItemStack(this);
-      CompoundTag tag = bathtubEntity.saveWithoutMetadata();
+      CompoundTag tag = bathtubEntity.saveWithoutMetadata(bathtubEntity.getLevel().registryAccess());
       BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
       return Collections.singletonList(stack);
     }
@@ -397,7 +407,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   }
 
   @Override
-  public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+  public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
     if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
       
@@ -425,7 +435,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           level.getEntitiesOfClass(FaucetInteractionEntity.class, new net.minecraft.world.phys.AABB(pos)).forEach(Entity::discard);
       }
     }
-    super.playerWillDestroy(level, pos, state, player);
+    return super.playerWillDestroy(level, pos, state, player);
   }
 
   @Override
@@ -473,7 +483,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   Fluid fluid = fluidStack.getFluid();
                   if (fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA) {
                       // Apply lava effects manually
-                      entity.setSecondsOnFire(15);
+                      entity.setRemainingFireTicks(300);
                       entity.hurt(level.damageSources().lava(), 4.0F);
                   }
               }

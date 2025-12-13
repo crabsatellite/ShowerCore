@@ -6,18 +6,19 @@ import java.util.stream.Collectors;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 // Config class to organize and configure blocks allowed for each specific core type
-@Mod.EventBusSubscriber(modid = ShowerCore.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ShowerCore.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
-  private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+  private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HOT_WATER_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> HOT_WATER_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Hot Water Core activation")
           .defineListAllowEmpty(
@@ -25,7 +26,7 @@ public class Config {
               List.of("minecraft:prismarine", "minecraft:prismarine_bricks"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HONEY_BATH_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> HONEY_BATH_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Honey Bath Core activation")
           .defineListAllowEmpty(
@@ -33,7 +34,7 @@ public class Config {
               List.of("minecraft:honeycomb_block", "minecraft:honey_block"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> MILK_BATH_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> MILK_BATH_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Milk Bath Core activation")
           .defineListAllowEmpty(
@@ -43,7 +44,7 @@ public class Config {
                   "minecraft:quartz_pillar", "minecraft:smooth_quartz"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ROSE_BATH_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> ROSE_BATH_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Rose Bath Core activation")
           .defineListAllowEmpty(
@@ -54,7 +55,7 @@ public class Config {
                   "minecraft:red_glazed_terracotta"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> PEONY_BATH_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> PEONY_BATH_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Peony Bath Core activation")
           .defineListAllowEmpty(
@@ -65,7 +66,7 @@ public class Config {
                   "minecraft:pink_glazed_terracotta"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> HERBAL_BATH_CORE_BLOCKS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> HERBAL_BATH_CORE_BLOCKS =
       BUILDER
           .comment("Allowed blocks for Herbal Bath Core activation")
           .defineListAllowEmpty(
@@ -80,7 +81,7 @@ public class Config {
                   "minecraft:flowering_azalea_leaves"),
               Config::validateBlockName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> STEAM_FLUIDS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> STEAM_FLUIDS =
       BUILDER
           .comment("Fluids that produce steam in the bathtub.",
                    "Add fluid registry names here, e.g., 'minecraft:lava' or 'some_mod:hot_spring_water'.",
@@ -90,7 +91,7 @@ public class Config {
               List.of(),
               Config::validateFluidName);
 
-  private static final ForgeConfigSpec.ConfigValue<List<? extends String>> RUBBER_DUCK_DESTROY_FLUIDS =
+  private static final ModConfigSpec.ConfigValue<List<? extends String>> RUBBER_DUCK_DESTROY_FLUIDS =
       BUILDER
           .comment("Fluids that will destroy the Rubber Duck (e.g. lava)")
           .defineListAllowEmpty(
@@ -98,7 +99,7 @@ public class Config {
               List.of("minecraft:lava", "minecraft:flowing_lava"),
               Config::validateFluidName);
 
-  static final ForgeConfigSpec SPEC = BUILDER.build();
+  static final ModConfigSpec SPEC = BUILDER.build();
 
   public static Set<Block> hotWaterCoreBlocks;
   public static Set<Block> honeyBathCoreBlocks;
@@ -111,12 +112,12 @@ public class Config {
 
   private static boolean validateBlockName(final Object obj) {
     return obj instanceof final String blockName
-        && ForgeRegistries.BLOCKS.containsKey(new ResourceLocation(blockName));
+        && BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse(blockName));
   }
 
   private static boolean validateFluidName(final Object obj) {
     return obj instanceof final String fluidName
-        && ForgeRegistries.FLUIDS.containsKey(new ResourceLocation(fluidName));
+        && BuiltInRegistries.FLUID.containsKey(ResourceLocation.parse(fluidName));
   }
 
   @SubscribeEvent
@@ -126,42 +127,42 @@ public class Config {
     }
     hotWaterCoreBlocks =
         HOT_WATER_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     honeyBathCoreBlocks =
         HONEY_BATH_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     milkBathCoreBlocks =
         MILK_BATH_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     roseBathCoreBlocks =
         ROSE_BATH_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     peonyBathCoreBlocks =
         PEONY_BATH_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     herbalBathCoreBlocks =
         HERBAL_BATH_CORE_BLOCKS.get().stream()
-            .map(blockName -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)))
+            .map(blockName -> BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockName)))
             .collect(Collectors.toSet());
 
     steamFluids =
         STEAM_FLUIDS.get().stream()
-            .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
+            .map(fluidName -> BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluidName)))
             .collect(Collectors.toSet());
 
     rubberDuckDestroyFluids =
         RUBBER_DUCK_DESTROY_FLUIDS.get().stream()
-            .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
+            .map(fluidName -> BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluidName)))
             .collect(Collectors.toSet());
   }
 }

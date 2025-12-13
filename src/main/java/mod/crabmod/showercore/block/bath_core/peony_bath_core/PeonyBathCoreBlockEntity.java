@@ -43,9 +43,8 @@ public class PeonyBathCoreBlockEntity extends BlockEntity {
     super(BlockEntitiesRegister.PEONY_BATH_CORE_BLOCK_ENTITY.get(), pPos, pBlockState);
   }
 
-  @Override
-  public void load(CompoundTag pTag) {
-    super.load(pTag);
+  @Override public void loadAdditional(CompoundTag pTag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.loadAdditional(pTag, registries);
     if (pTag.hasUUID("Target")) {
       this.destroyTargetUUID = pTag.getUUID("Target");
     } else {
@@ -53,9 +52,8 @@ public class PeonyBathCoreBlockEntity extends BlockEntity {
     }
   }
 
-  @Override
-  protected void saveAdditional(CompoundTag pTag) {
-    super.saveAdditional(pTag);
+  @Override protected void saveAdditional(CompoundTag pTag, net.minecraft.core.HolderLookup.Provider registries) {
+    super.saveAdditional(pTag, registries);
     if (this.destroyTarget != null) {
       pTag.putUUID("Target", this.destroyTarget.getUUID());
     }
@@ -66,9 +64,8 @@ public class PeonyBathCoreBlockEntity extends BlockEntity {
     return ClientboundBlockEntityDataPacket.create(this);
   }
 
-  @Override
-  public CompoundTag getUpdateTag() {
-    return this.saveWithoutMetadata();
+  @Override public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
+    return this.saveWithoutMetadata(registries);
   }
 
   public static void clientTick(
@@ -341,3 +338,4 @@ public class PeonyBathCoreBlockEntity extends BlockEntity {
     return (this.activeRotation + pPartialTick) * -0.0375F;
   }
 }
+

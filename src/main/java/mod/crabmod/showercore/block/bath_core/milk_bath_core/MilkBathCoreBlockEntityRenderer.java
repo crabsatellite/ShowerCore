@@ -16,20 +16,20 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class MilkBathCoreBlockEntityRenderer implements BlockEntityRenderer<MilkBathCoreBlockEntity>{
 
-    public static final Material SHELL_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_base"));
-    public static final Material ACTIVE_SHELL_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_cage"));
-    public static final Material WIND_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_wind"));
-    public static final Material VERTICAL_WIND_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_wind_vertical"));
-    public static final Material OPEN_EYE_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_open"));
-    public static final Material CLOSED_EYE_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation(ShowerCore.MODID, "entity/conduit/milk_bath_core_closed"));
+    public static final Material SHELL_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_base"));
+    public static final Material ACTIVE_SHELL_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_cage"));
+    public static final Material WIND_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_wind"));
+    public static final Material VERTICAL_WIND_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_wind_vertical"));
+    public static final Material OPEN_EYE_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_open"));
+    public static final Material CLOSED_EYE_TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS, ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "entity/conduit/milk_bath_core_closed"));
     private final ModelPart eye;
     private final ModelPart wind;
     private final ModelPart shell;
@@ -124,3 +124,4 @@ public class MilkBathCoreBlockEntityRenderer implements BlockEntityRenderer<Milk
         }
     }
 }
+

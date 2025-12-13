@@ -1,6 +1,6 @@
 package mod.crabmod.showercore;
 
-import com.crabmod.hotbath.item.ItemGroup;
+import mod.crabmod.showercore.item.ItemGroup;
 import com.mojang.logging.LogUtils;
 import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
@@ -17,6 +17,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,6 +25,8 @@ import net.neoforged.fml.ModContainer;
 import org.slf4j.Logger;
 
 import mod.crabmod.showercore.registers.SoundRegister;
+
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 @Mod(ShowerCore.MODID)
 public class ShowerCore {
@@ -34,6 +37,7 @@ public class ShowerCore {
   public ShowerCore(IEventBus modEventBus, ModContainer modContainer) {
     ItemRegister.register(modEventBus);
     BlocksRegister.register(modEventBus);
+    ItemGroup.CREATIVE_MODE_TABS.register(modEventBus);
 
     ModEffects.register(modEventBus);
 
@@ -43,12 +47,20 @@ public class ShowerCore {
     SoundRegister.register(modEventBus);
 
     modEventBus.addListener(this::commonSetup);
+    modEventBus.addListener(this::registerCapabilities);
 
     NeoForge.EVENT_BUS.register(this);
     modEventBus.addListener(this::addCreative);
 
     modContainer.registerConfig(ModConfig.Type.COMMON, mod.crabmod.showercore.Config.SPEC);
     modContainer.registerConfig(ModConfig.Type.CLIENT, mod.crabmod.showercore.ClientConfig.SPEC);
+  }
+
+  private void registerCapabilities(RegisterCapabilitiesEvent event) {
+    event.registerBlockEntity(
+        net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+        BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(),
+        (be, side) -> be.getFluidTank());
   }
 
   private void commonSetup(final FMLCommonSetupEvent event) {}
@@ -167,7 +179,7 @@ public class ShowerCore {
   @SubscribeEvent
   public void onServerStarting(ServerStartingEvent event) {}
 
-  @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+  @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
   public static class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {

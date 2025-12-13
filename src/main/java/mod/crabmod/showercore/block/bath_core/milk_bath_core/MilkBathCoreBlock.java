@@ -1,5 +1,7 @@
 package mod.crabmod.showercore.block.bath_core.milk_bath_core;
 
+import com.mojang.serialization.MapCodec;
+
 import mod.crabmod.showercore.block.bath_core.hot_water_core.HotWaterCoreBlockEntity;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import net.minecraft.core.BlockPos;
@@ -24,6 +26,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
 public class MilkBathCoreBlock extends BaseEntityBlock {
+  public static final MapCodec<MilkBathCoreBlock> CODEC = simpleCodec(MilkBathCoreBlock::new);
+
+  @Override
+  protected MapCodec<? extends BaseEntityBlock> codec() {
+     return CODEC;
+  }
+
   public static final VoxelShape SHAPE = Block.box(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
 
   public MilkBathCoreBlock(Properties pProperties) {
@@ -41,7 +50,7 @@ public class MilkBathCoreBlock extends BaseEntityBlock {
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof MilkBathCoreBlockEntity coreEntity) {
       ItemStack stack = new ItemStack(this);
-      CompoundTag tag = coreEntity.saveWithoutMetadata();
+      CompoundTag tag = coreEntity.saveWithoutMetadata(coreEntity.getLevel().registryAccess());
       BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
       return Collections.singletonList(stack);
     }
@@ -71,3 +80,4 @@ public class MilkBathCoreBlock extends BaseEntityBlock {
                     : MilkBathCoreBlockEntity::serverTick);
   }
 }
+

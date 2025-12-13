@@ -7,17 +7,18 @@ import net.minecraft.resources.ResourceLocation;
 public class RoseBathCoreModelLayers {
   public static final ModelLayerLocation ROSE_BATH_CORE_CAGE =
       new ModelLayerLocation(
-          new ResourceLocation(ShowerCore.MODID, "rose_bath_core/cage"), "main");
+          ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "rose_bath_core/cage"), "main");
 
   public static final ModelLayerLocation ROSE_BATH_CORE_SHELL =
       new ModelLayerLocation(
-          new ResourceLocation(ShowerCore.MODID, "rose_bath_core/shell"), "main");
+          ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "rose_bath_core/shell"), "main");
 
   public static final ModelLayerLocation ROSE_BATH_CORE_EYE =
       new ModelLayerLocation(
-          new ResourceLocation(ShowerCore.MODID, "rose_bath_core/eye"), "main");
+          ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "rose_bath_core/eye"), "main");
 
   public static final ModelLayerLocation ROSE_BATH_CORE_WIND =
       new ModelLayerLocation(
-          new ResourceLocation(ShowerCore.MODID, "rose_bath_core/wind"), "main");
+          ResourceLocation.fromNamespaceAndPath(ShowerCore.MODID, "rose_bath_core/wind"), "main");
 }
+

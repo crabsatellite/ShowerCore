@@ -1,5 +1,7 @@
 package mod.crabmod.showercore.block.bath_core.honey_bath_core;
 
+import com.mojang.serialization.MapCodec;
+
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -23,6 +25,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 
 public class HoneyBathCoreBlock extends BaseEntityBlock {
+  public static final MapCodec<HoneyBathCoreBlock> CODEC = simpleCodec(HoneyBathCoreBlock::new);
+
+  @Override
+  protected MapCodec<? extends BaseEntityBlock> codec() {
+     return CODEC;
+  }
+
   public static final VoxelShape SHAPE = Block.box(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
 
   public HoneyBathCoreBlock(Properties pProperties) {
@@ -45,7 +54,7 @@ public class HoneyBathCoreBlock extends BaseEntityBlock {
     BlockEntity blockEntity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
     if (blockEntity instanceof HoneyBathCoreBlockEntity coreEntity) {
       ItemStack stack = new ItemStack(this);
-      CompoundTag tag = coreEntity.saveWithoutMetadata();
+      CompoundTag tag = coreEntity.saveWithoutMetadata(coreEntity.getLevel().registryAccess());
       BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
       return Collections.singletonList(stack);
     }
@@ -70,3 +79,4 @@ public class HoneyBathCoreBlock extends BaseEntityBlock {
             : HoneyBathCoreBlockEntity::serverTick);
   }
 }
+

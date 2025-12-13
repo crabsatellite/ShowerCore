@@ -16,8 +16,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Matrix4f;
 
 public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBlockEntity> {
@@ -91,12 +91,13 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
     }
 
     private void addVertex(VertexConsumer builder, Matrix4f matrix, float x, float y, float z, float u, float v, float r, float g, float b, float a, int packedLight) {
-        builder.vertex(matrix, x, y, z)
-               .color(r, g, b, a)
-               .uv(u, v)
-               .overlayCoords(0, 10) // No overlay
-               .uv2(packedLight)
-               .normal(0, 1, 0)
-               .endVertex();
+        org.joml.Vector4f vector = new org.joml.Vector4f(x, y, z, 1.0F);
+        matrix.transform(vector);
+        builder.addVertex(vector.x, vector.y, vector.z)
+               .setColor(r, g, b, a)
+               .setUv(u, v)
+               .setOverlay(net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY)
+               .setLight(packedLight)
+               .setNormal(0, 1, 0);
     }
 }

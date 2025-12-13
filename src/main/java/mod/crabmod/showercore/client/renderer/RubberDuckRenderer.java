@@ -37,6 +37,7 @@ public class RubberDuckRenderer extends EntityRenderer<RubberDuckEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(RubberDuckEntity entity) {
-        return new ResourceLocation("showercore", "textures/item/rubber_duck.png");
+        return ResourceLocation.fromNamespaceAndPath("showercore", "textures/item/rubber_duck.png");
     }
 }
+

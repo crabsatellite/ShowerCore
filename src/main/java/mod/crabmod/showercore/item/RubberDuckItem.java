@@ -34,11 +34,11 @@ public class RubberDuckItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.place"));
         tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.push"));
         tooltip.add(Component.translatable("tooltip.showercore.rubber_duck.usage.pickup"));
-        super.appendHoverText(stack, level, tooltip, flag);
+        super.appendHoverText(stack, context, tooltip, flag);
     }
 
     @Override

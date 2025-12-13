@@ -2,6 +2,7 @@ package mod.crabmod.showercore.registers;
 
 import mod.crabmod.showercore.ShowerCore;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
