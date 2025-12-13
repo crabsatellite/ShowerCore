@@ -111,6 +111,7 @@ configurations {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Example of adding a dependency.
     // implementation 'com.some:library:1.0.0'
 }
@@ -146,5 +147,6 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs.addAll(['-AoutRefMapFile=mixins.showercore.refmap.json'])
 }
 
