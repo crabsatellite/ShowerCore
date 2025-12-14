@@ -1,6 +1,5 @@
 package mod.crabmod.showercore;
 
-import mod.crabmod.showercore.item.ItemGroup;
 import com.mojang.logging.LogUtils;
 import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
@@ -37,7 +36,6 @@ public class ShowerCore {
   public ShowerCore(IEventBus modEventBus, ModContainer modContainer) {
     ItemRegister.register(modEventBus);
     BlocksRegister.register(modEventBus);
-    ItemGroup.CREATIVE_MODE_TABS.register(modEventBus);
 
     ModEffects.register(modEventBus);
 
@@ -66,7 +64,7 @@ public class ShowerCore {
   private void commonSetup(final FMLCommonSetupEvent event) {}
 
   private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTabKey() == ItemGroup.HOT_BATH_TAB.getKey()) {
+    if (event.getTabKey() == com.crabmod.hotbath.item.ItemGroup.HOT_BATH_TAB.getKey()) {
       event.accept(BlocksRegister.HOT_WATER_CORE.get());
       event.accept(BlocksRegister.HERBAL_BATH_CORE.get());
       event.accept(BlocksRegister.PEONY_BATH_CORE.get());
