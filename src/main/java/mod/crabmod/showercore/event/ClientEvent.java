@@ -13,6 +13,9 @@ import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlock
 import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreModelLayers;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEntityRenderer;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLayers;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.core.particles.SimpleParticleType;
+import mod.crabmod.showercore.mixin.NautilusProviderAccessor;
 import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
@@ -223,42 +226,28 @@ public class ClientEvent {
 
   @SubscribeEvent
   public static void registerParticles(final RegisterParticleProvidersEvent event) {
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
 
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.HOT_WATER_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.HONEY_BATH_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.MILK_BATH_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.PEONY_BATH_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
-    Minecraft.getInstance()
-        .particleEngine
-        .register(
-            ParticleRegister.ROSE_BATH_BATH_CORE_PARTICLE.get(),
-            SuspendedTownParticle.Provider::new);
+    event.registerSpriteSet(
+        ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
+    event.registerSpriteSet(
+        ParticleRegister.HOT_WATER_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
+    event.registerSpriteSet(
+        ParticleRegister.HONEY_BATH_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
+    event.registerSpriteSet(
+        ParticleRegister.MILK_BATH_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
+    event.registerSpriteSet(
+        ParticleRegister.PEONY_BATH_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
+    event.registerSpriteSet(
+        ParticleRegister.ROSE_BATH_BATH_CORE_PARTICLE.get(),
+        NautilusProviderAccessor::create);
 
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
@@ -273,8 +262,4 @@ public class ClientEvent {
     event.registerSpriteSet(
         ParticleRegister.ROSE_BATH_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);
   }
-
-
-
-
 }
