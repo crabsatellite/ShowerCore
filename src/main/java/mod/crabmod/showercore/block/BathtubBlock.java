@@ -44,6 +44,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidActionResult;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import mod.crabmod.showercore.Config;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -51,6 +54,10 @@ import java.util.Collections;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.nbt.CompoundTag;
 import com.mojang.serialization.MapCodec;
 
@@ -335,18 +342,49 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
       // Fluid interaction
       if (!itemstack.isEmpty()) {
-          if (FluidUtil.getFluidHandler(itemstack).isPresent()) {
-              BlockEntity be = level.getBlockEntity(pos);
-              if (be instanceof BathtubBlockEntity bathtubBe) {
-                  boolean success = FluidUtil.interactWithFluidHandler(player, hand, level, pos, null);
-                  if (success) {
-                      if (!level.isClientSide) {
-                          FluidStack fluid = bathtubBe.getFluidTank().getFluid();
-                          syncFluidToOtherPart(level, pos, state, fluid);
-                          updateLiquidState(level, pos, state, fluid);
-                      }
-                      return ItemInteractionResult.sidedSuccess(level.isClientSide);
+          BlockEntity be = level.getBlockEntity(pos);
+          if (be instanceof BathtubBlockEntity bathtubBe) {
+              IFluidHandler handler = bathtubBe.getFluidTank();
+              
+              // Try standard FluidUtil interaction first
+              boolean success = FluidUtil.interactWithFluidHandler(player, hand, handler);
+              
+              if (success) {
+                  if (!level.isClientSide) {
+                      FluidStack fluid = bathtubBe.getFluidTank().getFluid();
+                      syncFluidToOtherPart(level, pos, state, fluid);
+                      updateLiquidState(level, pos, state, fluid);
                   }
+                  return ItemInteractionResult.sidedSuccess(level.isClientSide);
+              }
+
+              // Fallback for BucketItems that are missing FluidHandler capability (e.g. some modded buckets)
+              if (itemstack.getItem() instanceof BucketItem bucketItem) {
+                   Fluid bucketContent = bucketItem.content;
+                   if (bucketContent != Fluids.EMPTY) {
+                       FluidStack fluidStack = new FluidStack(bucketContent, 1000);
+                       // Simulate filling
+                       int filled = handler.fill(fluidStack, IFluidHandler.FluidAction.SIMULATE);
+                       if (filled == 1000) {
+                           if (!level.isClientSide) {
+                               // Execute filling
+                               handler.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+                               
+                               if (!player.isCreative()) {
+                                   player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                               }
+                               
+                               SoundEvent sound = bucketContent.getFluidType().getSound(player, level, pos, net.neoforged.neoforge.common.SoundActions.BUCKET_EMPTY);
+                               if (sound == null) sound = SoundEvents.BUCKET_EMPTY;
+                               level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+                               
+                               FluidStack currentFluid = bathtubBe.getFluidTank().getFluid();
+                               syncFluidToOtherPart(level, pos, state, currentFluid);
+                               updateLiquidState(level, pos, state, currentFluid);
+                           }
+                           return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                       }
+                   }
               }
           }
       }
