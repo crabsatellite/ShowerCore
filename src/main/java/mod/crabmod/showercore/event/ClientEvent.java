@@ -15,7 +15,7 @@ import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEn
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLayers;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.core.particles.SimpleParticleType;
-import mod.crabmod.showercore.mixin.NautilusProviderAccessor;
+import net.minecraft.client.particle.FlyTowardsPositionParticle;
 import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
@@ -228,26 +228,26 @@ public class ClientEvent {
   public static void registerParticles(final RegisterParticleProvidersEvent event) {
     event.registerSpriteSet(
         ParticleRegister.BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
 
     event.registerSpriteSet(
         ParticleRegister.HERBAL_BATH_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
     event.registerSpriteSet(
         ParticleRegister.HONEY_BATH_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
     event.registerSpriteSet(
         ParticleRegister.MILK_BATH_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
     event.registerSpriteSet(
         ParticleRegister.PEONY_BATH_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
     event.registerSpriteSet(
         ParticleRegister.ROSE_BATH_BATH_CORE_PARTICLE.get(),
-        NautilusProviderAccessor::create);
+        FlyTowardsPositionParticle.NautilusProvider::new);
 
     event.registerSpriteSet(
         ParticleRegister.HOT_WATER_SHOWER_PARTICLE.get(), ShowerParticle.Provider::new);

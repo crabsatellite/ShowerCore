@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "mixins.showercore.refmap.json",
   "mixins": ["CustomFluidHandlerMixin"],
-  "client": ["NautilusProviderAccessor"],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   },
