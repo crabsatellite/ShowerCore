@@ -412,10 +412,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
            ResourceLocation resourceLocation = BuiltInRegistries.FLUID.getKey(fluid.getFluid());
            String fluidName = resourceLocation.getPath();
            String namespace = resourceLocation.getNamespace();
-           
-           if (!level.isClientSide) {
-               com.mojang.logging.LogUtils.getLogger().info("ShowerCore DEBUG: Fluid detected - Namespace: " + namespace + ", Path: " + fluidName);
-           }
 
            if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
            else if (fluidName.contains("hot_water")) newLiquid = LiquidType.HOT_WATER;
@@ -426,10 +422,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
            else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
            else if (namespace.equals("hotbath")) newLiquid = LiquidType.HOT_WATER;
            else newLiquid = LiquidType.CUSTOM;
-           
-           if (!level.isClientSide) {
-               com.mojang.logging.LogUtils.getLogger().info("ShowerCore DEBUG: Mapped to LiquidType: " + newLiquid);
-           }
        }
        
        boolean running = state.getValue(RUNNING);
