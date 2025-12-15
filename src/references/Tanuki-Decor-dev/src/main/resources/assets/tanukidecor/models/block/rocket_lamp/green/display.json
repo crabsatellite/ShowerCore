@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/rocket_lamp/display",
+  "render_type": "minecraft:translucent",
+  "texture_size": [32, 32],
+  "textures": {
+    "lamp": "tanukidecor:block/rocket_lamp/green"
+  }
+}

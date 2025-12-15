@@ -1,0 +1,44 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_sofa",
+    "sofa": "tanukidecor:block/sweets_sofa"
+  },
+  "elements": [
+    {
+      "name": "sofa_0",
+      "from": [0, 0, 2],
+      "to": [16, 8, 14],
+      "faces": {
+        "north": {"uv": [0, 6, 4, 8], "texture": "#sofa"},
+        "south": {"uv": [4, 8, 0, 10], "texture": "#sofa"},
+        "west": {"uv": [0, 10, 3, 12], "texture": "#sofa"},
+        "up": {"uv": [0, 0, 4, 3], "texture": "#sofa"},
+        "down": {"uv": [0, 6, 4, 3], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_1",
+      "from": [0, 8, 9],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 2], "texture": "#sofa"},
+        "south": {"uv": [4, 2, 8, 4], "texture": "#sofa"},
+        "west": {"uv": [4, 7.5, 5.75, 9.5], "texture": "#sofa"},
+        "up": {"uv": [4, 4, 8, 5.75], "texture": "#sofa"},
+        "down": {"uv": [4, 5.75, 8, 7.5], "texture": "#sofa"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

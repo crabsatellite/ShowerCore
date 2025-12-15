@@ -1,0 +1,80 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "birdcage": "tanukidecor:block/birdcage",
+    "particle": "#birdcage"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [2, 0, 2],
+      "to": [14, 2, 14],
+      "faces": {
+        "north": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "east": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "south": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "west": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "up": {"uv": [0, 0, 3, 3], "texture": "#birdcage"},
+        "down": {"uv": [0, 3, 3, 6], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [6.5, 2, 6.5],
+      "to": [9.5, 16, 9.5],
+      "faces": {
+        "north": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "east": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "south": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "west": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_north",
+      "from": [8, 13, 2.5],
+      "to": [8, 16, 6.5],
+      "faces": {
+        "east": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"},
+        "west": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_west",
+      "from": [2.5, 13, 8],
+      "to": [6.5, 16, 8],
+      "faces": {
+        "north": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"},
+        "south": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_south",
+      "from": [8, 13, 9.5],
+      "to": [8, 16, 13.5],
+      "faces": {
+        "east": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"},
+        "west": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_east",
+      "from": [9.5, 13, 8],
+      "to": [13.5, 16, 8],
+      "faces": {
+        "north": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"},
+        "south": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

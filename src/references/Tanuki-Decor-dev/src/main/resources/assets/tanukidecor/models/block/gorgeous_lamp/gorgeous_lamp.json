@@ -1,0 +1,90 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_lamp",
+    "lamp": "tanukidecor:block/gorgeous_lamp"
+  },
+  "elements": [
+    {
+      "name": "lamp_0",
+      "from": [5, 0, 5],
+      "to": [11, 5, 11],
+      "faces": {
+        "north": {"uv": [5, 3, 8, 5.5], "texture": "#lamp"},
+        "east": {"uv": [5, 3, 8, 5.5], "texture": "#lamp"},
+        "south": {"uv": [5, 3, 8, 5.5], "texture": "#lamp"},
+        "west": {"uv": [5, 3, 8, 5.5], "texture": "#lamp"},
+        "up": {"uv": [5, 0, 8, 3], "texture": "#lamp"},
+        "down": {"uv": [5, 0, 8, 3], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_1",
+      "from": [7, 5, 7],
+      "to": [9, 14, 9],
+      "faces": {
+        "north": {"uv": [8, 0, 9, 4.5], "texture": "#lamp"},
+        "east": {"uv": [8, 0, 9, 4.5], "texture": "#lamp"},
+        "south": {"uv": [8, 0, 9, 4.5], "texture": "#lamp"},
+        "west": {"uv": [8, 0, 9, 4.5], "texture": "#lamp"},
+        "up": {"uv": [8, 4.5, 9, 5.5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_2",
+      "from": [3, 12, 3],
+      "to": [13, 12, 13],
+      "faces": {
+        "up": {"uv": [0, 5, 5, 10], "texture": "#lamp"},
+        "down": {"uv": [0, 5, 5, 10], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_3",
+      "from": [3, 6, 3],
+      "to": [13, 16, 3],
+      "faces": {
+        "north": {"uv": [0, 0, 5, 5], "texture": "#lamp"},
+        "south": {"uv": [5, 0, 0, 5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_4",
+      "from": [3, 6, 13],
+      "to": [13, 16, 13],
+      "faces": {
+        "north": {"uv": [5, 0, 0, 5], "texture": "#lamp"},
+        "south": {"uv": [0, 0, 5, 5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_5",
+      "from": [3, 6, 3],
+      "to": [3, 16, 13],
+      "faces": {
+        "east": {"uv": [5, 0, 0, 5], "texture": "#lamp"},
+        "west": {"uv": [0, 0, 5, 5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp_6",
+      "from": [13, 6, 3],
+      "to": [13, 16, 13],
+      "faces": {
+        "east": {"uv": [0, 0, 5, 5], "texture": "#lamp"},
+        "west": {"uv": [5, 0, 0, 5], "texture": "#lamp"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "lamp",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

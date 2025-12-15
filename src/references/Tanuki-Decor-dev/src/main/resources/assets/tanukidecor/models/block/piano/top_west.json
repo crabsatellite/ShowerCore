@@ -1,0 +1,76 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/piano",
+    "piano": "tanukidecor:block/piano"
+  },
+  "elements": [
+    {
+      "name": "piano_4",
+      "from": [0, 0, 7],
+      "to": [16, 16, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#piano"},
+        "south": {"uv": [4, 0, 0, 4], "texture": "#piano"},
+        "west": {"uv": [4, 0, 6, 4], "texture": "#piano"},
+        "up": {"uv": [6, 0, 8, 4], "rotation": 90, "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_5",
+      "from": [2, 0, 0],
+      "to": [16, 3, 7],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [0, 11.5, 3.5, 12.25], "texture": "#piano"},
+        "west": {"uv": [0, 12.25, 1.75, 13], "texture": "#piano"},
+        "up": {"uv": [0, 8, 3.5, 9.75], "texture": "#piano"},
+        "down": {"uv": [0, 9.75, 3.5, 11.5], "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_6",
+      "from": [2, 3, 4],
+      "to": [16, 8, 7],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [8, 0, 11.5, 1.25], "texture": "#piano"},
+        "west": {"uv": [8, 2, 8.75, 3.25], "texture": "#piano"},
+        "up": {"uv": [8, 1.25, 11.5, 2], "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_7",
+      "from": [1.995, 2, 4],
+      "to": [3.985, 8, 6],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [3, 8, 4]},
+      "faces": {
+        "north": {"uv": [8.75, 2, 9.25, 3.5], "texture": "#piano"},
+        "east": {"uv": [9.75, 2, 9.25, 3.5], "texture": "#piano"},
+        "west": {"uv": [9.25, 2, 9.75, 3.5], "texture": "#piano"}
+      }
+    },
+    {
+      "name": "paper_0",
+      "from": [12, 4, 3.5],
+      "to": [16, 10, 3.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [9.75, 2, 10.75, 3.5], "texture": "#piano"},
+        "south": {"uv": [10.75, 2, 9.75, 3.5], "texture": "#piano"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

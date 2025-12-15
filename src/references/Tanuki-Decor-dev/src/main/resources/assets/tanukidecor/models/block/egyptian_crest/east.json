@@ -1,0 +1,53 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/egyptian_crest",
+    "crest": "tanukidecor:block/egyptian_crest"
+  },
+  "elements": [
+    {
+      "name": "crest_3",
+      "from": [0, 5, 13],
+      "to": [5, 15, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 2.5, 5], "texture": "#crest"},
+        "east": {"uv": [6.5, 0, 5, 5], "texture": "#crest"},
+        "south": {"uv": [5, 0, 2.5, 5], "texture": "#crest"},
+        "up": {"uv": [5, 5, 2.5, 6.5], "texture": "#crest"},
+        "down": {"uv": [2.5, 6.5, 0, 5], "texture": "#crest"}
+      }
+    },
+    {
+      "name": "crest_4",
+      "from": [5, 10, 14],
+      "to": [16, 12, 16],
+      "faces": {
+        "north": {"uv": [0, 6.5, 5.5, 7.5], "texture": "#crest"},
+        "east": {"uv": [6.5, 6.5, 5.5, 7.5], "texture": "#crest"},
+        "south": {"uv": [5.5, 6.5, 0, 7.5], "texture": "#crest"},
+        "up": {"uv": [5.5, 7.5, 0, 8.5], "texture": "#crest"},
+        "down": {"uv": [5.5, 8.5, 0, 9.5], "texture": "#crest"}
+      }
+    },
+    {
+      "name": "crest_5",
+      "from": [1, 2, 15],
+      "to": [16, 10, 15],
+      "faces": {
+        "north": {"uv": [6.5, 0, 14, 4], "texture": "#crest"},
+        "south": {"uv": [14, 0, 6.5, 4], "texture": "#crest"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

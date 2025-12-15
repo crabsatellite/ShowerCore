@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/minimalist_chair",
+    "chair": "tanukidecor:block/minimalist_chair"
+  },
+  "elements": [
+    {
+      "name": "chair1",
+      "from": [1, 0, 12],
+      "to": [15, 8, 16],
+      "faces": {
+        "north": {"uv": [3.5, 0, 7, 2], "texture": "#chair"},
+        "east": {"uv": [8, 0, 7, 2], "texture": "#chair"},
+        "south": {"uv": [3.5, 0, 7, 2], "texture": "#chair"},
+        "west": {"uv": [7, 0, 8, 2], "texture": "#chair"},
+        "up": {"uv": [3.5, 3, 7, 4], "texture": "#chair"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

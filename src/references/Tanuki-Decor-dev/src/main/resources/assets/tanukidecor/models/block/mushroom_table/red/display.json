@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/mushroom_table/display",
+  "textures": {
+    "inside": "minecraft:block/mushroom_block_inside",
+    "stem": "minecraft:block/mushroom_stem",
+    "mushroom": "minecraft:block/red_mushroom_block"
+  }
+}

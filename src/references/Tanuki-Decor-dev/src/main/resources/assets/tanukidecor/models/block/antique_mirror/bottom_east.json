@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/antique_desk/east",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_mirror_desk",
+    "desk": "tanukidecor:block/oak_antique_mirror_desk"
+  }
+}

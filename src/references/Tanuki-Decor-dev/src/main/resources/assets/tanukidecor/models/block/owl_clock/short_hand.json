@@ -1,0 +1,74 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/owl_clock",
+    "clock": "tanukidecor:block/owl_clock"
+  },
+  "elements": [
+    {
+      "name": "short",
+      "from": [7.5, 4.5, 11.99],
+      "to": [8.5, 7.5, 11.99],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 12]},
+      "faces": {
+        "north": {"uv": [6.5, 8, 7, 9.5], "texture": "#clock"},
+        "south": {"uv": [6.5, 8, 7, 9.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "ground": {
+      "translation": [0, 4.5, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [2.5, 0.25, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "head": {
+      "translation": [0, 0, -13],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "translation": [0, 2, -3],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "short",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

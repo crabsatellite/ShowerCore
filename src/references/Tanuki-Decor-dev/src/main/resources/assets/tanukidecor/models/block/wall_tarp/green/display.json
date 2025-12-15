@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/wall_tarp/display",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "tarp": "tanukidecor:block/wall_tarp/green"
+  }
+}

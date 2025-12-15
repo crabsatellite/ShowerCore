@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/blue_cabinet",
+    "cabinet": "tanukidecor:block/blue_cabinet"
+  },
+  "elements": [
+    {
+      "name": "cabinet_top",
+      "from": [0, 0, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 4], "texture": "#cabinet"},
+        "east": {"uv": [7.5, 11.5, 4, 15.5], "texture": "#cabinet"},
+        "south": {"uv": [4, 4, 8, 8], "texture": "#cabinet"},
+        "west": {"uv": [4, 11.5, 7.5, 15.5], "texture": "#cabinet"},
+        "up": {"uv": [4, 8, 8, 11.5], "texture": "#cabinet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

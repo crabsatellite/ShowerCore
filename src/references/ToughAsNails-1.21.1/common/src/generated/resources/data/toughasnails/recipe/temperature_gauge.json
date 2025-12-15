@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "B": {
+      "item": "minecraft:brick_slab"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "T": {
+      "item": "toughasnails:thermometer"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "QTQ",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "toughasnails:temperature_gauge"
+  }
+}

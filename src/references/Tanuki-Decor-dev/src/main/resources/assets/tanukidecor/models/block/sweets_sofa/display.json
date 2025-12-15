@@ -1,0 +1,102 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "tanukidecor:block/display2x1x1",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_sofa",
+    "sofa": "tanukidecor:block/sweets_sofa"
+  },
+  "elements": [
+    {
+      "name": "sofa_0",
+      "from": [0, 0, 2],
+      "to": [16, 8, 14],
+      "faces": {
+        "north": {"uv": [0, 6, 4, 8], "texture": "#sofa"},
+        "south": {"uv": [4, 8, 0, 10], "texture": "#sofa"},
+        "west": {"uv": [0, 10, 3, 12], "texture": "#sofa"},
+        "up": {"uv": [0, 0, 4, 3], "texture": "#sofa"},
+        "down": {"uv": [0, 6, 4, 3], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_1",
+      "from": [0, 8, 9],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 2], "texture": "#sofa"},
+        "south": {"uv": [4, 2, 8, 4], "texture": "#sofa"},
+        "west": {"uv": [4, 7.5, 5.75, 9.5], "texture": "#sofa"},
+        "up": {"uv": [4, 4, 8, 5.75], "texture": "#sofa"},
+        "down": {"uv": [4, 5.75, 8, 7.5], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_2",
+      "from": [16, 0, 2],
+      "to": [32, 8, 14],
+      "faces": {
+        "north": {"uv": [4, 6, 0, 8], "texture": "#sofa"},
+        "east": {"uv": [3, 10, 0, 12], "texture": "#sofa"},
+        "south": {"uv": [0, 8, 4, 10], "texture": "#sofa"},
+        "up": {"uv": [4, 0, 0, 3], "texture": "#sofa"},
+        "down": {"uv": [4, 6, 0, 3], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_3",
+      "from": [16, 8, 9],
+      "to": [32, 16, 16],
+      "faces": {
+        "north": {"uv": [8, 0, 4, 2], "texture": "#sofa"},
+        "east": {"uv": [5.75, 7.5, 4, 9.5], "texture": "#sofa"},
+        "south": {"uv": [8, 2, 4, 4], "texture": "#sofa"},
+        "up": {"uv": [8, 4, 4, 5.75], "texture": "#sofa"},
+        "down": {"uv": [8, 5.75, 4, 7.5], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "pillow_0",
+      "from": [17, 8, 5],
+      "to": [23, 14, 7],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [20, 8, 7]},
+      "faces": {
+        "north": {"uv": [8, 0, 9.5, 1.5], "rotation": 180, "texture": "#sofa"},
+        "east": {"uv": [8, 1.5, 9.5, 2], "rotation": 90, "texture": "#sofa"},
+        "south": {"uv": [8, 0, 9.5, 1.5], "texture": "#sofa"},
+        "west": {"uv": [8, 1.5, 9.5, 2], "rotation": 270, "texture": "#sofa"},
+        "up": {"uv": [8, 1.5, 9.5, 2], "texture": "#sofa"},
+        "down": {"uv": [8, 1.5, 9.5, 2], "rotation": 180, "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "pillow_1",
+      "from": [24, 8, 5],
+      "to": [30, 14, 7],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [27, 8, 7]},
+      "faces": {
+        "north": {"uv": [8, 0, 9.5, 1.5], "rotation": 180, "texture": "#sofa"},
+        "east": {"uv": [8, 1.5, 9.5, 2], "rotation": 90, "texture": "#sofa"},
+        "south": {"uv": [8, 0, 9.5, 1.5], "texture": "#sofa"},
+        "west": {"uv": [8, 1.5, 9.5, 2], "rotation": 270, "texture": "#sofa"},
+        "up": {"uv": [8, 1.5, 9.5, 2], "texture": "#sofa"},
+        "down": {"uv": [8, 1.5, 9.5, 2], "rotation": 180, "texture": "#sofa"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    },
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [2, 3, 4, 5]
+    }
+  ]
+}

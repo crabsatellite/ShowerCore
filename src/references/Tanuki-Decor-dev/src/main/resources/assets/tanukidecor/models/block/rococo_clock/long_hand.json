@@ -1,0 +1,41 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/rococo_clock",
+    "clock": "tanukidecor:block/rococo_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 9.5, 2.98],
+      "to": [8.5, 12.5, 2.98],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 3]},
+      "faces": {
+        "north": {"uv": [11, 14, 11.5, 15.5], "texture": "#clock"},
+        "east": {"uv": [11, 14, 11, 15.5], "texture": "#clock"},
+        "south": {"uv": [11, 14, 11.5, 15.5], "texture": "#clock"},
+        "west": {"uv": [11, 14, 11, 15.5], "texture": "#clock"},
+        "up": {"uv": [11, 14, 11.5, 14], "texture": "#clock"},
+        "down": {"uv": [11, 14, 11.5, 14], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

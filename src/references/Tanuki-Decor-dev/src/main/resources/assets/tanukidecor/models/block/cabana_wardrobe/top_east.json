@@ -1,0 +1,31 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_wardrobe",
+    "wardrobe": "tanukidecor:block/cabana_wardrobe"
+  },
+  "elements": [
+    {
+      "name": "wardrobe_3",
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 0, 4], "texture": "#wardrobe"},
+        "east": {"uv": [8, 0, 4, 4], "texture": "#wardrobe"},
+        "south": {"uv": [12, 0, 8, 4], "texture": "#wardrobe"},
+        "up": {"uv": [8, 7.5, 4, 11.5], "texture": "#wardrobe"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

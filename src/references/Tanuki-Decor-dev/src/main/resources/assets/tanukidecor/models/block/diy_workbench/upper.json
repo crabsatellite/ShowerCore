@@ -1,0 +1,82 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/diy_workbench",
+    "bench": "tanukidecor:block/diy_workbench"
+  },
+  "elements": [
+    {
+      "name": "top_0",
+      "from": [2, 0, 15],
+      "to": [14, 7, 16],
+      "faces": {
+        "north": {"uv": [7.75, 0, 10.75, 1.75], "texture": "#bench"},
+        "south": {"uv": [7.75, 2.25, 10.75, 4], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "top_1",
+      "from": [0, 0, 14],
+      "to": [2, 7, 16],
+      "faces": {
+        "north": {"uv": [4.75, 2.5, 5.25, 4.25], "texture": "#bench"},
+        "east": {"uv": [5.75, 2.5, 6.25, 4.25], "texture": "#bench"},
+        "south": {"uv": [5.25, 2.5, 4.75, 4.25], "texture": "#bench"},
+        "west": {"uv": [5.25, 2.5, 5.75, 4.25], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "top_2",
+      "from": [14, 0, 14],
+      "to": [16, 7, 16],
+      "faces": {
+        "north": {"uv": [5.25, 2.5, 4.75, 4.25], "texture": "#bench"},
+        "east": {"uv": [5.75, 2.5, 5.25, 4.25], "texture": "#bench"},
+        "south": {"uv": [4.75, 2.5, 5.25, 4.25], "texture": "#bench"},
+        "west": {"uv": [6.25, 2.5, 5.75, 4.25], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "top_3",
+      "from": [0, 7, 11],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [4, 6, 8, 6.25], "texture": "#bench"},
+        "east": {"uv": [5.25, 6.25, 4, 6.5], "texture": "#bench"},
+        "south": {"uv": [8, 6, 4, 6.25], "texture": "#bench"},
+        "west": {"uv": [4, 6.25, 5.25, 6.5], "texture": "#bench"},
+        "up": {"uv": [4, 4.75, 8, 6], "texture": "#bench"},
+        "down": {"uv": [4, 6, 8, 4.75], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "saw_0",
+      "from": [-1, 4, 15],
+      "to": [0, 5, 15],
+      "faces": {
+        "north": {"uv": [9, 4.5, 9.25, 4.75], "texture": "#bench"},
+        "south": {"uv": [9, 4.5, 9.25, 4.75], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "saw_1",
+      "from": [-0.5, 0, 12.5],
+      "to": [-0.5, 4, 16.5],
+      "faces": {
+        "east": {"uv": [9, 4.5, 8, 5.5], "texture": "#bench"},
+        "west": {"uv": [8, 4.5, 9, 5.5], "texture": "#bench"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

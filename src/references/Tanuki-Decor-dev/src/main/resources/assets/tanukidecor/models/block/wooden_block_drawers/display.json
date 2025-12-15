@@ -1,0 +1,50 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "tanukidecor:block/display2x1x1",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_drawers",
+    "drawers": "tanukidecor:block/wooden_block_drawers"
+  },
+  "elements": [
+    {
+      "name": "left_drawer",
+      "from": [0, 0, 2],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 8, 8], "texture": "#drawers"},
+        "south": {"uv": [8, 0, 16, 8], "texture": "#drawers"},
+        "west": {"uv": [0, 8, 7, 16], "texture": "#drawers"},
+        "up": {"uv": [7, 8, 15, 15], "texture": "#drawers"},
+        "down": {"uv": [7, 15, 15, 8], "texture": "#drawers"}
+      }
+    },
+    {
+      "name": "right_drawer",
+      "from": [16, 0, 2],
+      "to": [32, 16, 16],
+      "faces": {
+        "north": {"uv": [8, 0, 0, 8], "texture": "#drawers"},
+        "east": {"uv": [7, 8, 0, 16], "texture": "#drawers"},
+        "south": {"uv": [16, 0, 8, 8], "texture": "#drawers"},
+        "up": {"uv": [15, 8, 7, 15], "texture": "#drawers"},
+        "down": {"uv": [15, 15, 7, 8], "texture": "#drawers"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    },
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [1]
+    }
+  ]
+}

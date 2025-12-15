@@ -1,0 +1,129 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_vanity",
+    "vanity": "tanukidecor:block/cabana_vanity"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [2, 3, 2],
+      "to": [4, 8, 4],
+      "faces": {
+        "north": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "east": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "south": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "west": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_0_bottom",
+      "from": [1.5, 0, 1.5],
+      "to": [4.5, 3, 4.5],
+      "faces": {
+        "north": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "east": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "south": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "west": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "up": {"uv": [8.5, 0.75, 9.25, 1.5], "texture": "#vanity"},
+        "down": {"uv": [8.5, 1.5, 9.25, 2.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [12, 3, 2],
+      "to": [14, 8, 4],
+      "faces": {
+        "north": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "east": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "south": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "west": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_1_bottom",
+      "from": [11.5, 0, 1.5],
+      "to": [14.5, 3, 4.5],
+      "faces": {
+        "north": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "east": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "south": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "west": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "up": {"uv": [9.25, 0.75, 8.5, 1.5], "texture": "#vanity"},
+        "down": {"uv": [9.25, 1.5, 8.5, 2.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_2",
+      "from": [2, 3, 12],
+      "to": [4, 8, 14],
+      "faces": {
+        "north": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "east": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "south": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "west": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_2_bottom",
+      "from": [1.5, 0, 11.5],
+      "to": [4.5, 3, 14.5],
+      "faces": {
+        "north": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "east": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "south": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "west": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "up": {"uv": [8.5, 1.5, 9.25, 0.75], "texture": "#vanity"},
+        "down": {"uv": [8.5, 2.25, 9.25, 1.5], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [12, 3, 12],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "east": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"},
+        "south": {"uv": [8, 0, 8.5, 1.25], "texture": "#vanity"},
+        "west": {"uv": [8.5, 0, 8, 1.25], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "leg_3_bottom",
+      "from": [11.5, 0, 11.5],
+      "to": [14.5, 3, 14.5],
+      "faces": {
+        "north": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "east": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "south": {"uv": [8.5, 0, 9.25, 0.75], "texture": "#vanity"},
+        "west": {"uv": [9.25, 0, 8.5, 0.75], "texture": "#vanity"},
+        "up": {"uv": [9.25, 1.5, 8.5, 0.75], "texture": "#vanity"},
+        "down": {"uv": [9.25, 2.25, 8.5, 1.5], "texture": "#vanity"}
+      }
+    },
+    {
+      "name": "table",
+      "from": [0, 8, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 2, 8, 4], "texture": "#vanity"},
+        "east": {"uv": [8, 0, 4, 2], "texture": "#vanity"},
+        "south": {"uv": [4, 0, 8, 2], "texture": "#vanity"},
+        "west": {"uv": [4, 0, 8, 2], "texture": "#vanity"},
+        "up": {"uv": [0, 0, 4, 4], "texture": "#vanity"},
+        "down": {"uv": [0, 4, 4, 0], "texture": "#vanity"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_bookshelf",
+    "bookshelf": "tanukidecor:block/wooden_block_bookshelf"
+  },
+  "elements": [
+    {
+      "name": "bookshelf_0",
+      "from": [0, 0, 4],
+      "to": [2, 8, 16],
+      "faces": {
+        "north": {"uv": [3.5, 6.5, 4, 8.5], "texture": "#bookshelf"},
+        "east": {"uv": [0, 6.5, 3, 8.5], "texture": "#bookshelf"},
+        "south": {"uv": [3, 6.5, 3.5, 8.5], "texture": "#bookshelf"},
+        "west": {"uv": [0, 6.5, 3, 8.5], "texture": "#bookshelf"},
+        "up": {"uv": [0, 12.5, 0.5, 15.5], "texture": "#bookshelf"}
+      }
+    },
+    {
+      "name": "bookshelf_2",
+      "from": [2, 0, 14],
+      "to": [14, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 3, 2], "texture": "#bookshelf"},
+        "south": {"uv": [0, 0, 3, 2], "texture": "#bookshelf"},
+        "up": {"uv": [0, 6, 3, 6.5], "texture": "#bookshelf"}
+      }
+    },
+    {
+      "name": "bookshelf_1",
+      "from": [14, 0, 4],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [4, 6.5, 3.5, 8.5], "texture": "#bookshelf"},
+        "east": {"uv": [3, 6.5, 0, 8.5], "texture": "#bookshelf"},
+        "south": {"uv": [3.5, 6.5, 3, 8.5], "texture": "#bookshelf"},
+        "west": {"uv": [3, 6.5, 0, 8.5], "texture": "#bookshelf"},
+        "up": {"uv": [0.5, 12.5, 0, 15.5], "texture": "#bookshelf"}
+      }
+    },
+    {
+      "name": "bookshelf_5",
+      "from": [2, 6, 4],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": {"uv": [3, 2.5, 6, 3], "texture": "#bookshelf"},
+        "up": {"uv": [3, 0, 6, 2.5], "texture": "#bookshelf"},
+        "down": {"uv": [3, 2.5, 6, 0], "texture": "#bookshelf"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

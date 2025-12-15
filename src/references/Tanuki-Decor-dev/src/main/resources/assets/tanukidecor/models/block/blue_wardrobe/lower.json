@@ -1,0 +1,80 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/blue_wardrobe",
+    "wardrobe": "tanukidecor:block/blue_wardrobe"
+  },
+  "elements": [
+    {
+      "name": "leg0",
+      "from": [0, 0, 1],
+      "to": [2, 2, 3],
+      "faces": {
+        "north": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "east": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "south": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "west": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "down": {"uv": [8, 0.5, 8.5, 1], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "leg1",
+      "from": [14, 0, 1],
+      "to": [16, 2, 3],
+      "faces": {
+        "north": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "east": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "south": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "west": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "down": {"uv": [8.5, 0.5, 8, 1], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "leg2",
+      "from": [0, 0, 13],
+      "to": [2, 2, 15],
+      "faces": {
+        "north": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "east": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "south": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "west": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "down": {"uv": [8, 1, 8.5, 0.5], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [14, 0, 13],
+      "to": [16, 2, 15],
+      "faces": {
+        "north": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "east": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "south": {"uv": [8, 0, 8.5, 0.5], "texture": "#wardrobe"},
+        "west": {"uv": [8.5, 0, 8, 0.5], "texture": "#wardrobe"},
+        "down": {"uv": [8.5, 1, 8, 0.5], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "wardrobe0",
+      "from": [0, 2, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.5], "texture": "#wardrobe"},
+        "east": {"uv": [3.5, 10.5, 0, 14], "texture": "#wardrobe"},
+        "south": {"uv": [0, 3.5, 4, 7], "texture": "#wardrobe"},
+        "west": {"uv": [0, 10.5, 3.5, 14], "texture": "#wardrobe"},
+        "down": {"uv": [0, 7, 4, 10.5], "texture": "#wardrobe"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

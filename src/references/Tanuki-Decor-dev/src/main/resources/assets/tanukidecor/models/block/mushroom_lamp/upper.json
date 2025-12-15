@@ -1,0 +1,87 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "elements": [
+    {
+      "name": "stem",
+      "from": [6, 0, 7],
+      "to": [8, 11, 9],
+      "faces": {
+        "north": {"uv": [0, 0, 2, 11], "texture": "#stem"},
+        "east": {"uv": [2, 0, 4, 11], "texture": "#stem"},
+        "south": {"uv": [4, 0, 6, 11], "texture": "#stem"},
+        "west": {"uv": [6, 0, 8, 11], "texture": "#stem"}
+      }
+    },
+    {
+      "name": "cap_top",
+      "from": [4, 14, 5],
+      "to": [10, 16, 11],
+      "faces": {
+        "north": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "east": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "south": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "west": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "up": {"uv": [9, 4, 15, 10], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_middle",
+      "from": [3, 11, 4],
+      "to": [11, 14, 12],
+      "faces": {
+        "north": {"uv": [3, 10, 11, 13], "texture": "#mushroom"},
+        "east": {"uv": [7, 7, 15, 10], "texture": "#mushroom"},
+        "south": {"uv": [6, 10, 14, 13], "texture": "#mushroom"},
+        "west": {"uv": [1, 3, 9, 6], "texture": "#mushroom"},
+        "up": {"uv": [5, 0, 13, 8], "texture": "#mushroom"},
+        "down": {"uv": [3, 3, 11, 11], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_west",
+      "from": [3, 8, 4],
+      "to": [3, 11, 12],
+      "faces": {
+        "east": {"uv": [0, 3, 8, 6], "texture": "#inside"},
+        "west": {"uv": [5, 5, 13, 8], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_north",
+      "from": [3, 8, 4],
+      "to": [11, 11, 4],
+      "faces": {
+        "north": {"uv": [3, 13, 11, 16], "texture": "#mushroom"},
+        "south": {"uv": [0, 6, 8, 9], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_south",
+      "from": [3, 8, 12],
+      "to": [11, 11, 12],
+      "faces": {
+        "north": {"uv": [0, 0, 8, 3], "texture": "#inside"},
+        "south": {"uv": [6, 13, 14, 16], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_east",
+      "from": [11, 8, 4],
+      "to": [11, 11, 12],
+      "faces": {
+        "east": {"uv": [5, 12, 13, 15], "texture": "#mushroom"},
+        "west": {"uv": [0, 9, 8, 12], "texture": "#inside"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/blue_clock",
+    "clock": "tanukidecor:block/blue_clock"
+  },
+  "elements": [
+    {
+      "name": "glass",
+      "from": [4, 2, 2],
+      "to": [12, 16, 3],
+      "faces": {
+        "north": {"uv": [0, 7.5, 2, 11], "texture": "#clock"},
+        "east": {"uv": [2, 7.5, 2.25, 11], "texture": "#clock"},
+        "south": {"uv": [2, 7.5, 0, 11], "texture": "#clock"},
+        "west": {"uv": [2, 7.5, 2.25, 11], "texture": "#clock"},
+        "up": {"uv": [0, 11, 2, 11.25], "texture": "#clock"},
+        "down": {"uv": [0, 11, 2, 11.25], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock0",
+      "from": [4, 0, 2],
+      "to": [12, 2, 12],
+      "faces": {
+        "north": {"uv": [0, 2.5, 2, 3], "texture": "#clock"},
+        "up": {"uv": [0, 0, 2, 2.5], "texture": "#clock"},
+        "down": {"uv": [0, 2.5, 2, 0], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock1",
+      "from": [2, 0, 2],
+      "to": [4, 16, 14],
+      "faces": {
+        "north": {"uv": [5.5, 0, 6, 4], "texture": "#clock"},
+        "east": {"uv": [5, 0, 2, 4], "texture": "#clock"},
+        "south": {"uv": [5, 0, 5.5, 4], "texture": "#clock"},
+        "west": {"uv": [2, 0, 5, 4], "texture": "#clock"},
+        "down": {"uv": [6, 0, 6.5, 3], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock2",
+      "from": [12, 0, 2],
+      "to": [14, 16, 14],
+      "faces": {
+        "north": {"uv": [6, 0, 5.5, 4], "texture": "#clock"},
+        "east": {"uv": [5, 0, 2, 4], "texture": "#clock"},
+        "south": {"uv": [5.5, 0, 5, 4], "texture": "#clock"},
+        "west": {"uv": [2, 0, 5, 4], "texture": "#clock"},
+        "down": {"uv": [6.5, 0, 6, 3], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock3",
+      "from": [4, 0, 12],
+      "to": [12, 16, 14],
+      "faces": {
+        "north": {"uv": [0, 3, 2, 7], "texture": "#clock"},
+        "south": {"uv": [2, 3, 0, 7], "texture": "#clock"},
+        "down": {"uv": [0, 7, 2, 7.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

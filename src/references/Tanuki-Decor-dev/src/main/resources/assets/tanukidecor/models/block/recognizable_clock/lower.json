@@ -1,0 +1,92 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/recognizable_clock",
+    "clock": "tanukidecor:block/recognizable_clock"
+  },
+  "elements": [
+    {
+      "name": "floor",
+      "from": [1, 0, 1],
+      "to": [15, 1, 15],
+      "faces": {
+        "north": {"uv": [5, 3.5, 8.5, 3.75], "texture": "#clock"},
+        "east": {"uv": [5, 3.5, 8.5, 3.75], "texture": "#clock"},
+        "south": {"uv": [5, 3.5, 8.5, 3.75], "texture": "#clock"},
+        "west": {"uv": [5, 3.5, 8.5, 3.75], "texture": "#clock"},
+        "up": {"uv": [5, 0, 8.5, 3.5], "texture": "#clock"},
+        "down": {"uv": [5, 3.5, 8.5, 0], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "tower_0",
+      "from": [3.5, 1, 3.5],
+      "to": [12.5, 14, 12.5],
+      "faces": {
+        "north": {"uv": [0, 2.5, 2.25, 5.75], "texture": "#clock"},
+        "east": {"uv": [0, 2.5, 2.25, 5.75], "texture": "#clock"},
+        "south": {"uv": [0, 2.5, 2.25, 5.75], "texture": "#clock"},
+        "west": {"uv": [0, 2.5, 2.25, 5.75], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "bottom_0",
+      "from": [3, 1, 3],
+      "to": [5, 7, 5],
+      "faces": {
+        "north": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "east": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "south": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "west": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "up": {"uv": [2.75, 2.5, 3.25, 3], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "bottom_1",
+      "from": [11, 1, 3],
+      "to": [13, 7, 5],
+      "faces": {
+        "north": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "east": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "south": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "west": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "up": {"uv": [3.25, 2.5, 2.75, 3], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "bottom_2",
+      "from": [3, 1, 11],
+      "to": [5, 7, 13],
+      "faces": {
+        "north": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "east": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "south": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "west": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "up": {"uv": [2.75, 3, 3.25, 2.5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "bottom_3",
+      "from": [11, 1, 11],
+      "to": [13, 7, 13],
+      "faces": {
+        "north": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "east": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "south": {"uv": [2.25, 2.5, 2.75, 4], "texture": "#clock"},
+        "west": {"uv": [2.75, 2.5, 2.25, 4], "texture": "#clock"},
+        "up": {"uv": [3.25, 3, 2.75, 2.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

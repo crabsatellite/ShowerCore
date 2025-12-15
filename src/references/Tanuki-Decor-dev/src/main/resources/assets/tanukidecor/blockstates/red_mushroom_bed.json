@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/north" }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/south" }
+    },
+    
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/north", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/south", "y": 180 }
+    },
+
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/north", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/south", "y": 90 }
+    },
+    
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/north", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/mushroom_bed/red/south", "y": 270 }
+    }
+  ]
+}

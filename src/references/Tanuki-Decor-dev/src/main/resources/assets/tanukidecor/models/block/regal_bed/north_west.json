@@ -1,0 +1,49 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/regal_bed",
+    "bed": "tanukidecor:block/regal_bed"
+  },
+  "elements": [
+    {
+      "name": "bed_0",
+      "from": [1, 2, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 9.5, 3.75, 11], "texture": "#bed"},
+        "west": {"uv": [0, 8, 4, 9.5], "texture": "#bed"},
+        "up": {"uv": [0, 0, 3.75, 4], "texture": "#bed"},
+        "down": {"uv": [0, 4, 3.75, 8], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "sheets_0",
+      "from": [1, 0, 0],
+      "to": [16, 2, 0],
+      "faces": {
+        "north": {"uv": [0, 11, 3.75, 11.5], "texture": "#bed"},
+        "south": {"uv": [3.75, 11, 0, 11.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "sheets_1",
+      "from": [1, 0, 0],
+      "to": [1, 2, 16],
+      "faces": {
+        "east": {"uv": [4, 11.5, 0, 12], "texture": "#bed"},
+        "west": {"uv": [0, 11.5, 4, 12], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left_front_bed",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "multipart": [
+    {
+      "when": { "half": "upper" },
+      "apply": { "model": "tanukidecor:block/plasma_ball/upper" }
+    },
+    {
+      "when": { "half": "lower" },
+      "apply": { "model": "tanukidecor:block/plasma_ball/lower" }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "half": "upper" }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/upper" }
+    },
+    {
+      "when": { "AND": [ { "half": "lower" }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/lower" }
+    },
+    {
+      "when": { "AND": [ { "half": "upper" }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/upper", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "half": "lower" }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/lower", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "half": "upper" }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/upper", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "half": "lower" }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/lower", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "half": "upper" }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/upper", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "half": "lower" }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/holiday_tree/lower", "y": 270 }
+    }
+  ]
+}

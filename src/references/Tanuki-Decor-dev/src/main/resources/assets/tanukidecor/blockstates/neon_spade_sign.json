@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/neon_sign/spade" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/neon_sign/spade", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/neon_sign/spade", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/neon_sign/spade", "y": 270 }
+    }
+  ]
+}

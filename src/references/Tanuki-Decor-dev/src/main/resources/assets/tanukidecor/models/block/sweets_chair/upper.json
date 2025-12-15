@@ -1,0 +1,31 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "tanukidecor:block/sweets_chair",
+    "chair": "tanukidecor:block/sweets_chair"
+  },
+  "elements": [
+    {
+      "name": "chair_1",
+      "from": [1.01, 0, 14],
+      "to": [14.99, 7, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 13.98, 7], "texture": "#chair"},
+        "east": {"uv": [14, 14, 7, 16], "rotation": 90, "texture": "#chair"},
+        "south": {"uv": [13.98, 0, 0, 7], "texture": "#chair"},
+        "west": {"uv": [0, 16, 7, 14], "rotation": 90, "texture": "#chair"},
+        "up": {"uv": [0, 14, 13.98, 16], "texture": "#chair"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

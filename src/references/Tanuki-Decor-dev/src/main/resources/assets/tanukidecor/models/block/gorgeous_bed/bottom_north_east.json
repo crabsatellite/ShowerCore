@@ -1,0 +1,90 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_bed",
+    "bed": "tanukidecor:block/gorgeous_bed"
+  },
+  "elements": [
+    {
+      "name": "leg_2",
+      "from": [14, 0, 0],
+      "to": [16, 16, 2],
+      "faces": {
+        "north": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "east": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "south": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "west": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "down": {"uv": [14.5, 4, 14, 4.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_2",
+      "from": [0, 3, 0],
+      "to": [14, 8, 16],
+      "faces": {
+        "north": {"uv": [3.5, 10.5, 0, 11.75], "texture": "#bed"},
+        "east": {"uv": [4, 9.25, 0, 10.5], "texture": "#bed"},
+        "up": {"uv": [3.5, 4, 0, 8], "texture": "#bed"},
+        "down": {"uv": [7, 4, 3.5, 8], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_3",
+      "from": [14, 1, 6],
+      "to": [14, 3, 12],
+      "faces": {
+        "east": {"uv": [5.5, 10.5, 4, 11], "texture": "#bed"},
+        "west": {"uv": [4, 10.5, 5.5, 11], "texture": "#bed"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [-2, 1.5, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 4.5, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "translation": [5.25, 0, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "ground": {
+      "translation": [-2, 3, -2],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [3.5, -2, 0],
+      "scale": [0.3, 0.3, 0.3]
+    },
+    "head": {
+      "translation": [-6.25, 12.75, -6.5],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "translation": [-4, -4, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "bottom_front_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

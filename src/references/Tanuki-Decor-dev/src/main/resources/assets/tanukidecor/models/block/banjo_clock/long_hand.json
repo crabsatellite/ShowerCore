@@ -1,0 +1,37 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/banjo_clock",
+    "clock": "tanukidecor:block/banjo_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 3.5, 10.98],
+      "to": [8.5, 6.5, 10.98],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 20, 11]},
+      "faces": {
+        "north": {"uv": [8, 8, 8.5, 9.5], "texture": "#clock"},
+        "south": {"uv": [8, 8, 8.5, 9.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

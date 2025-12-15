@@ -1,0 +1,41 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "1": "tanukidecor:block/antique_clock",
+    "particle": "#1"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [6.5, 5, 0.98],
+      "to": [9.5, 10, 0.98],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 22, 1]},
+      "faces": {
+        "north": {"uv": [4.25, 12.5, 5, 13.75], "texture": "#1"},
+        "east": {"uv": [4.25, 12.5, 4.25, 13.75], "texture": "#1"},
+        "south": {"uv": [4.25, 12.5, 5, 13.75], "texture": "#1"},
+        "west": {"uv": [4.25, 12.5, 4.25, 13.75], "texture": "#1"},
+        "up": {"uv": [4.25, 12.5, 5, 12.5], "texture": "#1"},
+        "down": {"uv": [4.25, 12.5, 5, 12.5], "texture": "#1"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

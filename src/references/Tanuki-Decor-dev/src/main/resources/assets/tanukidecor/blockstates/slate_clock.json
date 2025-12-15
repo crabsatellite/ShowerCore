@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/slate_clock/slate_clock" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/slate_clock/slate_clock", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/slate_clock/slate_clock", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/slate_clock/slate_clock", "y": 270 }
+    }
+  ]
+}

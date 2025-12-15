@@ -1,0 +1,31 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/train_set",
+    "train": "tanukidecor:block/train_set"
+  },
+  "elements": [
+    {
+      "name": "rail_5",
+      "from": [5.5, 0.095, 1],
+      "to": [10.5, 0.095, 16],
+      "shading": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [10.5, 0, 16]},
+      "faces": {
+        "up": {"uv": [5, 0, 2.5, 7.5], "texture": "#train"},
+        "down": {"uv": [5, 7.5, 2.5, 0], "texture": "#train"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "front_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

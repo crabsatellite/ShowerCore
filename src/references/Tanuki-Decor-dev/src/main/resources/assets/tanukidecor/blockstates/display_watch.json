@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/display_watch/display_watch" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/display_watch/display_watch", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/display_watch/display_watch", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/display_watch/display_watch", "y": 270 }
+    }
+  ]
+}

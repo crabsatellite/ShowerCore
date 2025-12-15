@@ -1,0 +1,56 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/long_display_case",
+    "case": "tanukidecor:block/long_display_case"
+  },
+  "elements": [
+    {
+      "name": "glass_0",
+      "from": [0, 0, 0],
+      "to": [16, 16, 0],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 4], "texture": "#case"},
+        "south": {"uv": [8, 0, 4, 4], "texture": "#case"}
+      }
+    },
+    {
+      "name": "glass_1",
+      "from": [0, 0, 16],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 4], "texture": "#case"},
+        "south": {"uv": [8, 0, 4, 4], "texture": "#case"}
+      }
+    },
+    {
+      "name": "glass_2",
+      "from": [0, 0, 0],
+      "to": [0, 16, 16],
+      "faces": {
+        "east": {"uv": [12, 0, 16, 4], "texture": "#case"},
+        "west": {"uv": [16, 0, 12, 4], "texture": "#case"}
+      }
+    },
+    {
+      "name": "glass_3",
+      "from": [0, 16, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "up": {"uv": [8, 8, 4, 4], "texture": "#case"},
+        "down": {"uv": [8, 4, 4, 8], "texture": "#case"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

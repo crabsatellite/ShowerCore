@@ -1,0 +1,42 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_closet",
+    "closet": "tanukidecor:block/gorgeous_closet"
+  },
+  "elements": [
+    {
+      "name": "closet_6",
+      "from": [0, 0, 2],
+      "to": [14, 13, 14],
+      "faces": {
+        "north": {"uv": [7, 0, 3.5, 3.25], "texture": "#closet"},
+        "east": {"uv": [6.5, 6.5, 3.5, 9.75], "texture": "#closet"},
+        "south": {"uv": [7, 3.25, 3.5, 6.5], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_7",
+      "from": [0, 13, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [11, 4, 7, 4.75], "texture": "#closet"},
+        "east": {"uv": [11, 4.75, 7, 5.5], "texture": "#closet"},
+        "south": {"uv": [7, 4, 11, 4.75], "texture": "#closet"},
+        "up": {"uv": [11, 0, 7, 4], "texture": "#closet"},
+        "down": {"uv": [11, 4, 7, 0], "texture": "#closet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

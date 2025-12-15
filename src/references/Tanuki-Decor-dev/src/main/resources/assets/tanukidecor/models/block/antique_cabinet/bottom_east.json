@@ -1,0 +1,61 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_cabinet",
+    "cabinet": "tanukidecor:block/oak_antique_cabinet"
+  },
+  "elements": [
+    {
+      "name": "right_front_leg",
+      "from": [14, 0, 0],
+      "to": [16, 2, 2],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [0.5, 14.5, 0, 15], "texture": "#cabinet"},
+        "east": {"uv": [0.5, 14.5, 0, 15], "texture": "#cabinet"},
+        "south": {"uv": [0.5, 14.5, 0, 15], "texture": "#cabinet"},
+        "west": {"uv": [0.5, 14.5, 0, 15], "texture": "#cabinet"},
+        "up": {"uv": [0.5, 14.5, 0, 15], "texture": "#cabinet"},
+        "down": {"uv": [1, 14.5, 0.5, 15], "texture": "#cabinet"}
+      }
+    },
+    {
+      "name": "right_back_leg",
+      "from": [14, 0, 14],
+      "to": [16, 2, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 16]},
+      "faces": {
+        "north": {"uv": [0, 14.5, 0.5, 15], "texture": "#cabinet"},
+        "east": {"uv": [0, 14.5, 0.5, 15], "texture": "#cabinet"},
+        "south": {"uv": [0, 14.5, 0.5, 15], "texture": "#cabinet"},
+        "west": {"uv": [0, 14.5, 0.5, 15], "texture": "#cabinet"},
+        "up": {"uv": [0.5, 15, 0, 14.5], "texture": "#cabinet"},
+        "down": {"uv": [1, 15, 0.5, 14.5], "texture": "#cabinet"}
+      }
+    },
+    {
+      "name": "right_bottom_cabinet",
+      "from": [0, 2, 0],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [4, 0, 0, 3.5], "texture": "#cabinet"},
+        "east": {"uv": [4, 7, 0, 10.5], "texture": "#cabinet"},
+        "south": {"uv": [4, 3.5, 0, 7], "texture": "#cabinet"},
+        "up": {"uv": [8, 0, 4, 4], "texture": "#cabinet"},
+        "down": {"uv": [4, 10.5, 0, 14.5], "texture": "#cabinet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right_bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

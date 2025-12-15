@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "width": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/east" }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/west" }
+    },
+    
+    {
+      "when": { "AND": [ { "width": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/east", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/west", "y": 180 }
+    },
+
+    {
+      "when": { "AND": [ { "width": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/east", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/west", "y": 90 }
+    },
+    
+    {
+      "when": { "AND": [ { "width": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/east", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/sweets_dresser/west", "y": 270 }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,waterlogged=true": { "model": "tanukidecor:block/antique_wall_oil_lamp/unlit" },
+    "facing=north,waterlogged=false": { "model": "tanukidecor:block/antique_wall_oil_lamp/lit" },
+    "facing=east,waterlogged=true": { "model": "tanukidecor:block/antique_wall_oil_lamp/unlit", "y": 90 },
+    "facing=east,waterlogged=false": { "model": "tanukidecor:block/antique_wall_oil_lamp/lit", "y": 90 },
+    "facing=south,waterlogged=true": { "model": "tanukidecor:block/antique_wall_oil_lamp/unlit", "y": 180 },
+    "facing=south,waterlogged=false": { "model": "tanukidecor:block/antique_wall_oil_lamp/lit", "y": 180 },
+    "facing=west,waterlogged=true": { "model": "tanukidecor:block/antique_wall_oil_lamp/unlit", "y": 270 },
+    "facing=west,waterlogged=false": { "model": "tanukidecor:block/antique_wall_oil_lamp/lit", "y": 270 }
+  }
+}

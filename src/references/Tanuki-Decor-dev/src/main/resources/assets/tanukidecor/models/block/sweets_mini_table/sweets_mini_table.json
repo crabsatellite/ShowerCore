@@ -1,0 +1,70 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_mini_table",
+    "table": "tanukidecor:block/sweets_mini_table"
+  },
+  "elements": [
+    {
+      "name": "glass_0",
+      "from": [4, 0, 4],
+      "to": [12, 1, 12],
+      "faces": {
+        "north": {"uv": [9, 8, 13, 8.5], "texture": "#table"},
+        "east": {"uv": [9, 8, 13, 8.5], "texture": "#table"},
+        "south": {"uv": [9, 8, 13, 8.5], "texture": "#table"},
+        "west": {"uv": [9, 8, 13, 8.5], "texture": "#table"},
+        "up": {"uv": [9, 0, 13, 4], "texture": "#table"},
+        "down": {"uv": [9, 4, 13, 8], "texture": "#table"}
+      }
+    },
+    {
+      "name": "glass_1",
+      "from": [7, 1, 7],
+      "to": [9, 9, 9],
+      "faces": {
+        "north": {"uv": [8, 0, 9, 4], "texture": "#table"},
+        "east": {"uv": [8, 0, 9, 4], "texture": "#table"},
+        "south": {"uv": [8, 0, 9, 4], "texture": "#table"},
+        "west": {"uv": [8, 0, 9, 4], "texture": "#table"}
+      }
+    },
+    {
+      "name": "glass_2",
+      "from": [0, 9, 0],
+      "to": [16, 10, 16],
+      "faces": {
+        "north": {"uv": [0, 8, 8, 8.5], "texture": "#table"},
+        "east": {"uv": [0, 8, 8, 8.5], "texture": "#table"},
+        "south": {"uv": [0, 8, 8, 8.5], "texture": "#table"},
+        "west": {"uv": [0, 8, 8, 8.5], "texture": "#table"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#table"},
+        "down": {"uv": [0, 8, 8, 0], "texture": "#table"}
+      }
+    },
+    {
+      "name": "custard",
+      "from": [2, 10, 2],
+      "to": [14, 16, 14],
+      "faces": {
+        "north": {"uv": [12, 8.5, 15, 14.5], "rotation": 270, "texture": "#table"},
+        "east": {"uv": [12, 8.5, 15, 14.5], "rotation": 270, "texture": "#table"},
+        "south": {"uv": [12, 8.5, 15, 14.5], "rotation": 270, "texture": "#table"},
+        "west": {"uv": [12, 8.5, 15, 14.5], "rotation": 270, "texture": "#table"},
+        "up": {"uv": [0, 8.5, 6, 14.5], "texture": "#table"},
+        "down": {"uv": [6, 8.5, 12, 14.5], "texture": "#table"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "table",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

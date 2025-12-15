@@ -1,0 +1,84 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/regal_armoire",
+    "armoire": "tanukidecor:block/regal_armoire"
+  },
+  "elements": [
+    {
+      "name": "armoire_bottom_0",
+      "from": [0, 0, 1],
+      "to": [16, 3, 1],
+      "faces": {
+        "north": {"uv": [0, 13.25, 4, 14], "texture": "#armoire"},
+        "east": {"uv": [0, 13.25, 0, 14], "texture": "#armoire"},
+        "south": {"uv": [0, 13.25, 4, 14], "texture": "#armoire"},
+        "west": {"uv": [0, 13.25, 0, 14], "texture": "#armoire"},
+        "up": {"uv": [0, 13.25, 4, 13.25], "texture": "#armoire"},
+        "down": {"uv": [0, 13.25, 4, 13.25], "texture": "#armoire"}
+      }
+    },
+    {
+      "name": "armoire_bottom_1",
+      "from": [0, 0, 15],
+      "to": [16, 3, 15],
+      "faces": {
+        "north": {"uv": [0, 13.25, 4, 14], "texture": "#armoire"},
+        "east": {"uv": [0, 13.25, 0, 14], "texture": "#armoire"},
+        "south": {"uv": [0, 13.25, 4, 14], "texture": "#armoire"},
+        "west": {"uv": [0, 13.25, 0, 14], "texture": "#armoire"},
+        "up": {"uv": [0, 13.25, 4, 13.25], "texture": "#armoire"},
+        "down": {"uv": [0, 13.25, 4, 13.25], "texture": "#armoire"}
+      }
+    },
+    {
+      "name": "armoire_bottom_2",
+      "from": [0, 0, 1],
+      "to": [0, 3, 15],
+      "faces": {
+        "north": {"uv": [0, 14, 0, 14.75], "texture": "#armoire"},
+        "east": {"uv": [0, 14, 3.5, 14.75], "texture": "#armoire"},
+        "south": {"uv": [0, 14, 0, 14.75], "texture": "#armoire"},
+        "west": {"uv": [0, 14, 3.5, 14.75], "texture": "#armoire"},
+        "up": {"uv": [0, 14, 3.5, 14], "rotation": 90, "texture": "#armoire"},
+        "down": {"uv": [0, 14, 3.5, 14], "rotation": 90, "texture": "#armoire"}
+      }
+    },
+    {
+      "name": "armoire_bottom_3",
+      "from": [16, 0, 1],
+      "to": [16, 3, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0.75], "texture": "#armoire"},
+        "east": {"uv": [0, 14, 3.5, 14.75], "texture": "#armoire"},
+        "south": {"uv": [0, 0, 0, 0.75], "texture": "#armoire"},
+        "west": {"uv": [0, 14, 3.5, 14.75], "texture": "#armoire"},
+        "up": {"uv": [0, 14, 3.5, 14], "rotation": 90, "texture": "#armoire"},
+        "down": {"uv": [0, 14, 3.5, 14], "rotation": 90, "texture": "#armoire"}
+      }
+    },
+    {
+      "name": "armoire_bottom_4",
+      "from": [0, 3, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.25], "texture": "#armoire"},
+        "east": {"uv": [3.5, 10, 0, 13.25], "texture": "#armoire"},
+        "south": {"uv": [0, 3.25, 4, 6.5], "texture": "#armoire"},
+        "west": {"uv": [0, 10, 3.5, 13.25], "texture": "#armoire"},
+        "down": {"uv": [0, 6.5, 4, 10], "texture": "#armoire"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

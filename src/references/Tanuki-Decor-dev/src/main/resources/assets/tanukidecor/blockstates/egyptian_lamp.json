@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "half=lower,waterlogged=true": { "model": "tanukidecor:block/egyptian_lamp/lower" },
+    "half=lower,waterlogged=false": { "model": "tanukidecor:block/egyptian_lamp/lower" },
+    "half=upper,waterlogged=true": { "model": "tanukidecor:block/egyptian_lamp/upper_unlit" },
+    "half=upper,waterlogged=false": { "model": "tanukidecor:block/egyptian_lamp/upper_lit" }
+  }
+}

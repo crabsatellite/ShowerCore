@@ -1,0 +1,114 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_sofa",
+    "sofa": "tanukidecor:block/gorgeous_sofa"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [2, 0, 0],
+      "to": [4, 3, 2],
+      "faces": {
+        "north": {"uv": [0, 12.25, 0.5, 13], "texture": "#sofa"},
+        "east": {"uv": [0, 12.25, 0.5, 13], "texture": "#sofa"},
+        "south": {"uv": [0, 12.25, 0.5, 13], "texture": "#sofa"},
+        "west": {"uv": [0, 12.25, 0.5, 13], "texture": "#sofa"},
+        "down": {"uv": [0, 13, 0.5, 13.5], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [2, 0, 12],
+      "to": [4, 3, 14],
+      "faces": {
+        "north": {"uv": [0.5, 12.25, 0, 13], "texture": "#sofa"},
+        "east": {"uv": [0.5, 12.25, 0, 13], "texture": "#sofa"},
+        "south": {"uv": [0.5, 12.25, 0, 13], "texture": "#sofa"},
+        "west": {"uv": [0.5, 12.25, 0, 13], "texture": "#sofa"},
+        "down": {"uv": [0, 13.5, 0.5, 13], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_0",
+      "from": [2, 3, 0],
+      "to": [16, 10, 14],
+      "faces": {
+        "north": {"uv": [0, 7, 3.5, 8.75], "texture": "#sofa"},
+        "south": {"uv": [0, 10.5, 3.5, 12.25], "texture": "#sofa"},
+        "west": {"uv": [0, 8.75, 3.5, 10.5], "texture": "#sofa"},
+        "up": {"uv": [0, 0, 3.5, 3.5], "texture": "#sofa"},
+        "down": {"uv": [0, 3.5, 3.5, 7], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_1",
+      "from": [2, 10, 0],
+      "to": [5, 13, 11],
+      "faces": {
+        "north": {"uv": [3.5, 2.75, 4.25, 3.5], "texture": "#sofa"},
+        "east": {"uv": [4.25, 0, 5, 2.75], "rotation": 90, "texture": "#sofa"},
+        "west": {"uv": [3.5, 0, 4.25, 2.75], "rotation": 90, "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_2",
+      "from": [0, 13, 0],
+      "to": [5, 16, 11],
+      "faces": {
+        "north": {"uv": [5, 2.75, 6.25, 3.5], "texture": "#sofa"},
+        "east": {"uv": [8.25, 0, 9, 2.75], "rotation": 90, "texture": "#sofa"},
+        "west": {"uv": [7.5, 0, 8.25, 2.75], "rotation": 90, "texture": "#sofa"},
+        "up": {"uv": [5, 0, 6.25, 2.75], "texture": "#sofa"},
+        "down": {"uv": [6.25, 0, 7.5, 2.75], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_3",
+      "from": [2, 10, 11],
+      "to": [16, 13, 14],
+      "faces": {
+        "north": {"uv": [4.25, 3.5, 5, 7], "rotation": 90, "texture": "#sofa"},
+        "south": {"uv": [3.5, 3.5, 4.25, 7], "rotation": 90, "texture": "#sofa"},
+        "west": {"uv": [3.5, 7, 4.25, 7.75], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa_4",
+      "from": [0, 13, 11],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [8.25, 3.5, 9, 7.5], "rotation": 90, "texture": "#sofa"},
+        "south": {"uv": [7.5, 3.5, 8.25, 7.5], "rotation": 90, "texture": "#sofa"},
+        "west": {"uv": [5, 7.5, 6.25, 8.25], "texture": "#sofa"},
+        "up": {"uv": [5, 3.5, 6.25, 7.5], "rotation": 90, "texture": "#sofa"},
+        "down": {"uv": [6.25, 3.5, 7.5, 7.5], "rotation": 90, "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "pillow_0",
+      "from": [8, 10, 6],
+      "to": [15, 12, 13],
+      "rotation": {"angle": -45, "axis": "x", "origin": [10, 10, 6]},
+      "faces": {
+        "north": {"uv": [0.5, 14, 2.25, 14.5], "texture": "#sofa"},
+        "east": {"uv": [0.5, 14, 2.25, 14.5], "texture": "#sofa"},
+        "south": {"uv": [0.5, 14, 2.25, 14.5], "texture": "#sofa"},
+        "west": {"uv": [0.5, 14, 2.25, 14.5], "texture": "#sofa"},
+        "up": {"uv": [0.5, 12.25, 2.25, 14], "texture": "#sofa"},
+        "down": {"uv": [0.5, 12.25, 2.25, 14], "texture": "#sofa"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "tanukidecor:antique_mirror",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "width": "1",
+            "height": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tanukidecor:antique_mirror"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

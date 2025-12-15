@@ -1,0 +1,41 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_closet",
+    "closet": "tanukidecor:block/sweets_closet"
+  },
+  "elements": [
+    {
+      "name": "closet_0",
+      "from": [0, 0, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#closet"},
+        "south": {"uv": [0, 4, 4, 8], "texture": "#closet"},
+        "west": {"uv": [0, 11.5, 3.5, 15.5], "texture": "#closet"},
+        "down": {"uv": [4, 8, 8, 11.5], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_0",
+      "from": [0, 0, 2],
+      "to": [0, 16, 8],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [0, 8, 2]},
+      "faces": {
+        "east": {"uv": [9.5, 0, 8, 4], "texture": "#closet"},
+        "west": {"uv": [8, 0, 9.5, 4], "texture": "#closet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

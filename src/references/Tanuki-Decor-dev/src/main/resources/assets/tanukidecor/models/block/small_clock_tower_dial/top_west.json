@@ -1,0 +1,31 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/small_clock_tower_dial",
+    "clock": "tanukidecor:block/small_clock_tower_dial"
+  },
+  "elements": [
+    {
+      "name": "clock_1",
+      "from": [0, 0, 13],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 4], "texture": "#clock"},
+        "south": {"uv": [16, 0, 12, 4], "texture": "#clock"},
+        "west": {"uv": [8, 8.75, 4, 8], "rotation": 90, "texture": "#clock"},
+        "up": {"uv": [8, 8, 4, 8.75], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

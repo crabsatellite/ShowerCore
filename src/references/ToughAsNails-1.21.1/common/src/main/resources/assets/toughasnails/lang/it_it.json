@@ -1,0 +1,48 @@
+{
+  "itemGroup.toughasnails": "Tough As Nails",
+  
+  "container.toughasnails.water_purifier": "Purificatore d'acqua",
+  
+  "death.attack.toughasnails.hyperthermia": "%1$s si è surriscaldato a morte",
+  "death.attack.toughasnails.hyperthermia.player": "%1$s si è surriscaldato a morte mentre cercava di scappare da %2$s",
+  
+  "effect.toughasnails.climate_clemency": "Clemenza Climatica",
+  "effect.toughasnails.ice_resistance": "Resistenza al Freddo",
+  "effect.toughasnails.thirst": "Sete",
+  "enchantment.toughasnails.thermal_tuning": "Sintonizzazione Termica",
+  
+  "block.toughasnails.rain_collector": "Collettore d'acqua",
+  "block.toughasnails.water_purifier": "Purificatore d'acqua",
+  
+  "item.toughasnails.apple_juice": "Succo di Mela",
+  "item.toughasnails.cactus_juice": "Succo di Cactus",
+  "item.toughasnails.chorus_fruit_juice": "Succo di Chorus",
+  "item.toughasnails.dirty_water_bottle": "Bottiglia d'acqua sporca",
+  "item.toughasnails.dirty_water_canteen": "Borraccia d'acqua sporca",
+  "item.toughasnails.empty_canteen": "Borraccia Vuota",
+  "item.toughasnails.glow_berry_juice": "Succo di Bacca Luminosa",
+  "item.toughasnails.leaf_boots": "Stivali di Foglie",
+  "item.toughasnails.leaf_chestplate": "Mantello di Foglie",
+  "item.toughasnails.leaf_helmet": "Velo di Foglie",
+  "item.toughasnails.leaf_leggings": "Pantaloni di Foglie",
+  "item.toughasnails.melon_juice": "Succo di Melone",
+  "item.toughasnails.pumpkin_juice": "Succo di Zucca",
+  "item.toughasnails.purified_water_bottle": "Bottiglia d'acqua purificata",
+  "item.toughasnails.purified_water_canteen": "Borraccia d'acqua purificata",
+  "item.toughasnails.sweet_berry_juice": "Succo di Bacca Dolce",
+  "item.toughasnails.tan_icon": "Icona TAN",
+  "item.toughasnails.water_canteen": "Borraccia d'acqua",
+  "item.toughasnails.wool_boots": "Stivali di Lana",
+  "item.toughasnails.wool_chestplate": "Giubbotto di Lana",
+  "item.toughasnails.wool_helmet": "Cappuccio di Lana",
+  "item.toughasnails.wool_leggings": "Pantaloni di Lana",
+  
+  "item.minecraft.lingering_potion.effect.ice_resistance": "Pozione di resistenza al freddo persistente",
+  "item.minecraft.lingering_potion.effect.long_ice_resistance": "Pozione di resistenza al freddo persistente",
+  "item.minecraft.potion.effect.ice_resistance": "Pozione di resistenza al freddo",
+  "item.minecraft.potion.effect.long_ice_resistance": "Pozione di resistenza al freddo",
+  "item.minecraft.splash_potion.effect.ice_resistance": "Pozione da lancio di resistenza al freddo",
+  "item.minecraft.splash_potion.effect.long_ice_resistance": "Pozione da lancio di resistenza al freddo",
+  "item.minecraft.tipped_arrow.effect.ice_resistance": "Freccia di resistenza al freddo",
+  "item.minecraft.tipped_arrow.effect.long_ice_resistance": "Freccia di resistenza al freddo"
+}

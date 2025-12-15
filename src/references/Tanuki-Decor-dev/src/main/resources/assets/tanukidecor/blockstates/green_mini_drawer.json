@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/green_mini_drawer/green_mini_drawer" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/green_mini_drawer/green_mini_drawer", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/green_mini_drawer/green_mini_drawer", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/green_mini_drawer/green_mini_drawer", "y": 270 }
+    }
+  ]
+}

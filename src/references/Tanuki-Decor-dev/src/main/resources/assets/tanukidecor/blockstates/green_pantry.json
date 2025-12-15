@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/green_pantry/green_pantry" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/green_pantry/green_pantry", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/green_pantry/green_pantry", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/green_pantry/green_pantry", "y": 270 }
+    }
+  ]
+}

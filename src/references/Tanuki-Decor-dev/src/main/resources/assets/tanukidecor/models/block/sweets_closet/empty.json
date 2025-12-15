@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/air",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "tanukidecor:block/sweets_closet"
+  }
+}

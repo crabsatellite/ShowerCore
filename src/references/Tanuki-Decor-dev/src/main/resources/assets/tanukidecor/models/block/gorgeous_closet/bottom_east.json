@@ -1,0 +1,66 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_closet",
+    "closet": "tanukidecor:block/gorgeous_closet"
+  },
+  "elements": [
+    {
+      "name": "leg_2",
+      "from": [13, 0, 1],
+      "to": [15, 3, 3],
+      "faces": {
+        "north": {"uv": [0.5, 8.25, 0, 9], "texture": "#closet"},
+        "east": {"uv": [0.5, 8.25, 0, 9], "texture": "#closet"},
+        "south": {"uv": [0.5, 8.25, 0, 9], "texture": "#closet"},
+        "west": {"uv": [0.5, 8.25, 0, 9], "texture": "#closet"},
+        "down": {"uv": [0.5, 9, 0, 9.5], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [13, 0, 13],
+      "to": [15, 3, 15],
+      "faces": {
+        "north": {"uv": [0, 8.25, 0.5, 9], "texture": "#closet"},
+        "east": {"uv": [0, 8.25, 0.5, 9], "texture": "#closet"},
+        "south": {"uv": [0, 8.25, 0.5, 9], "texture": "#closet"},
+        "west": {"uv": [0, 8.25, 0.5, 9], "texture": "#closet"},
+        "down": {"uv": [0.5, 9.5, 0, 9], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_4",
+      "from": [0, 3, 1],
+      "to": [15, 5, 15],
+      "faces": {
+        "north": {"uv": [14.75, 3.5, 11, 4], "texture": "#closet"},
+        "east": {"uv": [14.5, 4, 11, 4.5], "texture": "#closet"},
+        "south": {"uv": [11, 3.5, 14.75, 4], "texture": "#closet"},
+        "up": {"uv": [14.75, 0, 11, 3.5], "texture": "#closet"},
+        "down": {"uv": [14.75, 3.5, 11, 0], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_5",
+      "from": [0, 5, 2],
+      "to": [14, 16, 14],
+      "faces": {
+        "north": {"uv": [3.5, 0, 0, 2.75], "texture": "#closet"},
+        "east": {"uv": [3, 5.5, 0, 8.25], "texture": "#closet"},
+        "south": {"uv": [3.5, 2.75, 0, 5.5], "texture": "#closet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

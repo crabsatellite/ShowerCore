@@ -1,0 +1,33 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "minecraft:block/oak_log",
+    "log_side": "minecraft:block/oak_log",
+    "log_top": "minecraft:block/oak_log_top"
+  },
+  "elements": [
+    {
+      "name": "log",
+      "from": [2, 0, 2],
+      "to": [14, 14, 14],
+      "faces": {
+        "north": {"uv": [2, 2, 14, 16], "texture": "#log_side"},
+        "east": {"uv": [2, 2, 14, 16], "texture": "#log_side"},
+        "south": {"uv": [2, 2, 14, 16], "texture": "#log_side"},
+        "west": {"uv": [2, 2, 14, 16], "texture": "#log_side"},
+        "up": {"uv": [2, 2, 14, 14], "texture": "#log_top"},
+        "down": {"uv": [2, 2, 14, 14], "texture": "#log_top"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "log",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "tanukidecor:block/newtons_cradle",
+    "cradle": "tanukidecor:block/newtons_cradle"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [2, 0, 4],
+      "to": [14, 1, 12],
+      "faces": {
+        "north": {"uv": [0, 8, 12, 9], "texture": "#cradle"},
+        "east": {"uv": [0, 8, 8, 9], "texture": "#cradle"},
+        "south": {"uv": [0, 8, 12, 9], "texture": "#cradle"},
+        "west": {"uv": [0, 8, 8, 9], "texture": "#cradle"},
+        "up": {"uv": [0, 0, 12, 8], "texture": "#cradle"},
+        "down": {"uv": [0, 0, 12, 8], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [2, 1, 4],
+      "to": [3, 8, 5],
+      "faces": {
+        "north": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "east": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "south": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "west": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "up": {"uv": [1, 10, 2, 11], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [13, 1, 4],
+      "to": [14, 8, 5],
+      "faces": {
+        "north": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "east": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "south": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "west": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "up": {"uv": [10, 10, 11, 11], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [2, 1, 11],
+      "to": [3, 8, 12],
+      "faces": {
+        "north": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "east": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "south": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "west": {"uv": [0, 9, 1, 16], "texture": "#cradle"},
+        "up": {"uv": [1, 10, 2, 11], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [13, 1, 11],
+      "to": [14, 8, 12],
+      "faces": {
+        "north": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "east": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "south": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "west": {"uv": [11, 9, 12, 16], "texture": "#cradle"},
+        "up": {"uv": [10, 10, 11, 11], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [3, 7, 4],
+      "to": [13, 8, 5],
+      "faces": {
+        "north": {"uv": [11, 9, 1, 10], "texture": "#cradle"},
+        "south": {"uv": [1, 9, 11, 10], "texture": "#cradle"},
+        "up": {"uv": [1, 9, 11, 10], "texture": "#cradle"},
+        "down": {"uv": [1, 9, 11, 10], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [3, 7, 11],
+      "to": [13, 8, 12],
+      "faces": {
+        "north": {"uv": [11, 9, 1, 10], "texture": "#cradle"},
+        "south": {"uv": [1, 9, 11, 10], "texture": "#cradle"},
+        "up": {"uv": [1, 9, 11, 10], "texture": "#cradle"},
+        "down": {"uv": [1, 9, 11, 10], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "ball",
+      "from": [5, 2.1, 7.1],
+      "to": [7, 4.1, 9.1],
+      "faces": {
+        "north": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "east": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "south": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "west": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "up": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "down": {"uv": [13, 0, 15, 2], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "ball",
+      "from": [7, 2, 7],
+      "to": [9, 4, 9],
+      "faces": {
+        "north": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "east": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "south": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "west": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "up": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "down": {"uv": [13, 0, 15, 2], "texture": "#cradle"}
+      }
+    },
+    {
+      "name": "ball",
+      "from": [9, 2.1, 7.1],
+      "to": [11, 4.1, 9.1],
+      "faces": {
+        "north": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "east": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "south": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "west": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "up": {"uv": [13, 0, 15, 2], "texture": "#cradle"},
+        "down": {"uv": [13, 0, 15, 2], "texture": "#cradle"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "cradle",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    },
+    {
+      "name": "balls",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [7, 8, 9]
+    }
+  ]
+}

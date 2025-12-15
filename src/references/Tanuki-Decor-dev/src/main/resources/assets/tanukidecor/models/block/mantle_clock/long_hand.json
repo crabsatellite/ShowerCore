@@ -1,0 +1,40 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "clock": "tanukidecor:block/mantle_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 6.5, 4.98],
+      "to": [8.5, 9.5, 4.98],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 5]},
+      "faces": {
+        "north": {"uv": [0, 12.5, 0.5, 14], "texture": "#clock"},
+        "east": {"uv": [0, 12.5, 0, 14], "texture": "#clock"},
+        "south": {"uv": [0, 12.5, 0.5, 14], "texture": "#clock"},
+        "west": {"uv": [0, 12.5, 0, 14], "texture": "#clock"},
+        "up": {"uv": [0, 12.5, 0.5, 12.5], "texture": "#clock"},
+        "down": {"uv": [0, 12.5, 0.5, 12.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_seat",
+    "seat": "tanukidecor:block/gorgeous_seat"
+  },
+  "elements": [
+    {
+      "name": "seat_3",
+      "from": [0, 0, 9],
+      "to": [3, 5, 16],
+      "faces": {
+        "north": {"uv": [10, 0, 10.75, 1.25], "texture": "#seat"},
+        "east": {"uv": [8.25, 0, 6.5, 1.25], "texture": "#seat"},
+        "south": {"uv": [10.75, 0, 11.5, 1.25], "texture": "#seat"},
+        "west": {"uv": [8.25, 0, 10, 1.25], "texture": "#seat"}
+      }
+    },
+    {
+      "name": "seat_4",
+      "from": [-1, 5, 9],
+      "to": [3, 8, 16],
+      "faces": {
+        "north": {"uv": [7.5, 4.5, 8.5, 5.25], "texture": "#seat"},
+        "east": {"uv": [7.5, 2.75, 8.25, 4.5], "rotation": 90, "texture": "#seat"},
+        "south": {"uv": [6.5, 4.5, 7.5, 5.25], "texture": "#seat"},
+        "west": {"uv": [8.25, 2.75, 9, 4.5], "rotation": 90, "texture": "#seat"},
+        "up": {"uv": [6.5, 2.75, 7.5, 4.5], "texture": "#seat"},
+        "down": {"uv": [6.5, 2.75, 7.5, 4.5], "texture": "#seat"}
+      }
+    },
+    {
+      "name": "seat_7",
+      "from": [13, 0, 9],
+      "to": [16, 5, 16],
+      "faces": {
+        "north": {"uv": [10.75, 0, 10, 1.25], "texture": "#seat"},
+        "east": {"uv": [10, 0, 8.25, 1.25], "texture": "#seat"},
+        "south": {"uv": [11.5, 0, 10.75, 1.25], "texture": "#seat"},
+        "west": {"uv": [6.5, 0, 8.25, 1.25], "texture": "#seat"}
+      }
+    },
+    {
+      "name": "seat_8",
+      "from": [13, 5, 9],
+      "to": [17, 8, 16],
+      "faces": {
+        "north": {"uv": [8.5, 4.5, 7.5, 5.25], "texture": "#seat"},
+        "east": {"uv": [8.25, 4.5, 9, 2.75], "rotation": 90, "texture": "#seat"},
+        "south": {"uv": [7.5, 4.5, 6.5, 5.25], "texture": "#seat"},
+        "west": {"uv": [7.5, 4.5, 8.25, 2.75], "rotation": 90, "texture": "#seat"},
+        "up": {"uv": [7.5, 2.75, 6.5, 4.5], "texture": "#seat"},
+        "down": {"uv": [7.5, 2.75, 6.5, 4.5], "texture": "#seat"}
+      }
+    },
+    {
+      "name": "seat_9",
+      "from": [3, 0, 13],
+      "to": [13, 6, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 6.5, 1.5], "texture": "#seat"},
+        "south": {"uv": [4, 3, 6.5, 4.5], "texture": "#seat"},
+        "up": {"uv": [4, 6, 6.5, 6.75], "texture": "#seat"}
+      }
+    },
+    {
+      "name": "seat_10",
+      "from": [5, 6, 13],
+      "to": [11, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 13.5, 1.5, 14], "texture": "#seat"},
+        "east": {"uv": [0.75, 14.5, 0, 15], "texture": "#seat"},
+        "south": {"uv": [0, 14, 1.5, 14.5], "texture": "#seat"},
+        "west": {"uv": [0, 14.5, 0.75, 15], "texture": "#seat"},
+        "up": {"uv": [0, 12.75, 1.5, 13.5], "texture": "#seat"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

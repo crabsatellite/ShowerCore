@@ -1,0 +1,71 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_east" }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_west" }
+    },
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_east" }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_west" }
+    },
+    
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_east", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_west", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_east", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_west", "y": 180 }
+    },
+
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_east", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_west", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_east", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_west", "y": 90 }
+    },
+    
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_east", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/bottom_west", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "width": 1 }, { "height": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_east", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "width": 2 }, { "height": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/long_display_case/top_west", "y": 270 }
+    }
+  ]
+}

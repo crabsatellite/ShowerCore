@@ -1,0 +1,67 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_table",
+    "table": "tanukidecor:block/oak_antique_table"
+  },
+  "elements": [
+    {
+      "name": "leftLeg1",
+      "from": [6, 0, 4],
+      "to": [8, 6, 12],
+      "faces": {
+        "north": {"uv": [14.5, 3.5, 15, 5], "texture": "#table"},
+        "east": {"uv": [14, 3.5, 12, 5], "texture": "#table"},
+        "south": {"uv": [14.5, 3.5, 15, 5], "texture": "#table"},
+        "west": {"uv": [12, 3.5, 14, 5], "texture": "#table"},
+        "up": {"uv": [14, 3.5, 14.5, 5.5], "texture": "#table"},
+        "down": {"uv": [15, 3.5, 15.5, 5.5], "texture": "#table"}
+      }
+    },
+    {
+      "name": "center_front",
+      "from": [4, 2, 15],
+      "to": [16, 6, 16],
+      "faces": {
+        "north": {"uv": [7, 9, 10, 10], "texture": "#table"},
+        "west": {"uv": [0, 11, 0.25, 12], "texture": "#table"},
+        "up": {"uv": [7, 10.25, 10, 10.5], "texture": "#table"},
+        "down": {"uv": [7, 10.75, 10, 11], "texture": "#table"}
+      }
+    },
+    {
+      "name": "rightLeg0",
+      "from": [6, 0, 12],
+      "to": [8, 14, 16],
+      "faces": {
+        "north": {"uv": [14, 0, 14.5, 3.5], "texture": "#table"},
+        "east": {"uv": [13, 0, 14, 3.5], "texture": "#table"},
+        "west": {"uv": [14, 0, 13, 3.5], "texture": "#table"},
+        "down": {"uv": [14.5, 0, 15, 1], "texture": "#table"}
+      }
+    },
+    {
+      "name": "top",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [8, 8, 12, 8.5], "texture": "#table"},
+        "south": {"uv": [0, 8.5, 4, 9], "texture": "#table"},
+        "west": {"uv": [0, 8.5, 4, 9], "texture": "#table"},
+        "up": {"uv": [12, 8, 8, 4], "texture": "#table"},
+        "down": {"uv": [12, 4, 8, 8], "texture": "#table"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "front_west",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

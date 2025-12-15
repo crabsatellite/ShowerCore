@@ -1,0 +1,160 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/display_watch",
+    "clock": "tanukidecor:block/display_watch"
+  },
+  "elements": [
+    {
+      "name": "clock_0",
+      "from": [3, 0, 3],
+      "to": [13, 2, 13],
+      "faces": {
+        "north": {"uv": [0, 5, 5, 6], "texture": "#clock"},
+        "east": {"uv": [0, 5, 5, 6], "texture": "#clock"},
+        "south": {"uv": [0, 5, 5, 6], "texture": "#clock"},
+        "west": {"uv": [0, 5, 5, 6], "texture": "#clock"},
+        "up": {"uv": [5, 0, 10, 5], "texture": "#clock"},
+        "down": {"uv": [0, 0, 5, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_1",
+      "from": [4, 2, 4],
+      "to": [12, 12, 4],
+      "faces": {
+        "north": {"uv": [10, 0, 14, 5], "texture": "#clock"},
+        "south": {"uv": [14, 0, 10, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_2",
+      "from": [4, 2, 12],
+      "to": [12, 12, 12],
+      "faces": {
+        "north": {"uv": [14, 0, 10, 5], "texture": "#clock"},
+        "south": {"uv": [10, 0, 14, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_3",
+      "from": [4, 2, 4],
+      "to": [4, 12, 12],
+      "faces": {
+        "east": {"uv": [10, 0, 14, 5], "texture": "#clock"},
+        "west": {"uv": [14, 0, 10, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_4",
+      "from": [12, 2, 4],
+      "to": [12, 12, 12],
+      "faces": {
+        "east": {"uv": [14, 0, 10, 5], "texture": "#clock"},
+        "west": {"uv": [10, 0, 14, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_5",
+      "from": [4, 12, 4],
+      "to": [12, 12, 12],
+      "faces": {
+        "up": {"uv": [0, 6, 4, 10], "texture": "#clock"},
+        "down": {"uv": [4, 6, 0, 10], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_6",
+      "from": [6.5, 12, 6.5],
+      "to": [9.5, 16, 9.5],
+      "faces": {
+        "north": {"uv": [14, 0, 15.5, 2], "texture": "#clock"},
+        "east": {"uv": [15.5, 0, 14, 2], "texture": "#clock"},
+        "south": {"uv": [14, 0, 15.5, 2], "texture": "#clock"},
+        "west": {"uv": [15.5, 0, 14, 2], "texture": "#clock"},
+        "up": {"uv": [14, 2, 15.5, 3.5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_7",
+      "from": [5.5, 3, 7],
+      "to": [10.5, 8, 9],
+      "faces": {
+        "north": {"uv": [5, 5, 7.5, 7.5], "texture": "#clock"},
+        "east": {"uv": [11, 7.5, 10, 5], "texture": "#clock"},
+        "south": {"uv": [7.5, 5, 10, 7.5], "texture": "#clock"},
+        "west": {"uv": [10, 5, 11, 7.5], "texture": "#clock"},
+        "up": {"uv": [10, 7.5, 11, 5], "rotation": 90, "texture": "#clock"},
+        "down": {"uv": [11, 5, 10, 7.5], "rotation": 90, "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_8",
+      "from": [7.5, 8, 7.5],
+      "to": [8.5, 10, 8.5],
+      "faces": {
+        "north": {"uv": [11, 5, 11.5, 6], "texture": "#clock"},
+        "east": {"uv": [11, 5, 11.5, 6], "texture": "#clock"},
+        "south": {"uv": [11, 5, 11.5, 6], "texture": "#clock"},
+        "west": {"uv": [11, 5, 11.5, 6], "texture": "#clock"},
+        "up": {"uv": [11, 6, 11.5, 6.5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_9",
+      "from": [6.5, 8.5, 8],
+      "to": [9.5, 12.5, 8],
+      "faces": {
+        "north": {"uv": [11.5, 5, 13, 7], "texture": "#clock"},
+        "south": {"uv": [13, 5, 11.5, 7], "texture": "#clock"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 1, 0],
+      "scale": [0.825, 0.825, 0.825]
+    },
+    "head": {
+      "translation": [0, 12.75, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "clock",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    }
+  ]
+}

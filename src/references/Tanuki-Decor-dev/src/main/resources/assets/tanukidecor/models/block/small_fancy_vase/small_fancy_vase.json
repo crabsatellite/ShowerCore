@@ -1,0 +1,68 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "#vase",
+    "vase": "tanukidecor:block/vase/small_fancy_vase"
+  },
+  "elements": [
+    {
+      "name": "vase_0",
+      "from": [6, 0, 6],
+      "to": [10, 1, 10],
+      "faces": {
+        "north": {"uv": [1, 7, 5, 8], "texture": "#vase"},
+        "east": {"uv": [1, 7, 5, 8], "texture": "#vase"},
+        "south": {"uv": [1, 7, 5, 8], "texture": "#vase"},
+        "west": {"uv": [1, 7, 5, 8], "texture": "#vase"},
+        "down": {"uv": [12, 0, 16, 4], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_1",
+      "from": [5, 1, 5],
+      "to": [11, 5, 11],
+      "faces": {
+        "north": {"uv": [0, 3, 6, 7], "texture": "#vase"},
+        "east": {"uv": [0, 3, 6, 7], "texture": "#vase"},
+        "south": {"uv": [0, 3, 6, 7], "texture": "#vase"},
+        "west": {"uv": [0, 3, 6, 7], "texture": "#vase"},
+        "up": {"uv": [0, 8, 6, 14], "texture": "#vase"},
+        "down": {"uv": [0, 8, 6, 14], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_2",
+      "from": [6, 5, 6],
+      "to": [10, 6, 10],
+      "faces": {
+        "north": {"uv": [1, 2, 5, 3], "texture": "#vase"},
+        "east": {"uv": [1, 2, 5, 3], "texture": "#vase"},
+        "south": {"uv": [1, 2, 5, 3], "texture": "#vase"},
+        "west": {"uv": [1, 2, 5, 3], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_3",
+      "from": [5, 6, 5],
+      "to": [11, 8, 11],
+      "faces": {
+        "north": {"uv": [0, 0, 6, 2], "texture": "#vase"},
+        "east": {"uv": [0, 0, 6, 2], "texture": "#vase"},
+        "south": {"uv": [0, 0, 6, 2], "texture": "#vase"},
+        "west": {"uv": [0, 0, 6, 2], "texture": "#vase"},
+        "up": {"uv": [6, 0, 12, 6], "texture": "#vase"},
+        "down": {"uv": [6, 6, 12, 12], "texture": "#vase"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "vase",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

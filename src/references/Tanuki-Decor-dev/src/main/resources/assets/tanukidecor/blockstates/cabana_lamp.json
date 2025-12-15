@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "half=lower,waterlogged=true": { "model": "tanukidecor:block/cabana_lamp/lower" },
+    "half=lower,waterlogged=false": { "model": "tanukidecor:block/cabana_lamp/lower" },
+    "half=upper,waterlogged=true": { "model": "tanukidecor:block/cabana_lamp/upper" },
+    "half=upper,waterlogged=false": { "model": "tanukidecor:block/cabana_lamp/upper" }
+  }
+}

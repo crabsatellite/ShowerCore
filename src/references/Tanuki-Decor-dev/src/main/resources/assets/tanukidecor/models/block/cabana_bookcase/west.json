@@ -1,0 +1,101 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_bookcase",
+    "bookcase": "tanukidecor:block/cabana_bookcase"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [0, 0, 0],
+      "to": [2, 2, 2],
+      "faces": {
+        "north": {"uv": [0, 7, 0.5, 7.5], "texture": "#bookcase"},
+        "east": {"uv": [0.5, 7, 0, 7.5], "texture": "#bookcase"},
+        "south": {"uv": [0, 7, 0.5, 7.5], "texture": "#bookcase"},
+        "west": {"uv": [0.5, 7, 0, 7.5], "texture": "#bookcase"},
+        "down": {"uv": [0, 7.5, 0.5, 8], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [0, 0, 14],
+      "to": [2, 2, 16],
+      "faces": {
+        "north": {"uv": [0.5, 7, 0, 7.5], "texture": "#bookcase"},
+        "east": {"uv": [0, 7, 0.5, 7.5], "texture": "#bookcase"},
+        "south": {"uv": [0.5, 7, 0, 7.5], "texture": "#bookcase"},
+        "west": {"uv": [0, 7, 0.5, 7.5], "texture": "#bookcase"},
+        "down": {"uv": [0, 8, 0.5, 7.5], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_0",
+      "from": [0, 2, 0],
+      "to": [2, 14, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 4.5, 3], "texture": "#bookcase"},
+        "east": {"uv": [12, 3, 8, 6], "texture": "#bookcase"},
+        "south": {"uv": [4.5, 3, 4, 6], "texture": "#bookcase"},
+        "west": {"uv": [0, 0, 4, 3], "texture": "#bookcase"},
+        "down": {"uv": [0, 3, 4, 3.5], "rotation": 90, "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_1",
+      "from": [2, 2, 14],
+      "to": [16, 14, 16],
+      "faces": {
+        "north": {"uv": [11.5, 0, 8, 3], "texture": "#bookcase"},
+        "south": {"uv": [0, 3.5, 3.5, 6.5], "texture": "#bookcase"},
+        "down": {"uv": [0, 6.5, 3.5, 7], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_2",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [11.5, 4, 15.5, 4.5], "texture": "#bookcase"},
+        "south": {"uv": [15.5, 4, 11.5, 4.5], "texture": "#bookcase"},
+        "west": {"uv": [11.5, 4.5, 15.5, 5], "texture": "#bookcase"},
+        "up": {"uv": [11.5, 0, 15.5, 4], "texture": "#bookcase"},
+        "down": {"uv": [11.5, 4, 15.5, 0], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_3",
+      "from": [2, 2, 0],
+      "to": [16, 8, 14],
+      "faces": {
+        "north": {"uv": [4.5, 3.5, 8, 5], "texture": "#bookcase"},
+        "up": {"uv": [4.5, 0, 8, 3.5], "texture": "#bookcase"},
+        "down": {"uv": [4.5, 3.5, 8, 0], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "book",
+      "from": [5, 8, 4],
+      "to": [12, 10, 8],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [5, 8, 8]},
+      "faces": {
+        "north": {"uv": [0, 13.25, 1.75, 13.75], "texture": "#bookcase"},
+        "east": {"uv": [0, 14.25, 1, 14.75], "texture": "#bookcase"},
+        "south": {"uv": [0, 13.75, 1.75, 14.25], "texture": "#bookcase"},
+        "west": {"uv": [0, 14.25, 1, 14.75], "texture": "#bookcase"},
+        "up": {"uv": [0, 12.25, 1.75, 13.25], "rotation": 180, "texture": "#bookcase"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "block.alarm_clock.tick": {
+    "sounds": [
+      "tanukidecor:alarm_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.alarm_clock.tick"
+  },
+  "block.alarm_clock.chime": {
+    "sounds": [
+      "tanukidecor:alarm_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.alarm_clock.chime"
+  },
+  "block.clock_tower.tick": {
+    "sounds": [
+      "tanukidecor:clock_tower_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.clock_tower.tick"
+  },
+  "block.cash_register.ring": {
+    "sounds": [
+      "tanukidecor:cash_register_ring"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.cash_register.ring"
+  },
+  "block.clock_tower.chime": {
+    "sounds": [
+      "tanukidecor:clock_tower_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.clock_tower.chime"
+  },
+  "block.cuckoo_clock.tick": {
+    "sounds": [
+      "tanukidecor:cuckoo_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.cuckoo_clock.tick"
+  },
+  "block.cuckoo_clock.chime": {
+    "sounds": [
+      "tanukidecor:cuckoo_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.cuckoo_clock.chime"
+  },
+  "block.foliot_clock.tick": {
+    "sounds": [
+      "tanukidecor:foliot_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.foliot_clock.tick"
+  },
+  "block.grandfather_clock.tick": {
+    "sounds": [
+      "tanukidecor:grandfather_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.grandfather_clock.tick"
+  },
+  "block.grandfather_clock.chime": {
+    "sounds": [
+      "tanukidecor:grandfather_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.grandfather_clock.chime"
+  },
+  "block.lantern_clock.chime": {
+    "sounds": [
+      "tanukidecor:lantern_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.lantern_clock.chime"
+  },
+  "block.mantle_clock.tick": {
+    "sounds": [
+      "tanukidecor:mantle_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.mantle_clock.tick"
+  },
+  "block.mantle_clock.chime": {
+    "sounds": [
+      "tanukidecor:mantle_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.mantle_clock.chime"
+  },
+  "block.medium_clock.tick": {
+    "sounds": [
+      "tanukidecor:medium_clock_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.medium_clock.tick"
+  },
+  "block.medium_clock.tick2": {
+    "sounds": [
+      "tanukidecor:medium_clock_tick_2"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.medium_clock.tick"
+  },
+  "block.medium_clock.chime": {
+    "sounds": [
+      "tanukidecor:medium_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.medium_clock.chime"
+  },
+  "block.medium_clock.chime2": {
+    "sounds": [
+      "tanukidecor:medium_clock_chime_2"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.medium_clock.chime"
+  },
+  "block.metronome.tick": {
+    "sounds": [
+      "tanukidecor:metronome_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.metronome.tick"
+  },
+  "block.mini_figure.squeak": {
+    "sounds": [
+      "tanukidecor:mini_figure_squeak"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.mini_figure.squeak"
+  },
+  "block.pocket_watch.tick": {
+    "sounds": [
+      "tanukidecor:pocket_watch_tick"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.pocket_watch.tick"
+  },
+  "block.recognizable_clock.chime": {
+    "sounds": [
+      "tanukidecor:recognizable_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.recognizable_clock.chime"
+  },
+  "block.slate_clock.chime": {
+    "sounds": [
+      "tanukidecor:slate_clock_chime"
+    ],
+    "subtitle": "subtitle.block.tanukidecor.slate_clock.chime"
+  }
+}

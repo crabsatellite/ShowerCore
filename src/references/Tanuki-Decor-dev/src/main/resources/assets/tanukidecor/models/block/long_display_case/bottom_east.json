@@ -1,0 +1,77 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/long_display_case",
+    "case": "tanukidecor:block/long_display_case"
+  },
+  "elements": [
+    {
+      "name": "wood_3",
+      "from": [0, 6, 0],
+      "to": [16, 8, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, 0]},
+      "faces": {
+        "north": {"uv": [12, 8, 8, 8.5], "texture": "#case"},
+        "east": {"uv": [12, 8.5, 8, 9], "texture": "#case"},
+        "south": {"uv": [8, 8, 12, 8.5], "texture": "#case"},
+        "up": {"uv": [8, 4, 12, 8], "texture": "#case"},
+        "down": {"uv": [8, 4, 12, 0], "texture": "#case"}
+      }
+    },
+    {
+      "name": "wood_4",
+      "from": [0, 8, 1],
+      "to": [15, 14, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, 0]},
+      "faces": {
+        "north": {"uv": [3.75, 8, 0, 9.5], "texture": "#case"},
+        "east": {"uv": [7.25, 8, 3.75, 9.5], "texture": "#case"},
+        "south": {"uv": [0, 8, 3.75, 9.5], "texture": "#case"}
+      }
+    },
+    {
+      "name": "wood_5",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, 0]},
+      "faces": {
+        "north": {"uv": [12, 8, 8, 8.5], "texture": "#case"},
+        "east": {"uv": [12, 8.5, 8, 9], "texture": "#case"},
+        "south": {"uv": [8, 8, 12, 8.5], "texture": "#case"},
+        "up": {"uv": [8, 0, 12, 4], "texture": "#case"},
+        "down": {"uv": [8, 4, 12, 8], "texture": "#case"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [11, 0, 0],
+      "to": [16, 6, 0],
+      "rotation": {"angle": 45, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [1.25, 9.5, 0, 11], "texture": "#case"},
+        "south": {"uv": [0, 9.5, 1.25, 11], "texture": "#case"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [11, 0, 16],
+      "to": [16, 6, 16],
+      "rotation": {"angle": -45, "axis": "y", "origin": [16, 0, 16]},
+      "faces": {
+        "north": {"uv": [1.25, 9.5, 0, 11], "texture": "#case"},
+        "south": {"uv": [0, 9.5, 1.25, 11], "texture": "#case"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

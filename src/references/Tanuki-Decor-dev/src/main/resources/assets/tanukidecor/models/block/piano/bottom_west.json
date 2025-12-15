@@ -1,0 +1,81 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/piano",
+    "piano": "tanukidecor:block/piano"
+  },
+  "elements": [
+    {
+      "name": "piano_0",
+      "from": [0, 0, 7],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 4, 4, 8], "texture": "#piano"},
+        "south": {"uv": [4, 4, 0, 8], "texture": "#piano"},
+        "west": {"uv": [4, 4, 6, 8], "texture": "#piano"},
+        "down": {"uv": [6, 4, 8, 8], "rotation": 90, "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_1",
+      "from": [3.5, 0, 2.5],
+      "to": [4.5, 1, 4.5],
+      "faces": {
+        "north": {"uv": [8.5, 6.25, 8.75, 6.5], "texture": "#piano"},
+        "east": {"uv": [9, 6, 8.5, 6.25], "texture": "#piano"},
+        "south": {"uv": [8.75, 6.25, 9, 6.5], "texture": "#piano"},
+        "west": {"uv": [8.5, 6, 9, 6.25], "texture": "#piano"},
+        "down": {"uv": [9, 6, 8.5, 6.25], "rotation": 90, "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_2",
+      "from": [3, 1, 1],
+      "to": [5, 4, 6],
+      "faces": {
+        "north": {"uv": [8.5, 5.25, 9, 6], "texture": "#piano"},
+        "east": {"uv": [9.75, 3.5, 8.5, 4.25], "texture": "#piano"},
+        "south": {"uv": [9, 5.25, 8.5, 6], "texture": "#piano"},
+        "west": {"uv": [8.5, 3.5, 9.75, 4.25], "texture": "#piano"},
+        "up": {"uv": [8.5, 4.25, 9.75, 4.75], "rotation": 90, "texture": "#piano"},
+        "down": {"uv": [8.5, 4.75, 9.75, 5.25], "rotation": 90, "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_3",
+      "from": [3, 4, 2.5],
+      "to": [5, 16, 4.5],
+      "faces": {
+        "north": {"uv": [8, 3.5, 8.5, 6.5], "texture": "#piano"},
+        "east": {"uv": [8.5, 3.5, 8, 6.5], "texture": "#piano"},
+        "south": {"uv": [8, 3.5, 8.5, 6.5], "texture": "#piano"},
+        "west": {"uv": [8.5, 3.5, 8, 6.5], "texture": "#piano"}
+      }
+    },
+    {
+      "name": "piano_4",
+      "from": [12, 3, 3],
+      "to": [16, 3, 7],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [16, 3, 7]},
+      "faces": {
+        "north": {"uv": [0, 0, 1, 0], "texture": "#piano"},
+        "east": {"uv": [0, 0, 1, 0], "texture": "#piano"},
+        "south": {"uv": [0, 0, 1, 0], "texture": "#piano"},
+        "west": {"uv": [0, 0, 1, 0], "texture": "#piano"},
+        "up": {"uv": [9, 5.25, 10, 6.25], "texture": "#piano"},
+        "down": {"uv": [9, 6.25, 10, 5.25], "texture": "#piano"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

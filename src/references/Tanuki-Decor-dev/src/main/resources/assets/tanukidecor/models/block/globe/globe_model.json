@@ -1,0 +1,63 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "globe": "tanukidecor:block/globe",
+    "particle": "tanukidecor:block/globe"
+  },
+  "elements": [
+    {
+      "name": "top_axis",
+      "from": [7.5, 13, 7.5],
+      "to": [8.5, 14, 8.5],
+      "faces": {
+        "north": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "east": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "south": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "west": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"}
+      }
+    },
+    {
+      "name": "globe",
+      "from": [4, 5, 4],
+      "to": [12, 13, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4, 4, 8, 8], "texture": "#globe"},
+        "east": {"uv": [0, 4, 4, 8], "texture": "#globe"},
+        "south": {"uv": [12, 4, 16, 8], "texture": "#globe"},
+        "west": {"uv": [8, 4, 12, 8], "texture": "#globe"},
+        "up": {"uv": [4, 0, 8, 4], "rotation": 180, "texture": "#globe"},
+        "down": {"uv": [4, 8, 8, 12], "rotation": 180, "texture": "#globe"}
+      }
+    },
+    {
+      "name": "bottom_axis",
+      "from": [7.5, 4, 7.5],
+      "to": [8.5, 5, 8.5],
+      "faces": {
+        "north": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "east": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "south": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"},
+        "west": {"uv": [0, 8.5, 0.5, 9], "texture": "#globe"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "globe",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [
+        {
+          "name": "globe",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [0, 1, 2]
+        }
+      ]
+    }
+  ]
+}

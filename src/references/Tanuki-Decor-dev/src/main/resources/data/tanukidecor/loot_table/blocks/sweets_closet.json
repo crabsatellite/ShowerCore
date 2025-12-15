@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "tanukidecor:sweets_closet",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "width": "1",
+            "height": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tanukidecor:sweets_closet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

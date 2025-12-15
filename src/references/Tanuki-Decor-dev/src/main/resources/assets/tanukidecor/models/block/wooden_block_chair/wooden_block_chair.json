@@ -1,0 +1,120 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_chair",
+    "chair": "tanukidecor:block/wooden_block_chair"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [4, 0, 4],
+      "to": [6, 6, 6],
+      "faces": {
+        "north": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "east": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "south": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "west": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "up": {"uv": [0, 10, 1, 11], "texture": "#chair"},
+        "down": {"uv": [0, 10, 1, 11], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [10, 0, 4],
+      "to": [12, 6, 6],
+      "faces": {
+        "north": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "east": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "south": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "west": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "up": {"uv": [1, 10, 0, 11], "texture": "#chair"},
+        "down": {"uv": [1, 10, 0, 11], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_2",
+      "from": [4, 0, 10],
+      "to": [6, 6, 12],
+      "faces": {
+        "north": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "east": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "south": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "west": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "up": {"uv": [0, 11, 1, 10], "texture": "#chair"},
+        "down": {"uv": [0, 11, 1, 10], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [10, 0, 10],
+      "to": [12, 6, 12],
+      "faces": {
+        "north": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "east": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "south": {"uv": [0, 7, 1, 10], "texture": "#chair"},
+        "west": {"uv": [1, 7, 0, 10], "texture": "#chair"},
+        "up": {"uv": [1, 11, 0, 10], "texture": "#chair"},
+        "down": {"uv": [1, 11, 0, 10], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_0",
+      "from": [3, 6, 3],
+      "to": [13, 8, 13],
+      "faces": {
+        "north": {"uv": [0, 5, 5, 6], "texture": "#chair"},
+        "east": {"uv": [0, 6, 5, 7], "texture": "#chair"},
+        "south": {"uv": [5, 5, 0, 6], "texture": "#chair"},
+        "west": {"uv": [0, 6, 5, 7], "texture": "#chair"},
+        "up": {"uv": [0, 0, 5, 5], "texture": "#chair"},
+        "down": {"uv": [0, 5, 5, 0], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_1",
+      "from": [4, 8, 11],
+      "to": [6, 10, 13],
+      "faces": {
+        "north": {"uv": [1, 7, 2, 8], "texture": "#chair"},
+        "east": {"uv": [1, 9, 2, 10], "texture": "#chair"},
+        "south": {"uv": [2, 7, 1, 8], "texture": "#chair"},
+        "west": {"uv": [1, 8, 2, 9], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_2",
+      "from": [10, 8, 11],
+      "to": [12, 10, 13],
+      "faces": {
+        "north": {"uv": [2, 7, 1, 8], "texture": "#chair"},
+        "east": {"uv": [2, 8, 1, 9], "texture": "#chair"},
+        "south": {"uv": [1, 7, 2, 8], "texture": "#chair"},
+        "west": {"uv": [2, 9, 1, 10], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_3",
+      "from": [3, 10, 11],
+      "to": [13, 16, 13],
+      "faces": {
+        "north": {"uv": [5, 0, 10, 3], "texture": "#chair"},
+        "east": {"uv": [6, 4, 5, 7], "texture": "#chair"},
+        "south": {"uv": [10, 0, 5, 3], "texture": "#chair"},
+        "west": {"uv": [5, 4, 6, 7], "texture": "#chair"},
+        "up": {"uv": [5, 3, 10, 4], "texture": "#chair"},
+        "down": {"uv": [5, 4, 10, 3], "texture": "#chair"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "chair",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/minimalist_lamp",
+    "lamp": "tanukidecor:block/minimalist_lamp"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [3, 0, 3],
+      "to": [13, 2, 13],
+      "faces": {
+        "north": {"uv": [0, 5, 5, 6], "texture": "#lamp"},
+        "east": {"uv": [0, 5, 5, 6], "texture": "#lamp"},
+        "south": {"uv": [0, 5, 5, 6], "texture": "#lamp"},
+        "west": {"uv": [0, 5, 5, 6], "texture": "#lamp"},
+        "up": {"uv": [0, 0, 5, 5], "texture": "#lamp"},
+        "down": {"uv": [0, 5, 5, 0], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "stick0",
+      "from": [7, 2, 7],
+      "to": [9, 16, 9],
+      "faces": {
+        "north": {"uv": [5, 0, 6, 7], "texture": "#lamp"},
+        "east": {"uv": [6, 0, 5, 7], "texture": "#lamp"},
+        "south": {"uv": [5, 0, 6, 7], "texture": "#lamp"},
+        "west": {"uv": [6, 0, 5, 7], "texture": "#lamp"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

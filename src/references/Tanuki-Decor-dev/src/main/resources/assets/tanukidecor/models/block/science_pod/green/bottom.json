@@ -1,0 +1,9 @@
+{
+  "parent": "tanukidecor:block/science_pod/bottom",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/science_pod/green",
+    "pod": "tanukidecor:block/science_pod/green",
+    "bubbles": "tanukidecor:block/science_pod/bubbles"
+  }
+}

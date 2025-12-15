@@ -1,0 +1,32 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "tanukidecor:block/newtons_cradle",
+    "ball": "tanukidecor:block/newtons_cradle"
+  },
+  "elements": [
+    {
+      "name": "ball",
+      "from": [7, 2, 7],
+      "to": [9, 4, 9],
+      "faces": {
+        "north": {"uv": [13, 0, 15, 2], "texture": "#ball"},
+        "east": {"uv": [13, 0, 15, 2], "texture": "#ball"},
+        "south": {"uv": [13, 0, 15, 2], "texture": "#ball"},
+        "west": {"uv": [13, 0, 15, 2], "texture": "#ball"},
+        "up": {"uv": [13, 0, 15, 2], "texture": "#ball"},
+        "down": {"uv": [13, 0, 15, 2], "texture": "#ball"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "balls",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

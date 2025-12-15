@@ -1,0 +1,7 @@
+{
+  "parent": "tanukidecor:block/neon_sign/neon_sign",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "neon": "tanukidecor:block/neon_sign/club"
+  }
+}

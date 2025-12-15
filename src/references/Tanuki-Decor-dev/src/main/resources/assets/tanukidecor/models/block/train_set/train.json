@@ -1,0 +1,235 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/train_set",
+    "train": "tanukidecor:block/train_set"
+  },
+  "elements": [
+    {
+      "name": "locomotive_0",
+      "from": [-9.05635, 1, 0.92893],
+      "to": [-6.05635, 5, 4.92893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [10.5, 0, 12, 2], "texture": "#train"},
+        "east": {"uv": [10.5, 0, 8.5, 2], "texture": "#train"},
+        "south": {"uv": [10.5, 0, 12, 2], "texture": "#train"},
+        "west": {"uv": [8.5, 0, 10.5, 2], "texture": "#train"},
+        "up": {"uv": [0, 0, 2, 1.5], "rotation": 270, "texture": "#train"},
+        "down": {"uv": [8.5, 2, 10.5, 3.5], "rotation": 90, "texture": "#train"}
+      }
+    },
+    {
+      "name": "locomotive_1",
+      "from": [-9.05635, 1, 4.92893],
+      "to": [-6.05635, 4, 8.92893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "east": {"uv": [14, 0, 12, 1.5], "texture": "#train"},
+        "south": {"uv": [14, 1.5, 15.5, 3], "texture": "#train"},
+        "west": {"uv": [12, 0, 14, 1.5], "texture": "#train"},
+        "up": {"uv": [14, 0, 16, 1.5], "rotation": 270, "texture": "#train"},
+        "down": {"uv": [12, 1.5, 14, 3], "rotation": 90, "texture": "#train"}
+      }
+    },
+    {
+      "name": "locomotive_2",
+      "from": [-8.05635, 4, 6.92893],
+      "to": [-7.05635, 6, 7.92893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [15.5, 1.5, 16, 2.5], "texture": "#train"},
+        "east": {"uv": [15.5, 1.5, 16, 2.5], "texture": "#train"},
+        "south": {"uv": [15.5, 1.5, 16, 2.5], "texture": "#train"},
+        "west": {"uv": [15.5, 1.5, 16, 2.5], "texture": "#train"},
+        "up": {"uv": [15.5, 2.5, 16, 3], "rotation": 270, "texture": "#train"}
+      }
+    },
+    {
+      "name": "roof_0",
+      "from": [-9.55635, 5, 0.42893],
+      "to": [-5.55635, 6, 5.42893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [2, 13.5, 0, 14], "texture": "#train"},
+        "east": {"uv": [2.5, 13, 0, 13.5], "texture": "#train"},
+        "south": {"uv": [0, 14, 2, 14.5], "texture": "#train"},
+        "west": {"uv": [0, 13, 2.5, 13.5], "texture": "#train"},
+        "up": {"uv": [0, 11, 2.5, 13], "rotation": 270, "texture": "#train"},
+        "down": {"uv": [0, 11, 2.5, 13], "rotation": 90, "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_0",
+      "from": [-8.55635, 0, 1.92893],
+      "to": [-8.55635, 1, 7.92893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 1], "texture": "#train"},
+        "east": {"uv": [5, 6, 8, 6.5], "texture": "#train"},
+        "south": {"uv": [0, 0, 0, 1], "texture": "#train"},
+        "west": {"uv": [5, 6, 8, 6.5], "texture": "#train"},
+        "up": {"uv": [0, 0, 6, 0], "rotation": 270, "texture": "#train"},
+        "down": {"uv": [0, 0, 6, 0], "rotation": 90, "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_1",
+      "from": [-6.55635, 0, 1.92893],
+      "to": [-6.55635, 1, 7.92893],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 1], "texture": "#train"},
+        "east": {"uv": [5, 6, 8, 6.5], "texture": "#train"},
+        "south": {"uv": [0, 0, 0, 1], "texture": "#train"},
+        "west": {"uv": [5, 6, 8, 6.5], "texture": "#train"},
+        "up": {"uv": [0, 0, 6, 0], "rotation": 270, "texture": "#train"},
+        "down": {"uv": [0, 0, 6, 0], "rotation": 90, "texture": "#train"}
+      }
+    },
+    {
+      "name": "wagon_0",
+      "from": [5, 1, -9.5],
+      "to": [12, 5, -6.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 0, 8.5, 2], "texture": "#train"},
+        "east": {"uv": [5, 3.5, 6.5, 5.5], "texture": "#train"},
+        "south": {"uv": [8.5, 0, 5, 2], "texture": "#train"},
+        "west": {"uv": [5, 3.5, 6.5, 5.5], "texture": "#train"},
+        "down": {"uv": [5, 2, 8.5, 3.5], "texture": "#train"}
+      }
+    },
+    {
+      "name": "roof_1",
+      "from": [4.5, 5, -10],
+      "to": [12.5, 6, -6],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [0, 10, 4, 10.5], "texture": "#train"},
+        "east": {"uv": [2, 10.5, 0, 11], "texture": "#train"},
+        "south": {"uv": [4, 10, 0, 10.5], "texture": "#train"},
+        "west": {"uv": [0, 10.5, 2, 11], "texture": "#train"},
+        "up": {"uv": [0, 8, 4, 10], "texture": "#train"},
+        "down": {"uv": [0, 8, 4, 10], "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_2",
+      "from": [6, 0, -9],
+      "to": [11, 1, -9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"},
+        "south": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_3",
+      "from": [6, 0, -7],
+      "to": [11, 1, -7],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"},
+        "south": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"}
+      }
+    },
+    {
+      "name": "chains_0",
+      "from": [1, 2, -9.5],
+      "to": [5, 2, -6.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "up": {"uv": [6.5, 3.5, 8.5, 5], "texture": "#train"},
+        "down": {"uv": [6.5, 5, 8.5, 3.5], "texture": "#train"}
+      }
+    },
+    {
+      "name": "wagon_1",
+      "from": [7.99856, 1, -9.69863],
+      "to": [14.99856, 5, -6.69863],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 0, 8.5, 2], "texture": "#train"},
+        "east": {"uv": [5, 3.5, 6.5, 5.5], "texture": "#train"},
+        "south": {"uv": [8.5, 0, 5, 2], "texture": "#train"},
+        "west": {"uv": [5, 3.5, 6.5, 5.5], "texture": "#train"},
+        "down": {"uv": [5, 2, 8.5, 3.5], "texture": "#train"}
+      }
+    },
+    {
+      "name": "roof_2",
+      "from": [7.49856, 5, -10.19863],
+      "to": [15.49856, 6, -6.19863],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [0, 10, 4, 10.5], "texture": "#train"},
+        "east": {"uv": [2, 10.5, 0, 11], "texture": "#train"},
+        "south": {"uv": [4, 10, 0, 10.5], "texture": "#train"},
+        "west": {"uv": [0, 10.5, 2, 11], "texture": "#train"},
+        "up": {"uv": [0, 8, 4, 10], "texture": "#train"},
+        "down": {"uv": [0, 8, 4, 10], "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_4",
+      "from": [8.99856, 0, -9.19863],
+      "to": [13.99856, 1, -9.19863],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"},
+        "south": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"}
+      }
+    },
+    {
+      "name": "wheels_5",
+      "from": [8.99856, 0, -7.19863],
+      "to": [13.99856, 1, -7.19863],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"},
+        "south": {"uv": [5, 5.5, 7.5, 6], "texture": "#train"}
+      }
+    },
+    {
+      "name": "chains_1",
+      "from": [4.99856, 2, -9.69863],
+      "to": [7.99856, 2, -6.69863],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [8, 2, 8]},
+      "faces": {
+        "up": {"uv": [6.5, 3.5, 8, 5], "texture": "#train"},
+        "down": {"uv": [6.5, 5, 8, 3.5], "texture": "#train"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "train",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "locomotive",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0, 1, 2, 3, 4, 5]
+        },
+        {
+          "name": "wagon_0",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [6, 7, 8, 9, 10]
+        },
+        {
+          "name": "wagon_1",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [11, 12, 13, 14, 15]
+        }
+      ]
+    }
+  ]
+}

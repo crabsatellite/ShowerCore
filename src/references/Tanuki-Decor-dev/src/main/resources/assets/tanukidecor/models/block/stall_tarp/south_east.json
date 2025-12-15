@@ -1,0 +1,49 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "#tarp"
+  },
+  "elements": [
+    {
+      "name": "tarp_3",
+      "from": [0, 18, 0],
+      "to": [16, 18, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [24, 18, 16]},
+      "faces": {
+        "up": {"uv": [4, 4, 0, 0], "texture": "#tarp"},
+        "down": {"uv": [4, 0, 0, 4], "texture": "#tarp"}
+      }
+    },
+    {
+      "name": "tarp_9",
+      "from": [16, 10, 0],
+      "to": [16, 18, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [24, 18, 16]},
+      "faces": {
+        "east": {"uv": [8, 12.5, 4, 14.5], "texture": "#tarp"},
+        "west": {"uv": [4, 12.5, 8, 14.5], "texture": "#tarp"}
+      }
+    },
+    {
+      "name": "plank_3",
+      "from": [6, 17.5, 0],
+      "to": [10, 17.5, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [24, 18, 16]},
+      "faces": {
+        "up": {"uv": [9, 4, 8, 8], "texture": "#tarp"},
+        "down": {"uv": [9, 8, 8, 4], "texture": "#tarp"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right_back",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

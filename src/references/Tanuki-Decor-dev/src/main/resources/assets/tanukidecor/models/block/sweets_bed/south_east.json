@@ -1,0 +1,54 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_bed",
+    "bed": "tanukidecor:block/sweets_bed"
+  },
+  "elements": [
+    {
+      "name": "bed_3",
+      "from": [0, 0, 0],
+      "to": [16, 8, 14],
+      "faces": {
+        "east": {"uv": [11.5, 7, 8, 9], "texture": "#bed"},
+        "up": {"uv": [12, 0, 8, 3.5], "texture": "#bed"},
+        "down": {"uv": [8, 3.5, 12, 7], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow_1",
+      "from": [4, 8, 7],
+      "to": [10, 11, 13],
+      "faces": {
+        "north": {"uv": [1.5, 6.5, 0, 7.25], "texture": "#bed"},
+        "east": {"uv": [1.5, 6.5, 0, 7.25], "texture": "#bed"},
+        "south": {"uv": [1.5, 6.5, 0, 7.25], "texture": "#bed"},
+        "west": {"uv": [1.5, 6.5, 0, 7.25], "texture": "#bed"},
+        "up": {"uv": [1.5, 5, 0, 6.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "cookie_1",
+      "from": [0, 0, 14],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#bed"},
+        "east": {"uv": [0, 4.5, 4, 5], "rotation": 90, "texture": "#bed"},
+        "south": {"uv": [4, 0, 0, 4], "texture": "#bed"},
+        "up": {"uv": [4, 4, 0, 4.5], "texture": "#bed"},
+        "down": {"uv": [4, 4.5, 0, 4], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "back_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

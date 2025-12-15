@@ -1,0 +1,63 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_bed",
+    "bed": "tanukidecor:block/cabana_bed"
+  },
+  "elements": [
+    {
+      "name": "bed_4",
+      "from": [0, 0, 13],
+      "to": [16, 14, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.5], "texture": "#bed"},
+        "south": {"uv": [4, 0, 0, 3.5], "texture": "#bed"},
+        "west": {"uv": [0, 5, 3.5, 4.25], "rotation": 90, "texture": "#bed"},
+        "up": {"uv": [0, 4.25, 4, 3.5], "texture": "#bed"},
+        "down": {"uv": [0, 3.5, 4, 4.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_5",
+      "from": [0, 1, 0],
+      "to": [16, 5, 13],
+      "faces": {
+        "west": {"uv": [3.25, 8.25, 0, 9.25], "texture": "#bed"},
+        "up": {"uv": [0, 8.25, 4, 5], "texture": "#bed"},
+        "down": {"uv": [0, 5, 4, 8.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "mattress_2",
+      "from": [1, 5, 0],
+      "to": [16, 8, 13],
+      "faces": {
+        "west": {"uv": [7.75, 3.25, 11, 4], "texture": "#bed"},
+        "up": {"uv": [7.75, 0, 11.5, 3.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow_left",
+      "from": [5, 8, 8],
+      "to": [15, 9, 12],
+      "faces": {
+        "north": {"uv": [4, 5, 6.5, 5.25], "texture": "#bed"},
+        "east": {"uv": [5, 5.25, 4, 5.5], "texture": "#bed"},
+        "south": {"uv": [6.5, 5, 4, 5.25], "texture": "#bed"},
+        "west": {"uv": [4, 5.25, 5, 5.5], "texture": "#bed"},
+        "up": {"uv": [4, 4, 6.5, 5], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left_back",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

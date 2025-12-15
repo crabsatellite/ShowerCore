@@ -1,0 +1,7 @@
+{
+  "parent": "tanukidecor:block/narrow_streamer/narrow_streamer",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "streamer": "tanukidecor:block/narrow_streamer/yellow"
+  }
+}

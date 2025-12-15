@@ -1,0 +1,150 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/metronome",
+    "metronome": "tanukidecor:block/metronome"
+  },
+  "elements": [
+    {
+      "name": "metronome_0",
+      "from": [4, 0, 5],
+      "to": [12, 3, 11],
+      "faces": {
+        "north": {"uv": [0, 6, 4, 7.5], "texture": "#metronome"},
+        "east": {"uv": [3, 9, 0, 10.5], "texture": "#metronome"},
+        "south": {"uv": [0, 7.5, 4, 9], "texture": "#metronome"},
+        "west": {"uv": [0, 9, 3, 10.5], "texture": "#metronome"},
+        "up": {"uv": [0, 3, 4, 6], "texture": "#metronome"},
+        "down": {"uv": [0, 0, 4, 3], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "metronome_1",
+      "from": [4, 3, 7],
+      "to": [5, 11, 11.01],
+      "rotation": {"angle": -22.5, "axis": "z", "origin": [4, 3, 9]},
+      "faces": {
+        "north": {"uv": [0, 12.5, 4, 13], "rotation": 90, "texture": "#metronome"},
+        "east": {"uv": [0, 12.5, 4, 10.5], "rotation": 270, "texture": "#metronome"},
+        "south": {"uv": [0, 13, 4, 13.5], "rotation": 270, "texture": "#metronome"},
+        "west": {"uv": [0, 10.5, 4, 12.5], "rotation": 270, "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "metronome_2",
+      "from": [11, 3, 7],
+      "to": [12, 11, 11.01],
+      "rotation": {"angle": 22.5, "axis": "z", "origin": [12, 3, 9]},
+      "faces": {
+        "north": {"uv": [0, 13, 4, 12.5], "rotation": 90, "texture": "#metronome"},
+        "east": {"uv": [0, 12.5, 4, 10.5], "rotation": 270, "texture": "#metronome"},
+        "south": {"uv": [0, 13.5, 4, 13], "rotation": 270, "texture": "#metronome"},
+        "west": {"uv": [0, 10.5, 4, 12.5], "rotation": 270, "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "metronome_3",
+      "from": [7, 10, 6.99],
+      "to": [9, 11, 11.02],
+      "faces": {
+        "north": {"uv": [1, 14, 2, 14.5], "texture": "#metronome"},
+        "east": {"uv": [3, 13.5, 1, 14], "texture": "#metronome"},
+        "south": {"uv": [1, 14.5, 2, 15], "texture": "#metronome"},
+        "west": {"uv": [1, 13.5, 3, 14], "texture": "#metronome"},
+        "up": {"uv": [0, 13.5, 1, 15.5], "texture": "#metronome"},
+        "down": {"uv": [0, 15.5, 1, 13.5], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "front_0",
+      "from": [5, 3, 7.005],
+      "to": [11, 10, 7.005],
+      "faces": {
+        "north": {"uv": [4, 0, 7, 3.5], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "front_1",
+      "from": [5.5, 5, 7.005],
+      "to": [6, 6, 7.005],
+      "faces": {
+        "north": {"uv": [4.5, 3.5, 5, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "front_2",
+      "from": [10, 5, 7.005],
+      "to": [10.5, 6, 7.005],
+      "faces": {
+        "north": {"uv": [5, 3.5, 4.5, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "front_3",
+      "from": [6.5, 7, 7.005],
+      "to": [7, 8, 7.005],
+      "faces": {
+        "north": {"uv": [4, 3.5, 4.5, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "front_4",
+      "from": [9, 7, 7.005],
+      "to": [9.5, 8, 7.005],
+      "faces": {
+        "north": {"uv": [4.5, 3.5, 4, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "back_0",
+      "from": [5, 3, 10.995],
+      "to": [11, 10, 10.995],
+      "faces": {
+        "south": {"uv": [7, 0, 10, 3.5], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "back_1",
+      "from": [5.5, 5, 10.995],
+      "to": [6, 6, 10.995],
+      "faces": {
+        "south": {"uv": [7, 3.5, 7.5, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "back_2",
+      "from": [10, 5, 10.995],
+      "to": [10.5, 6, 10.995],
+      "faces": {
+        "south": {"uv": [7, 3.5, 7.5, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "back_3",
+      "from": [6.5, 7, 10.995],
+      "to": [7, 8, 10.995],
+      "faces": {
+        "south": {"uv": [7.5, 3.5, 8, 4], "texture": "#metronome"}
+      }
+    },
+    {
+      "name": "back_4",
+      "from": [9, 7, 10.995],
+      "to": [9.5, 8, 10.995],
+      "faces": {
+        "south": {"uv": [7.5, 3.5, 8, 4], "texture": "#metronome"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "metronome",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    }
+  ]
+}

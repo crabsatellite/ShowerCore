@@ -1,0 +1,35 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "elements": [
+    {
+      "from": [-2, -1.5, -2],
+      "to": [2, 1.5, 2],
+      "faces": {
+        "north": {"uv": [16, 3, 14, 4.5], "texture": "#wax"},
+        "east": {"uv": [14, 3, 16, 4.5], "texture": "#wax"},
+        "south": {"uv": [16, 3, 14, 4.5], "texture": "#wax"},
+        "west": {"uv": [14, 3, 16, 4.5], "texture": "#wax"},
+        "up": {"uv": [16, 0, 14, 2], "texture": "#wax"},
+        "down": {"uv": [14, 5, 16, 7], "texture": "#wax"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "wax",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "large",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

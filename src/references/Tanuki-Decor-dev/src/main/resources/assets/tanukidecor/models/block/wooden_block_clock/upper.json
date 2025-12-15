@@ -1,0 +1,60 @@
+{
+  "credit": "Made by Skart2000",
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/block",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_clock",
+    "clock": "tanukidecor:block/wooden_block_clock"
+  },
+  "elements": [
+    {
+      "name": "clock_4",
+      "from": [4.77817, 2, 10.01],
+      "to": [15.77817, 13, 15.99],
+      "rotation": {"angle": 45, "axis": "z", "origin": [15.77817, 2, 13]},
+      "faces": {
+        "north": {"uv": [8, 0, 13.5, 5.5], "rotation": 270, "texture": "#clock"},
+        "east": {"uv": [13.5, 5.5, 8, 8.5], "rotation": 90, "texture": "#clock"},
+        "south": {"uv": [8, 0, 13.5, 5.5], "texture": "#clock"},
+        "up": {"uv": [8, 5.5, 13.5, 8.5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_5",
+      "from": [0.2, 0, 10],
+      "to": [3, 2, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [1.5, 14, 3, 15], "texture": "#clock"},
+        "east": {"uv": [1.5, 13, 4.5, 14], "texture": "#clock"},
+        "south": {"uv": [3, 14, 1.5, 15], "texture": "#clock"},
+        "west": {"uv": [1.5, 13, 4.5, 14], "texture": "#clock"},
+        "up": {"uv": [0, 13, 1.5, 16], "texture": "#clock"},
+        "down": {"uv": [0, 13, 1.5, 16], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_6",
+      "from": [13, 0, 10],
+      "to": [15.8, 2, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, -16, 0]},
+      "faces": {
+        "north": {"uv": [3, 14, 1.5, 15], "texture": "#clock"},
+        "east": {"uv": [4.5, 13, 1.5, 14], "texture": "#clock"},
+        "south": {"uv": [1.5, 14, 3, 15], "texture": "#clock"},
+        "west": {"uv": [4.5, 13, 1.5, 14], "texture": "#clock"},
+        "up": {"uv": [1.5, 13, 0, 16], "texture": "#clock"},
+        "down": {"uv": [1.5, 13, 0, 16], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

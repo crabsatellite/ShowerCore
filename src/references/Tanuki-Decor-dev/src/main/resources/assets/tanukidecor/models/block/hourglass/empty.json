@@ -1,0 +1,126 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/hourglass",
+    "hourglass": "tanukidecor:block/hourglass"
+  },
+  "elements": [
+    {
+      "name": "wood_0",
+      "from": [2, 0, 2],
+      "to": [14, 2, 14],
+      "faces": {
+        "north": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "east": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "south": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "west": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "up": {"uv": [0, 0, 6, 6], "texture": "#hourglass"},
+        "down": {"uv": [0, 6, 6, 12], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "wood_1",
+      "from": [2, 14, 2],
+      "to": [14, 16, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 16, 0]},
+      "faces": {
+        "north": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "east": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "south": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "west": {"uv": [0, 12, 6, 13], "texture": "#hourglass"},
+        "up": {"uv": [0, 12, 6, 6], "texture": "#hourglass"},
+        "down": {"uv": [0, 6, 6, 0], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "wood_2",
+      "from": [3, 2, 3],
+      "to": [5, 14, 5],
+      "faces": {
+        "north": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "east": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "south": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "west": {"uv": [7, 0, 6, 6], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "wood_3",
+      "from": [11, 2, 3],
+      "to": [13, 14, 5],
+      "faces": {
+        "north": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "east": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "south": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "west": {"uv": [6, 0, 7, 6], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "wood_4",
+      "from": [3, 2, 11],
+      "to": [5, 14, 13],
+      "faces": {
+        "north": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "east": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "south": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "west": {"uv": [6, 0, 7, 6], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "wood_5",
+      "from": [11, 2, 11],
+      "to": [13, 14, 13],
+      "faces": {
+        "north": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "east": {"uv": [7, 0, 6, 6], "texture": "#hourglass"},
+        "south": {"uv": [6, 0, 7, 6], "texture": "#hourglass"},
+        "west": {"uv": [7, 0, 6, 6], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "glass_0",
+      "from": [5, 2, 5],
+      "to": [11, 7, 11],
+      "faces": {
+        "north": {"uv": [7, 0, 10, 2.5], "texture": "#hourglass"},
+        "east": {"uv": [10, 0, 7, 2.5], "texture": "#hourglass"},
+        "south": {"uv": [7, 0, 10, 2.5], "texture": "#hourglass"},
+        "west": {"uv": [10, 0, 7, 2.5], "texture": "#hourglass"},
+        "up": {"uv": [7, 2.5, 10, 5.5], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "glass_1",
+      "from": [6.5, 7, 6.5],
+      "to": [9.5, 9, 9.5],
+      "faces": {
+        "north": {"uv": [13, 0, 14.5, 1], "texture": "#hourglass"},
+        "east": {"uv": [13, 0, 14.5, 1], "texture": "#hourglass"},
+        "south": {"uv": [13, 0, 14.5, 1], "texture": "#hourglass"},
+        "west": {"uv": [13, 0, 14.5, 1], "texture": "#hourglass"}
+      }
+    },
+    {
+      "name": "glass_2",
+      "from": [5, 9, 5],
+      "to": [11, 14, 11],
+      "faces": {
+        "north": {"uv": [10, 0, 13, 2.5], "texture": "#hourglass"},
+        "east": {"uv": [13, 0, 10, 2.5], "texture": "#hourglass"},
+        "south": {"uv": [10, 0, 13, 2.5], "texture": "#hourglass"},
+        "west": {"uv": [13, 0, 10, 2.5], "texture": "#hourglass"},
+        "down": {"uv": [10, 2.5, 13, 5.5], "texture": "#hourglass"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hourglass",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  ]
+}

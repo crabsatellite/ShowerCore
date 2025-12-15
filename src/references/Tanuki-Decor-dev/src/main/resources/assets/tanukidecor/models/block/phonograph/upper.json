@@ -1,0 +1,117 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/phonograph",
+    "phonograph": "tanukidecor:block/phonograph"
+  },
+  "elements": [
+    {
+      "name": "phonograph_4",
+      "from": [7, -2, 9],
+      "to": [9, 0, 15],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "east": {"uv": [6, 0, 4.5, 0.5], "texture": "#phonograph"},
+        "south": {"uv": [4.5, 0.5, 5, 1], "texture": "#phonograph"},
+        "west": {"uv": [4.5, 0, 6, 0.5], "texture": "#phonograph"},
+        "up": {"uv": [3.5, 0, 4, 1.5], "texture": "#phonograph"},
+        "down": {"uv": [4, 0, 4.5, 1.5], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_5",
+      "from": [5, -4, 9],
+      "to": [11, 2, 9],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [3.5, 7, 5, 8.5], "texture": "#phonograph"},
+        "east": {"uv": [3.5, 1.5, 3.5, 3], "texture": "#phonograph"},
+        "south": {"uv": [3.5, 1.5, 5, 3], "texture": "#phonograph"},
+        "west": {"uv": [3.5, 1.5, 3.5, 3], "texture": "#phonograph"},
+        "up": {"uv": [3.5, 1.5, 5, 1.5], "texture": "#phonograph"},
+        "down": {"uv": [3.5, 1.5, 5, 1.5], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_6",
+      "from": [5, 2, 1],
+      "to": [11, 2, 9],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [3.5, 3, 5, 3], "texture": "#phonograph"},
+        "east": {"uv": [3.5, 3, 5.5, 3], "texture": "#phonograph"},
+        "south": {"uv": [3.5, 3, 5, 3], "texture": "#phonograph"},
+        "west": {"uv": [3.5, 3, 5.5, 3], "texture": "#phonograph"},
+        "up": {"uv": [3.5, 3, 5, 5], "texture": "#phonograph"},
+        "down": {"uv": [3.5, 7, 5, 5], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_7",
+      "from": [5, -4, 1],
+      "to": [11, -4, 9],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [3.5, 3, 5, 3], "texture": "#phonograph"},
+        "east": {"uv": [3.5, 3, 5.5, 3], "texture": "#phonograph"},
+        "south": {"uv": [3.5, 3, 5, 3], "texture": "#phonograph"},
+        "west": {"uv": [3.5, 3, 5.5, 3], "texture": "#phonograph"},
+        "up": {"uv": [3.5, 5, 5, 7], "texture": "#phonograph"},
+        "down": {"uv": [3.5, 5, 5, 3], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_8",
+      "from": [5, -4, 1],
+      "to": [5, 2, 9],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [3.5, 3, 3.5, 4.5], "texture": "#phonograph"},
+        "east": {"uv": [3.5, 5, 5, 7], "rotation": 90, "texture": "#phonograph"},
+        "south": {"uv": [3.5, 3, 3.5, 4.5], "texture": "#phonograph"},
+        "west": {"uv": [3.5, 5, 5, 3], "rotation": 90, "texture": "#phonograph"},
+        "up": {"uv": [3.5, 3, 3.5, 5], "texture": "#phonograph"},
+        "down": {"uv": [3.5, 3, 3.5, 5], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_9",
+      "from": [11, -4, 1],
+      "to": [11, 2, 9],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [3.5, 3, 3.5, 4.5], "texture": "#phonograph"},
+        "east": {"uv": [3.5, 3, 5, 5], "rotation": 90, "texture": "#phonograph"},
+        "south": {"uv": [3.5, 3, 3.5, 4.5], "texture": "#phonograph"},
+        "west": {"uv": [3.5, 7, 5, 5], "rotation": 90, "texture": "#phonograph"},
+        "up": {"uv": [3.5, 3, 3.5, 5], "texture": "#phonograph"},
+        "down": {"uv": [3.5, 3, 3.5, 5], "texture": "#phonograph"}
+      }
+    },
+    {
+      "name": "phonograph_10",
+      "from": [0, -9, 1],
+      "to": [16, 7, 1],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, -2, 13]},
+      "faces": {
+        "north": {"uv": [6, 0, 10, 4], "texture": "#phonograph"},
+        "east": {"uv": [6, 0, 6, 4], "texture": "#phonograph"},
+        "south": {"uv": [6, 0, 10, 4], "texture": "#phonograph"},
+        "west": {"uv": [6, 0, 6, 4], "texture": "#phonograph"},
+        "up": {"uv": [6, 0, 10, 0], "texture": "#phonograph"},
+        "down": {"uv": [6, 0, 10, 0], "texture": "#phonograph"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "phonograph_top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

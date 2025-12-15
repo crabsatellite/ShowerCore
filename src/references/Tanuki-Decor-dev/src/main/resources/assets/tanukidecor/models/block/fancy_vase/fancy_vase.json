@@ -1,0 +1,105 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "#vase",
+    "vase": "tanukidecor:block/vase/fancy_vase"
+  },
+  "elements": [
+    {
+      "name": "vase_0",
+      "from": [5, 0, 5],
+      "to": [11, 2, 11],
+      "faces": {
+        "north": {"uv": [0.5, 7, 3.5, 8], "texture": "#vase"},
+        "east": {"uv": [0.5, 7, 3.5, 8], "texture": "#vase"},
+        "south": {"uv": [0.5, 7, 3.5, 8], "texture": "#vase"},
+        "west": {"uv": [0.5, 7, 3.5, 8], "texture": "#vase"},
+        "up": {"uv": [4, 10, 7, 13], "texture": "#vase"},
+        "down": {"uv": [7, 10, 10, 13], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_1",
+      "from": [6, 2, 6],
+      "to": [10, 4, 10],
+      "faces": {
+        "north": {"uv": [1, 6, 3, 7], "texture": "#vase"},
+        "east": {"uv": [1, 6, 3, 7], "texture": "#vase"},
+        "south": {"uv": [1, 6, 3, 7], "texture": "#vase"},
+        "west": {"uv": [1, 6, 3, 7], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_2",
+      "from": [4, 4, 4],
+      "to": [12, 10, 12],
+      "faces": {
+        "north": {"uv": [0, 3, 4, 6], "texture": "#vase"},
+        "east": {"uv": [0, 3, 4, 6], "texture": "#vase"},
+        "south": {"uv": [0, 3, 4, 6], "texture": "#vase"},
+        "west": {"uv": [0, 3, 4, 6], "texture": "#vase"},
+        "up": {"uv": [4, 6, 8, 10], "texture": "#vase"},
+        "down": {"uv": [8, 6, 12, 10], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_3",
+      "from": [6, 10, 6],
+      "to": [10, 11, 10],
+      "faces": {
+        "north": {"uv": [1, 2.5, 3, 3], "texture": "#vase"},
+        "east": {"uv": [1, 2.5, 3, 3], "texture": "#vase"},
+        "south": {"uv": [1, 2.5, 3, 3], "texture": "#vase"},
+        "west": {"uv": [1, 2.5, 3, 3], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_4",
+      "from": [5, 11, 5],
+      "to": [11, 13, 11],
+      "faces": {
+        "north": {"uv": [0.5, 1.5, 3.5, 2.5], "texture": "#vase"},
+        "east": {"uv": [0.5, 1.5, 3.5, 2.5], "texture": "#vase"},
+        "south": {"uv": [0.5, 1.5, 3.5, 2.5], "texture": "#vase"},
+        "west": {"uv": [0.5, 1.5, 3.5, 2.5], "texture": "#vase"},
+        "up": {"uv": [4, 3, 7, 6], "texture": "#vase"},
+        "down": {"uv": [7, 3, 10, 6], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_5",
+      "from": [6, 13, 6],
+      "to": [10, 14, 10],
+      "faces": {
+        "north": {"uv": [1, 1, 3, 1.5], "texture": "#vase"},
+        "east": {"uv": [1, 1, 3, 1.5], "texture": "#vase"},
+        "south": {"uv": [1, 1, 3, 1.5], "texture": "#vase"},
+        "west": {"uv": [1, 1, 3, 1.5], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_6",
+      "from": [5, 14, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "north": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "east": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "south": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "west": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "up": {"uv": [4, 0, 7, 3], "texture": "#vase"},
+        "down": {"uv": [7, 0, 10, 3], "texture": "#vase"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "vase",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

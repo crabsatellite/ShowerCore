@@ -1,0 +1,99 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_bed",
+    "bed": "tanukidecor:block/wooden_block_bed"
+  },
+  "elements": [
+    {
+      "name": "pillow",
+      "from": [4, 8, 8],
+      "to": [12, 9, 13],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [5, 8.75, 7, 9], "texture": "#bed"},
+        "east": {"uv": [5, 9, 6.25, 9.25], "texture": "#bed"},
+        "south": {"uv": [5, 8.75, 7, 9], "texture": "#bed"},
+        "west": {"uv": [5, 9, 6.25, 9.25], "texture": "#bed"},
+        "up": {"uv": [5, 7.5, 7, 8.75], "texture": "#bed"},
+        "down": {"uv": [5, 8.75, 7, 7.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_back",
+      "from": [1, 5, 0],
+      "to": [15, 8, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -16]},
+      "faces": {
+        "east": {"uv": [0, 14.5, 3, 15.25], "texture": "#bed"},
+        "south": {"uv": [0, 13.75, 3.5, 14.5], "texture": "#bed"},
+        "west": {"uv": [3, 14.5, 0, 15.25], "texture": "#bed"},
+        "up": {"uv": [0, 13.75, 3.5, 10.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wooden_block_back_0",
+      "from": [0, 3, 0],
+      "to": [16, 5, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -16]},
+      "faces": {
+        "east": {"uv": [0, 6.5, 3, 7], "texture": "#bed"},
+        "south": {"uv": [0, 6, 4, 6.5], "texture": "#bed"},
+        "west": {"uv": [3, 6.5, 0, 7], "texture": "#bed"},
+        "up": {"uv": [0, 3, 4, 0], "texture": "#bed"},
+        "down": {"uv": [0, 6, 4, 3], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wooden_block_back_1",
+      "from": [0, 0, 12],
+      "to": [4, 6, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -16]},
+      "faces": {
+        "north": {"uv": [6, 3.5, 5, 5], "texture": "#bed"},
+        "east": {"uv": [4, 3.5, 5, 5], "texture": "#bed"},
+        "south": {"uv": [5, 3.5, 6, 5], "texture": "#bed"},
+        "west": {"uv": [5, 3.5, 4, 5], "texture": "#bed"},
+        "down": {"uv": [7, 3.5, 6, 4.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wooden_block_back_2",
+      "from": [12, 0, 12],
+      "to": [16, 6, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -16]},
+      "faces": {
+        "north": {"uv": [5, 3.5, 6, 5], "texture": "#bed"},
+        "east": {"uv": [4, 3.5, 5, 5], "texture": "#bed"},
+        "south": {"uv": [6, 3.5, 5, 5], "texture": "#bed"},
+        "west": {"uv": [5, 3.5, 4, 5], "texture": "#bed"},
+        "down": {"uv": [6, 3.5, 7, 4.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wooden_block_back_3",
+      "from": [0, 6, 12],
+      "to": [16, 12, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -16]},
+      "faces": {
+        "north": {"uv": [8, 5, 4, 6.5], "texture": "#bed"},
+        "east": {"uv": [4, 7.5, 5, 9], "texture": "#bed"},
+        "south": {"uv": [4, 5, 8, 6.5], "texture": "#bed"},
+        "west": {"uv": [5, 7.5, 4, 9], "texture": "#bed"},
+        "up": {"uv": [4, 6.5, 8, 7.5], "texture": "#bed"},
+        "down": {"uv": [4, 7.5, 8, 6.5], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "back",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

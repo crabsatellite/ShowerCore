@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O#O"
+  ],
+  "key": {
+    "O": {
+      "tag": "forge:ingots/iron"
+    },
+    "#": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "id": "tanukidecor:diy_workbench",
+    "count": 1
+  }
+}

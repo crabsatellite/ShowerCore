@@ -1,0 +1,121 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_bed",
+    "bed": "tanukidecor:block/gorgeous_bed"
+  },
+  "elements": [
+    {
+      "name": "leg_6",
+      "from": [14, 0, 14],
+      "to": [16, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, -16]},
+      "faces": {
+        "north": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "east": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "south": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "west": {"uv": [14.5, 0, 14, 4], "texture": "#bed"},
+        "down": {"uv": [14.5, 4, 14, 4.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_5",
+      "from": [0, 3, 0],
+      "to": [14, 8, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, -16]},
+      "faces": {
+        "east": {"uv": [4, 8, 0, 9.25], "texture": "#bed"},
+        "south": {"uv": [14, 5.5, 10.5, 6.75], "texture": "#bed"},
+        "up": {"uv": [3.5, 0, 0, 4], "texture": "#bed"},
+        "down": {"uv": [7, 0, 3.5, 4], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_8",
+      "from": [0, 8, 14],
+      "to": [14, 16, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [-16, 0, -16]},
+      "faces": {
+        "north": {"uv": [14, 6.75, 10.5, 8.75], "texture": "#bed"},
+        "south": {"uv": [14, 3.5, 10.5, 5.5], "texture": "#bed"},
+        "up": {"uv": [14, 8.75, 10.5, 9.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow_2",
+      "from": [0, -2.17605, 10],
+      "to": [14, 0.82395, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [-16, 0, -16]},
+      "faces": {
+        "north": {"uv": [14, 10.75, 10.5, 11.5], "texture": "#bed"},
+        "east": {"uv": [5.5, 9.75, 4, 10.5], "texture": "#bed"},
+        "south": {"uv": [14, 10.75, 10.5, 11.5], "texture": "#bed"},
+        "up": {"uv": [14, 9.25, 10.5, 10.75], "texture": "#bed"},
+        "down": {"uv": [14, 9.25, 10.5, 10.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow_3",
+      "from": [-7.25639, 8, 8.50767],
+      "to": [-2.25639, 10, 13.50767],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [-16, 0, -16]},
+      "faces": {
+        "north": {"uv": [5.25, 9.25, 6.5, 9.75], "texture": "#bed"},
+        "east": {"uv": [5.25, 9.25, 6.5, 9.75], "texture": "#bed"},
+        "south": {"uv": [5.25, 9.25, 6.5, 9.75], "texture": "#bed"},
+        "west": {"uv": [5.25, 9.25, 6.5, 9.75], "texture": "#bed"},
+        "up": {"uv": [5.25, 8, 6.5, 9.25], "texture": "#bed"},
+        "down": {"uv": [5.25, 8, 6.5, 9.25], "texture": "#bed"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [-2, 1.5, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 4.5, 0],
+      "scale": [0.15, 0.15, 0.15]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "translation": [5.25, 0, 0],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.2, 0.2, 0.2]
+    },
+    "ground": {
+      "translation": [-2, 3, -2],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [3.5, -2, 0],
+      "scale": [0.3, 0.3, 0.3]
+    },
+    "head": {
+      "translation": [-6.25, 12.75, -6.5],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "translation": [-4, -4, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "bottom_back_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

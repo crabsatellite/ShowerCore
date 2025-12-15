@@ -1,0 +1,37 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/anniversary_clock",
+    "clock": "tanukidecor:block/anniversary_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 11.5, 6.48],
+      "to": [8.5, 14.5, 6.48],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 12, 6.5]},
+      "faces": {
+        "north": {"uv": [0, 9.25, 0.25, 10], "texture": "#clock"},
+        "south": {"uv": [0, 9.25, 0.25, 10], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "tanukidecor:block/antique_small_table/antique_small_table",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_small_table_with_doily",
+    "table": "tanukidecor:block/oak_antique_small_table_with_doily"
+  }
+}

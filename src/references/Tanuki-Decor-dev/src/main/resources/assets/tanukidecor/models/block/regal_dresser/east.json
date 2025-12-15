@@ -1,0 +1,68 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/regal_dresser",
+    "dresser": "tanukidecor:block/regal_dresser"
+  },
+  "elements": [
+    {
+      "name": "dresser_4",
+      "from": [0, 2, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [8, 0, 0, 7], "texture": "#dresser"},
+        "east": {"uv": [15, 7, 8, 14], "texture": "#dresser"},
+        "south": {"uv": [8, 7, 0, 14], "texture": "#dresser"},
+        "up": {"uv": [16, 0, 8, 7], "texture": "#dresser"},
+        "down": {"uv": [16, 7, 8, 0], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "dresser_5",
+      "from": [0, 0, 1],
+      "to": [16, 2, 1],
+      "faces": {
+        "north": {"uv": [8, 14, 0, 15], "texture": "#dresser"},
+        "east": {"uv": [0, 14, 0, 15], "texture": "#dresser"},
+        "south": {"uv": [0, 14, 8, 15], "texture": "#dresser"},
+        "west": {"uv": [0, 14, 0, 15], "texture": "#dresser"},
+        "down": {"uv": [8, 14, 0, 14], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "dresser_6",
+      "from": [0, 0, 15],
+      "to": [16, 2, 15],
+      "faces": {
+        "north": {"uv": [8, 14, 0, 15], "texture": "#dresser"},
+        "east": {"uv": [0, 14, 0, 15], "texture": "#dresser"},
+        "south": {"uv": [0, 14, 8, 15], "texture": "#dresser"},
+        "west": {"uv": [0, 14, 0, 15], "texture": "#dresser"},
+        "down": {"uv": [8, 14, 0, 14], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "dresser_7",
+      "from": [16, 0, 1],
+      "to": [16, 2, 15],
+      "faces": {
+        "north": {"uv": [0, 15, 0, 16], "texture": "#dresser"},
+        "east": {"uv": [7, 15, 0, 16], "texture": "#dresser"},
+        "south": {"uv": [0, 15, 0, 16], "texture": "#dresser"},
+        "west": {"uv": [7, 15, 0, 16], "texture": "#dresser"},
+        "down": {"uv": [0, 15, 7, 15], "rotation": 90, "texture": "#dresser"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

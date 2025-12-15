@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/rocket_lamp/lower",
+  "texture_size": [32, 32],
+  "textures": {
+    "lamp": "tanukidecor:block/rocket_lamp/purple",
+    "particle": "#lamp"
+  }
+}

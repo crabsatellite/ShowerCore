@@ -1,0 +1,113 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/red_clock",
+    "clock": "tanukidecor:block/red_clock"
+  },
+  "elements": [
+    {
+      "name": "clock_0",
+      "from": [2, 0, 5],
+      "to": [14, 2, 11],
+      "faces": {
+        "north": {"uv": [5, 3, 11, 4], "texture": "#clock"},
+        "east": {"uv": [8, 4, 5, 5], "texture": "#clock"},
+        "south": {"uv": [11, 3, 5, 4], "texture": "#clock"},
+        "west": {"uv": [5, 4, 8, 5], "texture": "#clock"},
+        "down": {"uv": [5, 0, 11, 3], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_1",
+      "from": [2, 0, 5.005],
+      "to": [6, 2, 10.995],
+      "rotation": {"angle": 22.5, "axis": "z", "origin": [2, 2, 8]},
+      "faces": {
+        "north": {"uv": [5, 8, 7, 9], "texture": "#clock"},
+        "south": {"uv": [7, 8, 5, 9], "texture": "#clock"},
+        "up": {"uv": [5, 5, 7, 8], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_2",
+      "from": [10, 0, 5.005],
+      "to": [14, 2, 10.995],
+      "rotation": {"angle": -22.5, "axis": "z", "origin": [14, 2, 8]},
+      "faces": {
+        "north": {"uv": [7, 8, 5, 9], "texture": "#clock"},
+        "south": {"uv": [5, 8, 7, 9], "texture": "#clock"},
+        "up": {"uv": [7, 5, 5, 8], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_3",
+      "from": [8, 0, 4],
+      "to": [18, 10, 12],
+      "rotation": {"angle": 45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 5, 5], "texture": "#clock"},
+        "east": {"uv": [0, 10, 5, 14], "rotation": 90, "texture": "#clock"},
+        "south": {"uv": [0, 5, 5, 10], "texture": "#clock"},
+        "west": {"uv": [5, 14, 0, 10], "rotation": 90, "texture": "#clock"},
+        "up": {"uv": [5, 10, 0, 14], "texture": "#clock"},
+        "down": {"uv": [0, 14, 5, 10], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_inside_0",
+      "from": [8, 0, 4.75],
+      "to": [18, 10, 4.75],
+      "rotation": {"angle": 45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [11, 0, 16, 5], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_inside_1",
+      "from": [8, 0, 4],
+      "to": [8, 10, 5],
+      "rotation": {"angle": 45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "east": {"uv": [0, 10, 5, 10.5], "rotation": 90, "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_inside_2",
+      "from": [8, 0, 4],
+      "to": [8, 10, 5],
+      "rotation": {"angle": -45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "west": {"uv": [0, 10.5, 5, 10], "rotation": 90, "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_inside_3",
+      "from": [8, 10, 4],
+      "to": [18, 10, 5],
+      "rotation": {"angle": 45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "down": {"uv": [0, 10.5, 5, 10], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "clock_inside_4",
+      "from": [-2, 10, 4],
+      "to": [8, 10, 5],
+      "rotation": {"angle": -45, "axis": "z", "origin": [8, 0, 8]},
+      "faces": {
+        "down": {"uv": [5, 10.5, 0, 10], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "clock",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  ]
+}

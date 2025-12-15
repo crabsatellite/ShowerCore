@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_chair",
+    "chair": "tanukidecor:block/cabana_chair"
+  },
+  "elements": [
+    {
+      "name": "chair_1",
+      "from": [2, 0, 12],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": {"uv": [6, 0, 12, 4], "texture": "#chair"},
+        "east": {"uv": [13, 0, 12, 4], "texture": "#chair"},
+        "south": {"uv": [6, 0, 12, 4], "texture": "#chair"},
+        "west": {"uv": [12, 0, 13, 4], "texture": "#chair"},
+        "up": {"uv": [6, 7, 12, 8], "texture": "#chair"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upper",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

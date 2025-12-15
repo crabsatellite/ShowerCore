@@ -1,0 +1,29 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "streamer": "tanukidecor:block/wide_string_lights",
+    "particle": "#streamer"
+  },
+  "elements": [
+    {
+      "name": "streamer_left",
+      "from": [0, 0, 15],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [8, 0, 16, 8], "texture": "#streamer"},
+        "south": {"uv": [16, 0, 8, 8], "texture": "#streamer"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "streamer_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

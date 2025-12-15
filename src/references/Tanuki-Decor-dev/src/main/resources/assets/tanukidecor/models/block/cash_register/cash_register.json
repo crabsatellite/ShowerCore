@@ -1,0 +1,115 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/cash_register",
+    "cash_register": "tanukidecor:block/cash_register"
+  },
+  "elements": [
+    {
+      "name": "register_0",
+      "from": [1, 0, 1],
+      "to": [15, 3, 15],
+      "faces": {
+        "north": {"uv": [0, 7, 7, 8.5], "texture": "#cash_register"},
+        "east": {"uv": [7, 7, 0, 8.5], "texture": "#cash_register"},
+        "south": {"uv": [7, 7, 0, 8.5], "texture": "#cash_register"},
+        "west": {"uv": [0, 7, 7, 8.5], "texture": "#cash_register"},
+        "up": {"uv": [0, 0, 7, 7], "texture": "#cash_register"},
+        "down": {"uv": [0, 0, 7, 7], "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_1",
+      "from": [2, 3, 3],
+      "to": [12, 9, 9],
+      "faces": {
+        "north": {"uv": [12, 0, 15, 5], "rotation": 90, "texture": "#cash_register"},
+        "east": {"uv": [15, 10, 12, 13], "texture": "#cash_register"},
+        "south": {"uv": [12, 0, 15, 5], "rotation": 90, "texture": "#cash_register"},
+        "west": {"uv": [12, 10, 15, 13], "texture": "#cash_register"},
+        "up": {"uv": [12, 5, 15, 10], "rotation": 90, "texture": "#cash_register"},
+        "down": {"uv": [12, 5, 15, 10], "rotation": 90, "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_2",
+      "from": [2, 3, 9],
+      "to": [12, 13, 14],
+      "faces": {
+        "north": {"uv": [7, 0, 12, 5], "texture": "#cash_register"},
+        "east": {"uv": [7, 12.5, 12, 10], "rotation": 90, "texture": "#cash_register"},
+        "south": {"uv": [7, 5, 12, 10], "texture": "#cash_register"},
+        "west": {"uv": [7, 10, 12, 12.5], "rotation": 90, "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_3",
+      "from": [1.5, 13, 8.5],
+      "to": [12.5, 14, 14.5],
+      "faces": {
+        "north": {"uv": [0, 11.5, 5.5, 12], "texture": "#cash_register"},
+        "east": {"uv": [3, 12, 0, 12.5], "texture": "#cash_register"},
+        "south": {"uv": [5.5, 11.5, 0, 12], "texture": "#cash_register"},
+        "west": {"uv": [0, 12, 3, 12.5], "texture": "#cash_register"},
+        "up": {"uv": [0, 8.5, 5.5, 11.5], "texture": "#cash_register"},
+        "down": {"uv": [0, 8.5, 5.5, 11.5], "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_4",
+      "from": [3.5, 14, 11.5],
+      "to": [10.5, 17, 11.5],
+      "faces": {
+        "north": {"uv": [5.5, 8.5, 7, 12], "rotation": 90, "texture": "#cash_register"},
+        "south": {"uv": [5.5, 8.5, 7, 12], "rotation": 90, "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_5",
+      "from": [12, 3, 1],
+      "to": [15, 6, 11],
+      "faces": {
+        "north": {"uv": [5, 12.5, 6.5, 14], "texture": "#cash_register"},
+        "east": {"uv": [0, 14, 5, 15.5], "texture": "#cash_register"},
+        "south": {"uv": [6.5, 12.5, 5, 14], "texture": "#cash_register"},
+        "west": {"uv": [5, 14, 0, 15.5], "texture": "#cash_register"},
+        "up": {"uv": [0, 12.5, 5, 14], "rotation": 90, "texture": "#cash_register"},
+        "down": {"uv": [0, 12.5, 5, 14], "rotation": 90, "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_6",
+      "from": [12, 3, 11],
+      "to": [15, 9, 14],
+      "faces": {
+        "north": {"uv": [9.5, 12.5, 11, 15.5], "texture": "#cash_register"},
+        "east": {"uv": [8, 12.5, 6.5, 15.5], "texture": "#cash_register"},
+        "south": {"uv": [8, 12.5, 9.5, 15.5], "texture": "#cash_register"},
+        "west": {"uv": [6.5, 12.5, 8, 15.5], "texture": "#cash_register"},
+        "up": {"uv": [5, 14, 6.5, 15.5], "texture": "#cash_register"},
+        "down": {"uv": [5, 14, 6.5, 15.5], "texture": "#cash_register"}
+      }
+    },
+    {
+      "name": "register_7",
+      "from": [-3, 5, 6.5],
+      "to": [2, 10, 6.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [2, 5.5, 6.5]},
+      "faces": {
+        "north": {"uv": [11, 13, 13.5, 15.5], "texture": "#cash_register"},
+        "south": {"uv": [13.5, 13, 11, 15.5], "texture": "#cash_register"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "cash_register",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7]
+    }
+  ]
+}

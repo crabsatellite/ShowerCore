@@ -1,0 +1,107 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/green_bed",
+    "bed": "tanukidecor:block/green_bed"
+  },
+  "elements": [
+    {
+      "name": "wood1",
+      "from": [0, 0, 13],
+      "to": [16, 10, 16],
+      "faces": {
+        "north": {"uv": [0, 4.5, 4, 7], "texture": "#bed"},
+        "east": {"uv": [4.75, 4.5, 4, 7], "texture": "#bed"},
+        "south": {"uv": [4, 4.5, 0, 7], "texture": "#bed"},
+        "west": {"uv": [4, 4.5, 4.75, 7], "texture": "#bed"},
+        "up": {"uv": [0, 7, 4, 7.75], "texture": "#bed"},
+        "down": {"uv": [0, 8.5, 4, 7.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood2",
+      "from": [1, 10, 16],
+      "to": [15, 15, 16],
+      "faces": {
+        "north": {"uv": [3.5, 8.5, 0, 9.75], "texture": "#bed"},
+        "east": {"uv": [0, 8.5, 0, 9.75], "texture": "#bed"},
+        "south": {"uv": [0, 8.5, 3.5, 9.75], "texture": "#bed"},
+        "west": {"uv": [0, 8.5, 0, 9.75], "texture": "#bed"},
+        "up": {"uv": [0, 8.5, 3.5, 8.5], "texture": "#bed"},
+        "down": {"uv": [0, 8.5, 3.5, 8.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood3",
+      "from": [15, 10, 13],
+      "to": [16, 15, 16],
+      "faces": {
+        "north": {"uv": [0.75, 11, 1, 12.25], "texture": "#bed"},
+        "east": {"uv": [0, 11, 0.75, 12.25], "texture": "#bed"},
+        "south": {"uv": [0.75, 11, 1, 12.25], "texture": "#bed"},
+        "west": {"uv": [0, 11, 0.75, 12.25], "texture": "#bed"},
+        "up": {"uv": [1, 11, 1.25, 11.75], "texture": "#bed"},
+        "down": {"uv": [1, 11, 1.25, 11.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood4",
+      "from": [0, 10, 13],
+      "to": [1, 15, 16],
+      "faces": {
+        "north": {"uv": [1, 11, 0.75, 12.25], "texture": "#bed"},
+        "east": {"uv": [0.75, 11, 0, 12.25], "texture": "#bed"},
+        "south": {"uv": [1, 11, 0.75, 12.25], "texture": "#bed"},
+        "west": {"uv": [0.75, 11, 0, 12.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood5",
+      "from": [0, 15, 13],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 10.5, 4, 10.75], "texture": "#bed"},
+        "east": {"uv": [0.75, 10.75, 0, 11], "texture": "#bed"},
+        "south": {"uv": [4, 10.5, 0, 10.75], "texture": "#bed"},
+        "west": {"uv": [0, 10.75, 0.75, 11], "texture": "#bed"},
+        "up": {"uv": [0, 9.75, 4, 10.5], "texture": "#bed"},
+        "down": {"uv": [0, 10.5, 4, 9.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed1",
+      "from": [0, 2, 0],
+      "to": [16, 8, 13],
+      "faces": {
+        "east": {"uv": [12, 6.5, 8.75, 8], "texture": "#bed"},
+        "west": {"uv": [8.75, 6.5, 12, 8], "texture": "#bed"},
+        "up": {"uv": [8.75, 0, 12.75, 3.25], "texture": "#bed"},
+        "down": {"uv": [8.75, 3.25, 12.75, 6.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow",
+      "from": [4, 8, 7],
+      "to": [12, 10, 12],
+      "faces": {
+        "north": {"uv": [12.75, 1.25, 14.75, 1.75], "texture": "#bed"},
+        "east": {"uv": [14, 1.75, 12.75, 2.25], "texture": "#bed"},
+        "south": {"uv": [14.75, 1.25, 12.75, 1.75], "texture": "#bed"},
+        "west": {"uv": [12.75, 1.75, 14, 2.25], "texture": "#bed"},
+        "up": {"uv": [12.75, 0, 14.75, 1.25], "texture": "#bed"},
+        "down": {"uv": [12.75, 1.25, 14.75, 0], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "back",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

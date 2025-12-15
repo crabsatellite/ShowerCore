@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/mushroom_log_stool/red/mushroom_log_stool" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/mushroom_log_stool/red/mushroom_log_stool", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/mushroom_log_stool/red/mushroom_log_stool", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/mushroom_log_stool/red/mushroom_log_stool", "y": 270 }
+    }
+  ]
+}

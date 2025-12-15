@@ -1,0 +1,131 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/egyptian_bed",
+    "bed": "tanukidecor:block/egyptian_bed"
+  },
+  "elements": [
+    {
+      "name": "bed_0",
+      "from": [0, 5, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 8.75, 4, 9.5], "texture": "#bed"},
+        "east": {"uv": [4, 8, 0, 8.75], "texture": "#bed"},
+        "west": {"uv": [0, 8, 4, 8.75], "texture": "#bed"},
+        "up": {"uv": [0, 4, 4, 8], "texture": "#bed"},
+        "down": {"uv": [0, 0, 4, 4], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed_1",
+      "from": [1, 8, 1],
+      "to": [15, 10, 16],
+      "faces": {
+        "north": {"uv": [8, 4.25, 11.5, 4.75], "texture": "#bed"},
+        "east": {"uv": [11.75, 3.75, 8, 4.25], "texture": "#bed"},
+        "west": {"uv": [8, 3.75, 11.75, 4.25], "texture": "#bed"},
+        "up": {"uv": [8, 0, 11.5, 3.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_0",
+      "from": [0.005, 0, 0],
+      "to": [1.995, 5, 2],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [1, 5, 0]},
+      "faces": {
+        "north": {"uv": [0.5, 11.5, 0, 12.75], "texture": "#bed"},
+        "east": {"uv": [1, 11.5, 0.5, 12.75], "texture": "#bed"},
+        "south": {"uv": [1, 11.5, 1.5, 12.75], "texture": "#bed"},
+        "west": {"uv": [0, 11.5, 0.5, 12.75], "texture": "#bed"},
+        "down": {"uv": [0, 12.75, 0.5, 13.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_0_bottom",
+      "from": [0, 0, 0],
+      "to": [2, 2, 3],
+      "faces": {
+        "north": {"uv": [0, 13.5, 0.5, 14], "texture": "#bed"},
+        "east": {"uv": [0.75, 13, 0, 13.5], "texture": "#bed"},
+        "south": {"uv": [0.5, 13.5, 1, 14], "texture": "#bed"},
+        "west": {"uv": [0, 13, 0.75, 13.5], "texture": "#bed"},
+        "up": {"uv": [0.75, 13, 1.5, 13.5], "rotation": 90, "texture": "#bed"},
+        "down": {"uv": [1.5, 13, 2.25, 13.5], "rotation": 90, "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_0_top",
+      "from": [0, 8, 0],
+      "to": [2, 10.01, 2],
+      "faces": {
+        "north": {"uv": [4, 8.5, 4.5, 9], "texture": "#bed"},
+        "east": {"uv": [4.5, 8.5, 4, 9], "texture": "#bed"},
+        "south": {"uv": [4, 8.5, 4.5, 9], "texture": "#bed"},
+        "west": {"uv": [4.5, 8.5, 4, 9], "texture": "#bed"},
+        "up": {"uv": [4.5, 8.5, 5, 9], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [14.005, 0, 0],
+      "to": [15.995, 5, 2],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [15, 5, 0]},
+      "faces": {
+        "north": {"uv": [0, 11.5, 0.5, 12.75], "texture": "#bed"},
+        "east": {"uv": [0.5, 11.5, 0, 12.75], "texture": "#bed"},
+        "south": {"uv": [1.5, 11.5, 1, 12.75], "texture": "#bed"},
+        "west": {"uv": [0.5, 11.5, 1, 12.75], "texture": "#bed"},
+        "down": {"uv": [0.5, 12.75, 0, 13.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_1_bottom",
+      "from": [14, 0, 0],
+      "to": [16, 2, 3],
+      "faces": {
+        "north": {"uv": [0.5, 13.5, 0, 14], "texture": "#bed"},
+        "east": {"uv": [0.75, 13, 0, 13.5], "texture": "#bed"},
+        "south": {"uv": [1, 13.5, 0.5, 14], "texture": "#bed"},
+        "west": {"uv": [0, 13, 0.75, 13.5], "texture": "#bed"},
+        "up": {"uv": [0.75, 13.5, 1.5, 13], "rotation": 90, "texture": "#bed"},
+        "down": {"uv": [1.5, 13.5, 2.25, 13], "rotation": 90, "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg_1_top",
+      "from": [14, 8, 0],
+      "to": [16, 10.01, 2],
+      "faces": {
+        "north": {"uv": [4.5, 8.5, 4, 9], "texture": "#bed"},
+        "east": {"uv": [4, 8.5, 4.5, 9], "texture": "#bed"},
+        "south": {"uv": [4.5, 8.5, 4, 9], "texture": "#bed"},
+        "west": {"uv": [4, 8.5, 4.5, 9], "texture": "#bed"},
+        "up": {"uv": [5, 8.5, 4.5, 9], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "legs_middle_0",
+      "from": [2, 1, 0],
+      "to": [14, 3, 2],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [8, 5, 0]},
+      "faces": {
+        "north": {"uv": [0, 14, 3, 14.5], "texture": "#bed"},
+        "south": {"uv": [3, 14.5, 0, 14], "texture": "#bed"},
+        "up": {"uv": [3, 14, 0, 14.5], "texture": "#bed"},
+        "down": {"uv": [3, 14, 0, 14.5], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "front",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  ]
+}

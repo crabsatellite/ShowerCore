@@ -1,0 +1,41 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/slate_clock",
+    "clock": "tanukidecor:block/slate_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 5.5, 8.98],
+      "to": [8.5, 7.5, 8.98],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 6, 9]},
+      "faces": {
+        "north": {"uv": [5.75, 8.5, 6, 9], "texture": "#clock"},
+        "east": {"uv": [0, 0, 0, 0.5], "texture": "#clock"},
+        "south": {"uv": [5.5, 8.5, 5.75, 9], "texture": "#clock"},
+        "west": {"uv": [0, 0, 0, 0.5], "texture": "#clock"},
+        "up": {"uv": [0.25, 0, 0, 0], "rotation": 180, "texture": "#clock"},
+        "down": {"uv": [0.25, 0, 0, 0], "rotation": 180, "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

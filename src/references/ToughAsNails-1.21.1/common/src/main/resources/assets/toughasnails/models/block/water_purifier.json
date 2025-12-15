@@ -1,0 +1,37 @@
+{
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "toughasnails:block/water_purifier_front",
+		"top": "toughasnails:block/water_purifier_top",
+		"inner": "toughasnails:block/water_purifier_inner",
+		"front": "toughasnails:block/water_purifier_front",
+		"side": "toughasnails:block/water_purifier_side",
+		"bottom": "toughasnails:block/water_purifier_bottom"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 10, 16],
+			"faces": {
+				"north": {"uv": [0, 6, 16, 16], "texture": "#front", "cullface": "north"},
+				"east": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 6, 16, 16], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#inner"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 10, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 6], "texture": "#front", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 6], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 6], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 6], "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#top", "cullface": "up"}
+			}
+		}
+	]
+}

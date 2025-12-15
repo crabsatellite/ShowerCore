@@ -1,0 +1,45 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_counter",
+    "counter": "tanukidecor:block/gorgeous_counter"
+  },
+  "elements": [
+    {
+      "name": "counter_0",
+      "from": [0, 0, 1],
+      "to": [16, 14, 11],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -2]},
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.5], "texture": "#counter"},
+        "east": {"uv": [4, 0, 6.5, 3.5], "texture": "#counter"},
+        "south": {"uv": [4, 0, 0, 3.5], "texture": "#counter"},
+        "down": {"uv": [0, 3.5, 4, 6], "texture": "#counter"}
+      }
+    },
+    {
+      "name": "counter_1",
+      "from": [0, 14, 0],
+      "to": [16, 15.99, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -2]},
+      "faces": {
+        "north": {"uv": [0, 9, 4, 9.5], "texture": "#counter"},
+        "east": {"uv": [0, 9.5, 3, 10], "texture": "#counter"},
+        "south": {"uv": [4, 9, 0, 9.5], "texture": "#counter"},
+        "up": {"uv": [0, 6, 4, 9], "texture": "#counter"},
+        "down": {"uv": [0, 9, 4, 6], "texture": "#counter"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

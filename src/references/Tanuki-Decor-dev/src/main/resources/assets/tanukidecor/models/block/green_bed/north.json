@@ -1,0 +1,44 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/green_bed",
+    "bed": "tanukidecor:block/green_bed"
+  },
+  "elements": [
+    {
+      "name": "wood0",
+      "from": [0, 0, 0],
+      "to": [16, 12, 3],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3], "texture": "#bed"},
+        "east": {"uv": [4.75, 0, 4, 3], "texture": "#bed"},
+        "south": {"uv": [4, 0, 0, 3], "texture": "#bed"},
+        "west": {"uv": [4, 0, 4.75, 3], "texture": "#bed"},
+        "up": {"uv": [0, 3, 4, 3.75], "texture": "#bed"},
+        "down": {"uv": [0, 4.5, 4, 3.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed0",
+      "from": [0, 2, 3],
+      "to": [16, 8, 16],
+      "faces": {
+        "east": {"uv": [8, 6.5, 4.75, 8], "texture": "#bed"},
+        "west": {"uv": [4.75, 6.5, 8, 8], "texture": "#bed"},
+        "up": {"uv": [4.75, 0, 8.75, 3.25], "texture": "#bed"},
+        "down": {"uv": [4.75, 3.25, 8.75, 6.5], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "front",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

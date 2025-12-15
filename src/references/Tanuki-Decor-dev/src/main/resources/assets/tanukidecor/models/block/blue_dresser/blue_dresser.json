@@ -1,0 +1,81 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "#dresser",
+    "dresser": "tanukidecor:block/blue_dresser"
+  },
+  "elements": [
+    {
+      "name": "dresser",
+      "from": [0, 2, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.5], "texture": "#dresser"},
+        "east": {"uv": [7.5, 0, 4, 3.5], "texture": "#dresser"},
+        "south": {"uv": [0, 3.5, 4, 7], "texture": "#dresser"},
+        "west": {"uv": [4, 0, 7.5, 3.5], "texture": "#dresser"},
+        "up": {"uv": [0, 7, 4, 10.5], "texture": "#dresser"},
+        "down": {"uv": [0, 10.5, 4, 14], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg0",
+      "from": [0, 0, 1],
+      "to": [2, 2, 3],
+      "faces": {
+        "north": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "east": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "south": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "west": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "down": {"uv": [0, 14.5, 0.5, 15], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg1",
+      "from": [14, 0, 1],
+      "to": [16, 2, 3],
+      "faces": {
+        "north": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "east": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "south": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "west": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "down": {"uv": [0.5, 14.5, 0, 15], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg2",
+      "from": [0, 0, 13],
+      "to": [2, 2, 15],
+      "faces": {
+        "north": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "east": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "south": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "west": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "down": {"uv": [0, 15, 0.5, 14.5], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [14, 0, 13],
+      "to": [16, 2, 15],
+      "faces": {
+        "north": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "east": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "south": {"uv": [0, 14, 0.5, 14.5], "texture": "#dresser"},
+        "west": {"uv": [0.5, 14, 0, 14.5], "texture": "#dresser"},
+        "down": {"uv": [0.5, 15, 0, 14.5], "texture": "#dresser"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "dresser",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

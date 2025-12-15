@@ -1,0 +1,52 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "1": "tanukidecor:block/bookshelf_clock"
+  },
+  "elements": [
+    {
+      "name": "bottom_right0",
+      "from": [0, 0, 2],
+      "to": [16, 8, 14],
+      "faces": {
+        "north": {"uv": [4, 6, 0, 8], "texture": "#1"},
+        "east": {"uv": [3, 8, 0, 10], "texture": "#1"},
+        "south": {"uv": [0, 6, 4, 8], "texture": "#1"},
+        "up": {"uv": [4, 3, 0, 6], "texture": "#1"},
+        "down": {"uv": [4, 0, 0, 3], "texture": "#1"}
+      }
+    },
+    {
+      "name": "bottom_right1",
+      "from": [7, 8, 3],
+      "to": [15, 16, 13],
+      "faces": {
+        "north": {"uv": [2, 14, 0, 16], "texture": "#1"},
+        "east": {"uv": [2.5, 10, 0, 12], "texture": "#1"},
+        "south": {"uv": [2, 14, 4, 16], "texture": "#1"},
+        "west": {"uv": [2.5, 12, 0, 14], "texture": "#1"}
+      }
+    },
+    {
+      "name": "bottom_right2",
+      "from": [0, 8, 12],
+      "to": [7, 16, 13],
+      "faces": {
+        "north": {"uv": [11.25, 12.75, 13, 14.75], "texture": "#1"},
+        "south": {"uv": [11.25, 12.75, 9.5, 14.75], "texture": "#1"}
+      }
+    },
+    {
+      "name": "bottom_right3",
+      "from": [0, 8, 2],
+      "to": [7, 16, 3],
+      "faces": {
+        "north": {"uv": [9.75, 10.75, 8, 12.75], "texture": "#1"},
+        "east": {"uv": [10, 10.75, 9.75, 12.75], "texture": "#1"},
+        "south": {"uv": [8, 10.75, 9.75, 12.75], "texture": "#1"}
+      }
+    }
+  ]
+}

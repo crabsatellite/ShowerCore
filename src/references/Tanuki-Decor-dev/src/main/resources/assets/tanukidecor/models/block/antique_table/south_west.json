@@ -1,0 +1,66 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_table",
+    "table": "tanukidecor:block/oak_antique_table"
+  },
+  "elements": [
+    {
+      "name": "leftLeg2",
+      "from": [6, 0, 4],
+      "to": [8, 6, 12],
+      "faces": {
+        "north": {"uv": [15, 3.5, 14.5, 5], "texture": "#table"},
+        "east": {"uv": [12, 3.5, 14, 5], "texture": "#table"},
+        "south": {"uv": [15, 3.5, 14.5, 5], "texture": "#table"},
+        "west": {"uv": [14, 3.5, 12, 5], "texture": "#table"},
+        "up": {"uv": [14, 5.5, 14.5, 3.5], "texture": "#table"},
+        "down": {"uv": [15, 5.5, 15.5, 3.5], "texture": "#table"}
+      }
+    },
+    {
+      "name": "top",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "south": {"uv": [0, 8, 4, 8.5], "texture": "#table"},
+        "west": {"uv": [4, 8.5, 8, 9], "texture": "#table"},
+        "up": {"uv": [12, 4, 8, 0], "texture": "#table"},
+        "down": {"uv": [12, 0, 8, 4], "texture": "#table"}
+      }
+    },
+    {
+      "name": "rightLeg0",
+      "from": [6, 0, 0],
+      "to": [8, 14, 4],
+      "faces": {
+        "east": {"uv": [12, 0, 13, 3.5], "texture": "#table"},
+        "south": {"uv": [14, 0, 14.5, 3.5], "texture": "#table"},
+        "west": {"uv": [13, 0, 12, 3.5], "texture": "#table"},
+        "down": {"uv": [14.5, 0, 15, 1], "texture": "#table"}
+      }
+    },
+    {
+      "name": "center_front",
+      "from": [4, 2, 0],
+      "to": [16, 6, 1],
+      "faces": {
+        "south": {"uv": [0, 9, 3, 10], "texture": "#table"},
+        "west": {"uv": [0.25, 11, 0.5, 12], "texture": "#table"},
+        "up": {"uv": [0, 10, 3, 10.25], "texture": "#table"},
+        "down": {"uv": [0, 10.5, 3, 10.75], "texture": "#table"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "back_west",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

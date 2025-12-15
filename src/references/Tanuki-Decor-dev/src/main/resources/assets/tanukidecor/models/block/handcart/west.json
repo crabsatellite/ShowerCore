@@ -1,0 +1,125 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "handcart": "tanukidecor:block/handcart",
+    "particle": "#handcart"
+  },
+  "elements": [
+    {
+      "name": "axle_north",
+      "from": [4.5, 2, 5],
+      "to": [6.5, 6, 7],
+      "rotation": {"angle": 0, "axis": "y", "origin": [5.5, 2.5, 7]},
+      "faces": {
+        "north": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "east": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "south": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "west": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "down": {"uv": [2, 8, 2.5, 8.5], "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "axle_south",
+      "from": [4.5, 2, 9],
+      "to": [6.5, 6, 11],
+      "rotation": {"angle": 0, "axis": "y", "origin": [5.5, 2.5, 9]},
+      "faces": {
+        "north": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "east": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "south": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "west": {"uv": [2, 7, 2.5, 8], "texture": "#handcart"},
+        "down": {"uv": [2, 8, 2.5, 8.5], "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "wheel",
+      "from": [3, 0, 7],
+      "to": [8, 5, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [5.5, 2.5, 8]},
+      "faces": {
+        "north": {"uv": [0, 7, 1.25, 8.25], "texture": "#handcart"},
+        "east": {"uv": [1.25, 7, 1.75, 8.25], "texture": "#handcart"},
+        "south": {"uv": [0, 7, 1.25, 8.25], "texture": "#handcart"},
+        "west": {"uv": [1.25, 7, 1.75, 8.25], "texture": "#handcart"},
+        "up": {"uv": [1.25, 7, 1.75, 8.25], "rotation": 270, "texture": "#handcart"},
+        "down": {"uv": [1.25, 7, 1.75, 8.25], "rotation": 90, "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "barrow_east",
+      "from": [3, 8, 2],
+      "to": [16, 14, 4],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4.75, 0, 8, 1.5], "texture": "#handcart"},
+        "south": {"uv": [8, 2, 4.75, 3.5], "texture": "#handcart"},
+        "west": {"uv": [0, 0, 0.5, 1.5], "texture": "#handcart"},
+        "up": {"uv": [10, 6.75, 6.75, 6.25], "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "barrow_west",
+      "from": [3, 8, 12],
+      "to": [16, 14, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4.75, 2, 8, 3.5], "texture": "#handcart"},
+        "south": {"uv": [8, 0, 4.75, 1.5], "texture": "#handcart"},
+        "west": {"uv": [2.5, 0, 3, 1.5], "texture": "#handcart"},
+        "up": {"uv": [10, 4.25, 6.75, 3.75], "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "barrow_bottom",
+      "from": [3, 6, 2],
+      "to": [16, 8, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "north": {"uv": [4.75, 1.5, 8, 2], "texture": "#handcart"},
+        "south": {"uv": [8, 1.5, 4.75, 2], "texture": "#handcart"},
+        "west": {"uv": [3, 1.5, 0, 2], "texture": "#handcart"},
+        "up": {"uv": [10, 3.75, 6.75, 6.75], "texture": "#handcart"},
+        "down": {"uv": [5, 3.75, 1.75, 6.75], "texture": "#handcart"}
+      }
+    },
+    {
+      "name": "barrow_top",
+      "from": [3, 8, 4],
+      "to": [5, 14, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+      "faces": {
+        "east": {"uv": [0.5, 2, 2.5, 3.5], "texture": "#handcart"},
+        "west": {"uv": [0.5, 0, 2.5, 1.5], "texture": "#handcart"},
+        "up": {"uv": [10, 6.25, 9.5, 4.25], "texture": "#handcart"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "handcart",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "west",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [
+            0,
+            1,
+            2,
+            {
+              "name": "barrow",
+              "origin": [0, 0, 0],
+              "color": 0,
+              "children": [3, 4, 5, 6]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

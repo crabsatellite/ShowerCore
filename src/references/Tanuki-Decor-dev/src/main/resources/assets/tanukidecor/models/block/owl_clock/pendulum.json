@@ -1,0 +1,81 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/owl_clock",
+    "clock": "tanukidecor:block/owl_clock"
+  },
+  "elements": [
+    {
+      "name": "pendulum_0",
+      "from": [7.5, -4, 14],
+      "to": [8.5, 0, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 14]},
+      "faces": {
+        "north": {"uv": [11.5, 0, 12, 2], "texture": "#clock"},
+        "south": {"uv": [11.5, 0, 12, 2], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "pendulum_1",
+      "from": [6.5, -8, 13],
+      "to": [9.5, -4, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 14]},
+      "faces": {
+        "north": {"uv": [12, 0, 13.5, 2], "texture": "#clock"},
+        "east": {"uv": [14.5, 0, 13.5, 2], "texture": "#clock"},
+        "south": {"uv": [13.5, 0, 12, 2], "texture": "#clock"},
+        "west": {"uv": [13.5, 0, 14.5, 2], "texture": "#clock"},
+        "up": {"uv": [14.5, 0, 16, 1], "texture": "#clock"},
+        "down": {"uv": [14.5, 0, 16, 1], "texture": "#clock"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "ground": {
+      "translation": [0, 4.5, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [2.5, 0.25, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "head": {
+      "translation": [0, 0, -13],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "translation": [0, 2, -3],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "pendulum",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

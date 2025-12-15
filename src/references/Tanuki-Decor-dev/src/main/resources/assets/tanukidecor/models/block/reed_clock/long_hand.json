@@ -1,0 +1,37 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/reed_clock",
+    "clock": "tanukidecor:block/reed_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 9.5, 11.75],
+      "to": [8.5, 13.5, 11.75],
+      "rotation": {"angle": 0, "axis": "z", "origin": [8, 10, 12]},
+      "faces": {
+        "north": {"uv": [10, 0, 10.5, 2], "texture": "#clock"},
+        "south": {"uv": [10, 0, 10.5, 2], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

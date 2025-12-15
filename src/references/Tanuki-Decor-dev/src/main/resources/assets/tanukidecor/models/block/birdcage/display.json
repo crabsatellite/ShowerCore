@@ -1,0 +1,166 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "tanukidecor:block/display1x2x1",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/birdcage",
+    "birdcage": "tanukidecor:block/birdcage"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [2, 0, 2],
+      "to": [14, 2, 14],
+      "faces": {
+        "north": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "east": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "south": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "west": {"uv": [0, 6, 3, 6.5], "texture": "#birdcage"},
+        "up": {"uv": [3, 3, 0, 0], "texture": "#birdcage"},
+        "down": {"uv": [3, 6, 0, 3], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "pole",
+      "from": [6.5, 2, 6.5],
+      "to": [9.5, 16, 9.5],
+      "faces": {
+        "north": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "east": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "south": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"},
+        "west": {"uv": [9.75, 0, 10.5, 3.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_north",
+      "from": [8, 13, 2.5],
+      "to": [8, 16, 6.5],
+      "faces": {
+        "east": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"},
+        "west": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_west",
+      "from": [2.5, 13, 8],
+      "to": [6.5, 16, 8],
+      "faces": {
+        "north": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"},
+        "south": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_south",
+      "from": [8, 13, 9.5],
+      "to": [8, 16, 13.5],
+      "faces": {
+        "east": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"},
+        "west": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "support_east",
+      "from": [9.5, 13, 8],
+      "to": [13.5, 16, 8],
+      "faces": {
+        "north": {"uv": [10.75, 3.75, 9.75, 4.5], "texture": "#birdcage"},
+        "south": {"uv": [9.75, 3.75, 10.75, 4.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_north",
+      "from": [2, 16, 2],
+      "to": [14, 31, 2],
+      "faces": {
+        "north": {"uv": [3.25, 0, 6.25, 3.75], "texture": "#birdcage"},
+        "south": {"uv": [6.25, 0, 3.25, 3.75], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_south",
+      "from": [2, 16, 14],
+      "to": [14, 31, 14],
+      "faces": {
+        "north": {"uv": [6.25, 0, 3.25, 3.75], "texture": "#birdcage"},
+        "south": {"uv": [3.25, 0, 6.25, 3.75], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_east",
+      "from": [14, 16, 2],
+      "to": [14, 31, 14],
+      "faces": {
+        "east": {"uv": [3.25, 0, 6.25, 3.75], "texture": "#birdcage"},
+        "west": {"uv": [6.25, 0, 3.25, 3.75], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_west",
+      "from": [2, 16, 2],
+      "to": [2, 31, 14],
+      "faces": {
+        "east": {"uv": [6.25, 0, 3.25, 3.75], "texture": "#birdcage"},
+        "west": {"uv": [3.25, 0, 6.25, 3.75], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_bottom",
+      "from": [2, 16, 2],
+      "to": [14, 16, 14],
+      "faces": {
+        "up": {"uv": [6.5, 3, 9.5, 6], "texture": "#birdcage"},
+        "down": {"uv": [6.5, 3, 9.5, 6], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "cage_top",
+      "from": [2, 31, 2],
+      "to": [14, 31, 14],
+      "faces": {
+        "up": {"uv": [9.5, 3, 6.5, 0], "texture": "#birdcage"},
+        "down": {"uv": [9.5, 3, 6.5, 0], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "perch",
+      "from": [3.01, 16.01, 7],
+      "to": [12.99, 17.01, 9],
+      "faces": {
+        "north": {"uv": [11.25, 0.5, 13.745, 0.75], "texture": "#birdcage"},
+        "east": {"uv": [13.75, 0, 14.25, 0.25], "texture": "#birdcage"},
+        "south": {"uv": [11.25, 0.5, 13.745, 0.75], "texture": "#birdcage"},
+        "west": {"uv": [13.75, 0, 14.25, 0.25], "texture": "#birdcage"},
+        "up": {"uv": [11.25, 0, 13.745, 0.5], "texture": "#birdcage"},
+        "down": {"uv": [11.25, 0, 13.745, 0.5], "texture": "#birdcage"}
+      }
+    },
+    {
+      "name": "top",
+      "from": [7, 30.99, 7],
+      "to": [9, 32, 9],
+      "faces": {
+        "north": {"uv": [3.25, 4.5, 3.75, 4.7525], "texture": "#birdcage"},
+        "east": {"uv": [3.25, 4.5, 3.75, 4.7525], "texture": "#birdcage"},
+        "south": {"uv": [3.25, 4.5, 3.75, 4.7525], "texture": "#birdcage"},
+        "west": {"uv": [3.25, 4.5, 3.75, 4.7525], "texture": "#birdcage"},
+        "up": {"uv": [3.75, 4.5, 3.25, 4], "texture": "#birdcage"},
+        "down": {"uv": [3.75, 4, 3.25, 4.5], "texture": "#birdcage"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    },
+    {
+      "name": "top",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [6, 7, 8, 9, 10, 11, 12, 13]
+    }
+  ]
+}

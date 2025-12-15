@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "active=true,waterlogged=true": { "model": "tanukidecor:block/hourglass/active" },
+    "active=true,waterlogged=false": { "model": "tanukidecor:block/hourglass/active" },
+    "active=false,waterlogged=true": { "model": "tanukidecor:block/hourglass/empty" },
+    "active=false,waterlogged=false": { "model": "tanukidecor:block/hourglass/empty" }
+  }
+}

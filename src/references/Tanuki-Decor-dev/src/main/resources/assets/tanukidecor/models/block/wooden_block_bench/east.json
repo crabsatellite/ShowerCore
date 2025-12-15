@@ -1,0 +1,44 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/wooden_block_bench",
+    "bench": "tanukidecor:block/wooden_block_bench"
+  },
+  "elements": [
+    {
+      "name": "left_bench_1",
+      "from": [13, 0, 2],
+      "to": [16, 12, 14],
+      "faces": {
+        "north": {"uv": [7.5, 0, 6, 6], "texture": "#bench"},
+        "east": {"uv": [6, 0, 0, 6], "texture": "#bench"},
+        "south": {"uv": [6, 0, 7.5, 6], "texture": "#bench"},
+        "west": {"uv": [0, 0, 6, 6], "texture": "#bench"},
+        "up": {"uv": [9, 0, 7.5, 6], "texture": "#bench"},
+        "down": {"uv": [9, 0, 7.5, 6], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "left_bench_2",
+      "from": [0, 5, 3],
+      "to": [13, 7, 13],
+      "faces": {
+        "north": {"uv": [6.5, 11, 0, 12], "texture": "#bench"},
+        "south": {"uv": [6.5, 11, 0, 12], "texture": "#bench"},
+        "up": {"uv": [6.5, 6, 0, 11], "texture": "#bench"},
+        "down": {"uv": [6.5, 11, 0, 6], "texture": "#bench"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "east",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

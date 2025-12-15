@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/slot_machine",
+    "machine": "tanukidecor:block/slot_machine"
+  },
+  "elements": [
+    {
+      "name": "machine_1",
+      "from": [1, 0, 4],
+      "to": [15, 16, 12],
+      "faces": {
+        "north": {"uv": [0, 0, 3.5, 4], "texture": "#machine"},
+        "east": {"uv": [7, 0, 9, 4], "texture": "#machine"},
+        "south": {"uv": [3.5, 0, 7, 4], "texture": "#machine"},
+        "west": {"uv": [9, 0, 7, 4], "texture": "#machine"},
+        "up": {"uv": [0, 7, 3.5, 9], "texture": "#machine"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

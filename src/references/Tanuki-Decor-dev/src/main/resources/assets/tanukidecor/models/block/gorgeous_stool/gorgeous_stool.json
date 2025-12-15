@@ -1,0 +1,112 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "#stool",
+    "stool": "tanukidecor:block/gorgeous_stool"
+  },
+  "elements": [
+    {
+      "name": "stool_0",
+      "from": [5, 0, 5],
+      "to": [11, 2, 11],
+      "faces": {
+        "north": {"uv": [6, 11, 9, 12], "texture": "#stool"},
+        "east": {"uv": [6, 11, 9, 12], "texture": "#stool"},
+        "south": {"uv": [6, 11, 9, 12], "texture": "#stool"},
+        "west": {"uv": [6, 11, 9, 12], "texture": "#stool"},
+        "up": {"uv": [6, 8, 9, 11], "texture": "#stool"},
+        "down": {"uv": [9, 8, 12, 11], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_1",
+      "from": [7, 2, 7],
+      "to": [9, 9, 9],
+      "faces": {
+        "north": {"uv": [12, 0, 13, 3.5], "texture": "#stool"},
+        "east": {"uv": [13, 0, 12, 3.5], "texture": "#stool"},
+        "south": {"uv": [12, 0, 13, 3.5], "texture": "#stool"},
+        "west": {"uv": [13, 0, 12, 3.5], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_2",
+      "from": [3, 3, 8],
+      "to": [7, 6, 8],
+      "faces": {
+        "north": {"uv": [6, 12, 8, 13.5], "texture": "#stool"},
+        "south": {"uv": [8, 12, 6, 13.5], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_3",
+      "from": [9, 3, 8],
+      "to": [13, 6, 8],
+      "faces": {
+        "north": {"uv": [8, 12, 6, 13.5], "texture": "#stool"},
+        "south": {"uv": [6, 12, 8, 13.5], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_4",
+      "from": [8, 3, 3],
+      "to": [8, 6, 7],
+      "faces": {
+        "east": {"uv": [6, 12, 8, 13.5], "texture": "#stool"},
+        "west": {"uv": [8, 12, 6, 13.5], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_5",
+      "from": [8, 3, 9],
+      "to": [8, 6, 13],
+      "faces": {
+        "east": {"uv": [8, 12, 6, 13.5], "texture": "#stool"},
+        "west": {"uv": [6, 12, 8, 13.5], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_6",
+      "from": [3, 6, 3],
+      "to": [13, 6, 13],
+      "faces": {
+        "up": {"uv": [6, 3, 11, 8], "texture": "#stool"},
+        "down": {"uv": [6, 3, 11, 8], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_7",
+      "from": [2, 9, 2],
+      "to": [14, 12, 14],
+      "faces": {
+        "north": {"uv": [0, 12, 6, 13.5], "texture": "#stool"},
+        "east": {"uv": [6, 12, 0, 13.5], "texture": "#stool"},
+        "south": {"uv": [0, 12, 6, 13.5], "texture": "#stool"},
+        "west": {"uv": [6, 12, 0, 13.5], "texture": "#stool"},
+        "up": {"uv": [0, 0, 6, 6], "texture": "#stool"},
+        "down": {"uv": [0, 6, 6, 12], "texture": "#stool"}
+      }
+    },
+    {
+      "name": "stool_8",
+      "from": [2, 12, 13],
+      "to": [14, 18, 13],
+      "rotation": {"angle": 22.5, "axis": "x", "origin": [8, 12, 13]},
+      "faces": {
+        "north": {"uv": [6, 0, 12, 3], "texture": "#stool"},
+        "south": {"uv": [6, 0, 12, 3], "texture": "#stool"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "stool",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  ]
+}

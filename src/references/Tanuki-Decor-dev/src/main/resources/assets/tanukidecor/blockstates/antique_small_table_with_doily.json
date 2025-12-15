@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/antique_small_table_with_doily/antique_small_table_with_doily" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/antique_small_table_with_doily/antique_small_table_with_doily", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/antique_small_table_with_doily/antique_small_table_with_doily", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/antique_small_table_with_doily/antique_small_table_with_doily", "y": 270 }
+    }
+  ]
+}

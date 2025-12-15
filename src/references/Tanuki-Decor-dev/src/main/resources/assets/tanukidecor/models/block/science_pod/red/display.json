@@ -1,0 +1,9 @@
+{
+  "parent": "tanukidecor:block/science_pod/display",
+  "render_type": "minecraft:translucent",
+  "texture_size": [32, 32],
+  "textures": {
+    "pod": "tanukidecor:block/science_pod/red",
+    "bubbles": "tanukidecor:block/science_pod/bubbles"
+  }
+}

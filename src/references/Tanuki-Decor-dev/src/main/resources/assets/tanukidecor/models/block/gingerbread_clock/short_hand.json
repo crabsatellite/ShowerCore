@@ -1,0 +1,37 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/gingerbread_clock",
+    "clock": "tanukidecor:block/gingerbread_clock"
+  },
+  "elements": [
+    {
+      "name": "short",
+      "from": [7.5, -2.5, 7.99],
+      "to": [8.5, -0.5, 7.99],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, -2, 8]},
+      "faces": {
+        "north": {"uv": [15.5, 0.5, 16, 1.5], "texture": "#clock"},
+        "south": {"uv": [15.5, 0.5, 16, 1.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "short",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

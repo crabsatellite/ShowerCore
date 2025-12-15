@@ -1,0 +1,86 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "fireplace": "tanukidecor:block/small_fireplace",
+    "particle": "#fireplace"
+  },
+  "elements": [
+    {
+      "name": "stone_right",
+      "from": [0, 0, 0],
+      "to": [16, 2, 16],
+      "faces": {
+        "north": {"uv": [4, 4, 0, 4.5], "texture": "#fireplace"},
+        "east": {"uv": [4, 4.5, 0, 5], "texture": "#fireplace"},
+        "south": {"uv": [0, 4, 4, 4.5], "texture": "#fireplace"},
+        "up": {"uv": [8, 0, 4, 4], "texture": "#fireplace"},
+        "down": {"uv": [4, 4, 0, 0], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "bars_right",
+      "from": [0, 2, 1],
+      "to": [7, 7, 1],
+      "faces": {
+        "north": {"uv": [5.25, 10, 3.5, 11.25], "texture": "#fireplace"},
+        "east": {"uv": [3.5, 10, 3.5, 11.25], "texture": "#fireplace"},
+        "south": {"uv": [5.25, 10, 3.5, 11.25], "texture": "#fireplace"},
+        "west": {"uv": [3.5, 10, 3.5, 11.25], "texture": "#fireplace"},
+        "up": {"uv": [1.75, 0, 0, 0], "texture": "#fireplace"},
+        "down": {"uv": [1.75, 0, 0, 0], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "wood_right",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 9, 0, 9.5], "texture": "#fireplace"},
+        "east": {"uv": [4, 9.5, 0, 10], "texture": "#fireplace"},
+        "south": {"uv": [0, 9, 4, 9.5], "texture": "#fireplace"},
+        "up": {"uv": [4, 5, 0, 9], "texture": "#fireplace"},
+        "down": {"uv": [8, 8, 4, 4], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "bricks_3",
+      "from": [6, 2, 2],
+      "to": [14, 14, 16],
+      "faces": {
+        "north": {"uv": [10, 0, 8, 3], "texture": "#fireplace"},
+        "east": {"uv": [0, 10, 3.5, 13], "texture": "#fireplace"},
+        "south": {"uv": [12, 0, 10, 3], "texture": "#fireplace"},
+        "west": {"uv": [3.5, 13, 0, 16], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "bricks_4",
+      "from": [0, 2, 12],
+      "to": [6, 14, 16],
+      "faces": {
+        "north": {"uv": [9.5, 6, 8, 9], "texture": "#fireplace"},
+        "south": {"uv": [9.5, 3, 8, 6], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "bricks_5",
+      "from": [0, 10, 2],
+      "to": [6, 14, 12],
+      "faces": {
+        "north": {"uv": [9.5, 11.5, 8, 12.5], "texture": "#fireplace"},
+        "down": {"uv": [9.5, 9, 8, 11.5], "texture": "#fireplace"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

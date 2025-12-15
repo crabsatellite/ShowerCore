@@ -1,0 +1,52 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [128, 128],
+  "textures": {
+    "particle": "tanukidecor:block/large_fireplace",
+    "fireplace": "tanukidecor:block/large_fireplace"
+  },
+  "elements": [
+    {
+      "name": "fireplace_0",
+      "from": [0, 0, 0],
+      "to": [16, 4, 16],
+      "faces": {
+        "north": {"uv": [0, 7.25, 2, 7.75], "texture": "#fireplace"},
+        "south": {"uv": [2, 7.25, 0, 7.75], "texture": "#fireplace"},
+        "west": {"uv": [2, 7.25, 4, 7.75], "texture": "#fireplace"},
+        "up": {"uv": [0, 5.25, 2, 7.25], "texture": "#fireplace"},
+        "down": {"uv": [2, 5.25, 4, 7.25], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "fireplace_1",
+      "from": [2, 4, 4],
+      "to": [12, 16, 16],
+      "faces": {
+        "north": {"uv": [7.75, 0, 9, 1.5], "texture": "#fireplace"},
+        "east": {"uv": [7.75, 4.5, 9.25, 6], "texture": "#fireplace"},
+        "south": {"uv": [7.75, 1.5, 9, 3], "texture": "#fireplace"},
+        "west": {"uv": [7.75, 3, 9.25, 4.5], "texture": "#fireplace"}
+      }
+    },
+    {
+      "name": "fireplace_2",
+      "from": [12, 4, 14],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 4.25, 4.5, 5.75], "texture": "#fireplace"},
+        "south": {"uv": [4.5, 4.25, 5, 5.75], "texture": "#fireplace"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left_bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

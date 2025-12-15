@@ -1,0 +1,56 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/minimalist_dresser",
+    "dresser": "tanukidecor:block/minimalist_dresser"
+  },
+  "elements": [
+    {
+      "name": "right_dresser",
+      "from": [0, 2, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [4, 0, 0, 3.5], "texture": "#dresser"},
+        "east": {"uv": [3.5, 7, 0, 10.5], "texture": "#dresser"},
+        "south": {"uv": [0, 3.5, 4, 7], "texture": "#dresser"},
+        "up": {"uv": [8, 0, 4, 3.5], "texture": "#dresser"},
+        "down": {"uv": [8, 7, 4, 3.5], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg2",
+      "from": [13, 0, 2],
+      "to": [15, 2, 4],
+      "faces": {
+        "north": {"uv": [4, 7, 3.5, 7.5], "texture": "#dresser"},
+        "east": {"uv": [3.5, 7, 4, 7.5], "texture": "#dresser"},
+        "south": {"uv": [4, 7, 3.5, 7.5], "texture": "#dresser"},
+        "west": {"uv": [3.5, 7, 4, 7.5], "texture": "#dresser"},
+        "down": {"uv": [4, 7.5, 3.5, 8], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [13, 0, 12],
+      "to": [15, 2, 14],
+      "faces": {
+        "north": {"uv": [3.5, 7, 4, 7.5], "texture": "#dresser"},
+        "east": {"uv": [4, 7, 3.5, 7.5], "texture": "#dresser"},
+        "south": {"uv": [3.5, 7, 4, 7.5], "texture": "#dresser"},
+        "west": {"uv": [4, 7, 3.5, 7.5], "texture": "#dresser"},
+        "down": {"uv": [4, 8, 3.5, 7.5], "texture": "#dresser"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

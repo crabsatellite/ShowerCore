@@ -1,0 +1,56 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_dresser",
+    "dresser": "tanukidecor:block/cabana_dresser"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [0, 0, 0],
+      "to": [2, 2, 2],
+      "faces": {
+        "north": {"uv": [0, 15, 1, 16], "texture": "#dresser"},
+        "east": {"uv": [1, 15, 0, 16], "texture": "#dresser"},
+        "south": {"uv": [0, 15, 1, 16], "texture": "#dresser"},
+        "west": {"uv": [1, 15, 0, 16], "texture": "#dresser"},
+        "down": {"uv": [1, 15, 2, 16], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [0, 0, 14],
+      "to": [2, 2, 16],
+      "faces": {
+        "north": {"uv": [1, 15, 0, 16], "texture": "#dresser"},
+        "east": {"uv": [0, 15, 1, 16], "texture": "#dresser"},
+        "south": {"uv": [1, 15, 0, 16], "texture": "#dresser"},
+        "west": {"uv": [0, 15, 1, 16], "texture": "#dresser"},
+        "down": {"uv": [1, 16, 2, 15], "texture": "#dresser"}
+      }
+    },
+    {
+      "name": "dresser_0",
+      "from": [0, 2, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [8, 0, 16, 7], "texture": "#dresser"},
+        "south": {"uv": [8, 7, 16, 14], "texture": "#dresser"},
+        "west": {"uv": [0, 8, 8, 15], "texture": "#dresser"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#dresser"},
+        "down": {"uv": [0, 8, 8, 0], "texture": "#dresser"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

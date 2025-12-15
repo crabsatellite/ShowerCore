@@ -1,0 +1,31 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/station_clock",
+    "clock": "tanukidecor:block/station_clock"
+  },
+  "elements": [
+    {
+      "name": "clock_3",
+      "from": [0, 0, 5],
+      "to": [16, 16, 11],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#clock"},
+        "east": {"uv": [8, 8, 4, 9.5], "rotation": 90, "texture": "#clock"},
+        "south": {"uv": [4, 0, 8, 4], "texture": "#clock"},
+        "up": {"uv": [4, 8, 0, 9.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

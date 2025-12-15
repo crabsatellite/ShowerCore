@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/regal_armoire",
+    "armoire": "tanukidecor:block/regal_armoire"
+  },
+  "elements": [
+    {
+      "name": "armoire_top",
+      "from": [0, 0, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [4, 0, 8, 4], "texture": "#armoire"},
+        "east": {"uv": [7.5, 11.5, 4, 15.5], "texture": "#armoire"},
+        "south": {"uv": [4, 4, 8, 8], "texture": "#armoire"},
+        "west": {"uv": [4, 11.5, 7.5, 15.5], "texture": "#armoire"},
+        "up": {"uv": [4, 8, 8, 11.5], "texture": "#armoire"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "tanukidecor:block/display1x1x2",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "#bed"
+  },
+  "elements": [
+    {
+      "name": "bed",
+      "from": [1, 0, 2],
+      "to": [15, 8, 16],
+      "faces": {
+        "east": {"uv": [11, 0, 7.5, 2], "texture": "#bed"},
+        "west": {"uv": [7.5, 0, 11, 2], "texture": "#bed"},
+        "up": {"uv": [3.5, 7, 0, 3.5], "texture": "#bed"},
+        "down": {"uv": [3.75, 3.5, 7.25, 7], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "frame",
+      "from": [0, 0, 0],
+      "to": [16, 10, 2],
+      "faces": {
+        "north": {"uv": [0.5, 13, 4.5, 15.5], "texture": "#bed"},
+        "east": {"uv": [0, 13, 0.5, 15.5], "texture": "#bed"},
+        "south": {"uv": [5, 13, 9, 15.5], "texture": "#bed"},
+        "west": {"uv": [4.5, 13, 5, 15.5], "texture": "#bed"},
+        "up": {"uv": [0.5, 12.5, 4.5, 13], "texture": "#bed"},
+        "down": {"uv": [0.5, 15.5, 4.5, 16], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "frame",
+      "from": [2, 10, 0],
+      "to": [14, 12, 2],
+      "faces": {
+        "north": {"uv": [1, 12.5, 4, 13], "texture": "#bed"},
+        "east": {"uv": [0.5, 12, 1, 12.5], "texture": "#bed"},
+        "south": {"uv": [5.5, 12.5, 8.5, 13], "texture": "#bed"},
+        "west": {"uv": [4, 12, 4.5, 12.5], "texture": "#bed"},
+        "up": {"uv": [4, 12.5, 1, 12], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "bed",
+      "from": [1, 0, 16],
+      "to": [15, 8, 30],
+      "faces": {
+        "east": {"uv": [14.5, 0, 11, 2], "texture": "#bed"},
+        "west": {"uv": [11, 0, 14.5, 2], "texture": "#bed"},
+        "up": {"uv": [3.5, 3.5, 0, 0], "texture": "#bed"},
+        "down": {"uv": [3.75, 0, 7.25, 3.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "frame",
+      "from": [0, 0, 30],
+      "to": [16, 12, 32],
+      "faces": {
+        "north": {"uv": [5, 8.25, 9, 11.25], "texture": "#bed"},
+        "east": {"uv": [0, 8.25, 0.5, 11.25], "texture": "#bed"},
+        "south": {"uv": [0.5, 8.25, 4.5, 11.25], "texture": "#bed"},
+        "west": {"uv": [4.5, 8.25, 5, 11.25], "texture": "#bed"},
+        "up": {"uv": [0.5, 7.75, 4.5, 8.25], "texture": "#bed"},
+        "down": {"uv": [0.5, 11.25, 4.5, 11.75], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "frame",
+      "from": [2, 12, 30],
+      "to": [14, 14, 32],
+      "faces": {
+        "north": {"uv": [5.5, 7.75, 8.5, 8.25], "texture": "#bed"},
+        "east": {"uv": [0.5, 7.25, 1, 7.75], "texture": "#bed"},
+        "south": {"uv": [1, 7.75, 4, 8.25], "texture": "#bed"},
+        "west": {"uv": [4, 7.25, 4.5, 7.75], "texture": "#bed"},
+        "up": {"uv": [4, 7.75, 1, 7.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "pillow",
+      "from": [4, 7, 26],
+      "to": [12, 10, 30],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 28]},
+      "faces": {
+        "north": {"uv": [10.5, 5, 8.5, 4.25], "rotation": 180, "texture": "#bed"},
+        "east": {"uv": [7.75, 3.25, 8.5, 4.25], "rotation": 270, "texture": "#bed"},
+        "south": {"uv": [10.5, 3.25, 8.5, 2.5], "texture": "#bed"},
+        "west": {"uv": [10.5, 3.25, 11.25, 4.25], "rotation": 90, "texture": "#bed"},
+        "up": {"uv": [8.5, 3.25, 10.5, 4.25], "rotation": 180, "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "north",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2]
+    },
+    {
+      "name": "south",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [3, 4, 5, 6]
+    }
+  ]
+}

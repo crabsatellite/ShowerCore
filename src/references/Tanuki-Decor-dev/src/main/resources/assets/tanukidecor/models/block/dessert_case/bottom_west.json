@@ -1,0 +1,32 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/dessert_case",
+    "case": "tanukidecor:block/dessert_case"
+  },
+  "elements": [
+    {
+      "name": "bottom_left",
+      "from": [0, 0, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 7, 4, 11], "texture": "#case"},
+        "south": {"uv": [4, 7, 0, 11], "texture": "#case"},
+        "west": {"uv": [0, 11, 3.5, 15], "texture": "#case"},
+        "up": {"uv": [0, 0, 4, 3.5], "texture": "#case"},
+        "down": {"uv": [0, 3.5, 4, 7], "texture": "#case"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_bed",
+    "bed": "tanukidecor:block/oak_antique_bed"
+  },
+  "elements": [
+    {
+      "name": "bed2",
+      "from": [0, 2, 3],
+      "to": [16, 8, 16],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "east": {"uv": [3.25, 6.5, 0, 8], "texture": "#bed"},
+        "west": {"uv": [0, 6.5, 3.25, 8], "texture": "#bed"},
+        "up": {"uv": [4, 0, 0, 3.25], "texture": "#bed"},
+        "down": {"uv": [4, 6.5, 0, 3.25], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leg2",
+      "from": [12, 0, 0],
+      "to": [16, 12, 3],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [5, 2.5, 4, 5.5], "texture": "#bed"},
+        "east": {"uv": [5.75, 2.5, 5, 5.5], "texture": "#bed"},
+        "south": {"uv": [5.75, 2.5, 6.75, 5.5], "texture": "#bed"},
+        "west": {"uv": [5.75, 2.5, 5, 5.5], "texture": "#bed"},
+        "up": {"uv": [5, 5.5, 4, 6.25], "texture": "#bed"},
+        "down": {"uv": [5, 6.25, 4, 7], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood4",
+      "from": [0, 2, 1],
+      "to": [12, 12, 3],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [4, 7, 7, 9.5], "texture": "#bed"},
+        "south": {"uv": [7, 7, 4, 9.5], "texture": "#bed"},
+        "up": {"uv": [7, 9.5, 4, 10], "texture": "#bed"},
+        "down": {"uv": [7, 10, 4, 10.5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "wood5",
+      "from": [0, 12, 1],
+      "to": [6, 16, 3],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+      "faces": {
+        "north": {"uv": [5, 5.5, 6.5, 6.5], "texture": "#bed"},
+        "east": {"uv": [7, 5.5, 6.5, 6.5], "texture": "#bed"},
+        "south": {"uv": [6.5, 5.5, 5, 6.5], "texture": "#bed"},
+        "up": {"uv": [6.5, 6.5, 5, 7], "texture": "#bed"},
+        "down": {"uv": [6.5, 6.5, 5, 7], "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "rightFrontBed",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

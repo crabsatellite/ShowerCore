@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/mushroom_bed/south",
+  "texture_size": [64, 64],
+  "textures": {
+    "bed": "tanukidecor:block/brown_mushroom_bed",
+    "particle": "#bed"
+  }
+}

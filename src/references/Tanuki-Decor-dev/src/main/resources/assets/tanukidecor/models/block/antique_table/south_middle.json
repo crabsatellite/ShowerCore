@@ -1,0 +1,40 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_table",
+    "table": "tanukidecor:block/oak_antique_table"
+  },
+  "elements": [
+    {
+      "name": "center_front",
+      "from": [0, 2, 0],
+      "to": [16, 6, 1],
+      "faces": {
+        "south": {"uv": [3, 9, 7, 10], "texture": "#table"},
+        "up": {"uv": [3, 10, 7, 10.25], "texture": "#table"},
+        "down": {"uv": [3, 10.5, 7, 10.75], "texture": "#table"}
+      }
+    },
+    {
+      "name": "top",
+      "from": [0, 14, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "south": {"uv": [4, 8, 8, 8.5], "texture": "#table"},
+        "up": {"uv": [8, 4, 4, 0], "texture": "#table"},
+        "down": {"uv": [8, 0, 4, 4], "texture": "#table"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "back_middle",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    }
+  ]
+}

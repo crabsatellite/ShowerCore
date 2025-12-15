@@ -1,0 +1,101 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/slot_machine",
+    "machine": "tanukidecor:block/slot_machine"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [1, 0, 7],
+      "to": [15, 1, 9],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [1.75, 10.25, 5.25, 10.5], "texture": "#machine"},
+        "east": {"uv": [1.75, 10.5, 2.25, 10.75], "texture": "#machine"},
+        "south": {"uv": [5.25, 10.25, 1.75, 10.5], "texture": "#machine"},
+        "west": {"uv": [1.75, 10.5, 2.25, 10.75], "texture": "#machine"},
+        "up": {"uv": [1.75, 9.75, 5.25, 10.25], "texture": "#machine"},
+        "down": {"uv": [1.75, 9.75, 5.25, 10.25], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [1, 0, 7],
+      "to": [15, 1, 9],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [5.25, 10.25, 1.75, 10.5], "texture": "#machine"},
+        "east": {"uv": [2.25, 10.5, 1.75, 10.75], "texture": "#machine"},
+        "south": {"uv": [1.75, 10.25, 5.25, 10.5], "texture": "#machine"},
+        "west": {"uv": [2.25, 10.5, 1.75, 10.75], "texture": "#machine"},
+        "up": {"uv": [5.25, 9.75, 1.75, 10.25], "texture": "#machine"},
+        "down": {"uv": [5.25, 9.75, 1.75, 10.25], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "leg_2",
+      "from": [3, 1, 8],
+      "to": [13, 3, 8],
+      "rotation": {"angle": -45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [1.75, 9, 4.25, 9.5], "texture": "#machine"},
+        "east": {"uv": [1.75, 9, 1.75, 9.5], "texture": "#machine"},
+        "south": {"uv": [1.75, 9, 4.25, 9.5], "texture": "#machine"},
+        "west": {"uv": [1.75, 9, 1.75, 9.5], "texture": "#machine"},
+        "up": {"uv": [1.75, 9, 4.25, 9], "texture": "#machine"},
+        "down": {"uv": [1.75, 9, 4.25, 9], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [3, 1, 8],
+      "to": [13, 3, 8],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [4.25, 9, 1.75, 9.5], "texture": "#machine"},
+        "east": {"uv": [1.75, 9, 1.75, 9.5], "texture": "#machine"},
+        "south": {"uv": [4.25, 9, 1.75, 9.5], "texture": "#machine"},
+        "west": {"uv": [1.75, 9, 1.75, 9.5], "texture": "#machine"},
+        "up": {"uv": [4.25, 9, 1.75, 9], "texture": "#machine"},
+        "down": {"uv": [4.25, 9, 1.75, 9], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "leg_4",
+      "from": [7, 1, 7],
+      "to": [9, 4, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [0, 12, 0.5, 12.75], "texture": "#machine"},
+        "east": {"uv": [0.5, 12, 0, 12.75], "texture": "#machine"},
+        "south": {"uv": [0, 12, 0.5, 12.75], "texture": "#machine"},
+        "west": {"uv": [0.5, 12, 0, 12.75], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "machine_0",
+      "from": [1, 4, 4],
+      "to": [15, 16, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [0, 4, 3.5, 7], "texture": "#machine"},
+        "east": {"uv": [7, 4, 9, 7], "texture": "#machine"},
+        "south": {"uv": [3.5, 4, 7, 7], "texture": "#machine"},
+        "west": {"uv": [9, 4, 7, 7], "texture": "#machine"},
+        "down": {"uv": [3.5, 7, 7, 9], "texture": "#machine"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

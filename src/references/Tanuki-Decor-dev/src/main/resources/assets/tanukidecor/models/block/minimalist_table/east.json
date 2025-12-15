@@ -1,0 +1,56 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/minimalist_table",
+    "table": "tanukidecor:block/minimalist_table"
+  },
+  "elements": [
+    {
+      "name": "leg2",
+      "from": [13, 0, 1],
+      "to": [15, 12, 3],
+      "faces": {
+        "north": {"uv": [9, 4, 8, 10], "texture": "#table"},
+        "east": {"uv": [8, 4, 9, 10], "texture": "#table"},
+        "south": {"uv": [9, 4, 8, 10], "texture": "#table"},
+        "west": {"uv": [8, 4, 9, 10], "texture": "#table"},
+        "down": {"uv": [9, 10, 8, 11], "texture": "#table"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [13, 0, 13],
+      "to": [15, 12, 15],
+      "faces": {
+        "north": {"uv": [8, 4, 9, 10], "texture": "#table"},
+        "east": {"uv": [9, 4, 8, 10], "texture": "#table"},
+        "south": {"uv": [8, 4, 9, 10], "texture": "#table"},
+        "west": {"uv": [9, 4, 8, 10], "texture": "#table"},
+        "down": {"uv": [9, 11, 8, 10], "texture": "#table"}
+      }
+    },
+    {
+      "name": "right_table",
+      "from": [0, 12, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [16, 2, 8, 4], "texture": "#table"},
+        "east": {"uv": [16, 0, 8, 2], "texture": "#table"},
+        "south": {"uv": [8, 2, 16, 4], "texture": "#table"},
+        "up": {"uv": [8, 0, 0, 8], "texture": "#table"},
+        "down": {"uv": [8, 8, 0, 16], "texture": "#table"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

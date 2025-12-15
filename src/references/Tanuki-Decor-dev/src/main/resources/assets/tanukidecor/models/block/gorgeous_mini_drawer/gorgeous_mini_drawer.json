@@ -1,0 +1,105 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "#drawer",
+    "drawer": "tanukidecor:block/gorgeous_mini_drawer"
+  },
+  "elements": [
+    {
+      "name": "drawer_0",
+      "from": [0, 3, 2],
+      "to": [16, 5, 16],
+      "faces": {
+        "north": {"uv": [7, 7, 15, 8], "texture": "#drawer"},
+        "east": {"uv": [14, 8, 7, 9], "texture": "#drawer"},
+        "south": {"uv": [15, 7, 7, 8], "texture": "#drawer"},
+        "west": {"uv": [7, 8, 14, 9], "texture": "#drawer"},
+        "up": {"uv": [7, 0, 15, 7], "texture": "#drawer"},
+        "down": {"uv": [7, 7, 15, 0], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "drawer_1",
+      "from": [1, 5, 3],
+      "to": [15, 14, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 7, 4.5], "texture": "#drawer"},
+        "east": {"uv": [6.5, 9, 0, 13.5], "texture": "#drawer"},
+        "south": {"uv": [0, 4.5, 7, 9], "texture": "#drawer"},
+        "west": {"uv": [0, 9, 6.5, 13.5], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "drawer_2",
+      "from": [0, 14, 2],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [7, 7, 15, 8], "texture": "#drawer"},
+        "east": {"uv": [14, 8, 7, 9], "texture": "#drawer"},
+        "south": {"uv": [15, 7, 7, 8], "texture": "#drawer"},
+        "west": {"uv": [7, 8, 14, 9], "texture": "#drawer"},
+        "up": {"uv": [7, 0, 15, 7], "texture": "#drawer"},
+        "down": {"uv": [7, 7, 15, 0], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "leg_0",
+      "from": [2, 0, 3],
+      "to": [4, 3, 5],
+      "faces": {
+        "north": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "east": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "south": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "west": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "down": {"uv": [6.5, 10.5, 7.5, 11.5], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [12, 0, 3],
+      "to": [14, 3, 5],
+      "faces": {
+        "north": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "east": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "south": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "west": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "down": {"uv": [7.5, 10.5, 6.5, 11.5], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "leg_2",
+      "from": [2, 0, 11],
+      "to": [4, 3, 13],
+      "faces": {
+        "north": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "east": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "south": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "west": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "down": {"uv": [6.5, 11.5, 7.5, 10.5], "texture": "#drawer"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [12, 0, 11],
+      "to": [14, 3, 13],
+      "faces": {
+        "north": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "east": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "south": {"uv": [6.5, 9, 7.5, 10.5], "texture": "#drawer"},
+        "west": {"uv": [7.5, 9, 6.5, 10.5], "texture": "#drawer"},
+        "down": {"uv": [7.5, 11.5, 6.5, 10.5], "texture": "#drawer"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "drawer",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

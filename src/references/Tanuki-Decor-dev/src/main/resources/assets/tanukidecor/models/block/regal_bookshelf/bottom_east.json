@@ -1,0 +1,71 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/regal_bookshelf",
+    "bookcase": "tanukidecor:block/regal_bookshelf"
+  },
+  "elements": [
+    {
+      "name": "bookcase_4",
+      "from": [16, 0, 0],
+      "to": [16, 3, 16],
+      "faces": {
+        "north": {"uv": [0, 11.5, 0, 12.25], "texture": "#bookcase"},
+        "east": {"uv": [4, 11.5, 0, 12.25], "texture": "#bookcase"},
+        "south": {"uv": [0, 11.5, 0, 12.25], "texture": "#bookcase"},
+        "west": {"uv": [4, 11.5, 0, 12.25], "texture": "#bookcase"},
+        "up": {"uv": [0, 11.5, 4, 11.5], "rotation": 90, "texture": "#bookcase"},
+        "down": {"uv": [0, 11.5, 4, 11.5], "rotation": 90, "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_5",
+      "from": [0, 0, 0],
+      "to": [16, 3, 0],
+      "faces": {
+        "north": {"uv": [4, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "east": {"uv": [0, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "south": {"uv": [0, 10.75, 4, 11.5], "texture": "#bookcase"},
+        "west": {"uv": [0, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "up": {"uv": [4, 10.75, 0, 10.75], "texture": "#bookcase"},
+        "down": {"uv": [4, 10.75, 0, 10.75], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_6",
+      "from": [0, 0, 16],
+      "to": [16, 3, 16],
+      "faces": {
+        "north": {"uv": [4, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "east": {"uv": [0, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "south": {"uv": [0, 10.75, 4, 11.5], "texture": "#bookcase"},
+        "west": {"uv": [0, 10.75, 0, 11.5], "texture": "#bookcase"},
+        "up": {"uv": [4, 10.75, 0, 10.75], "texture": "#bookcase"},
+        "down": {"uv": [4, 10.75, 0, 10.75], "texture": "#bookcase"}
+      }
+    },
+    {
+      "name": "bookcase_7",
+      "from": [0, 3, 0],
+      "to": [16, 12, 16],
+      "faces": {
+        "north": {"uv": [4, 0, 0, 2.25], "texture": "#bookcase"},
+        "east": {"uv": [4, 4.5, 0, 6.75], "texture": "#bookcase"},
+        "south": {"uv": [4, 2.25, 0, 4.5], "texture": "#bookcase"},
+        "up": {"uv": [4, 6.75, 0, 10.75], "texture": "#bookcase"},
+        "down": {"uv": [4, 6.75, 0, 10.75], "texture": "#bookcase"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

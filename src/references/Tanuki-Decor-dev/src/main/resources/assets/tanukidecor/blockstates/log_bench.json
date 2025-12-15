@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "side": "left" }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/east" }
+    },
+    {
+      "when": { "AND": [ { "side": "right" }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/west" }
+    },
+    
+    {
+      "when": { "AND": [ { "side": "left" }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/east", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "side": "right" }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/west", "y": 180 }
+    },
+
+    {
+      "when": { "AND": [ { "side": "left" }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/east", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "side": "right" }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/west", "y": 90 }
+    },
+    
+    {
+      "when": { "AND": [ { "side": "left" }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/east", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "side": "right" }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/log_bench/west", "y": 270 }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "lamp": "tanukidecor:block/blue_dresser",
+    "particle": "#lamp"
+  },
+  "elements": [
+    {
+      "name": "lamp0",
+      "from": [6, 0, 6],
+      "to": [10, 1, 10],
+      "faces": {
+        "north": {"uv": [4, 4.5, 5, 4.75], "texture": "#lamp"},
+        "east": {"uv": [4, 4.5, 5, 4.75], "texture": "#lamp"},
+        "south": {"uv": [4, 4.5, 5, 4.75], "texture": "#lamp"},
+        "west": {"uv": [4, 4.5, 5, 4.75], "texture": "#lamp"},
+        "up": {"uv": [4, 3.5, 5, 4.5], "texture": "#lamp"},
+        "down": {"uv": [4, 3.5, 5, 4.5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp1",
+      "from": [7, 1, 7],
+      "to": [9, 10, 9],
+      "faces": {
+        "north": {"uv": [4, 4.75, 4.5, 7], "texture": "#lamp"},
+        "east": {"uv": [4.5, 4.75, 4, 7], "texture": "#lamp"},
+        "south": {"uv": [4, 4.75, 4.5, 7], "texture": "#lamp"},
+        "west": {"uv": [4.5, 4.75, 4, 7], "texture": "#lamp"},
+        "up": {"uv": [4.5, 5.25, 5, 5.75], "texture": "#lamp"},
+        "down": {"uv": [4.5, 4.75, 5, 5.25], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp2",
+      "from": [5, 6, 5],
+      "to": [11, 12, 5],
+      "faces": {
+        "north": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "east": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "south": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "west": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "up": {"uv": [0.5, 14, 2, 14], "texture": "#lamp"},
+        "down": {"uv": [0.5, 14, 2, 14], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp3",
+      "from": [5, 6, 5],
+      "to": [5, 12, 11],
+      "faces": {
+        "north": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "east": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "south": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "west": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "up": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "down": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp4",
+      "from": [11, 6, 5],
+      "to": [11, 12, 11],
+      "faces": {
+        "north": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "east": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "south": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "west": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "up": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "down": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp5",
+      "from": [5, 6, 11],
+      "to": [11, 12, 11],
+      "faces": {
+        "north": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "east": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "south": {"uv": [0.5, 14, 2, 15.5], "texture": "#lamp"},
+        "west": {"uv": [0.5, 14, 0.5, 15.5], "texture": "#lamp"},
+        "up": {"uv": [0.5, 14, 2, 14], "texture": "#lamp"},
+        "down": {"uv": [0.5, 14, 2, 14], "texture": "#lamp"}
+      }
+    },
+    {
+      "name": "lamp6",
+      "from": [5, 8, 5],
+      "to": [11, 8, 11],
+      "faces": {
+        "north": {"uv": [5, 3.5, 6.5, 3.5], "texture": "#lamp"},
+        "east": {"uv": [5, 3.5, 6.5, 3.5], "texture": "#lamp"},
+        "south": {"uv": [5, 3.5, 6.5, 3.5], "texture": "#lamp"},
+        "west": {"uv": [5, 3.5, 6.5, 3.5], "texture": "#lamp"},
+        "up": {"uv": [5, 3.5, 6.5, 5], "texture": "#lamp"},
+        "down": {"uv": [5, 3.5, 6.5, 5], "texture": "#lamp"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "lamp",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5, 6]
+    }
+  ]
+}

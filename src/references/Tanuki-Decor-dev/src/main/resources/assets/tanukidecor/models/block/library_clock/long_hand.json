@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "1": "tanukidecor:block/bookshelf_clock"
+  },
+  "elements": [
+    {
+      "name": "long",
+      "from": [7.5, 11, 2.96],
+      "to": [8.5, 15, 2.96],
+      "rotation": {"angle": 0, "axis": "y", "origin": [16, 24, 3]},
+      "faces": {
+        "north": {"uv": [15, 3.5, 15.25, 4.5], "texture": "#1"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "hands",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "long",
+          "origin": [8, 8, 8],
+          "color": 0,
+          "children": [0]
+        }
+      ]
+    }
+  ]
+}

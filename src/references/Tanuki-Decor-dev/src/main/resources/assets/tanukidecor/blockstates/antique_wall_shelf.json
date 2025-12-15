@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "tanukidecor:block/antique_wall_shelf/antique_wall_shelf" }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": { "model": "tanukidecor:block/antique_wall_shelf/antique_wall_shelf", "y": 180 }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": { "model": "tanukidecor:block/antique_wall_shelf/antique_wall_shelf", "y": 90 }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": { "model": "tanukidecor:block/antique_wall_shelf/antique_wall_shelf", "y": 270 }
+    }
+  ]
+}

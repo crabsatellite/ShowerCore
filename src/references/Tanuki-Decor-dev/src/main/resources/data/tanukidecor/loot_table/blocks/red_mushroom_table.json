@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "tanukidecor:red_mushroom_table",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "width": "1",
+            "depth": "1"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "tanukidecor:red_mushroom_table"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

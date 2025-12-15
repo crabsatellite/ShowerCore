@@ -1,0 +1,62 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/slot_machine",
+    "machine": "tanukidecor:block/slot_machine"
+  },
+  "elements": [
+    {
+      "name": "lever_0",
+      "from": [-2, 1, 6.5],
+      "to": [1, 4, 9.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [1, 18.5, 8]},
+      "faces": {
+        "north": {"uv": [0, 9, 0.75, 9.75], "texture": "#machine"},
+        "east": {"uv": [0, 9.75, 0.75, 10.5], "texture": "#machine"},
+        "south": {"uv": [0.75, 9, 0, 9.75], "texture": "#machine"},
+        "west": {"uv": [0, 9.75, 0.75, 10.5], "texture": "#machine"},
+        "up": {"uv": [0, 10.5, 0.75, 11.25], "texture": "#machine"},
+        "down": {"uv": [0, 11.25, 0.75, 12], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "lever_1",
+      "from": [-1.5, 4, 8],
+      "to": [-0.5, 11, 8],
+      "rotation": {"angle": 0, "axis": "y", "origin": [1, 18.5, 8]},
+      "faces": {
+        "north": {"uv": [0.75, 9, 1, 10.75], "texture": "#machine"},
+        "east": {"uv": [0.75, 9, 0.75, 10.75], "texture": "#machine"},
+        "south": {"uv": [0.75, 9, 1, 10.75], "texture": "#machine"},
+        "west": {"uv": [0.75, 9, 0.75, 10.75], "texture": "#machine"},
+        "up": {"uv": [0.75, 9, 1, 9], "texture": "#machine"},
+        "down": {"uv": [0.75, 9, 1, 9], "texture": "#machine"}
+      }
+    },
+    {
+      "name": "lever_2",
+      "from": [-2.5, 11, 6.5],
+      "to": [0.5, 14, 9.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [1, 18.5, 8]},
+      "faces": {
+        "north": {"uv": [1, 9.75, 1.75, 10.5], "texture": "#machine"},
+        "east": {"uv": [1.75, 9.75, 1, 9], "texture": "#machine"},
+        "south": {"uv": [1, 9.75, 1.75, 9], "texture": "#machine"},
+        "west": {"uv": [1.75, 9.75, 1, 10.5], "texture": "#machine"},
+        "up": {"uv": [1.75, 9.75, 1, 10.5], "texture": "#machine"},
+        "down": {"uv": [1, 9, 1.75, 9.75], "texture": "#machine"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "lever",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

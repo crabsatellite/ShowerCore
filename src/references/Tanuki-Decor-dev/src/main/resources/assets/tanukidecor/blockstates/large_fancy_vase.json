@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "half=lower,waterlogged=false": { "model": "tanukidecor:block/large_fancy_vase/lower" },
+    "half=lower,waterlogged=true": { "model": "tanukidecor:block/large_fancy_vase/lower" },
+    "half=upper,waterlogged=false": { "model": "tanukidecor:block/large_fancy_vase/upper" },
+    "half=upper,waterlogged=true": { "model": "tanukidecor:block/large_fancy_vase/upper" }
+  }
+}

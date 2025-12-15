@@ -1,0 +1,104 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "tanukidecor:block/display1x2x1",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/oak_antique_bureau",
+    "bureau": "tanukidecor:block/oak_antique_bureau"
+  },
+  "elements": [
+    {
+      "name": "drawers",
+      "from": [0, 2, 2],
+      "to": [16, 16, 14],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 3.5], "texture": "#bureau"},
+        "east": {"uv": [7, 0, 4, 3.5], "texture": "#bureau"},
+        "south": {"uv": [0, 3.5, 4, 7], "texture": "#bureau"},
+        "west": {"uv": [4, 0, 7, 3.5], "texture": "#bureau"},
+        "up": {"uv": [0, 7, 4, 10], "texture": "#bureau"},
+        "down": {"uv": [0, 13, 4, 10], "texture": "#bureau"}
+      }
+    },
+    {
+      "name": "leg0",
+      "from": [0, 0, 2],
+      "to": [2, 2, 4],
+      "faces": {
+        "north": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "east": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "south": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "west": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "up": {"uv": [11, 0.5, 11.5, 1], "texture": "#bureau"},
+        "down": {"uv": [11, 0.5, 11.5, 1], "texture": "#bureau"}
+      }
+    },
+    {
+      "name": "leg1",
+      "from": [14, 0, 2],
+      "to": [16, 2, 4],
+      "faces": {
+        "north": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "east": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "south": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "west": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "up": {"uv": [11.5, 0.5, 11, 1], "texture": "#bureau"},
+        "down": {"uv": [11.5, 0.5, 11, 1], "texture": "#bureau"}
+      }
+    },
+    {
+      "name": "leg2",
+      "from": [0, 0, 12],
+      "to": [2, 2, 14],
+      "faces": {
+        "north": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "east": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "south": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "west": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "up": {"uv": [11, 1, 11.5, 0.5], "texture": "#bureau"},
+        "down": {"uv": [11, 1, 11.5, 0.5], "texture": "#bureau"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [14, 0, 12],
+      "to": [16, 2, 14],
+      "faces": {
+        "north": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "east": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "south": {"uv": [11, 0, 11.5, 0.5], "texture": "#bureau"},
+        "west": {"uv": [11.5, 0, 11, 0.5], "texture": "#bureau"},
+        "up": {"uv": [11.5, 1, 11, 0.5], "texture": "#bureau"},
+        "down": {"uv": [11.5, 1, 11, 0.5], "texture": "#bureau"}
+      }
+    },
+    {
+      "name": "top",
+      "from": [0, 16, 4],
+      "to": [16, 24, 14],
+      "faces": {
+        "north": {"uv": [7, 0, 11, 2], "texture": "#bureau"},
+        "east": {"uv": [9.5, 6.5, 7, 8.5], "texture": "#bureau"},
+        "south": {"uv": [7, 2, 11, 4], "texture": "#bureau"},
+        "west": {"uv": [7, 6.5, 9.5, 8.5], "texture": "#bureau"},
+        "up": {"uv": [7, 4, 11, 6.5], "texture": "#bureau"},
+        "down": {"uv": [7, 4, 11, 6.5], "texture": "#bureau"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    },
+    {
+      "name": "top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [5]
+    }
+  ]
+}

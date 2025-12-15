@@ -1,0 +1,93 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "tanukidecor:block/display1x2x1",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "particle": "tanukidecor:block/sweets_chair",
+    "chair": "tanukidecor:block/sweets_chair"
+  },
+  "elements": [
+    {
+      "name": "leg_0",
+      "from": [2, 0, 2],
+      "to": [3, 8, 3],
+      "faces": {
+        "north": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "east": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "south": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "west": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "down": {"uv": [14, 8, 15, 9], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_1",
+      "from": [13, 0, 2],
+      "to": [14, 8, 3],
+      "faces": {
+        "north": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "east": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "south": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "west": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "down": {"uv": [14, 8, 15, 9], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_2",
+      "from": [2, 0, 13],
+      "to": [3, 8, 14],
+      "faces": {
+        "north": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "east": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "south": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "west": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "down": {"uv": [14, 8, 15, 9], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [13, 0, 13],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "east": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "south": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "west": {"uv": [14, 0, 15, 8], "texture": "#chair"},
+        "down": {"uv": [14, 8, 15, 9], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_0",
+      "from": [1, 8, 1],
+      "to": [15, 10, 15],
+      "faces": {
+        "north": {"uv": [0, 14, 14, 16], "texture": "#chair"},
+        "east": {"uv": [14, 14, 0, 16], "texture": "#chair"},
+        "south": {"uv": [0, 14, 14, 16], "texture": "#chair"},
+        "west": {"uv": [14, 14, 0, 16], "texture": "#chair"},
+        "up": {"uv": [0, 0, 14, 14], "texture": "#chair"},
+        "down": {"uv": [0, 14, 14, 0], "texture": "#chair"}
+      }
+    },
+    {
+      "name": "chair_1",
+      "from": [1, 9, 14],
+      "to": [15, 23, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 14, 14], "texture": "#chair"},
+        "east": {"uv": [14, 14, 0, 16], "rotation": 90, "texture": "#chair"},
+        "south": {"uv": [14, 0, 0, 14], "texture": "#chair"},
+        "west": {"uv": [0, 16, 14, 14], "rotation": 90, "texture": "#chair"},
+        "up": {"uv": [0, 14, 14, 16], "texture": "#chair"},
+        "down": {"uv": [14, 16, 0, 14], "texture": "#chair"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "chair",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}

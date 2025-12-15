@@ -1,0 +1,52 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "height": 0 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/bottom" }
+    },
+    {
+      "when": { "AND": [ { "height": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/middle" }
+    },
+    {
+      "when": { "AND": [ { "height": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/top" }
+    },
+    {
+      "when": { "AND": [ { "height": 0 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/bottom", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "height": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/middle", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "height": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/top", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "height": 0 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/bottom", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "height": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/middle", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "height": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/top", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "height": 0 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/bottom", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "height": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/middle", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "height": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/science_pod/red/top", "y": 90 }
+    }
+  ]
+}

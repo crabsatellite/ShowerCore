@@ -1,0 +1,78 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/gorgeous_chest",
+    "chest": "tanukidecor:block/gorgeous_chest"
+  },
+  "elements": [
+    {
+      "name": "leg_2",
+      "from": [13, 0, 3],
+      "to": [15, 2, 5],
+      "faces": {
+        "north": {"uv": [16, 0, 15, 1], "texture": "#chest"},
+        "east": {"uv": [15, 0, 16, 1], "texture": "#chest"},
+        "south": {"uv": [16, 0, 15, 1], "texture": "#chest"},
+        "west": {"uv": [15, 0, 16, 1], "texture": "#chest"},
+        "down": {"uv": [16, 1, 15, 2], "texture": "#chest"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [13, 0, 11],
+      "to": [15, 2, 13],
+      "faces": {
+        "north": {"uv": [15, 0, 16, 1], "texture": "#chest"},
+        "east": {"uv": [16, 0, 15, 1], "texture": "#chest"},
+        "south": {"uv": [15, 0, 16, 1], "texture": "#chest"},
+        "west": {"uv": [16, 0, 15, 1], "texture": "#chest"},
+        "down": {"uv": [16, 2, 15, 1], "texture": "#chest"}
+      }
+    },
+    {
+      "name": "chest_3",
+      "from": [0, 2, 2],
+      "to": [16, 4, 14],
+      "faces": {
+        "north": {"uv": [15, 6, 7, 7], "texture": "#chest"},
+        "east": {"uv": [13, 7, 7, 8], "texture": "#chest"},
+        "south": {"uv": [7, 6, 15, 7], "texture": "#chest"},
+        "up": {"uv": [15, 0, 7, 6], "texture": "#chest"},
+        "down": {"uv": [15, 6, 7, 0], "texture": "#chest"}
+      }
+    },
+    {
+      "name": "chest_4",
+      "from": [0, 4, 2],
+      "to": [14, 14, 14],
+      "faces": {
+        "north": {"uv": [7, 0, 0, 5], "texture": "#chest"},
+        "east": {"uv": [6, 10, 0, 15], "texture": "#chest"},
+        "south": {"uv": [0, 5, 7, 10], "texture": "#chest"}
+      }
+    },
+    {
+      "name": "chest_5",
+      "from": [0, 14, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [15, 15, 7, 16], "texture": "#chest"},
+        "east": {"uv": [7, 15, 0, 16], "texture": "#chest"},
+        "south": {"uv": [7, 15, 15, 16], "texture": "#chest"},
+        "up": {"uv": [15, 8, 7, 15], "texture": "#chest"},
+        "down": {"uv": [15, 8, 7, 15], "texture": "#chest"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right_chest",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

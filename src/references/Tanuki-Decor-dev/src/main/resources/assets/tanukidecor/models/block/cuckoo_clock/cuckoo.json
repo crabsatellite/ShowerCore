@@ -1,0 +1,156 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/cuckoo_clock",
+    "clock": "tanukidecor:block/cuckoo_clock"
+  },
+  "elements": [
+    {
+      "name": "platform",
+      "from": [6.5, 9, 11.5],
+      "to": [9.5, 9, 15.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 8]},
+      "faces": {
+        "up": {"uv": [5.5, 14, 7, 16], "texture": "#clock"},
+        "down": {"uv": [5.5, 14, 7, 16], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "body",
+      "from": [7, 8, 9.5],
+      "to": [9, 10, 11.5],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 9.5]},
+      "faces": {
+        "north": {"uv": [9.5, 15, 10.5, 16], "texture": "#clock"},
+        "east": {"uv": [8.5, 15, 9.5, 16], "rotation": 270, "texture": "#clock"},
+        "south": {"uv": [8.5, 14, 9.5, 15], "texture": "#clock"},
+        "west": {"uv": [10.5, 15, 11.5, 16], "rotation": 90, "texture": "#clock"},
+        "up": {"uv": [9.5, 14, 10.5, 15], "texture": "#clock"},
+        "down": {"uv": [9.5, 14, 10.5, 15], "texture": "#clock"}
+      }
+    },
+    {
+      "name": "beak",
+      "from": [7.5, 8.5, 9],
+      "to": [8.5, 9.5, 10],
+      "rotation": {"angle": 45, "axis": "x", "origin": [8, 9, 9.5]},
+      "faces": {
+        "north": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"},
+        "east": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"},
+        "south": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"},
+        "west": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"},
+        "up": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"},
+        "down": {"uv": [11, 14, 11.5, 14.5], "texture": "#clock"}
+      }
+    },
+    {
+      "from": [7, 10, 11.5],
+      "to": [9, 12, 11.5],
+      "rotation": {"angle": 45, "axis": "x", "origin": [8, 10, 11.5]},
+      "faces": {
+        "north": {"uv": [8.5, 13, 9.5, 14], "texture": "#clock"},
+        "south": {"uv": [9.5, 13, 8.5, 14], "texture": "#clock"}
+      }
+    },
+    {
+      "from": [9, 8, 9.5],
+      "to": [9, 10, 11.5],
+      "rotation": {"angle": 45, "axis": "z", "origin": [9, 10, 10.5]},
+      "faces": {
+        "east": {"uv": [7.5, 15, 8.5, 16], "rotation": 270, "texture": "#clock"},
+        "west": {"uv": [8.5, 15, 7.5, 16], "rotation": 90, "texture": "#clock"}
+      }
+    },
+    {
+      "from": [7, 8, 9.5],
+      "to": [7, 10, 11.5],
+      "rotation": {"angle": -45, "axis": "z", "origin": [7, 10, 10.5]},
+      "faces": {
+        "east": {"uv": [12.5, 15, 11.5, 16], "rotation": 270, "texture": "#clock"},
+        "west": {"uv": [11.5, 15, 12.5, 16], "rotation": 90, "texture": "#clock"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.375, 0.375, 0.375]
+    },
+    "firstperson_righthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_lefthand": {
+      "rotation": [180, 45, 180],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.25, 0.25, 0.25]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [1.5, 0.25, 0],
+      "scale": [0.625, 0.625, 0.625]
+    },
+    "head": {
+      "translation": [0, 0, -12.75],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "translation": [0, 1.5, -1],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  },
+  "groups": [
+    {
+      "name": "cuckoo",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        0,
+        {
+          "name": "bird",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [
+            1,
+            {
+              "name": "beak",
+              "origin": [0, 0, 0],
+              "color": 0,
+              "children": [2]
+            },
+            {
+              "name": "tail",
+              "origin": [0, 0, 0],
+              "color": 0,
+              "children": [3]
+            },
+            {
+              "name": "wing",
+              "origin": [0, 0, 0],
+              "color": 0,
+              "children": [4]
+            },
+            {
+              "name": "wing",
+              "origin": [0, 0, 0],
+              "color": 0,
+              "children": [5]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

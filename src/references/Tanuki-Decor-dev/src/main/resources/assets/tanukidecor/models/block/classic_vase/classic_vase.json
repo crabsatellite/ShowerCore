@@ -1,0 +1,69 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "#vase",
+    "vase": "tanukidecor:block/vase/classic_vase"
+  },
+  "elements": [
+    {
+      "name": "vase_0",
+      "from": [5, 0, 5],
+      "to": [11, 4, 11],
+      "faces": {
+        "north": {"uv": [0.5, 6, 3.5, 8], "texture": "#vase"},
+        "east": {"uv": [0.5, 6, 3.5, 8], "texture": "#vase"},
+        "south": {"uv": [0.5, 6, 3.5, 8], "texture": "#vase"},
+        "west": {"uv": [0.5, 6, 3.5, 8], "texture": "#vase"},
+        "down": {"uv": [4, 7, 7, 10], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_1",
+      "from": [4, 4, 4],
+      "to": [12, 11, 12],
+      "faces": {
+        "north": {"uv": [0, 2.5, 4, 6], "texture": "#vase"},
+        "east": {"uv": [0, 2.5, 4, 6], "texture": "#vase"},
+        "south": {"uv": [0, 2.5, 4, 6], "texture": "#vase"},
+        "west": {"uv": [0, 2.5, 4, 6], "texture": "#vase"},
+        "up": {"uv": [4, 3, 8, 7], "texture": "#vase"},
+        "down": {"uv": [8, 3, 12, 7], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_2",
+      "from": [6, 11, 6],
+      "to": [10, 14, 10],
+      "faces": {
+        "north": {"uv": [1, 1, 3, 2.5], "texture": "#vase"},
+        "east": {"uv": [1, 1, 3, 2.5], "texture": "#vase"},
+        "south": {"uv": [1, 1, 3, 2.5], "texture": "#vase"},
+        "west": {"uv": [1, 1, 3, 2.5], "texture": "#vase"}
+      }
+    },
+    {
+      "name": "vase_3",
+      "from": [5, 14, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "north": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "east": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "south": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "west": {"uv": [0.5, 0, 3.5, 1], "texture": "#vase"},
+        "up": {"uv": [4, 0, 7, 3], "texture": "#vase"},
+        "down": {"uv": [7, 0, 10, 3], "texture": "#vase"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "vase",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

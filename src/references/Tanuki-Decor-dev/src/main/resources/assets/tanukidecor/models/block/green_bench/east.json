@@ -1,0 +1,79 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/green_bench",
+    "bench": "tanukidecor:block/green_bench"
+  },
+  "elements": [
+    {
+      "name": "right_leg0",
+      "from": [11, 0, 2],
+      "to": [15, 1, 14],
+      "faces": {
+        "north": {"uv": [12, 8, 10, 8.5], "texture": "#bench"},
+        "east": {"uv": [14, 7, 8, 7.5], "texture": "#bench"},
+        "south": {"uv": [10, 8.5, 12, 9], "texture": "#bench"},
+        "west": {"uv": [8, 7.5, 14, 8], "texture": "#bench"},
+        "up": {"uv": [10, 8, 8, 14], "texture": "#bench"},
+        "down": {"uv": [10, 14, 8, 8], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "right_leg1",
+      "from": [12, 1, 5],
+      "to": [14, 6, 11],
+      "faces": {
+        "north": {"uv": [13, 4, 12, 6.5], "texture": "#bench"},
+        "east": {"uv": [11, 4, 8, 6.5], "texture": "#bench"},
+        "south": {"uv": [13, 4, 12, 6.5], "texture": "#bench"},
+        "west": {"uv": [11, 4, 8, 6.5], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "right_middle_plank",
+      "from": [0, 2, 7],
+      "to": [15, 5, 9],
+      "faces": {
+        "north": {"uv": [15.5, 0, 8, 1.5], "texture": "#bench"},
+        "east": {"uv": [14, 4, 13, 5.5], "texture": "#bench"},
+        "south": {"uv": [15.5, 0, 8, 1.5], "texture": "#bench"},
+        "up": {"uv": [15.5, 1.5, 8, 2.5], "texture": "#bench"},
+        "down": {"uv": [15.5, 2.5, 8, 3.5], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "right_planks",
+      "from": [0, 6, 1],
+      "to": [16, 8, 15],
+      "faces": {
+        "north": {"uv": [8, 7, 0, 8], "texture": "#bench"},
+        "east": {"uv": [7, 8, 0, 9], "texture": "#bench"},
+        "south": {"uv": [8, 9, 0, 10], "texture": "#bench"},
+        "up": {"uv": [8, 0, 0, 7], "texture": "#bench"},
+        "down": {"uv": [8, 7, 0, 0], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "right_top",
+      "from": [0, 8, 13],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [8, 10, 0, 14], "texture": "#bench"},
+        "east": {"uv": [11, 9, 10, 13], "texture": "#bench"},
+        "south": {"uv": [0, 10, 8, 14], "texture": "#bench"},
+        "up": {"uv": [8, 14, 0, 15], "texture": "#bench"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

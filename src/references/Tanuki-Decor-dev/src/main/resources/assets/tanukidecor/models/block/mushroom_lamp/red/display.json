@@ -1,0 +1,10 @@
+{
+  "parent": "tanukidecor:block/mushroom_lamp/display",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "mushroom": "minecraft:block/red_mushroom_block",
+    "inside": "minecraft:block/mushroom_block_inside",
+    "stem": "minecraft:block/mushroom_stem",
+    "cross": "minecraft:block/red_mushroom"
+  }
+}

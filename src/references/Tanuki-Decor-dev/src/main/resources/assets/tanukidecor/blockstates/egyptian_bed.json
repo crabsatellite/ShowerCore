@@ -1,0 +1,39 @@
+{
+  "multipart": [
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/north" }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "north" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/south" }
+    },
+    
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/north", "y": 180 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "south" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/south", "y": 180 }
+    },
+
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/north", "y": 90 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "east" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/south", "y": 90 }
+    },
+    
+    {
+      "when": { "AND": [ { "depth": 1 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/north", "y": 270 }
+    },
+    {
+      "when": { "AND": [ { "depth": 2 }, { "facing": "west" } ] },
+      "apply": { "model": "tanukidecor:block/egyptian_bed/south", "y": 270 }
+    }
+  ]
+}

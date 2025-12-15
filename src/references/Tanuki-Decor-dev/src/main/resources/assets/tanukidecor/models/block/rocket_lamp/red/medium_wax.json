@@ -1,0 +1,8 @@
+{
+  "parent": "tanukidecor:block/rocket_lamp/medium_wax",
+  "texture_size": [32, 32],
+  "textures": {
+    "wax": "tanukidecor:block/rocket_lamp/red",
+    "particle": "#wax"
+  }
+}

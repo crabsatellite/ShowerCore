@@ -1,0 +1,9 @@
+{
+  "parent": "tanukidecor:block/mushroom_table/north_west",
+  "textures": {
+    "inside": "minecraft:block/mushroom_block_inside",
+    "stem": "minecraft:block/mushroom_stem",
+    "mushroom": "minecraft:block/brown_mushroom_block",
+    "particle": "#mushroom"	
+  }
+}

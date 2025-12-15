@@ -1,0 +1,86 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:translucent",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/science_pod/yellow",
+    "pod": "tanukidecor:block/science_pod/yellow",
+    "bubbles": "tanukidecor:block/science_pod/bubbles"
+  },
+  "elements": [
+    {
+      "name": "glass_south",
+      "from": [2, 0, 14],
+      "to": [14, 16, 14],
+      "faces": {
+        "north": {"uv": [3, 4, 0, 8], "texture": "#pod"},
+        "south": {"uv": [0, 4, 3, 8], "texture": "#pod"}
+      }
+    },
+    {
+      "name": "glass_east",
+      "from": [2, 0, 2],
+      "to": [2, 16, 14],
+      "faces": {
+        "east": {"uv": [3, 4, 0, 8], "texture": "#pod"},
+        "west": {"uv": [0, 4, 3, 8], "texture": "#pod"}
+      }
+    },
+    {
+      "name": "glass_north",
+      "from": [2, 0, 2],
+      "to": [14, 16, 2],
+      "faces": {
+        "north": {"uv": [0, 4, 3, 8], "texture": "#pod"},
+        "south": {"uv": [3, 4, 0, 8], "texture": "#pod"}
+      }
+    },
+    {
+      "name": "glass_east",
+      "from": [14, 0, 2],
+      "to": [14, 16, 14],
+      "faces": {
+        "east": {"uv": [0, 4, 3, 8], "texture": "#pod"},
+        "west": {"uv": [3, 4, 0, 8], "texture": "#pod"}
+      }
+    },
+    {
+      "name": "bubbles",
+      "from": [8, 0, 0],
+      "to": [8, 8, 16],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "east": {"uv": [2, 0, 14, 8], "texture": "#bubbles"},
+        "west": {"uv": [2, 0, 14, 8], "texture": "#bubbles"}
+      }
+    },
+    {
+      "name": "bubbles",
+      "from": [0, 0, 8],
+      "to": [16, 8, 8],
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [2, 0, 14, 8], "texture": "#bubbles"},
+        "south": {"uv": [2, 0, 14, 8], "texture": "#bubbles"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "middle",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [
+        {
+          "name": "glass",
+          "origin": [0, 0, 0],
+          "color": 0,
+          "children": [0, 1, 2, 3]
+        },
+        4,
+        5
+      ]
+    }
+  ]
+}

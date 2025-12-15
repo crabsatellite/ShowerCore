@@ -1,0 +1,51 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_bed",
+    "bed": "tanukidecor:block/sweets_bed"
+  },
+  "elements": [
+    {
+      "name": "bed_0",
+      "from": [0, 0, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [4, 8, 8, 10], "texture": "#bed"},
+        "west": {"uv": [4, 10, 8, 12], "texture": "#bed"},
+        "up": {"uv": [4, 0, 8, 4], "texture": "#bed"},
+        "down": {"uv": [4, 4, 8, 8], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leaf_0",
+      "from": [14, 8, 13],
+      "to": [18, 8, 18],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [16, 8, 13]},
+      "faces": {
+        "up": {"uv": [1.5, 5, 2.5, 6.25], "texture": "#bed"},
+        "down": {"uv": [1.5, 6.25, 2.5, 5], "texture": "#bed"}
+      }
+    },
+    {
+      "name": "leaf_1",
+      "from": [11, 8, 11],
+      "to": [16, 8, 15],
+      "rotation": {"angle": -22.5, "axis": "z", "origin": [16, 8, 13]},
+      "faces": {
+        "up": {"uv": [1.5, 5, 2.5, 6.25], "rotation": 90, "texture": "#bed"},
+        "down": {"uv": [1.5, 6.25, 2.5, 5], "rotation": 270, "texture": "#bed"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "front_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

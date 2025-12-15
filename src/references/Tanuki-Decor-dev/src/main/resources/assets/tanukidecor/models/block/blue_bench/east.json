@@ -1,0 +1,81 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/blue_bench",
+    "bench": "tanukidecor:block/blue_bench"
+  },
+  "elements": [
+    {
+      "name": "leg2",
+      "from": [12, 0, 2],
+      "to": [14, 6, 4],
+      "faces": {
+        "north": {"uv": [8.5, 0, 7.5, 3], "texture": "#bench"},
+        "east": {"uv": [7.5, 0, 8.5, 3], "texture": "#bench"},
+        "south": {"uv": [8.5, 0, 7.5, 3], "texture": "#bench"},
+        "west": {"uv": [7.5, 0, 8.5, 3], "texture": "#bench"},
+        "down": {"uv": [8.5, 3, 7.5, 4], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "leg3",
+      "from": [12, 0, 12],
+      "to": [14, 6, 14],
+      "faces": {
+        "north": {"uv": [7.5, 0, 8.5, 3], "texture": "#bench"},
+        "east": {"uv": [8.5, 0, 7.5, 3], "texture": "#bench"},
+        "south": {"uv": [7.5, 0, 8.5, 3], "texture": "#bench"},
+        "west": {"uv": [8.5, 0, 7.5, 3], "texture": "#bench"},
+        "down": {"uv": [8.5, 4, 7.5, 3], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "bench_right",
+      "from": [0, 6, 1],
+      "to": [15, 8, 15],
+      "faces": {
+        "north": {"uv": [7.5, 7, 0, 8], "texture": "#bench"},
+        "east": {"uv": [7, 8, 0, 9], "texture": "#bench"},
+        "south": {"uv": [7.5, 7, 0, 8], "texture": "#bench"},
+        "up": {"uv": [7.5, 0, 0, 7], "texture": "#bench"},
+        "down": {"uv": [7.5, 7, 0, 0], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "top2",
+      "from": [13, 8, 13],
+      "to": [15, 16, 15],
+      "faces": {
+        "north": {"uv": [9.5, 0, 8.5, 4], "texture": "#bench"},
+        "east": {"uv": [10.5, 0, 9.5, 4], "texture": "#bench"},
+        "south": {"uv": [8.5, 0, 9.5, 4], "texture": "#bench"},
+        "west": {"uv": [9.5, 0, 10.5, 4], "texture": "#bench"},
+        "up": {"uv": [9.5, 4, 8.5, 5], "texture": "#bench"}
+      }
+    },
+    {
+      "name": "top3",
+      "from": [0, 8, 14],
+      "to": [13, 16, 14],
+      "faces": {
+        "north": {"uv": [6.5, 9, 0, 13], "texture": "#bench"},
+        "east": {"uv": [0, 9, 0, 13], "texture": "#bench"},
+        "south": {"uv": [6.5, 9, 0, 13], "texture": "#bench"},
+        "west": {"uv": [0, 9, 0, 13], "texture": "#bench"},
+        "up": {"uv": [6.5, 9, 0, 9], "texture": "#bench"},
+        "down": {"uv": [6.5, 9, 0, 9], "texture": "#bench"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

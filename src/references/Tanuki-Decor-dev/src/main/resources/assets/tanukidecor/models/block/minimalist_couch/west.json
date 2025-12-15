@@ -1,0 +1,79 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/minimalist_couch",
+    "sofa": "tanukidecor:block/minimalist_couch"
+  },
+  "elements": [
+    {
+      "name": "sofa0",
+      "from": [4, 3, 0],
+      "to": [16, 8, 16],
+      "faces": {
+        "north": {"uv": [0, 8, 3, 9.25], "texture": "#sofa"},
+        "south": {"uv": [0, 9.25, 3, 10.5], "texture": "#sofa"},
+        "up": {"uv": [0, 0, 3, 4], "texture": "#sofa"},
+        "down": {"uv": [0, 4, 3, 8], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa1",
+      "from": [0, 3, 0],
+      "to": [4, 12, 16],
+      "faces": {
+        "north": {"uv": [5, 2.25, 6, 4.5], "texture": "#sofa"},
+        "east": {"uv": [7, 0, 3, 2.25], "texture": "#sofa"},
+        "south": {"uv": [6, 2.25, 5, 4.5], "texture": "#sofa"},
+        "west": {"uv": [3, 0, 7, 2.25], "texture": "#sofa"},
+        "up": {"uv": [3, 2.25, 4, 6.25], "texture": "#sofa"},
+        "down": {"uv": [4, 2.25, 5, 6.25], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "sofa2",
+      "from": [4, 8, 12],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [7, 0, 10, 2], "texture": "#sofa"},
+        "south": {"uv": [10, 0, 7, 2], "texture": "#sofa"},
+        "west": {"uv": [10, 0, 11, 2], "texture": "#sofa"},
+        "up": {"uv": [7, 2, 10, 3], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "leg0",
+      "from": [1, 0, 1],
+      "to": [3, 3, 3],
+      "faces": {
+        "north": {"uv": [11, 0, 11.5, 0.75], "texture": "#sofa"},
+        "east": {"uv": [11.5, 0, 11, 0.75], "texture": "#sofa"},
+        "south": {"uv": [11, 0, 11.5, 0.75], "texture": "#sofa"},
+        "west": {"uv": [11.5, 0, 11, 0.75], "texture": "#sofa"},
+        "down": {"uv": [11, 0.75, 11.5, 1.25], "texture": "#sofa"}
+      }
+    },
+    {
+      "name": "leg1",
+      "from": [1, 0, 13],
+      "to": [3, 3, 15],
+      "faces": {
+        "north": {"uv": [11.5, 0, 11, 0.75], "texture": "#sofa"},
+        "east": {"uv": [11, 0, 11.5, 0.75], "texture": "#sofa"},
+        "south": {"uv": [11.5, 0, 11, 0.75], "texture": "#sofa"},
+        "west": {"uv": [11, 0, 11.5, 0.75], "texture": "#sofa"},
+        "down": {"uv": [11, 1.25, 11.5, 0.75], "texture": "#sofa"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4]
+    }
+  ]
+}

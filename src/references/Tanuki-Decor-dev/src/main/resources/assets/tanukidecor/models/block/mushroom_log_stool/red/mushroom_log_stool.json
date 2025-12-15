@@ -1,0 +1,12 @@
+{
+  "parent": "tanukidecor:block/mushroom_log_stool/mushroom_log_stool",
+  "textures": {
+    "particle": "minecraft:block/oak_log",
+    "log_side": "minecraft:block/oak_log",
+    "log_top": "minecraft:block/oak_log_top",
+    "mushroom": "minecraft:block/red_mushroom_block",
+    "inside": "minecraft:block/mushroom_block_inside",
+    "stem": "minecraft:block/mushroom_stem",
+	"particle": "#log_side"
+  }
+}

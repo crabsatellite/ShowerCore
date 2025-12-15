@@ -1,0 +1,30 @@
+{
+  "credit": "Made by Skart2000",
+  "render_type": "minecraft:cutout",
+  "parent": "minecraft:block/block",
+  "texture_size": [96, 96],
+  "textures": {
+    "1": "tanukidecor:block/emblem_clock",
+    "particle": "tanukidecor:block/emblem_clock"
+  },
+  "elements": [
+    {
+      "name": "clock_7",
+      "from": [0, 0, 12],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [2.66667, 0, 5.33334, 2.66667], "texture": "#1"},
+        "south": {"uv": [10.66667, 0, 13.33334, 2.66667], "texture": "#1"},
+        "up": {"uv": [2.66667, 8, 5.33334, 8.66667], "texture": "#1"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "top_center",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

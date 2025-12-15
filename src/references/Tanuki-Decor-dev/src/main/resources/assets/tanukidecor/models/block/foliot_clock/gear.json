@@ -1,0 +1,34 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/foliot_clock",
+    "clock": "tanukidecor:block/foliot_clock"
+  },
+  "elements": [
+    {
+      "name": "gear",
+      "from": [6.5, 2.5, 12],
+      "to": [9.5, 5.5, 13],
+      "rotation": {"angle": 0, "axis": "z", "origin": [8, 4, 15]},
+      "faces": {
+        "north": {"uv": [4, 0, 5.5, 1.5], "texture": "#clock"},
+        "east": {"uv": [4, 1.5, 5.5, 2], "rotation": 90, "texture": "#clock"},
+        "south": {"uv": [4, 0, 5.5, 1.5], "texture": "#clock"},
+        "west": {"uv": [4, 1.5, 5.5, 2], "rotation": 90, "texture": "#clock"},
+        "up": {"uv": [4, 2, 5.5, 2.5], "texture": "#clock"},
+        "down": {"uv": [4, 2, 5.5, 2.5], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottomGear",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

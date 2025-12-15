@@ -1,0 +1,71 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_screen",
+    "screen": "tanukidecor:block/cabana_screen"
+  },
+  "elements": [
+    {
+      "name": "screen_7",
+      "from": [5, 0, 7],
+      "to": [16, 12, 9],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [10.5, -16, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 5.5, 6], "texture": "#screen"},
+        "east": {"uv": [6.5, 0, 5.5, 6], "texture": "#screen"},
+        "south": {"uv": [5.5, 0, 0, 6], "texture": "#screen"},
+        "west": {"uv": [5.5, 0, 6.5, 6], "texture": "#screen"},
+        "up": {"uv": [6.5, 0, 7.5, 5.5], "rotation": 90, "texture": "#screen"}
+      }
+    },
+    {
+      "name": "screen_4",
+      "from": [0.5, 0, 7],
+      "to": [5.5, 12, 9],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [0, -16, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 2.5, 6], "texture": "#screen"},
+        "east": {"uv": [6.5, 0, 5.5, 6], "texture": "#screen"},
+        "south": {"uv": [2.5, 0, 0, 6], "texture": "#screen"},
+        "up": {"uv": [6.5, 0, 7.5, 2.5], "rotation": 90, "texture": "#screen"}
+      }
+    },
+    {
+      "name": "screen_5",
+      "from": [0.5, 12, 7.5],
+      "to": [5.5, 16, 8.5],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [0, -16, 8]},
+      "faces": {
+        "north": {"uv": [0, 13, 2.5, 15], "texture": "#screen"},
+        "east": {"uv": [6, 13, 5.5, 15], "texture": "#screen"},
+        "south": {"uv": [2.5, 13, 0, 15], "texture": "#screen"},
+        "west": {"uv": [5.5, 13, 6, 15], "texture": "#screen"},
+        "up": {"uv": [0, 15, 2.5, 15.5], "texture": "#screen"}
+      }
+    },
+    {
+      "name": "screen_8",
+      "from": [5, 12, 7.5],
+      "to": [16, 16, 8.5],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [10.5, -16, 8]},
+      "faces": {
+        "north": {"uv": [0, 13, 5.5, 15], "texture": "#screen"},
+        "east": {"uv": [6, 13, 5.5, 15], "texture": "#screen"},
+        "south": {"uv": [5.5, 13, 0, 15], "texture": "#screen"},
+        "west": {"uv": [5.5, 13, 6, 15], "texture": "#screen"},
+        "up": {"uv": [0, 15, 5.5, 15.5], "texture": "#screen"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "right_top",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    }
+  ]
+}

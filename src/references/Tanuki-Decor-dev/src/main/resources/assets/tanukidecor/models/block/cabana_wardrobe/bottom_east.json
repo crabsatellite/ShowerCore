@@ -1,0 +1,55 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/cabana_wardrobe",
+    "wardrobe": "tanukidecor:block/cabana_wardrobe"
+  },
+  "elements": [
+    {
+      "name": "leg_2",
+      "from": [14, 0, 0],
+      "to": [16, 2, 2],
+      "faces": {
+        "north": {"uv": [8.5, 7.5, 8, 8], "texture": "#wardrobe"},
+        "east": {"uv": [8, 7.5, 8.5, 8], "texture": "#wardrobe"},
+        "south": {"uv": [8.5, 7.5, 8, 8], "texture": "#wardrobe"},
+        "west": {"uv": [8, 7.5, 8.5, 8], "texture": "#wardrobe"},
+        "down": {"uv": [8.5, 8, 8, 8.5], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "leg_3",
+      "from": [14, 0, 14],
+      "to": [16, 2, 16],
+      "faces": {
+        "north": {"uv": [8, 7.5, 8.5, 8], "texture": "#wardrobe"},
+        "east": {"uv": [8.5, 7.5, 8, 8], "texture": "#wardrobe"},
+        "south": {"uv": [8, 7.5, 8.5, 8], "texture": "#wardrobe"},
+        "west": {"uv": [8.5, 7.5, 8, 8], "texture": "#wardrobe"},
+        "down": {"uv": [8.5, 8.5, 8, 8], "texture": "#wardrobe"}
+      }
+    },
+    {
+      "name": "wardrobe_2",
+      "from": [0, 2, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [4, 4, 0, 7.5], "texture": "#wardrobe"},
+        "east": {"uv": [8, 4, 4, 7.5], "texture": "#wardrobe"},
+        "south": {"uv": [12, 4, 8, 7.5], "texture": "#wardrobe"},
+        "down": {"uv": [4, 7.5, 0, 11.5], "texture": "#wardrobe"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1, 2]
+    }
+  ]
+}

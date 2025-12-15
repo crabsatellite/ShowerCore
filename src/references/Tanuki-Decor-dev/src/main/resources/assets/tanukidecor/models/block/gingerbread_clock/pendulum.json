@@ -1,0 +1,30 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "texture_size": [32, 32],
+  "textures": {
+    "particle": "tanukidecor:block/gingerbread_clock",
+    "clock": "tanukidecor:block/gingerbread_clock"
+  },
+  "elements": [
+    {
+      "name": "pendulum",
+      "from": [6.5, 5, 8.01],
+      "to": [9.5, 11, 8.01],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 11, 8.01]},
+      "faces": {
+        "north": {"uv": [13.5, 0, 15, 3], "texture": "#clock"},
+        "south": {"uv": [13.5, 0, 15, 3], "texture": "#clock"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "pendulum",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0]
+    }
+  ]
+}

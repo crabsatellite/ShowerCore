@@ -1,0 +1,143 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "tanukidecor:block/display1x2x1",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "#mushroom"
+  },
+  "elements": [
+    {
+      "name": "stem",
+      "from": [7, 0, 7],
+      "to": [9, 14, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "faces": {
+        "north": {"uv": [0, 2, 2, 16], "texture": "#stem"},
+        "east": {"uv": [2, 2, 4, 16], "texture": "#stem"},
+        "south": {"uv": [4, 2, 6, 16], "texture": "#stem"},
+        "west": {"uv": [6, 2, 8, 16], "texture": "#stem"},
+        "up": {"uv": [8, 2, 10, 4], "texture": "#stem"},
+        "down": {"uv": [8, 2, 10, 4], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "stem",
+      "from": [6, 14, 7],
+      "to": [8, 16, 9],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -2]},
+      "faces": {
+        "north": {"uv": [0, 0, 2, 2], "texture": "#stem"},
+        "east": {"uv": [2, 0, 4, 2], "texture": "#stem"},
+        "south": {"uv": [4, 0, 6, 2], "texture": "#stem"},
+        "west": {"uv": [6, 0, 8, 2], "texture": "#stem"},
+        "down": {"uv": [8, 0, 10, 2], "texture": "#stem"}
+      }
+    },
+    {
+      "name": "cross",
+      "from": [9, 0, 4],
+      "to": [17, 8, 4],
+      "rotation": {"angle": 45, "axis": "y", "origin": [13, 0, 4]},
+      "faces": {
+        "north": {"uv": [4, 8, 12, 16], "texture": "#cross"},
+        "south": {"uv": [12, 8, 4, 16], "texture": "#cross"}
+      }
+    },
+    {
+      "name": "cross",
+      "from": [13, 0, 0],
+      "to": [13, 8, 8],
+      "rotation": {"angle": 45, "axis": "y", "origin": [13, 0, 4]},
+      "faces": {
+        "east": {"uv": [12, 8, 4, 16], "texture": "#cross"},
+        "west": {"uv": [4, 8, 12, 16], "texture": "#cross"}
+      }
+    },
+    {
+      "name": "stem",
+      "from": [6, 16, 7],
+      "to": [8, 27, 9],
+      "faces": {
+        "north": {"uv": [0, 0, 2, 11], "texture": "#stem"},
+        "east": {"uv": [2, 0, 4, 11], "texture": "#stem"},
+        "south": {"uv": [4, 0, 6, 11], "texture": "#stem"},
+        "west": {"uv": [6, 0, 8, 11], "texture": "#stem"}
+      }
+    },
+    {
+      "name": "cap_top",
+      "from": [4, 30, 5],
+      "to": [10, 32, 11],
+      "faces": {
+        "north": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "east": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "south": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "west": {"uv": [9, 10, 15, 12], "texture": "#mushroom"},
+        "up": {"uv": [9, 4, 15, 10], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_middle",
+      "from": [3, 27, 4],
+      "to": [11, 30, 12],
+      "faces": {
+        "north": {"uv": [3, 10, 11, 13], "texture": "#mushroom"},
+        "east": {"uv": [7, 7, 15, 10], "texture": "#mushroom"},
+        "south": {"uv": [6, 10, 14, 13], "texture": "#mushroom"},
+        "west": {"uv": [1, 3, 9, 6], "texture": "#mushroom"},
+        "up": {"uv": [5, 0, 13, 8], "texture": "#mushroom"},
+        "down": {"uv": [3, 3, 11, 11], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_west",
+      "from": [3, 24, 4],
+      "to": [3, 27, 12],
+      "faces": {
+        "east": {"uv": [0, 3, 8, 6], "texture": "#inside"},
+        "west": {"uv": [5, 5, 13, 8], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_north",
+      "from": [3, 24, 4],
+      "to": [11, 27, 4],
+      "faces": {
+        "north": {"uv": [3, 13, 11, 16], "texture": "#mushroom"},
+        "south": {"uv": [0, 6, 8, 9], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_south",
+      "from": [3, 24, 12],
+      "to": [11, 27, 12],
+      "faces": {
+        "north": {"uv": [0, 0, 8, 3], "texture": "#inside"},
+        "south": {"uv": [6, 13, 14, 16], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_east",
+      "from": [11, 24, 4],
+      "to": [11, 27, 12],
+      "faces": {
+        "east": {"uv": [5, 12, 13, 15], "texture": "#mushroom"},
+        "west": {"uv": [0, 9, 8, 12], "texture": "#inside"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3]
+    },
+    {
+      "name": "top",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [4, 5, 6, 7, 8, 9, 10]
+    }
+  ]
+}

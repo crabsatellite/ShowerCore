@@ -1,0 +1,144 @@
+{
+  "credit": "Made by Skart2000",
+  "parent": "tanukidecor:block/display2x2x1",
+  "render_type": "minecraft:solid",
+  "texture_size": [64, 64],
+  "textures": {
+    "particle": "tanukidecor:block/sweets_closet",
+    "closet": "tanukidecor:block/sweets_closet"
+  },
+  "elements": [
+    {
+      "name": "closet_0",
+      "from": [0, 0, 1],
+      "to": [16, 16, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#closet"},
+        "south": {"uv": [0, 4, 4, 8], "texture": "#closet"},
+        "west": {"uv": [0, 11.5, 3.5, 15.5], "texture": "#closet"},
+        "down": {"uv": [4, 8, 8, 11.5], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_0",
+      "from": [0, 0, 2],
+      "to": [0, 16, 8],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [0, 8, 2]},
+      "faces": {
+        "east": {"uv": [9.5, 0, 8, 4], "texture": "#closet"},
+        "west": {"uv": [8, 0, 9.5, 4], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_1",
+      "from": [16, 0, 1],
+      "to": [32, 16, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [32, 0, 0]},
+      "faces": {
+        "north": {"uv": [4, 0, 0, 4], "texture": "#closet"},
+        "east": {"uv": [3.5, 11.5, 0, 15.5], "texture": "#closet"},
+        "south": {"uv": [4, 4, 0, 8], "texture": "#closet"},
+        "down": {"uv": [8, 8, 4, 11.5], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_1",
+      "from": [32, 0, 2],
+      "to": [32, 16, 8],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [32, 8, 2]},
+      "faces": {
+        "east": {"uv": [9.5, 0, 8, 4], "texture": "#closet"},
+        "west": {"uv": [8, 0, 9.5, 4], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_2",
+      "from": [0, 16, 1],
+      "to": [16, 32, 15],
+      "faces": {
+        "north": {"uv": [0, 0, 4, 4], "texture": "#closet"},
+        "south": {"uv": [4, 0, 8, 4], "texture": "#closet"},
+        "west": {"uv": [4, 4, 7.5, 8], "texture": "#closet"},
+        "up": {"uv": [0, 11.5, 4, 8], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_2",
+      "from": [0, 16, 2],
+      "to": [0, 32, 8],
+      "rotation": {"angle": -22.5, "axis": "y", "origin": [0, 24, 2]},
+      "faces": {
+        "east": {"uv": [11, 0, 9.5, 4], "texture": "#closet"},
+        "west": {"uv": [9.5, 0, 11, 4], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_3",
+      "from": [0, 32, 2],
+      "to": [16, 32, 8],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [8, 32, 2]},
+      "faces": {
+        "up": {"uv": [8, 4, 12, 5.5], "texture": "#closet"},
+        "down": {"uv": [8, 5.5, 12, 4], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "closet_3",
+      "from": [16, 16, 1],
+      "to": [32, 32, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [32, 0, 0]},
+      "faces": {
+        "north": {"uv": [4, 0, 0, 4], "texture": "#closet"},
+        "east": {"uv": [7.5, 4, 4, 8], "texture": "#closet"},
+        "south": {"uv": [8, 0, 4, 4], "texture": "#closet"},
+        "up": {"uv": [4, 11.5, 0, 8], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_4",
+      "from": [32, 16, 2],
+      "to": [32, 32, 8],
+      "rotation": {"angle": 22.5, "axis": "y", "origin": [32, 24, 2]},
+      "faces": {
+        "east": {"uv": [11, 0, 9.5, 4], "texture": "#closet"},
+        "west": {"uv": [9.5, 0, 11, 4], "texture": "#closet"}
+      }
+    },
+    {
+      "name": "wrap_5",
+      "from": [16, 32, 2],
+      "to": [32, 32, 8],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [24, 32, 2]},
+      "faces": {
+        "up": {"uv": [12, 4, 8, 5.5], "texture": "#closet"},
+        "down": {"uv": [12, 5.5, 8, 4], "texture": "#closet"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "bottom_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [0, 1]
+    },
+    {
+      "name": "bottom_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [2, 3]
+    },
+    {
+      "name": "top_left",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [4, 5, 6]
+    },
+    {
+      "name": "top_right",
+      "origin": [8, 8, 8],
+      "color": 0,
+      "children": [7, 8, 9]
+    }
+  ]
+}

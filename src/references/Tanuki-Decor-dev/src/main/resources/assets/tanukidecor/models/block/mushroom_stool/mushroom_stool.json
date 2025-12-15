@@ -1,0 +1,76 @@
+{
+  "credit": "Made by skyjay1",
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:solid",
+  "elements": [
+    {
+      "name": "stem",
+      "from": [4, 0, 4],
+      "to": [12, 8, 12],
+      "faces": {
+        "north": {"uv": [0, 5, 8, 13], "texture": "#stem"},
+        "east": {"uv": [8, 5, 16, 13], "texture": "#stem"},
+        "south": {"uv": [0, 5, 8, 13], "texture": "#stem"},
+        "west": {"uv": [8, 5, 16, 13], "texture": "#stem"},
+        "down": {"uv": [4, 3, 12, 11], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap",
+      "from": [2, 8, 2],
+      "to": [14, 12, 14],
+      "faces": {
+        "north": {"uv": [2, 8, 14, 12], "texture": "#mushroom"},
+        "east": {"uv": [0, 6, 12, 10], "texture": "#mushroom"},
+        "south": {"uv": [0, 11, 12, 15], "texture": "#mushroom"},
+        "west": {"uv": [3, 4, 15, 8], "texture": "#mushroom"},
+        "up": {"uv": [3, 3, 15, 15], "texture": "#mushroom"},
+        "down": {"uv": [2, 2, 14, 14], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_north",
+      "from": [2, 4, 2],
+      "to": [14, 8, 2],
+      "faces": {
+        "north": {"uv": [3, 10, 15, 14], "texture": "#mushroom"},
+        "south": {"uv": [0, 8, 12, 12], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_south",
+      "from": [2, 4, 14],
+      "to": [14, 8, 14],
+      "faces": {
+        "north": {"uv": [0, 0, 12, 4], "texture": "#inside"},
+        "south": {"uv": [4, 10, 16, 14], "texture": "#mushroom"}
+      }
+    },
+    {
+      "name": "cap_east",
+      "from": [14, 4, 2],
+      "to": [14, 8, 14],
+      "faces": {
+        "east": {"uv": [0, 3, 12, 7], "texture": "#mushroom"},
+        "west": {"uv": [0, 4, 12, 8], "texture": "#inside"}
+      }
+    },
+    {
+      "name": "cap_west",
+      "from": [2, 4, 2],
+      "to": [2, 8, 14],
+      "faces": {
+        "east": {"uv": [0, 12, 12, 16], "texture": "#inside"},
+        "west": {"uv": [3, 8, 15, 12], "texture": "#mushroom"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "stool",
+      "origin": [0, 0, 0],
+      "color": 0,
+      "children": [0, 1, 2, 3, 4, 5]
+    }
+  ]
+}
