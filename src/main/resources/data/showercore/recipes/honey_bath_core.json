@@ -1,6 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [" I ", "ICI", " I "],
+  "pattern": [
+    " I ",
+    "ICI",
+    " I "
+  ],
   "key": {
     "I": {
       "item": "minecraft:honeycomb"
@@ -10,6 +14,6 @@
     }
   },
   "result": {
-    "item": "showercore:honey_bath_core"
+    "id": "showercore:honey_bath_core"
   }
 }

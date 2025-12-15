@@ -1,6 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["  I", "X X", "XXX"],
+  "pattern": [
+    "  I",
+    "X X",
+    "XXX"
+  ],
   "key": {
     "X": {
       "item": "minecraft:cherry_planks"
@@ -10,6 +14,6 @@
     }
   },
   "result": {
-    "item": "showercore:bathtub_cherry"
+    "id": "showercore:bathtub_cherry"
   }
 }

@@ -116,7 +116,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:hot_water_bucket"]
+            "items": "hotbath:hot_water_bucket"
           }
         ]
       }
@@ -126,7 +126,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:honey_bath_bucket"]
+            "items": "hotbath:honey_bath_bucket"
           }
         ]
       }
@@ -136,7 +136,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:milk_bath_bucket"]
+            "items": "hotbath:milk_bath_bucket"
           }
         ]
       }
@@ -146,7 +146,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:rose_bath_bucket"]
+            "items": "hotbath:rose_bath_bucket"
           }
         ]
       }
@@ -156,7 +156,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:peony_bath_bucket"]
+            "items": "hotbath:peony_bath_bucket"
           }
         ]
       }
@@ -166,7 +166,7 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:herbal_bath_bucket"]
+            "items": "hotbath:herbal_bath_bucket"
           }
         ]
       }
