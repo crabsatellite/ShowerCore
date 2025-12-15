@@ -58,6 +58,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.nbt.CompoundTag;
 import com.mojang.serialization.MapCodec;
 
@@ -408,15 +409,27 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
    private void updateLiquidState(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
        LiquidType newLiquid = LiquidType.EMPTY;
        if (!fluid.isEmpty()) {
-           String fluidName = BuiltInRegistries.FLUID.getKey(fluid.getFluid()).getPath();
+           ResourceLocation resourceLocation = BuiltInRegistries.FLUID.getKey(fluid.getFluid());
+           String fluidName = resourceLocation.getPath();
+           String namespace = resourceLocation.getNamespace();
+           
+           if (!level.isClientSide) {
+               com.mojang.logging.LogUtils.getLogger().info("ShowerCore DEBUG: Fluid detected - Namespace: " + namespace + ", Path: " + fluidName);
+           }
+
            if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
-           else if (fluidName.equals("hot_water_fluid") || fluidName.equals("hot_water_flowing")) newLiquid = LiquidType.HOT_WATER;
+           else if (fluidName.contains("hot_water")) newLiquid = LiquidType.HOT_WATER;
            else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
            else if (fluidName.contains("honey")) newLiquid = LiquidType.HONEY_BATH;
            else if (fluidName.contains("milk")) newLiquid = LiquidType.MILK_BATH;
            else if (fluidName.contains("peony")) newLiquid = LiquidType.PEONY_BATH;
            else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
+           else if (namespace.equals("hotbath")) newLiquid = LiquidType.HOT_WATER;
            else newLiquid = LiquidType.CUSTOM;
+           
+           if (!level.isClientSide) {
+               com.mojang.logging.LogUtils.getLogger().info("ShowerCore DEBUG: Mapped to LiquidType: " + newLiquid);
+           }
        }
        
        boolean running = state.getValue(RUNNING);
@@ -500,7 +513,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       double x = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       double y = (double) pos.getY() + 0.9D;
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
-      level.addParticle((ParticleOptions) ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
+      level.addParticle((ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
     }
   }
 

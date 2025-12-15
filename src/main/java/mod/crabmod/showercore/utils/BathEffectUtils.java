@@ -67,7 +67,7 @@ public class BathEffectUtils {
         if (!airPositions.isEmpty()) {
             BlockPos selectedPos = airPositions.get(rand.nextInt(airPositions.size()));
             worldIn.addParticle(
-                    (ParticleOptions) ParticleRegister.STEAM_PARTICLE.get(),
+                    (ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.STEAM_PARTICLE.get(),
                     selectedPos.getX() + rand.nextDouble(),
                     selectedPos.getY() + rand.nextDouble(),
                     selectedPos.getZ() + rand.nextDouble(),
