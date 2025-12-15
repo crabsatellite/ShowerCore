@@ -40,7 +40,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 
 @EventBusSubscriber(
     modid = ShowerCore.MODID,
-    bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
 
