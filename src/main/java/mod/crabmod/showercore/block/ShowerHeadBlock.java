@@ -15,6 +15,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -222,6 +223,21 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
         }
       }
       super.onRemove(state, level, pos, newState, isMoving);
+    }
+  }
+
+  @Override
+  public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    super.setPlacedBy(level, pos, state, placer, stack);
+    BlockEntity blockEntity = level.getBlockEntity(pos);
+    if (blockEntity instanceof ShowerHeadContainerEntity showerEntity) {
+        CustomData customData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
+        if (customData != null) {
+            CompoundTag tag = customData.copyTag();
+            showerEntity.loadWithComponents(tag, level.registryAccess());
+            showerEntity.setChanged();
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
     }
   }
 
