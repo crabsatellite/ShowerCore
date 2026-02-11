@@ -10,6 +10,7 @@ import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -185,8 +186,29 @@ public class HoneyBathCoreBlockEntity extends BlockEntity {
       for (Player player : list) {
         if (pPos.closerThan(player.blockPosition(), (double) j)) {
           player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 260, 1, false, false));
+          // Dirtiness cleaning integration with hotBath
+          if (player instanceof ServerPlayer serverPlayer) {
+            applyDirtinessCleaning(serverPlayer);
+          }
         }
       }
+    }
+  }
+
+  /**
+   * Apply dirtiness cleaning for a player in the bath core's effect range.
+   * Uses hotBath's Capability API to gradually clean the player.
+   */
+  private static void applyDirtinessCleaning(ServerPlayer player) {
+    try {
+      if (!com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) return;
+      long gameTime = player.level().getGameTime();
+      com.crabmod.hotbath.dirtiness.DirtinessCapability.get(player).ifPresent(data -> {
+        data.progressBath(gameTime, false);
+        com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(player);
+      });
+    } catch (Exception e) {
+      // Safety catch - do not crash if hotBath classes are unavailable
     }
   }
 

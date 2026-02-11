@@ -1,10 +1,14 @@
 package mod.crabmod.showercore.block;
 
 import javax.annotation.Nullable;
+import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
+import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,6 +42,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.phys.AABB;
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
@@ -137,7 +142,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
   public BathtubBlock(Properties properties) {
     super(properties);
-    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT).setValue(LIQUID, LiquidType.EMPTY));
+    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.FOOT).setValue(LIQUID, LiquidType.EMPTY).setValue(RUNNING, false));
   }
 
   @Nullable
@@ -359,8 +364,10 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
    private void updateLiquidState(Level level, BlockPos pos, BlockState state, FluidStack fluid) {
        LiquidType newLiquid = LiquidType.EMPTY;
+       ResourceLocation detectedCustomFluidId = null;
        if (!fluid.isEmpty()) {
-           String fluidName = ForgeRegistries.FLUIDS.getKey(fluid.getFluid()).getPath();
+           ResourceLocation fluidKey = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
+           String fluidName = fluidKey != null ? fluidKey.getPath() : "";
            if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
            else if (fluidName.equals("hot_water_fluid") || fluidName.equals("hot_water_flowing")) newLiquid = LiquidType.HOT_WATER;
            else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
@@ -368,9 +375,33 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
            else if (fluidName.contains("milk")) newLiquid = LiquidType.MILK_BATH;
            else if (fluidName.contains("peony")) newLiquid = LiquidType.PEONY_BATH;
            else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
-           else newLiquid = LiquidType.CUSTOM;
+           else {
+               newLiquid = LiquidType.CUSTOM;
+               // Detect custom fluid from hotBath's dynamic custom fluid system
+               if (fluidName.equals("dynamic_custom_fluid") || fluidName.equals("dynamic_custom_fluid_flowing")) {
+                   // Try to get the custom fluid ID from the FluidStack's NBT tag
+                   CompoundTag fluidTag = fluid.getTag();
+                   if (fluidTag != null && fluidTag.contains("CustomFluidId")) {
+                       detectedCustomFluidId = ResourceLocation.tryParse(fluidTag.getString("CustomFluidId"));
+                   }
+               }
+           }
        }
-       
+
+       // Update the custom fluid ID on the BlockEntity
+       BlockEntity be = level.getBlockEntity(pos);
+       if (be instanceof BathtubBlockEntity bathtubBe) {
+           if (newLiquid == LiquidType.CUSTOM) {
+               // Only update if we detected a new ID, otherwise keep the existing one
+               if (detectedCustomFluidId != null) {
+                   bathtubBe.setCustomFluidId(detectedCustomFluidId);
+               }
+           } else {
+               // Clear the custom fluid ID when switching to a non-custom liquid
+               bathtubBe.setCustomFluidId(null);
+           }
+       }
+
        boolean running = state.getValue(RUNNING);
        if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
            running = false;
@@ -436,11 +467,21 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     if (liquid == LiquidType.CUSTOM) {
          BlockEntity be = level.getBlockEntity(pos);
          if (be instanceof BathtubBlockEntity bathtubBe) {
-             FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
-             if (!fluidStack.isEmpty()) {
-                 Fluid fluid = fluidStack.getFluid();
-                 if (Config.steamFluids.contains(fluid)) {
+             // Check custom fluid definition for steam settings
+             Optional<CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+             if (defOpt.isPresent()) {
+                 CustomFluidDefinition def = defOpt.get();
+                 if (def.isHot() && def.showSteam()) {
                      produceSteam = true;
+                 }
+             } else {
+                 // Fallback: check config-based steam fluids for non-hotBath custom fluids
+                 FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
+                 if (!fluidStack.isEmpty()) {
+                     Fluid fluid = fluidStack.getFluid();
+                     if (Config.steamFluids.contains(fluid)) {
+                         produceSteam = true;
+                     }
                  }
              }
          }

@@ -98,6 +98,16 @@ public class Config {
               List.of("minecraft:lava", "minecraft:flowing_lava"),
               Config::validateFluidName);
 
+  private static final ForgeConfigSpec.BooleanValue ENABLE_MOD_INTEGRATIONS =
+      BUILDER
+          .comment(
+              "=== MOD INTEGRATIONS ===",
+              "Enable or disable mod integrations (Cold Sweat, Tough As Nails, LSO, etc.).",
+              "When disabled, ShowerCore will not interact with other mods' systems.",
+              "SAVE SAFETY: This has NO impact on world data - can be toggled freely.",
+              "Default: true")
+          .define("enableModIntegrations", true);
+
   static final ForgeConfigSpec SPEC = BUILDER.build();
 
   public static Set<Block> hotWaterCoreBlocks;
@@ -108,6 +118,18 @@ public class Config {
   public static Set<Block> herbalBathCoreBlocks;
   public static Set<Fluid> steamFluids;
   public static Set<Fluid> rubberDuckDestroyFluids;
+
+  // Cached config value for mod integrations toggle
+  private static boolean enableModIntegrations = true;
+
+  /**
+   * Check if mod integrations are enabled.
+   *
+   * @return true if mod integrations are enabled in config
+   */
+  public static boolean isModIntegrationsEnabled() {
+    return enableModIntegrations;
+  }
 
   private static boolean validateBlockName(final Object obj) {
     return obj instanceof final String blockName
@@ -163,5 +185,7 @@ public class Config {
         RUBBER_DUCK_DESTROY_FLUIDS.get().stream()
             .map(fluidName -> ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidName)))
             .collect(Collectors.toSet());
+
+    enableModIntegrations = ENABLE_MOD_INTEGRATIONS.get();
   }
 }

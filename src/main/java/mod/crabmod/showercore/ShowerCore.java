@@ -2,6 +2,13 @@ package mod.crabmod.showercore;
 
 import com.crabmod.hotbath.item.ItemGroup;
 import com.mojang.logging.LogUtils;
+import mod.crabmod.showercore.compat.CompatManager;
+import mod.crabmod.showercore.compat.ColdSweatCompat;
+import mod.crabmod.showercore.compat.ColdSweatIntegration;
+import mod.crabmod.showercore.compat.LSOCompat;
+import mod.crabmod.showercore.compat.LSOIntegration;
+import mod.crabmod.showercore.compat.ToughAsNailsCompat;
+import mod.crabmod.showercore.compat.ToughAsNailsIntegration;
 import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
@@ -55,10 +62,67 @@ public class ShowerCore {
         .registerConfig(ModConfig.Type.CLIENT, mod.crabmod.showercore.ClientConfig.SPEC);
   }
 
-  private void commonSetup(final FMLCommonSetupEvent event) {}
+  private void commonSetup(final FMLCommonSetupEvent event) {
+    LOGGER.info("ShowerCore common setup starting...");
+
+    // Skip all mod integrations if disabled in config
+    if (!Config.isModIntegrationsEnabled()) {
+      LOGGER.info("Mod integrations disabled in config - skipping all mod integrations.");
+      return;
+    }
+
+    // Register all compat modules with the CompatManager
+    registerCompatModules();
+
+    // Initialize all registered compats safely
+    CompatManager.initializeAll();
+  }
+
+  /**
+   * Register all compatibility modules with the CompatManager.
+   * Each module is registered with its mod ID, display name, load check, and initializer.
+   */
+  private void registerCompatModules() {
+    CompatManager.registerCompat(
+        "cold_sweat",
+        "Cold Sweat",
+        ColdSweatIntegration::isColdSweatLoaded,
+        ColdSweatCompat::init,
+        "com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier",
+        "com.momosoftworks.coldsweat.api.util.Temperature"
+    );
+
+    CompatManager.registerCompat(
+        "toughasnails",
+        "Tough As Nails",
+        ToughAsNailsIntegration::isToughAsNailsLoaded,
+        ToughAsNailsCompat::init,
+        "toughasnails.api.temperature.TemperatureHelper",
+        "toughasnails.api.temperature.TemperatureLevel",
+        "toughasnails.api.thirst.ThirstHelper"
+    );
+
+    CompatManager.registerCompat(
+        "legendarysurvivaloverhaul",
+        "Legendary Survival Overhaul",
+        LSOIntegration::isLSOLoaded,
+        LSOCompat::init,
+        "sfiomn.legendarysurvivaloverhaul.api.temperature.TemperatureUtil",
+        "sfiomn.legendarysurvivaloverhaul.api.thirst.ThirstUtil"
+    );
+  }
 
   private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTabKey() == ItemGroup.HOT_BATH_TAB.getKey()) {
+    try {
+      if (event.getTabKey() != ItemGroup.HOT_BATH_TAB.getKey()) {
+        return;
+      }
+    } catch (Throwable e) {
+      LOGGER.error("Failed to access Hot Bath creative tab - Hot Bath mod may not be installed: {}", e.getMessage());
+      return;
+    }
+
+    try {
       event.accept(BlocksRegister.HOT_WATER_CORE.get());
       event.accept(BlocksRegister.HERBAL_BATH_CORE.get());
       event.accept(BlocksRegister.PEONY_BATH_CORE.get());
@@ -165,6 +229,8 @@ public class ShowerCore {
       event.accept(BlocksRegister.BATHTUB_COPPER.get());
       event.accept(BlocksRegister.BATHTUB_DIAMOND.get());
       event.accept(ItemRegister.RUBBER_DUCK.get());
+    } catch (Throwable e) {
+      LOGGER.error("Error adding ShowerCore items to creative tab: {}", e.getMessage());
     }
   }
 
