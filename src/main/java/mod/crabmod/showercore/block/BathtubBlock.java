@@ -367,24 +367,40 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
        ResourceLocation detectedCustomFluidId = null;
        if (!fluid.isEmpty()) {
            ResourceLocation fluidKey = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
-           String fluidName = fluidKey != null ? fluidKey.getPath() : "";
-           if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
-           else if (fluidName.equals("hot_water_fluid") || fluidName.equals("hot_water_flowing")) newLiquid = LiquidType.HOT_WATER;
-           else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
-           else if (fluidName.contains("honey")) newLiquid = LiquidType.HONEY_BATH;
-           else if (fluidName.contains("milk")) newLiquid = LiquidType.MILK_BATH;
-           else if (fluidName.contains("peony")) newLiquid = LiquidType.PEONY_BATH;
-           else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
-           else {
-               newLiquid = LiquidType.CUSTOM;
-               // Detect custom fluid from hotBath's dynamic custom fluid system
-               if (fluidName.equals("dynamic_custom_fluid") || fluidName.equals("dynamic_custom_fluid_flowing")) {
-                   // Try to get the custom fluid ID from the FluidStack's NBT tag
+           String fluidPath = fluidKey != null ? fluidKey.getPath() : "";
+           String namespace = fluidKey != null ? fluidKey.getNamespace() : "";
+
+           if (fluidPath.equals("water")) {
+               newLiquid = LiquidType.WATER;
+           } else if (namespace.equals("hotbath")) {
+               // Use namespace + exact path matching for built-in hotBath fluids
+               // to avoid false positives from other mods with similar fluid names
+               if (fluidPath.equals("hot_water_fluid") || fluidPath.equals("hot_water_flowing")) {
+                   newLiquid = LiquidType.HOT_WATER;
+               } else if (fluidPath.equals("herbal_bath_fluid") || fluidPath.equals("herbal_bath_flowing")) {
+                   newLiquid = LiquidType.HERBAL_BATH;
+               } else if (fluidPath.equals("honey_bath_fluid") || fluidPath.equals("honey_bath_flowing")) {
+                   newLiquid = LiquidType.HONEY_BATH;
+               } else if (fluidPath.equals("milk_bath_fluid") || fluidPath.equals("milk_bath_flowing")) {
+                   newLiquid = LiquidType.MILK_BATH;
+               } else if (fluidPath.equals("peony_bath_fluid") || fluidPath.equals("peony_bath_flowing")) {
+                   newLiquid = LiquidType.PEONY_BATH;
+               } else if (fluidPath.equals("rose_bath_fluid") || fluidPath.equals("rose_bath_flowing")) {
+                   newLiquid = LiquidType.ROSE_BATH;
+               } else if (fluidPath.equals("dynamic_custom_fluid") || fluidPath.equals("dynamic_custom_fluid_flowing")) {
+                   // Dynamic custom fluid from hotBath's datapack system
+                   newLiquid = LiquidType.CUSTOM;
                    CompoundTag fluidTag = fluid.getTag();
                    if (fluidTag != null && fluidTag.contains("CustomFluidId")) {
                        detectedCustomFluidId = ResourceLocation.tryParse(fluidTag.getString("CustomFluidId"));
                    }
+               } else {
+                   // Unknown hotbath fluid, fallback to HOT_WATER
+                   newLiquid = LiquidType.HOT_WATER;
                }
+           } else {
+               // Non-hotbath mod fluid: mark as CUSTOM
+               newLiquid = LiquidType.CUSTOM;
            }
        }
 

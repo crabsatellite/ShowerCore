@@ -30,6 +30,31 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   private Object bathEffectUtils;
   private final Map<UUID, Integer> timeUnderShower = new HashMap<>();
 
+  /**
+   * Tracks player UUIDs that are currently under an active shower head with a core installed.
+   * Updated every server tick by the shower head entity tick method.
+   * Used by temperature mod compat handlers to detect shower usage.
+   */
+  private static final Set<UUID> PLAYERS_UNDER_ACTIVE_SHOWER = java.util.concurrent.ConcurrentHashMap.newKeySet();
+
+  /**
+   * Checks if a player is currently under an active shower head with a core installed.
+   * @param playerUUID The UUID of the player to check
+   * @return true if the player is under an active shower
+   */
+  public static boolean isPlayerUnderActiveShower(UUID playerUUID) {
+    return PLAYERS_UNDER_ACTIVE_SHOWER.contains(playerUUID);
+  }
+
+  /**
+   * Removes a player from the active shower tracking set.
+   * Called during cleanup on logout/death.
+   * @param playerUUID The UUID of the player to remove
+   */
+  public static void cleanupPlayer(UUID playerUUID) {
+    PLAYERS_UNDER_ACTIVE_SHOWER.remove(playerUUID);
+  }
+
   public ShowerHeadContainerEntity(BlockPos pos, BlockState state) {
     super(BlockEntitiesRegister.RAIN_SHOWER_HEAD_CONTAINER.get(), pos, state);
   }
@@ -190,12 +215,45 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
       time++;
       entity.timeUnderShower.put(uuid, time);
 
+      // Track players under active shower for compat mod integration
+      if (livingEntity instanceof net.minecraft.world.entity.player.Player) {
+        PLAYERS_UNDER_ACTIVE_SHOWER.add(uuid);
+      }
+
       if (time >= 100) { // 5 seconds
         applyEffects(livingEntity, core);
+        // Apply dirtiness cleaning for players under shower
+        if (livingEntity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+          applyDirtinessCleaning(serverPlayer);
+        }
+      }
+    }
+
+    // Remove players that left this shower from the tracking set
+    for (UUID tracked : entity.timeUnderShower.keySet()) {
+      if (!currentEntities.contains(tracked)) {
+        PLAYERS_UNDER_ACTIVE_SHOWER.remove(tracked);
       }
     }
 
     entity.timeUnderShower.keySet().retainAll(currentEntities);
+  }
+
+  /**
+   * Apply dirtiness cleaning to a player under an active shower.
+   * Matches the pattern used by hotBath's BathCore block entities.
+   */
+  private static void applyDirtinessCleaning(net.minecraft.server.level.ServerPlayer player) {
+    try {
+      if (!com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) return;
+      long gameTime = player.level().getGameTime();
+      com.crabmod.hotbath.dirtiness.DirtinessCapability.get(player).ifPresent(data -> {
+        data.progressBath(gameTime, false);
+        com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(player);
+      });
+    } catch (Exception ignored) {
+      // Safety catch - dirtiness system may not be available
+    }
   }
 
   private static void applyEffects(LivingEntity entity, ItemStack core) {

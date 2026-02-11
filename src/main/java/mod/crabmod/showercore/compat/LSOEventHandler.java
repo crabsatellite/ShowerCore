@@ -7,20 +7,17 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.slf4j.Logger;
 
+import java.util.UUID;
+
 /**
  * Event handler for Legendary Survival Overhaul integration with ShowerCore.
- * Handles shower-related temperature and thirst modifications.
+ * Handles tick-based updates for temperature modifiers.
  *
- * All event methods are wrapped with CompatManager.safeEventCall() to ensure
- * that any errors automatically disable this integration without crashing.
+ * Follows the same pattern as hotBath's LSOEventHandler.
  */
 public class LSOEventHandler {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    /**
-     * Handle player tick events for shower temperature and thirst effects.
-     * When a player is using a shower, apply LSO temperature/thirst modifiers.
-     */
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         CompatManager.safeEventCall("legendarysurvivaloverhaul", "onPlayerTick", () -> {
@@ -32,8 +29,8 @@ public class LSOEventHandler {
                 return;
             }
 
-            // TODO: Implement shower temperature and thirst effects for LSO
-            // This will modify the player's LSO temperature/thirst when using a shower
+            // Tick the immersion modifier to apply/remove shower temperature effects
+            ShowerImmersionLSOModifier.tick(player);
         });
     }
 
@@ -43,18 +40,26 @@ public class LSOEventHandler {
     @SubscribeEvent
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         CompatManager.safeEventCall("legendarysurvivaloverhaul", "onPlayerLogout", () -> {
-            // TODO: Clean up any cached player data for LSO integration
+            Player player = event.getEntity();
+
+            ShowerImmersionLSOModifier.cleanup(player);
+            ShowerLSOApiHelper.cleanupPlayerCache(player);
         });
     }
 
     /**
      * Clean up player data when they die and respawn.
+     * This prevents stale bath timers from persisting after death.
      */
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
         CompatManager.safeEventCall("legendarysurvivaloverhaul", "onPlayerClone", () -> {
+            // Only clean up on death (not dimension change)
             if (event.isWasDeath()) {
-                // TODO: Clean up any cached player data for LSO integration
+                Player original = event.getOriginal();
+
+                ShowerImmersionLSOModifier.cleanup(original);
+                ShowerLSOApiHelper.cleanupPlayerCache(original);
             }
         });
     }

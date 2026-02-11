@@ -2,6 +2,7 @@ package mod.crabmod.showercore.utils;
 
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.core.BlockPos;
@@ -99,6 +100,19 @@ public class CoreUtils {
             return type != BathtubBlock.LiquidType.EMPTY && type != BathtubBlock.LiquidType.WATER;
         }
         return false;
+    }
+
+    /**
+     * Checks if a player is currently experiencing a "hot bath" effect from ShowerCore.
+     * This returns true if the player is in a ShowerCore hot bathtub OR under an active shower head.
+     * Used by temperature mod compat handlers (Cold Sweat, Tough As Nails, LSO).
+     *
+     * @param player The player to check
+     * @return true if the player is in a hot bathtub or under an active shower
+     */
+    public static boolean isPlayerInShowerCoreHotWater(Entity player) {
+        return isEntityInAnyHotBathtub(player) ||
+               ShowerHeadContainerEntity.isPlayerUnderActiveShower(player.getUUID());
     }
 
     public static boolean isCoreItem(ItemStack stack) {
