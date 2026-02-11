@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -182,6 +183,19 @@ public class HotWaterCoreBlockEntity extends BlockEntity {
       for (Player player : list) {
         if (pPos.closerThan(player.blockPosition(), (double) j)) {
           player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 260, 1, false, false));
+          // Dirtiness cleaning from bath core
+          try {
+            if (player instanceof ServerPlayer serverPlayer
+                && com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) {
+              com.crabmod.hotbath.dirtiness.DirtinessData data = serverPlayer.getData(
+                  com.crabmod.hotbath.dirtiness.DirtinessAttachment.DIRTINESS);
+              long gameTime = pLevel.getGameTime();
+              data.reduceDirtiness(gameTime, 0.10f);
+              com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(serverPlayer);
+            }
+          } catch (Exception ignored) {
+            // Gracefully handle if hotBath dirtiness classes are not available
+          }
         }
       }
     }

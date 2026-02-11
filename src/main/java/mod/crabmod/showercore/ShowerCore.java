@@ -24,6 +24,13 @@ import net.neoforged.fml.ModContainer;
 import org.slf4j.Logger;
 
 import mod.crabmod.showercore.registers.SoundRegister;
+import mod.crabmod.showercore.compat.CompatManager;
+import mod.crabmod.showercore.compat.ColdSweatIntegration;
+import mod.crabmod.showercore.compat.ColdSweatCompat;
+import mod.crabmod.showercore.compat.ToughAsNailsIntegration;
+import mod.crabmod.showercore.compat.ToughAsNailsCompat;
+import mod.crabmod.showercore.compat.LSOIntegration;
+import mod.crabmod.showercore.compat.LSOCompat;
 
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
@@ -61,10 +68,85 @@ public class ShowerCore {
         (be, side) -> be.getFluidTank());
   }
 
-  private void commonSetup(final FMLCommonSetupEvent event) {}
+  private void commonSetup(final FMLCommonSetupEvent event) {
+    LOGGER.info("ShowerCore common setup starting...");
+
+    // Skip all mod integrations if disabled in config
+    if (!Config.isModIntegrationsEnabled()) {
+      LOGGER.info("Mod integrations disabled in config - skipping all mod integrations.");
+      return;
+    }
+
+    // Register all compat modules with the CompatManager
+    registerCompatModules();
+
+    // Initialize all registered compats safely
+    CompatManager.initializeAll();
+  }
+
+  /**
+   * Register all compatibility modules with the CompatManager.
+   * Each module is registered with its mod ID, display name, load check, and initializer.
+   */
+  private void registerCompatModules() {
+    // Cold Sweat - temperature system integration
+    CompatManager.registerCompat(
+        "cold_sweat",
+        "Cold Sweat",
+        ColdSweatIntegration::isColdSweatLoaded,
+        ColdSweatCompat::init,
+        // Required API classes - verified before init() runs
+        "com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier",
+        "com.momosoftworks.coldsweat.api.util.Temperature",
+        "com.momosoftworks.coldsweat.api.event.core.registry.TempModifierRegisterEvent",
+        "com.momosoftworks.coldsweat.api.event.core.init.DefaultTempModifiersEvent"
+    );
+
+    // Tough As Nails - temperature & thirst integration
+    CompatManager.registerCompat(
+        "toughasnails",
+        "Tough As Nails",
+        ToughAsNailsIntegration::isToughAsNailsLoaded,
+        ToughAsNailsCompat::init,
+        "toughasnails.api.temperature.IPlayerTemperatureModifier",
+        "toughasnails.api.temperature.TemperatureLevel",
+        "toughasnails.api.temperature.TemperatureHelper",
+        "toughasnails.api.thirst.ThirstHelper",
+        "toughasnails.api.thirst.IThirst"
+    );
+
+    // Legendary Survival Overhaul - temperature & thirst integration
+    CompatManager.registerCompat(
+        "legendarysurvivaloverhaul",
+        "Legendary Survival Overhaul",
+        LSOIntegration::isLSOLoaded,
+        LSOCompat::init,
+        "sfiomn.legendarysurvivaloverhaul.api.temperature.TemperatureUtil",
+        "sfiomn.legendarysurvivaloverhaul.api.thirst.ThirstUtil",
+        "sfiomn.legendarysurvivaloverhaul.registry.MobEffectRegistry"
+    );
+  }
 
   private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTabKey() == com.crabmod.hotbath.item.ItemGroup.HOT_BATH_TAB.getKey()) {
+    try {
+      if (event.getTabKey() == com.crabmod.hotbath.item.ItemGroup.HOT_BATH_TAB.getKey()) {
+        addShowerCoreItems(event);
+      }
+    } catch (NoClassDefFoundError | NoSuchFieldError | Exception e) {
+      // hotBath mod's ItemGroup is not available - fall back to adding items
+      // to the building blocks tab so they are still accessible in creative mode
+      LOGGER.warn("Could not access hotBath ItemGroup (hotBath mod may not be installed). " +
+          "ShowerCore items will be added to the Building Blocks tab instead. Error: {}", e.getMessage());
+      if (event.getTabKey() == net.minecraft.world.item.CreativeModeTabs.BUILDING_BLOCKS) {
+        addShowerCoreItems(event);
+      }
+    }
+  }
+
+  /**
+   * Add all ShowerCore items to the given creative mode tab event.
+   */
+  private void addShowerCoreItems(BuildCreativeModeTabContentsEvent event) {
       event.accept(BlocksRegister.HOT_WATER_CORE.get());
       event.accept(BlocksRegister.HERBAL_BATH_CORE.get());
       event.accept(BlocksRegister.PEONY_BATH_CORE.get());
@@ -171,13 +253,12 @@ public class ShowerCore {
       event.accept(BlocksRegister.BATHTUB_COPPER.get());
       event.accept(BlocksRegister.BATHTUB_DIAMOND.get());
       event.accept(ItemRegister.RUBBER_DUCK.get());
-    }
   }
 
   @SubscribeEvent
   public void onServerStarting(ServerStartingEvent event) {}
 
-  @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
+  @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
   public static class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {

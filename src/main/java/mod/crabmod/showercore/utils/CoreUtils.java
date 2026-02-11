@@ -1,7 +1,9 @@
 package mod.crabmod.showercore.utils;
 
+import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import mod.crabmod.showercore.registers.ParticleRegister;
 import net.minecraft.core.BlockPos;
@@ -9,6 +11,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -16,6 +19,8 @@ import net.minecraft.world.level.Level;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.Direction;
+
+import java.util.Optional;
 
 public class CoreUtils {
 
@@ -96,7 +101,44 @@ public class CoreUtils {
         BlockState state = level.getBlockState(pos);
         if (state.getBlock() instanceof BathtubBlock) {
             BathtubBlock.LiquidType type = state.getValue(BathtubBlock.LIQUID);
-            return type != BathtubBlock.LiquidType.EMPTY && type != BathtubBlock.LiquidType.WATER;
+            if (type == BathtubBlock.LiquidType.EMPTY || type == BathtubBlock.LiquidType.WATER) {
+                return false;
+            }
+            if (type == BathtubBlock.LiquidType.CUSTOM) {
+                return isCustomFluidHotAt(level, pos);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the custom fluid in a bathtub at the given position is hot.
+     * Uses the CustomFluidDefinition's isHot() method to determine temperature.
+     */
+    public static boolean isCustomFluidHotAt(Level level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof BathtubBlockEntity bathtubBe) {
+            Optional<CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+            return defOpt.map(CustomFluidDefinition::isHot).orElse(false);
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the entity is in a bathtub containing a CUSTOM fluid that is hot.
+     */
+    public static boolean isEntityInHotCustomBathtub(Entity entity) {
+        if (entity.getVehicle() instanceof SeatEntity seatEntity) {
+            BlockPos pos = seatEntity.blockPosition();
+            return checkBathtubAt(entity.level(), pos, BathtubBlock.LiquidType.CUSTOM)
+                    && isCustomFluidHotAt(entity.level(), pos);
+        }
+
+        BlockPos pos = entity.blockPosition();
+        if (checkBathtubAt(entity.level(), pos, BathtubBlock.LiquidType.CUSTOM)
+                && isCustomFluidHotAt(entity.level(), pos)) {
+            return isEntityInLiquidBounds(entity, pos);
         }
         return false;
     }

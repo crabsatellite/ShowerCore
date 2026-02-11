@@ -14,7 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 // Config class to organize and configure blocks allowed for each specific core type
-@EventBusSubscriber(modid = ShowerCore.MODID)
+@EventBusSubscriber(modid = ShowerCore.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
   private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -99,6 +99,14 @@ public class Config {
               List.of("minecraft:lava", "minecraft:flowing_lava"),
               Config::validateFluidName);
 
+  private static final ModConfigSpec.BooleanValue ENABLE_MOD_INTEGRATIONS = BUILDER
+      .comment("=== MOD INTEGRATIONS ===",
+               "Enable or disable mod integrations (Cold Sweat, Tough As Nails, LSO, etc.).",
+               "When disabled, ShowerCore will not interact with other mods' systems.",
+               "SAVE SAFETY: This has NO impact on world data - can be toggled freely.",
+               "Default: true")
+      .define("enableModIntegrations", true);
+
   static final ModConfigSpec SPEC = BUILDER.build();
 
   public static Set<Block> hotWaterCoreBlocks;
@@ -109,6 +117,18 @@ public class Config {
   public static Set<Block> herbalBathCoreBlocks;
   public static Set<Fluid> steamFluids;
   public static Set<Fluid> rubberDuckDestroyFluids;
+
+  // Cached config value for mod integrations
+  private static boolean enableModIntegrations = true;
+
+  /**
+   * Check if mod integrations are enabled.
+   * When disabled, ShowerCore will not interact with other mods' systems.
+   * @return true if mod integrations are enabled
+   */
+  public static boolean isModIntegrationsEnabled() {
+    return enableModIntegrations;
+  }
 
   private static boolean validateBlockName(final Object obj) {
     return obj instanceof final String blockName
@@ -164,5 +184,7 @@ public class Config {
         RUBBER_DUCK_DESTROY_FLUIDS.get().stream()
             .map(fluidName -> BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluidName)))
             .collect(Collectors.toSet());
+
+    enableModIntegrations = ENABLE_MOD_INTEGRATIONS.get();
   }
 }

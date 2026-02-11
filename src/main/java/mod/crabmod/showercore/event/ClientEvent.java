@@ -34,12 +34,16 @@ import net.neoforged.fml.common.Mod;
 
 import mod.crabmod.showercore.utils.FluidsColor;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import mod.crabmod.showercore.registers.BlocksRegister;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.fml.common.EventBusSubscriber;
+import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
 
 @EventBusSubscriber(
     modid = ShowerCore.MODID,
+    bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
 
@@ -64,6 +68,18 @@ public class ClientEvent {
                 return FluidsColor.PEONY_BATH_COLOR;
               case ROSE_BATH:
                 return FluidsColor.ROSE_BATH_COLOR;
+              case CUSTOM:
+                BlockEntity be = world.getBlockEntity(pos);
+                if (be instanceof BathtubBlockEntity bathtubBe) {
+                    net.minecraft.resources.ResourceLocation fluidId = bathtubBe.getCustomFluidId();
+                    if (fluidId != null) {
+                        int color = CustomFluidAPI.getFluidColor(fluidId);
+                        if (color != -1) {
+                            return color;
+                        }
+                    }
+                }
+                return -1;
               default:
                 return -1;
             }

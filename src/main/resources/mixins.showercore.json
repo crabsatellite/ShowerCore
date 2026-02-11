@@ -3,7 +3,7 @@
   "package": "mod.crabmod.showercore.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "mixins.showercore.refmap.json",
-  "mixins": ["CustomFluidHandlerMixin"],
+  "mixins": ["CustomFluidHandlerMixin", "DirtinessHandlerMixin"],
   "client": [],
   "injectors": {
     "defaultRequire": 1
