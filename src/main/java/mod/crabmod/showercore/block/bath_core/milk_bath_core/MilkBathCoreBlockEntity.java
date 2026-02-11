@@ -183,14 +183,16 @@ public class MilkBathCoreBlockEntity extends BlockEntity {
       for (Player player : list) {
         if (pPos.closerThan(player.blockPosition(), (double) j)) {
           player.addEffect(new MobEffectInstance(MobEffects.SATURATION, 260, 1, false, false));
-          // Dirtiness cleaning from bath core
+          // Dirtiness cleaning from bath core (area effect, slower than direct bathing)
+          // Called every 40 ticks. 0.04 = 4% per call -> 25 calls to fully clean -> 1000 ticks (~50s)
+          // Compare: direct bathing = 20s standing still, 15s moving
           try {
             if (player instanceof ServerPlayer serverPlayer
                 && com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) {
               com.crabmod.hotbath.dirtiness.DirtinessData data = serverPlayer.getData(
                   com.crabmod.hotbath.dirtiness.DirtinessAttachment.DIRTINESS);
               long gameTime = pLevel.getGameTime();
-              data.reduceDirtiness(gameTime, 0.10f);
+              data.reduceDirtiness(gameTime, 0.04f);
               com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(serverPlayer);
             }
           } catch (Exception ignored) {

@@ -121,6 +121,14 @@ dependencies {
     // Example of adding a dependency.
     // implementation 'com.some:library:1.0.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // Temperature/survival mod APIs (optional, compileOnly for compat modules)
+    // ColdSweat - Temperature mod
+    compileOnly "curse.maven:cold-sweat-506194:7492465"
+    // ToughAsNails - Temperature and thirst mod
+    compileOnly "curse.maven:tough-as-nails-246391:5766204"
+    // Legendary Survival Overhaul - Temperature and survival overhaul mod
+    compileOnly "curse.maven:legendary-survival-overhaul-840254:7254309"
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

@@ -1,46 +1,42 @@
 package mod.crabmod.showercore.compat;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.entity.player.Player;
+import com.momosoftworks.coldsweat.api.event.core.init.DefaultTempModifiersEvent;
+import com.momosoftworks.coldsweat.api.event.core.registry.TempModifierRegisterEvent;
+import com.momosoftworks.coldsweat.api.util.Temperature;
+import com.momosoftworks.coldsweat.api.util.placement.Matcher;
+import com.momosoftworks.coldsweat.api.util.placement.Placement;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.slf4j.Logger;
 
 /**
  * Event handler for Cold Sweat integration with ShowerCore.
- * Handles temperature modifications when players use shower blocks.
+ * Registers and applies a temperature modifier that warms players
+ * when they are in a ShowerCore hot bathtub or under an active shower head.
  *
- * TODO: Implement actual Cold Sweat temperature modifier logic.
- *       This requires the Cold Sweat API to be available at compile time.
- *       The following Cold Sweat API classes will be needed:
- *       - com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier
- *       - com.momosoftworks.coldsweat.api.util.Temperature
- *       - com.momosoftworks.coldsweat.api.event.core.registry.TempModifierRegisterEvent
- *       - com.momosoftworks.coldsweat.api.event.core.init.DefaultTempModifiersEvent
- *
- *       Implementation should:
- *       1. Register a custom TempModifier for shower usage
- *       2. Apply warming effect when player is under an active shower
- *       3. Gradually return to normal temperature when player leaves the shower
+ * Follows the same pattern as hotBath's ColdSweatEventHandler.
  */
 public class ColdSweatEventHandler {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Post event) {
-        CompatManager.safeEventCall("cold_sweat", "onPlayerTick", () -> {
-            Player player = event.getEntity();
+    public static void onTempModifierRegister(TempModifierRegisterEvent event) {
+        CompatManager.safeEventCall("cold_sweat", "onTempModifierRegister", () -> {
+            LOGGER.info("Registering ShowerCore temperature modifiers with Cold Sweat...");
+            event.register(ResourceLocation.parse("showercore:immersion"), ShowerImmersionColdSweatModifier::new);
+            LOGGER.info("Successfully registered ShowerCore temperature modifiers!");
+        });
+    }
 
-            // Only process on server side
-            if (player.level().isClientSide()) {
-                return;
-            }
-
-            // TODO: Check if player is currently under an active shower block
-            // TODO: If under shower, apply Cold Sweat temperature modifier
-            //       - Hot water shower should warm the player
-            //       - Different bath types may have different temperature effects
-            // TODO: If player left shower, gradually remove the temperature modifier
+    @SubscribeEvent
+    public static void onDefaultModifiers(DefaultTempModifiersEvent event) {
+        CompatManager.safeEventCall("cold_sweat", "onDefaultModifiers", () -> {
+            event.addModifier(
+                    Temperature.Trait.WORLD,
+                    new ShowerImmersionColdSweatModifier(),
+                    Placement.LAST.noDuplicates(Matcher.SAME_CLASS)
+            );
         });
     }
 }

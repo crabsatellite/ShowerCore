@@ -13,7 +13,7 @@ public class DirtinessHandlerMixin {
 
     @Inject(method = "isInHotBathFluid", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isInHotBathFluid(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
-        if (CoreUtils.isEntityInAnyHotBathtub(player)) {
+        if (CoreUtils.isPlayerInShowerCoreHotWater(player)) {
             cir.setReturnValue(true);
         }
     }

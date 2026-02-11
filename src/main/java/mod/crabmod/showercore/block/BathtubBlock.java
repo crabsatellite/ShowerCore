@@ -64,7 +64,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import com.mojang.serialization.MapCodec;
 import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
+import com.crabmod.hotbath.custom_fluid.CustomFluidBucketItem;
 import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
+import com.crabmod.hotbath.custom_fluid.DynamicFluidRegistry;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final MapCodec<BathtubBlock> CODEC = simpleCodec(BathtubBlock::new);
@@ -350,10 +352,54 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           BlockEntity be = level.getBlockEntity(pos);
           if (be instanceof BathtubBlockEntity bathtubBe) {
               IFluidHandler handler = bathtubBe.getFluidTank();
-              
+
+              // Handle hotBath custom fluid items (buckets/bottles) that use Data Components
+              // These items store their fluid ID via CustomFluidDataComponents instead of
+              // standard fluid handler capabilities, so FluidUtil cannot handle them.
+              if (CustomFluidAPI.hasCustomFluid(itemstack)) {
+                  Optional<CustomFluidDefinition> defOpt = CustomFluidAPI.getFluidFromItem(itemstack);
+                  if (defOpt.isPresent()) {
+                      CustomFluidDefinition definition = defOpt.get();
+                      // Use the dynamic custom fluid as the FluidStack base
+                      FluidStack customFluidStack = new FluidStack(
+                              DynamicFluidRegistry.DYNAMIC_FLUID_STILL.get(), 1000);
+                      int filled = handler.fill(customFluidStack, IFluidHandler.FluidAction.SIMULATE);
+                      if (filled == 1000) {
+                          if (!level.isClientSide) {
+                              handler.fill(customFluidStack, IFluidHandler.FluidAction.EXECUTE);
+
+                              // Store the custom fluid ID in the block entity
+                              bathtubBe.setCustomFluidId(definition.id());
+
+                              if (!player.isCreative()) {
+                                  // Return the appropriate empty container
+                                  if (itemstack.getItem() instanceof CustomFluidBucketItem) {
+                                      player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                                  } else {
+                                      // Bottle items - shrink and give back glass bottle
+                                      itemstack.shrink(1);
+                                      ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
+                                      if (!player.getInventory().add(bottle)) {
+                                          player.drop(bottle, false);
+                                      }
+                                  }
+                              }
+
+                              level.playSound(null, pos, SoundEvents.BUCKET_EMPTY,
+                                      net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                              FluidStack currentFluid = bathtubBe.getFluidTank().getFluid();
+                              syncFluidToOtherPart(level, pos, state, currentFluid);
+                              updateLiquidState(level, pos, state, currentFluid);
+                          }
+                          return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                      }
+                  }
+              }
+
               // Try standard FluidUtil interaction first
               boolean success = FluidUtil.interactWithFluidHandler(player, hand, handler);
-              
+
               if (success) {
                   if (!level.isClientSide) {
                       FluidStack fluid = bathtubBe.getFluidTank().getFluid();
@@ -374,15 +420,15 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                            if (!level.isClientSide) {
                                // Execute filling
                                handler.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
-                               
+
                                if (!player.isCreative()) {
                                    player.setItemInHand(hand, new ItemStack(Items.BUCKET));
                                }
-                               
+
                                SoundEvent sound = bucketContent.getFluidType().getSound(player, level, pos, net.neoforged.neoforge.common.SoundActions.BUCKET_EMPTY);
                                if (sound == null) sound = SoundEvents.BUCKET_EMPTY;
                                level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
-                               
+
                                FluidStack currentFluid = bathtubBe.getFluidTank().getFluid();
                                syncFluidToOtherPart(level, pos, state, currentFluid);
                                updateLiquidState(level, pos, state, currentFluid);
@@ -421,36 +467,66 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
        if (!fluid.isEmpty()) {
            ResourceLocation resourceLocation = BuiltInRegistries.FLUID.getKey(fluid.getFluid());
-           String fluidName = resourceLocation.getPath();
+           String fluidPath = resourceLocation.getPath();
            String namespace = resourceLocation.getNamespace();
 
-           if (fluidName.equals("water")) newLiquid = LiquidType.WATER;
-           else if (fluidName.contains("hot_water")) newLiquid = LiquidType.HOT_WATER;
-           else if (fluidName.contains("herbal")) newLiquid = LiquidType.HERBAL_BATH;
-           else if (fluidName.contains("honey")) newLiquid = LiquidType.HONEY_BATH;
-           else if (fluidName.contains("milk")) newLiquid = LiquidType.MILK_BATH;
-           else if (fluidName.contains("peony")) newLiquid = LiquidType.PEONY_BATH;
-           else if (fluidName.contains("rose")) newLiquid = LiquidType.ROSE_BATH;
-           else if (namespace.equals("hotbath")) {
-               // Check if this is a registered custom fluid from hotBath
-               // Try matching by the fluid's registry name as a custom fluid ID
-               for (CustomFluidDefinition def : CustomFluidAPI.getAllFluids()) {
-                   if (resourceLocation.toString().contains(def.id().getPath())) {
-                       newLiquid = LiquidType.CUSTOM;
-                       detectedCustomFluidId = def.id();
-                       break;
+           if (fluidPath.equals("water")) {
+               newLiquid = LiquidType.WATER;
+           } else if (namespace.equals("hotbath")) {
+               // Use namespace + exact path matching for built-in hotBath fluids
+               // to avoid false positives from other mods with similar fluid names
+               if (fluidPath.equals("hot_water_fluid") || fluidPath.equals("hot_water_flowing")) {
+                   newLiquid = LiquidType.HOT_WATER;
+               } else if (fluidPath.equals("herbal_bath_fluid") || fluidPath.equals("herbal_bath_flowing")) {
+                   newLiquid = LiquidType.HERBAL_BATH;
+               } else if (fluidPath.equals("honey_bath_fluid") || fluidPath.equals("honey_bath_flowing")) {
+                   newLiquid = LiquidType.HONEY_BATH;
+               } else if (fluidPath.equals("milk_bath_fluid") || fluidPath.equals("milk_bath_flowing")) {
+                   newLiquid = LiquidType.MILK_BATH;
+               } else if (fluidPath.equals("peony_bath_fluid") || fluidPath.equals("peony_bath_flowing")) {
+                   newLiquid = LiquidType.PEONY_BATH;
+               } else if (fluidPath.equals("rose_bath_fluid") || fluidPath.equals("rose_bath_flowing")) {
+                   newLiquid = LiquidType.ROSE_BATH;
+               } else {
+                   // Check if this is the dynamic custom fluid (Data Components system in 1.21).
+                   // In 1.21, all custom fluids share a single fluid type (hotbath:dynamic_custom_fluid)
+                   // and the specific fluid identity is stored in the block entity via Data Components.
+                   boolean isDynamicCustomFluid =
+                           fluid.getFluid() == DynamicFluidRegistry.DYNAMIC_FLUID_STILL.get()
+                        || fluid.getFluid() == DynamicFluidRegistry.DYNAMIC_FLUID_FLOWING.get();
+
+                   if (isDynamicCustomFluid) {
+                       // The custom fluid ID should already be stored in the block entity
+                       // (set when the custom fluid bucket/bottle was used on the bathtub)
+                       BlockEntity currentBe = level.getBlockEntity(pos);
+                       if (currentBe instanceof BathtubBlockEntity currentBathtubBe
+                               && currentBathtubBe.getCustomFluidId() != null) {
+                           newLiquid = LiquidType.CUSTOM;
+                           detectedCustomFluidId = currentBathtubBe.getCustomFluidId();
+                       } else {
+                           // Dynamic custom fluid without stored ID - fallback
+                           newLiquid = LiquidType.HOT_WATER;
+                       }
+                   } else {
+                       // Other hotBath namespace fluid (legacy per-fluid registrations)
+                       for (CustomFluidDefinition def : CustomFluidAPI.getAllFluids()) {
+                           if (resourceLocation.toString().contains(def.id().getPath())) {
+                               newLiquid = LiquidType.CUSTOM;
+                               detectedCustomFluidId = def.id();
+                               break;
+                           }
+                       }
+                       // Fallback to HOT_WATER if no custom fluid matched but still hotbath namespace
+                       if (newLiquid != LiquidType.CUSTOM) {
+                           newLiquid = LiquidType.HOT_WATER;
+                       }
                    }
                }
-               // Fallback to HOT_WATER if no custom fluid matched
-               if (newLiquid != LiquidType.CUSTOM) {
-                   newLiquid = LiquidType.HOT_WATER;
-               }
-           }
-           else {
+           } else {
                // Non-hotbath mod fluid: check if it matches any registered custom fluid
                for (CustomFluidDefinition def : CustomFluidAPI.getAllFluids()) {
                    if (resourceLocation.toString().contains(def.id().getPath())
-                           || def.id().toString().contains(fluidName)) {
+                           || def.id().toString().contains(fluidPath)) {
                        newLiquid = LiquidType.CUSTOM;
                        detectedCustomFluidId = def.id();
                        break;
