@@ -227,6 +227,9 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
         PLAYERS_UNDER_ACTIVE_SHOWER.add(uuid);
       }
 
+      // Dirtiness cleaning is handled by DirtinessHandlerMixin injecting into
+      // hotBath's isInHotBathFluid() - no direct call needed here to avoid double cleaning.
+
       if (time >= 100) { // 5 seconds
         applyEffects(livingEntity, core);
       }

@@ -67,6 +67,7 @@ import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
 import com.crabmod.hotbath.custom_fluid.CustomFluidBucketItem;
 import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
 import com.crabmod.hotbath.custom_fluid.DynamicFluidRegistry;
+import com.crabmod.hotbath.custom_fluid.SplashCustomFluidBottleItem;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final MapCodec<BathtubBlock> CODEC = simpleCodec(BathtubBlock::new);
@@ -191,6 +192,25 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
         default: return HEAD_NORTH_SHAPE;
       }
     }
+  }
+
+  @Override
+  public boolean hasDynamicLightEmission(BlockState state) {
+      return true;
+  }
+
+  @Override
+  public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+      if (state.getValue(LIQUID) != LiquidType.CUSTOM) {
+          return 0;
+      }
+      BlockEntity be = level.getBlockEntity(pos);
+      if (be instanceof BathtubBlockEntity bathtubBe) {
+          return bathtubBe.getCustomFluidDefinition()
+                  .map(CustomFluidDefinition::luminosity)
+                  .orElse(0);
+      }
+      return 0;
   }
 
   @Nullable
@@ -375,8 +395,11 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                                   // Return the appropriate empty container
                                   if (itemstack.getItem() instanceof CustomFluidBucketItem) {
                                       player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                                  } else if (itemstack.getItem() instanceof SplashCustomFluidBottleItem) {
+                                      // Splash bottles are consumed without returning a container
+                                      itemstack.shrink(1);
                                   } else {
-                                      // Bottle items - shrink and give back glass bottle
+                                      // Regular bottle items - shrink and give back glass bottle
                                       itemstack.shrink(1);
                                       ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
                                       if (!player.getInventory().add(bottle)) {
@@ -642,6 +665,24 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       level.addParticle((ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
     }
+
+    // Bubble particles for custom fluids with showBubbles enabled
+    if (liquid == LiquidType.CUSTOM) {
+        BlockEntity bubbleBe = level.getBlockEntity(pos);
+        if (bubbleBe instanceof BathtubBlockEntity bubbleBathtubBe) {
+            Optional<CustomFluidDefinition> bubbleDefOpt = bubbleBathtubBe.getCustomFluidDefinition();
+            if (bubbleDefOpt.isPresent() && bubbleDefOpt.get().showBubbles()) {
+                if (random.nextInt(15) == 0) {
+                    double bx = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
+                    double by = (double) pos.getY() + 0.7D;
+                    double bz = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
+                    level.addParticle(
+                        (ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.HOT_WATER_BUBBLE.get(),
+                        bx, by, bz, 0.0D, 0.02D, 0.0D);
+                }
+            }
+        }
+    }
   }
 
   @Override
@@ -653,7 +694,9 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
   @Override
   public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-      if (state.getValue(LIQUID) == LiquidType.CUSTOM) {
+      LiquidType liquid = state.getValue(LIQUID);
+
+      if (liquid == LiquidType.CUSTOM) {
           BlockEntity be = level.getBlockEntity(pos);
           if (be instanceof BathtubBlockEntity bathtubBe) {
               // Check for custom fluid definition and apply its effects
@@ -661,7 +704,30 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
               if (defOpt.isPresent()) {
                   ResourceLocation fluidId = bathtubBe.getCustomFluidId();
                   if (fluidId != null && entity instanceof ServerPlayer serverPlayer && !level.isClientSide) {
-                      CustomFluidAPI.applyFluidEffects(serverPlayer, fluidId);
+                      // Respect triggerTimeSeconds from the custom fluid definition.
+                      // Track how long the player has been in this bath and only apply
+                      // effects after the configured trigger delay (matching HotBath behavior).
+                      CustomFluidDefinition def = defOpt.get();
+                      int triggerTimeTicks = def.triggerTimeSeconds() * 20;
+
+                      CompoundTag playerData = serverPlayer.getPersistentData();
+                      long currentTick = level.getGameTime();
+                      long lastInsideTick = playerData.getLong("showercore.custom_bath_last_tick");
+
+                      int stayedTicks;
+                      if (currentTick - lastInsideTick > 5) {
+                          // Re-entry or first entry — reset timer
+                          stayedTicks = 1;
+                      } else {
+                          stayedTicks = playerData.getInt("showercore.custom_bath_stayed") + 1;
+                      }
+
+                      playerData.putLong("showercore.custom_bath_last_tick", currentTick);
+                      playerData.putInt("showercore.custom_bath_stayed", stayedTicks);
+
+                      if (stayedTicks >= triggerTimeTicks) {
+                          CustomFluidAPI.applyFluidEffects(serverPlayer, fluidId);
+                      }
                   }
               } else {
                   // No custom fluid definition; handle special cases like lava
@@ -676,6 +742,30 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
               }
           }
       }
+
+      // === Hot bathtub interactions (server-side only) ===
+      if (!level.isClientSide && liquid != LiquidType.EMPTY && liquid != LiquidType.WATER) {
+          boolean isHot = (liquid != LiquidType.CUSTOM) ||
+                  mod.crabmod.showercore.utils.CoreUtils.isCustomFluidHotAt(level, pos);
+
+          if (isHot) {
+              // Dirtiness cleaning is handled by DirtinessHandlerMixin injecting into
+              // hotBath's isInHotBathFluid() - no direct call needed here to avoid double cleaning.
+
+              // Twilight Forest ice mobs take damage in hot bathtub (1 damage/sec)
+              if (entity.tickCount % 20 == 0
+                      && mod.crabmod.showercore.compat.ShowerCoreCompat.isTwilightForestIceMob(entity)) {
+                  entity.hurt(level.damageSources().magic(), 1.0F);
+              }
+
+              // Alex's Caves GummyBear melts in hot bathtub (0.5 damage/sec)
+              if (entity.tickCount % 20 == 0
+                      && mod.crabmod.showercore.compat.ShowerCoreCompat.isGummyBear(entity)) {
+                  entity.hurt(level.damageSources().magic(), 0.5F);
+              }
+          }
+      }
+
       super.entityInside(state, level, pos, entity);
   }
 }

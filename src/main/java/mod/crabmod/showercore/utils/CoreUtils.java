@@ -157,6 +157,24 @@ public class CoreUtils {
                ShowerHeadContainerEntity.isPlayerUnderActiveShower(player.getUUID());
     }
 
+    /**
+     * Returns the bath temperature for a player in a ShowerCore hot bath.
+     * For custom fluids, returns the actual CustomFluidDefinition temperature.
+     * For built-in hot liquids and shower heads, returns the default 40.0f.
+     */
+    public static float getShowerCoreBathTemperature(Entity player) {
+        Entity vehicle = player.getVehicle();
+        BlockPos pos = vehicle instanceof SeatEntity ? vehicle.blockPosition() : player.blockPosition();
+        BlockEntity be = player.level().getBlockEntity(pos);
+        if (be instanceof BathtubBlockEntity bathtubBe) {
+            Optional<CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+            if (defOpt.isPresent()) {
+                return defOpt.get().temperature();
+            }
+        }
+        return 40.0f;
+    }
+
     public static boolean isCoreItem(ItemStack stack) {
         if (stack.isEmpty()) return false;
         ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(stack.getItem());
