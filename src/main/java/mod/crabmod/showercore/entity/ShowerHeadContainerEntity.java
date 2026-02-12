@@ -220,12 +220,11 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
         PLAYERS_UNDER_ACTIVE_SHOWER.add(uuid);
       }
 
+      // Dirtiness cleaning is handled by DirtinessHandlerMixin injecting into
+      // hotBath's isInHotBathFluid() - no direct call needed here to avoid double cleaning.
+
       if (time >= 100) { // 5 seconds
         applyEffects(livingEntity, core);
-        // Apply dirtiness cleaning for players under shower
-        if (livingEntity instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-          applyDirtinessCleaning(serverPlayer);
-        }
       }
     }
 
@@ -239,22 +238,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     entity.timeUnderShower.keySet().retainAll(currentEntities);
   }
 
-  /**
-   * Apply dirtiness cleaning to a player under an active shower.
-   * Matches the pattern used by hotBath's BathCore block entities.
-   */
-  private static void applyDirtinessCleaning(net.minecraft.server.level.ServerPlayer player) {
-    try {
-      if (!com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) return;
-      long gameTime = player.level().getGameTime();
-      com.crabmod.hotbath.dirtiness.DirtinessCapability.get(player).ifPresent(data -> {
-        data.progressBath(gameTime, false);
-        com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(player);
-      });
-    } catch (Exception ignored) {
-      // Safety catch - dirtiness system may not be available
-    }
-  }
+
 
   private static void applyEffects(LivingEntity entity, ItemStack core) {
     String path = ForgeRegistries.ITEMS.getKey(core.getItem()).getPath();

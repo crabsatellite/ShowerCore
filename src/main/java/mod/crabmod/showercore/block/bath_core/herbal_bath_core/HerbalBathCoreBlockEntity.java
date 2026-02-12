@@ -197,15 +197,18 @@ public class HerbalBathCoreBlockEntity extends BlockEntity {
 
   /**
    * Apply dirtiness cleaning for a player in the bath core's effect range.
-   * Uses hotBath's Capability API to gradually clean the player.
+   * Uses reduceDirtiness (8% per call, called every 40 ticks) for area-effect cleaning.
+   * This is slower than direct bathing (progressBath) which is tick-based.
    */
   private static void applyDirtinessCleaning(ServerPlayer player) {
     try {
       if (!com.crabmod.hotbath.HotBathConfig.isDirtinessEnabled()) return;
       long gameTime = player.level().getGameTime();
       com.crabmod.hotbath.dirtiness.DirtinessCapability.get(player).ifPresent(data -> {
-        data.progressBath(gameTime, false);
-        com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(player);
+        data.reduceDirtiness(gameTime, 0.08f);
+        if (gameTime % 5 == 0) {
+          com.crabmod.hotbath.dirtiness.DirtinessNetworking.syncToClient(player);
+        }
       });
     } catch (Exception e) {
       // Safety catch - do not crash if hotBath classes are unavailable

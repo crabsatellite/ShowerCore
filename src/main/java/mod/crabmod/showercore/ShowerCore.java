@@ -2,13 +2,6 @@ package mod.crabmod.showercore;
 
 import com.crabmod.hotbath.item.ItemGroup;
 import com.mojang.logging.LogUtils;
-import mod.crabmod.showercore.compat.CompatManager;
-import mod.crabmod.showercore.compat.ColdSweatCompat;
-import mod.crabmod.showercore.compat.ColdSweatIntegration;
-import mod.crabmod.showercore.compat.LSOCompat;
-import mod.crabmod.showercore.compat.LSOIntegration;
-import mod.crabmod.showercore.compat.ToughAsNailsCompat;
-import mod.crabmod.showercore.compat.ToughAsNailsIntegration;
 import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
@@ -54,6 +47,7 @@ public class ShowerCore {
     modEventBus.addListener(this::commonSetup);
 
     MinecraftForge.EVENT_BUS.register(this);
+    MinecraftForge.EVENT_BUS.register(mod.crabmod.showercore.event.ServerEvent.class);
     modEventBus.addListener(this::addCreative);
 
     ModLoadingContext.get()
@@ -63,53 +57,10 @@ public class ShowerCore {
   }
 
   private void commonSetup(final FMLCommonSetupEvent event) {
-    LOGGER.info("ShowerCore common setup starting...");
-
-    // Skip all mod integrations if disabled in config
-    if (!Config.isModIntegrationsEnabled()) {
-      LOGGER.info("Mod integrations disabled in config - skipping all mod integrations.");
-      return;
-    }
-
-    // Register all compat modules with the CompatManager
-    registerCompatModules();
-
-    // Initialize all registered compats safely
-    CompatManager.initializeAll();
-  }
-
-  /**
-   * Register all compatibility modules with the CompatManager.
-   * Each module is registered with its mod ID, display name, load check, and initializer.
-   */
-  private void registerCompatModules() {
-    CompatManager.registerCompat(
-        "cold_sweat",
-        "Cold Sweat",
-        ColdSweatIntegration::isColdSweatLoaded,
-        ColdSweatCompat::init,
-        "com.momosoftworks.coldsweat.api.temperature.modifier.TempModifier",
-        "com.momosoftworks.coldsweat.api.util.Temperature"
-    );
-
-    CompatManager.registerCompat(
-        "toughasnails",
-        "Tough As Nails",
-        ToughAsNailsIntegration::isToughAsNailsLoaded,
-        ToughAsNailsCompat::init,
-        "toughasnails.api.temperature.TemperatureHelper",
-        "toughasnails.api.temperature.TemperatureLevel",
-        "toughasnails.api.thirst.ThirstHelper"
-    );
-
-    CompatManager.registerCompat(
-        "legendarysurvivaloverhaul",
-        "Legendary Survival Overhaul",
-        LSOIntegration::isLSOLoaded,
-        LSOCompat::init,
-        "sfiomn.legendarysurvivaloverhaul.api.temperature.TemperatureUtil",
-        "sfiomn.legendarysurvivaloverhaul.api.thirst.ThirstUtil"
-    );
+    LOGGER.info("ShowerCore common setup complete.");
+    // Temperature mod compat (Cold Sweat, TAN, LSO) is handled automatically
+    // via CustomFluidHandlerMixin intercepting hotBath's API methods.
+    // No separate registration needed - hotBath's own handlers detect ShowerCore players.
   }
 
   private void addCreative(BuildCreativeModeTabContentsEvent event) {

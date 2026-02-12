@@ -2,7 +2,11 @@ package mod.crabmod.showercore.block;
 
 import javax.annotation.Nullable;
 import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
+import com.crabmod.hotbath.custom_fluid.CustomFluidBucketItem;
+import com.crabmod.hotbath.custom_fluid.CustomFluidBottleItem;
 import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
+import com.crabmod.hotbath.custom_fluid.DynamicFluidRegistry;
+import com.crabmod.hotbath.custom_fluid.SplashCustomFluidBottleItem;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.core.BlockPos;
@@ -49,6 +53,9 @@ import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.FluidStack;
 import mod.crabmod.showercore.Config;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import java.util.Collections;
@@ -173,6 +180,20 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
         default: return HEAD_NORTH_SHAPE;
       }
     }
+  }
+
+  @Override
+  public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+      if (state.getValue(LIQUID) != LiquidType.CUSTOM) {
+          return 0;
+      }
+      BlockEntity be = level.getBlockEntity(pos);
+      if (be instanceof BathtubBlockEntity bathtubBe) {
+          return bathtubBe.getCustomFluidDefinition()
+                  .map(CustomFluidDefinition::luminosity)
+                  .orElse(0);
+      }
+      return 0;
   }
 
   @Nullable
@@ -330,18 +351,63 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
       // Fluid interaction
       if (!itemstack.isEmpty()) {
-          if (FluidUtil.getFluidHandler(itemstack).isPresent()) {
-              BlockEntity be = level.getBlockEntity(pos);
-              if (be instanceof BathtubBlockEntity bathtubBe) {
-                  boolean success = FluidUtil.interactWithFluidHandler(player, hand, level, pos, null);
-                  if (success) {
-                      if (!level.isClientSide) {
-                          FluidStack fluid = bathtubBe.getFluidTank().getFluid();
-                          syncFluidToOtherPart(level, pos, state, fluid);
-                          updateLiquidState(level, pos, state, fluid);
+          BlockEntity be = level.getBlockEntity(pos);
+          if (be instanceof BathtubBlockEntity bathtubBe) {
+              net.minecraftforge.fluids.capability.IFluidHandler handler = bathtubBe.getFluidTank();
+
+              // Handle hotBath custom fluid items (buckets/bottles) that use NBT instead of
+              // standard fluid handler capabilities, so FluidUtil cannot handle them.
+              if (CustomFluidAPI.hasCustomFluid(itemstack)) {
+                  Optional<CustomFluidDefinition> defOpt = CustomFluidAPI.getFluidFromItem(itemstack);
+                  if (defOpt.isPresent()) {
+                      CustomFluidDefinition definition = defOpt.get();
+                      FluidStack customFluidStack = new FluidStack(
+                              DynamicFluidRegistry.DYNAMIC_FLUID_STILL.get(), 1000);
+                      int filled = handler.fill(customFluidStack, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.SIMULATE);
+                      if (filled == 1000) {
+                          if (!level.isClientSide) {
+                              handler.fill(customFluidStack, net.minecraftforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+
+                              // Store the custom fluid ID in the block entity
+                              bathtubBe.setCustomFluidId(definition.id());
+
+                              if (!player.isCreative()) {
+                                  if (itemstack.getItem() instanceof CustomFluidBucketItem) {
+                                      player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                                  } else if (itemstack.getItem() instanceof SplashCustomFluidBottleItem) {
+                                      // Splash bottles are consumed without returning a container
+                                      itemstack.shrink(1);
+                                  } else {
+                                      // Regular bottle items - shrink and give back glass bottle
+                                      itemstack.shrink(1);
+                                      ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
+                                      if (!player.getInventory().add(bottle)) {
+                                          player.drop(bottle, false);
+                                      }
+                                  }
+                              }
+
+                              level.playSound(null, pos, SoundEvents.BUCKET_EMPTY,
+                                      net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                              FluidStack currentFluid = bathtubBe.getFluidTank().getFluid();
+                              syncFluidToOtherPart(level, pos, state, currentFluid);
+                              updateLiquidState(level, pos, state, currentFluid);
+                          }
+                          return InteractionResult.sidedSuccess(level.isClientSide);
                       }
-                      return InteractionResult.sidedSuccess(level.isClientSide);
                   }
+              }
+
+              // Try standard FluidUtil interaction
+              boolean success = FluidUtil.interactWithFluidHandler(player, hand, level, pos, null);
+              if (success) {
+                  if (!level.isClientSide) {
+                      FluidStack fluid = bathtubBe.getFluidTank().getFluid();
+                      syncFluidToOtherPart(level, pos, state, fluid);
+                      updateLiquidState(level, pos, state, fluid);
+                  }
+                  return InteractionResult.sidedSuccess(level.isClientSide);
               }
           }
       }
@@ -353,8 +419,13 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
        BedPart part = state.getValue(PART);
        BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
        BlockEntity otherBe = level.getBlockEntity(otherPos);
-       if (otherBe instanceof BathtubBlockEntity bathtubBe) {
-           bathtubBe.getFluidTank().setFluid(fluid.copy());
+       if (otherBe instanceof BathtubBlockEntity otherBathtubBe) {
+           otherBathtubBe.getFluidTank().setFluid(fluid.copy());
+           // Sync custom fluid ID to the other part
+           BlockEntity thisBe = level.getBlockEntity(pos);
+           if (thisBe instanceof BathtubBlockEntity thisBathtubBe) {
+               otherBathtubBe.setCustomFluidId(thisBathtubBe.getCustomFluidId());
+           }
            BlockState otherState = level.getBlockState(otherPos);
            if (otherState.getBlock() == this) {
                updateLiquidState(level, otherPos, otherState, fluid);
@@ -388,11 +459,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                } else if (fluidPath.equals("rose_bath_fluid") || fluidPath.equals("rose_bath_flowing")) {
                    newLiquid = LiquidType.ROSE_BATH;
                } else if (fluidPath.equals("dynamic_custom_fluid") || fluidPath.equals("dynamic_custom_fluid_flowing")) {
-                   // Dynamic custom fluid from hotBath's datapack system
-                   newLiquid = LiquidType.CUSTOM;
-                   CompoundTag fluidTag = fluid.getTag();
-                   if (fluidTag != null && fluidTag.contains("CustomFluidId")) {
-                       detectedCustomFluidId = ResourceLocation.tryParse(fluidTag.getString("CustomFluidId"));
+                   // Dynamic custom fluid from hotBath's datapack system.
+                   // The custom fluid ID is stored in the BathtubBlockEntity (set when the
+                   // custom fluid bucket/bottle was used on the bathtub), not in FluidStack NBT.
+                   BlockEntity currentBe = level.getBlockEntity(pos);
+                   if (currentBe instanceof BathtubBlockEntity currentBathtubBe
+                           && currentBathtubBe.getCustomFluidId() != null) {
+                       newLiquid = LiquidType.CUSTOM;
+                       detectedCustomFluidId = currentBathtubBe.getCustomFluidId();
+                   } else {
+                       // Dynamic custom fluid without stored ID - fallback
+                       newLiquid = LiquidType.HOT_WATER;
                    }
                } else {
                    // Unknown hotbath fluid, fallback to HOT_WATER
@@ -511,6 +588,24 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       double z = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.8D;
       level.addParticle((ParticleOptions) ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
     }
+
+    // Bubble particles for custom fluids with showBubbles enabled
+    if (liquid == LiquidType.CUSTOM) {
+        BlockEntity bubbleBe = level.getBlockEntity(pos);
+        if (bubbleBe instanceof BathtubBlockEntity bubbleBathtubBe) {
+            Optional<CustomFluidDefinition> bubbleDefOpt = bubbleBathtubBe.getCustomFluidDefinition();
+            if (bubbleDefOpt.isPresent() && bubbleDefOpt.get().showBubbles()) {
+                if (random.nextInt(15) == 0) {
+                    double bx = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
+                    double by = (double) pos.getY() + 0.7D;
+                    double bz = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
+                    level.addParticle(
+                        (ParticleOptions) ParticleRegister.HOT_WATER_BUBBLE.get(),
+                        bx, by, bz, 0.0D, 0.02D, 0.0D);
+                }
+            }
+        }
+    }
   }
 
   @Override
@@ -522,20 +617,55 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
   @Override
   public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-      if (state.getValue(LIQUID) == LiquidType.CUSTOM) {
+      LiquidType liquid = state.getValue(LIQUID);
+
+      if (liquid == LiquidType.CUSTOM) {
           BlockEntity be = level.getBlockEntity(pos);
           if (be instanceof BathtubBlockEntity bathtubBe) {
-              FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
-              if (!fluidStack.isEmpty()) {
-                  Fluid fluid = fluidStack.getFluid();
-                  if (fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA) {
-                      // Apply lava effects manually
-                      entity.setSecondsOnFire(15);
-                      entity.hurt(level.damageSources().lava(), 4.0F);
+              // Check for custom fluid definition and apply its effects
+              Optional<CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+              if (defOpt.isPresent()) {
+                  ResourceLocation fluidId = bathtubBe.getCustomFluidId();
+                  if (fluidId != null && entity instanceof ServerPlayer serverPlayer && !level.isClientSide) {
+                      CustomFluidAPI.applyFluidEffects(serverPlayer, fluidId);
+                  }
+              } else {
+                  // No custom fluid definition; handle special cases like lava
+                  FluidStack fluidStack = bathtubBe.getFluidTank().getFluid();
+                  if (!fluidStack.isEmpty()) {
+                      Fluid fluid = fluidStack.getFluid();
+                      if (fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA) {
+                          entity.setSecondsOnFire(15);
+                          entity.hurt(level.damageSources().lava(), 4.0F);
+                      }
                   }
               }
           }
       }
+
+      // === Hot bathtub interactions (server-side only) ===
+      if (!level.isClientSide && liquid != LiquidType.EMPTY && liquid != LiquidType.WATER) {
+          boolean isHot = (liquid != LiquidType.CUSTOM) ||
+                  mod.crabmod.showercore.utils.CoreUtils.isCustomFluidHotAt(level, pos);
+
+          if (isHot) {
+              // Dirtiness cleaning is handled by DirtinessHandlerMixin injecting into
+              // hotBath's isInHotBathFluid() - no direct call needed here to avoid double cleaning.
+
+              // Twilight Forest ice mobs take damage in hot bathtub (1 damage/sec)
+              if (entity.tickCount % 20 == 0
+                      && mod.crabmod.showercore.compat.ShowerCoreCompat.isTwilightForestIceMob(entity)) {
+                  entity.hurt(level.damageSources().magic(), 1.0F);
+              }
+
+              // Alex's Caves GummyBear melts in hot bathtub (0.5 damage/sec)
+              if (entity.tickCount % 20 == 0
+                      && mod.crabmod.showercore.compat.ShowerCoreCompat.isGummyBear(entity)) {
+                  entity.hurt(level.damageSources().magic(), 0.5F);
+              }
+          }
+      }
+
       super.entityInside(state, level, pos, entity);
   }
 }

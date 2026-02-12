@@ -97,7 +97,29 @@ public class CoreUtils {
         BlockState state = level.getBlockState(pos);
         if (state.getBlock() instanceof BathtubBlock) {
             BathtubBlock.LiquidType type = state.getValue(BathtubBlock.LIQUID);
-            return type != BathtubBlock.LiquidType.EMPTY && type != BathtubBlock.LiquidType.WATER;
+            if (type == BathtubBlock.LiquidType.EMPTY || type == BathtubBlock.LiquidType.WATER) {
+                return false;
+            }
+            if (type == BathtubBlock.LiquidType.CUSTOM) {
+                return isCustomFluidHotAt(level, pos);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the custom fluid in a bathtub at the given position is hot.
+     * Uses the CustomFluidDefinition's isHot() method to determine temperature.
+     */
+    public static boolean isCustomFluidHotAt(Level level, BlockPos pos) {
+        try {
+            net.minecraft.world.level.block.entity.BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof mod.crabmod.showercore.block.entity.BathtubBlockEntity bathtubBe) {
+                java.util.Optional<com.crabmod.hotbath.custom_fluid.CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+                return defOpt.map(com.crabmod.hotbath.custom_fluid.CustomFluidDefinition::isHot).orElse(false);
+            }
+        } catch (Exception ignored) {
         }
         return false;
     }
@@ -113,6 +135,27 @@ public class CoreUtils {
     public static boolean isPlayerInShowerCoreHotWater(Entity player) {
         return isEntityInAnyHotBathtub(player) ||
                ShowerHeadContainerEntity.isPlayerUnderActiveShower(player.getUUID());
+    }
+
+    /**
+     * Returns the bath temperature for a player in a ShowerCore hot bath.
+     * For custom fluids, returns the actual CustomFluidDefinition temperature.
+     * For built-in hot liquids and shower heads, returns the default 40.0f.
+     */
+    public static float getShowerCoreBathTemperature(Entity player) {
+        try {
+            Entity vehicle = player.getVehicle();
+            BlockPos pos = vehicle instanceof SeatEntity ? vehicle.blockPosition() : player.blockPosition();
+            net.minecraft.world.level.block.entity.BlockEntity be = player.level().getBlockEntity(pos);
+            if (be instanceof mod.crabmod.showercore.block.entity.BathtubBlockEntity bathtubBe) {
+                java.util.Optional<com.crabmod.hotbath.custom_fluid.CustomFluidDefinition> defOpt = bathtubBe.getCustomFluidDefinition();
+                if (defOpt.isPresent()) {
+                    return defOpt.get().temperature();
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return 40.0f;
     }
 
     public static boolean isCoreItem(ItemStack stack) {
