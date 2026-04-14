@@ -1,8 +1,10 @@
 package mod.crabmod.showercore.compat;
 
+import java.lang.reflect.Method;
 import mod.crabmod.showercore.Config;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 
 /**
  * Centralized compatibility handler for ShowerCore (Forge 1.20).
@@ -85,6 +87,62 @@ public class ShowerCoreCompat {
         } catch (Exception ignored) {
             gummyBearClassResolved = true;
             return false;
+        }
+    }
+
+    // ==================== SERENE SEASONS ====================
+
+    public enum WinterSubSeason { NONE, EARLY, MID, LATE }
+
+    private static Boolean sereneSeasonsLoaded = null;
+    private static boolean sereneSeasonsResolved = false;
+    private static Method seasonHelperGetState;
+    private static Method seasonStateGetSubSeason;
+    private static Method subSeasonName;
+
+    private static boolean isSereneSeasonsLoaded() {
+        if (sereneSeasonsLoaded == null) {
+            sereneSeasonsLoaded = net.minecraftforge.fml.ModList.get().isLoaded("sereneseasons");
+        }
+        return sereneSeasonsLoaded;
+    }
+
+    private static void resolveSereneSeasons() {
+        if (sereneSeasonsResolved) return;
+        sereneSeasonsResolved = true;
+        try {
+            Class<?> seasonHelper = Class.forName("sereneseasons.api.season.SeasonHelper");
+            seasonHelperGetState = seasonHelper.getMethod("getSeasonState", Level.class);
+            Class<?> iSeasonState = Class.forName("sereneseasons.api.season.ISeasonState");
+            seasonStateGetSubSeason = iSeasonState.getMethod("getSubSeason");
+            Class<?> subSeason = Class.forName("sereneseasons.api.season.Season$SubSeason");
+            subSeasonName = subSeason.getMethod("name");
+        } catch (Exception ignored) {
+            seasonHelperGetState = null;
+        }
+    }
+
+    /**
+     * Returns the current winter sub-season at the player's level, or NONE if not in winter
+     * or if Serene Seasons is not installed.
+     */
+    public static WinterSubSeason getWinterSubSeason(Level level) {
+        if (!Config.isModIntegrationsEnabled()) return WinterSubSeason.NONE;
+        if (!isSereneSeasonsLoaded()) return WinterSubSeason.NONE;
+        resolveSereneSeasons();
+        if (seasonHelperGetState == null) return WinterSubSeason.NONE;
+        try {
+            Object state = seasonHelperGetState.invoke(null, level);
+            if (state == null) return WinterSubSeason.NONE;
+            Object sub = seasonStateGetSubSeason.invoke(state);
+            if (sub == null) return WinterSubSeason.NONE;
+            String name = (String) subSeasonName.invoke(sub);
+            if ("EARLY_WINTER".equals(name)) return WinterSubSeason.EARLY;
+            if ("MID_WINTER".equals(name)) return WinterSubSeason.MID;
+            if ("LATE_WINTER".equals(name)) return WinterSubSeason.LATE;
+            return WinterSubSeason.NONE;
+        } catch (Exception ignored) {
+            return WinterSubSeason.NONE;
         }
     }
 }

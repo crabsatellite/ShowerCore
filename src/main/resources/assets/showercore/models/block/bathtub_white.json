@@ -1,6 +1,6 @@
 {
   "credit": "Made with Blockbench",
-  "render_type": "translucent",
+  "render_type": "cutout",
   "textures": {
     "0": "minecraft:block/white_concrete",
     "1": "minecraft:block/black_concrete",
