@@ -1,5 +1,6 @@
 package mod.crabmod.showercore.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.core.Holder;
 
 public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
@@ -69,6 +71,16 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
   public void toggleEffect() {
     effectActive = !effectActive;
     this.setChanged();
+  }
+
+  @Override
+  public void setChanged() {
+    super.setChanged();
+    // Core emits ambient light (see ShowerHeadBlock#getLightEmission). The light engine
+    // caches emission per block, so tell it to recheck whenever the contents may have changed.
+    if (this.level != null) {
+      this.level.getLightEngine().checkBlock(this.worldPosition);
+    }
   }
 
   // 获取当前效果状态的方法
@@ -276,7 +288,10 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             }
             // Hunger: 1 every 15s (300 ticks)
             if (gameTime - data.getLong("showercore.last.milk_hunger") >= 300) {
-                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, false));
+                if (entity instanceof net.minecraft.world.entity.player.Player player && player.getFoodData().needsFood()) {
+                    player.getFoodData().eat(1, 2.0F);
+                }
+                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, false, true));
                 data.putLong("showercore.last.milk_hunger", gameTime);
             }
             break;
@@ -314,7 +329,10 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
             }
             // Hunger: 1 every 4s (80 ticks)
             if (gameTime - data.getLong("showercore.last.honey_hunger") >= 80) {
-                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, false));
+                if (entity instanceof net.minecraft.world.entity.player.Player player && player.getFoodData().needsFood()) {
+                    player.getFoodData().eat(1, 2.0F);
+                }
+                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, false, true));
                 data.putLong("showercore.last.honey_hunger", gameTime);
             }
             break;
@@ -330,30 +348,44 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     }
   }
 
-  private static void addStackingEffect(LivingEntity entity, Holder<MobEffect> effect, int durationIncrement, int amplifier) {
+  static void addStackingEffect(LivingEntity entity, Holder<MobEffect> effect, int durationIncrement, int amplifier) {
     CompoundTag data = entity.getPersistentData();
     String key = "showercore.last_stack." + effect.value().getDescriptionId();
     long gameTime = entity.level().getGameTime();
-    
-    // Prevent applying same effect multiple times in short window (e.g. 100 ticks)
-    if (gameTime - data.getLong(key) < 100) return; 
+
+    if (gameTime - data.getLong(key) < 100) return;
     data.putLong(key, gameTime);
 
     MobEffectInstance current = entity.getEffect(effect);
-    int currentDuration = (current != null) ? current.getDuration() : 0;
-    int newDuration = Math.min(currentDuration + durationIncrement, 2400); // Cap at 2 mins (2400 ticks)
+    int currentAmp = (current != null) ? current.getAmplifier() : -1;
+    int currentDuration = (current != null && currentAmp == amplifier) ? current.getDuration() : 0;
+    int newDuration = Math.min(currentDuration + durationIncrement, 2400);
     if (newDuration < durationIncrement) newDuration = durationIncrement;
-    
-    entity.addEffect(new MobEffectInstance(effect, newDuration, amplifier, true, false));
+
+    entity.addEffect(new MobEffectInstance(effect, newDuration, amplifier, true, false, true));
   }
 
-  private static void cureNegativeEffects(LivingEntity entity) {
-    entity.removeEffect(MobEffects.POISON);
-    entity.removeEffect(MobEffects.WITHER);
-    entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-    entity.removeEffect(MobEffects.WEAKNESS);
-    entity.removeEffect(MobEffects.CONFUSION);
-    entity.removeEffect(MobEffects.BLINDNESS);
-    entity.removeEffect(MobEffects.HUNGER);
+  static void cureNegativeEffects(LivingEntity entity) {
+    removeHarmfulEffects(entity, false);
+  }
+
+  /** Cleanse variant that preserves MOVEMENT_SLOWDOWN (honey-bath). UNLUCK is always preserved. */
+  static void cureNegativeEffectsExceptSlow(LivingEntity entity) {
+    removeHarmfulEffects(entity, true);
+  }
+
+  private static void removeHarmfulEffects(LivingEntity entity, boolean keepSlow) {
+    MobEffect unluck = MobEffects.UNLUCK.value();
+    MobEffect slow = MobEffects.MOVEMENT_SLOWDOWN.value();
+    List<Holder<MobEffect>> toRemove = new ArrayList<>();
+    for (MobEffectInstance inst : entity.getActiveEffects()) {
+      Holder<MobEffect> holder = inst.getEffect();
+      MobEffect e = holder.value();
+      if (e.getCategory() != MobEffectCategory.HARMFUL) continue;
+      if (e == unluck) continue;
+      if (keepSlow && e == slow) continue;
+      toRemove.add(holder);
+    }
+    for (Holder<MobEffect> h : toRemove) entity.removeEffect(h);
   }
 }

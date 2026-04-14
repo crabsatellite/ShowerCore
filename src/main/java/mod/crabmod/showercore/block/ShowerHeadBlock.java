@@ -97,6 +97,20 @@ public class ShowerHeadBlock extends RotatableBlock implements EntityBlock, Simp
   }
 
   @Override
+  public boolean hasDynamicLightEmission(BlockState state) {
+    return true;
+  }
+
+  @Override
+  public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+    BlockEntity be = level.getBlockEntity(pos);
+    if (be instanceof ShowerHeadContainerEntity entity) {
+      return CoreUtils.getCoreLight(entity.getItem(0));
+    }
+    return 0;
+  }
+
+  @Override
   protected VoxelShape getBaseShape() {
     return Shapes.or(box(2.75, -16, 5.5, 13, 15, 16));
   }

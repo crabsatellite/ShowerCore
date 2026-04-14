@@ -129,6 +129,18 @@ dependencies {
     compileOnly "curse.maven:tough-as-nails-246391:5766204"
     // Legendary Survival Overhaul - Temperature and survival overhaul mod
     compileOnly "curse.maven:legendary-survival-overhaul-840254:7254309"
+
+    // Unit-test dependencies
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

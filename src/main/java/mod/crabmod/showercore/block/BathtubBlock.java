@@ -41,7 +41,10 @@ import net.minecraft.world.phys.AABB;
 import java.util.List;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
+import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidActionResult;
@@ -168,6 +171,45 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
       return new BathtubBlockEntity(pos, state);
+  }
+
+  @Nullable
+  @Override
+  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+      if (level.isClientSide) return null;
+      if (type != BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get()) return null;
+      return (lvl, pos, st, be) -> serverTick(lvl, pos, st, (BathtubBlockEntity) be);
+  }
+
+  // Hot bathtubs melt snow layers / snow blocks within 3 blocks. Active regardless of
+  // whether Serene Seasons is installed — SS just makes this visibly matter by keeping
+  // snow on the ground outside snow biomes.
+  private static void serverTick(Level level, BlockPos pos, BlockState state, BathtubBlockEntity be) {
+      if ((level.getGameTime() + pos.asLong()) % 80L != 0L) return;
+
+      LiquidType liquid = state.getValue(LIQUID);
+      if (liquid == LiquidType.EMPTY || liquid == LiquidType.WATER) return;
+
+      boolean isHot = (liquid != LiquidType.CUSTOM)
+              || mod.crabmod.showercore.utils.CoreUtils.isCustomFluidHotAt(level, pos);
+      if (!isHot) return;
+
+      final int radius = 3;
+      BlockPos.MutableBlockPos check = new BlockPos.MutableBlockPos();
+      for (int dx = -radius; dx <= radius; dx++) {
+          for (int dy = -radius; dy <= radius; dy++) {
+              for (int dz = -radius; dz <= radius; dz++) {
+                  if (dx == 0 && dy == 0 && dz == 0) continue;
+                  check.set(pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz);
+                  BlockState bs = level.getBlockState(check);
+                  if (bs.is(Blocks.SNOW) || bs.is(Blocks.SNOW_BLOCK)) {
+                      level.setBlock(check, Blocks.AIR.defaultBlockState(), 3);
+                  } else if (bs.is(Blocks.POWDER_SNOW)) {
+                      level.setBlock(check, Blocks.AIR.defaultBlockState(), 3);
+                  }
+              }
+          }
+      }
   }
 
   @Override
@@ -460,6 +502,18 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                        }
                    }
               }
+
+              // If the player clicked the bathtub with a bucket-like item but no fluid
+              // interaction succeeded (bathtub already full, incompatible fluid, empty
+              // bucket on empty bathtub, etc.), CONSUME the click via FAIL instead of
+              // passing through. Otherwise vanilla BucketItem.use() runs next and places
+              // fluid in the adjacent block — in creative mode this lets the player spawn
+              // unlimited fluid in neighboring grids by repeatedly right-clicking.
+              if (itemstack.getItem() instanceof BucketItem
+                      || itemstack.getItem() instanceof CustomFluidBucketItem
+                      || CustomFluidAPI.hasCustomFluid(itemstack)) {
+                  return ItemInteractionResult.FAIL;
+              }
           }
       }
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -601,24 +655,16 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
     if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
-      
-      if (player.isCreative()) {
-          Direction neighborDir = getNeighbourDirection(bedpart, state.getValue(FACING));
-          BlockPos neighborPos = pos.relative(neighborDir);
-          BlockState neighborState = level.getBlockState(neighborPos);
-          if (neighborState.is(this) && neighborState.getValue(PART) != bedpart) {
-              level.setBlock(neighborPos, Blocks.AIR.defaultBlockState(), 35);
-              level.levelEvent(player, 2001, neighborPos, Block.getId(neighborState));
-          }
-      } else {
-          if (bedpart == BedPart.FOOT) {
-            BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
-            BlockState blockstate = level.getBlockState(blockpos);
-            if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
-              level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
-              level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
-            }
-          }
+
+      // Destroy the other half silently regardless of which part was mined / which game mode.
+      // Without this, mining the HEAD triggers the FOOT's updateShape -> updateOrDestroy path
+      // which calls destroyBlock(drop=true, player=null), duplicating the drop — and bypassing
+      // the correct-tool check so the bathtub drops even with bare hands.
+      BlockPos neighborPos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
+      BlockState neighborState = level.getBlockState(neighborPos);
+      if (neighborState.is(this) && neighborState.getValue(PART) != bedpart) {
+        level.setBlock(neighborPos, Blocks.AIR.defaultBlockState(), 35);
+        level.levelEvent(player, 2001, neighborPos, Block.getId(neighborState));
       }
 
       if (bedpart == BedPart.HEAD) {
@@ -666,23 +712,12 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       level.addParticle((ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.STEAM_PARTICLE.get(), x, y, z, 0.0D, 0.02D, 0.0D);
     }
 
-    // Bubble particles for custom fluids with showBubbles enabled
-    if (liquid == LiquidType.CUSTOM) {
-        BlockEntity bubbleBe = level.getBlockEntity(pos);
-        if (bubbleBe instanceof BathtubBlockEntity bubbleBathtubBe) {
-            Optional<CustomFluidDefinition> bubbleDefOpt = bubbleBathtubBe.getCustomFluidDefinition();
-            if (bubbleDefOpt.isPresent() && bubbleDefOpt.get().showBubbles()) {
-                if (random.nextInt(15) == 0) {
-                    double bx = (double) pos.getX() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
-                    double by = (double) pos.getY() + 0.7D;
-                    double bz = (double) pos.getZ() + 0.5D + (random.nextDouble() - 0.5D) * 0.6D;
-                    level.addParticle(
-                        (ParticleOptions) com.crabmod.hotbath.registers.ParticleRegister.HOT_WATER_BUBBLE.get(),
-                        bx, by, bz, 0.0D, 0.02D, 0.0D);
-                }
-            }
-        }
-    }
+    // Bubble particles (HotBathBubbleParticle) are intentionally NOT spawned in bathtubs:
+    // that particle's tick() removes itself unless the blockpos contains water or an
+    // AbstractHotbathBlock. A BathtubBlock is neither, so every spawned bubble died on
+    // its first tick and appeared as a single-frame flicker. The showBubbles flag still
+    // takes effect for hotBath's own fluid blocks (CustomFluidBlock) where the particle
+    // survives correctly.
   }
 
   @Override
@@ -741,6 +776,16 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   }
               }
           }
+      }
+
+      // Apply the 6 vanilla bath effects to entities standing in the bathtub. Previously
+      // these only fired when a player was sitting on the SeatEntity, so simply standing
+      // in a bath gave no buff. Frequency-gated to once per second to match the seated
+      // path's cadence and avoid effect-icon flicker.
+      if (!level.isClientSide
+              && entity instanceof LivingEntity living
+              && entity.tickCount % 20 == 0) {
+          SeatEntity.applyBathEffects(living, liquid);
       }
 
       // === Hot bathtub interactions (server-side only) ===

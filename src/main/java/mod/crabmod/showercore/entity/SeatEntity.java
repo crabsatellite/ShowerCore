@@ -11,11 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import mod.crabmod.showercore.block.BathtubBlock;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.Holder;
 
 public class SeatEntity extends Entity {
     public SeatEntity(EntityType<?> type, Level level) {
@@ -64,20 +61,78 @@ public class SeatEntity extends Entity {
         }
     }
 
-    private void applyBathEffects(LivingEntity entity, BathtubBlock.LiquidType liquid) {
-        Holder<MobEffect> effect = null;
-        switch (liquid) {
-            case HOT_WATER -> effect = MobEffects.MOVEMENT_SPEED;
-            case HERBAL_BATH -> effect = MobEffects.REGENERATION;
-            case HONEY_BATH -> effect = MobEffects.ABSORPTION;
-            case MILK_BATH -> effect = MobEffects.SATURATION;
-            case PEONY_BATH -> effect = MobEffects.LUCK;
-            case ROSE_BATH -> effect = MobEffects.DAMAGE_BOOST;
-            default -> {}
+    public static void applyBathEffects(LivingEntity entity, BathtubBlock.LiquidType liquid) {
+        if (entity.level().isClientSide) return;
+
+        long gameTime = entity.level().getGameTime();
+        CompoundTag data = entity.getPersistentData();
+
+        // Reset timers if the liquid type changed or the player had a gap (>1.5s)
+        // in attendance — otherwise cleanse would fire the instant they re-enter.
+        String currentLiquid = data.getString("showercore.bath.liquid");
+        long lastSeen = data.getLong("showercore.bath.last_seen");
+        if (!currentLiquid.equals(liquid.name()) || gameTime - lastSeen > 30) {
+            data.putString("showercore.bath.liquid", liquid.name());
+            data.putLong("showercore.bath.start", gameTime);
         }
-        
-        if (effect != null) {
-            entity.addEffect(new MobEffectInstance(effect, 260, 0, false, false));
+        data.putLong("showercore.bath.last_seen", gameTime);
+
+        long sittingTime = gameTime - data.getLong("showercore.bath.start");
+
+        boolean shouldRefreshBuffs = gameTime - data.getLong("showercore.bath.buff_refresh") >= 200;
+        if (shouldRefreshBuffs) data.putLong("showercore.bath.buff_refresh", gameTime);
+
+        // Cleanse after 15s of continuous bathing, then re-cleanse every 15s.
+        boolean shouldCleanse = sittingTime >= 300
+                && gameTime - data.getLong("showercore.bath.cleanse") >= 300;
+        if (shouldCleanse) data.putLong("showercore.bath.cleanse", gameTime);
+
+        switch (liquid) {
+            case HOT_WATER -> {
+                if (shouldRefreshBuffs)
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.MOVEMENT_SPEED, 400, 1);
+            }
+            case HERBAL_BATH -> {
+                if (shouldRefreshBuffs) {
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.DAMAGE_RESISTANCE, 400, 1);
+                }
+                if (shouldCleanse) ShowerHeadContainerEntity.cureNegativeEffects(entity);
+            }
+            case HONEY_BATH -> {
+                if (shouldRefreshBuffs) {
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.ABSORPTION, 400, 3);
+                }
+                if (shouldCleanse) ShowerHeadContainerEntity.cureNegativeEffectsExceptSlow(entity);
+            }
+            case MILK_BATH -> {
+                if (shouldRefreshBuffs)
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
+                if (shouldCleanse) ShowerHeadContainerEntity.cureNegativeEffects(entity);
+            }
+            case PEONY_BATH -> {
+                if (shouldRefreshBuffs) {
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.LUCK, 400, 1);
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.DIG_SPEED, 400, 1);
+                }
+                if (shouldCleanse) {
+                    ShowerHeadContainerEntity.cureNegativeEffects(entity);
+                    entity.removeEffect(MobEffects.BAD_OMEN);
+                }
+            }
+            case ROSE_BATH -> {
+                if (shouldRefreshBuffs) {
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
+                    ShowerHeadContainerEntity.addStackingEffect(entity, MobEffects.DAMAGE_BOOST, 400, 1);
+                }
+                if (shouldCleanse) {
+                    ShowerHeadContainerEntity.cureNegativeEffects(entity);
+                    entity.removeEffect(MobEffects.BAD_OMEN);
+                }
+            }
+            default -> {}
         }
     }
 

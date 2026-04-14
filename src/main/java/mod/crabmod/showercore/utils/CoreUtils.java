@@ -158,6 +158,39 @@ public class CoreUtils {
     }
 
     /**
+     * Variant of {@link #isPlayerInShowerCoreHotWater} that excludes CUSTOM-fluid bathtubs.
+     * Used by the hotBath DirtinessHandler mixin so that hotBath's fast dirtiness decrement only
+     * fires for the 6 built-in bath cores and shower heads. CUSTOM-fluid bathtubs rely on
+     * ShowerCore's own (slower) dirtiness handling so their cleaning speed stays pack-tunable.
+     */
+    public static boolean isPlayerInShowerCoreHotWaterNonCustom(Entity player) {
+        return isEntityInBuiltInHotBathtub(player) ||
+               ShowerHeadContainerEntity.isPlayerUnderActiveShower(player.getUUID());
+    }
+
+    private static boolean isEntityInBuiltInHotBathtub(Entity entity) {
+        if (entity.getVehicle() instanceof SeatEntity) {
+            return checkBuiltInHotBathtubAt(entity.level(), entity.getVehicle().blockPosition());
+        }
+        BlockPos pos = entity.blockPosition();
+        if (checkBuiltInHotBathtubAt(entity.level(), pos)) {
+            return isEntityInLiquidBounds(entity, pos);
+        }
+        return false;
+    }
+
+    private static boolean checkBuiltInHotBathtubAt(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.getBlock() instanceof BathtubBlock) {
+            BathtubBlock.LiquidType type = state.getValue(BathtubBlock.LIQUID);
+            return type != BathtubBlock.LiquidType.EMPTY
+                && type != BathtubBlock.LiquidType.WATER
+                && type != BathtubBlock.LiquidType.CUSTOM;
+        }
+        return false;
+    }
+
+    /**
      * Returns the bath temperature for a player in a ShowerCore hot bath.
      * For custom fluids, returns the actual CustomFluidDefinition temperature.
      * For built-in hot liquids and shower heads, returns the default 40.0f.
@@ -192,6 +225,24 @@ public class CoreUtils {
                path.equals("rose_bath_core") ||
                path.equals("milk_bath_core") ||
                path.equals("honey_bath_core");
+    }
+
+    /**
+     * Light level a shower head should emit based on which core is installed.
+     * Hot water / peony / honey cores emit warm ambient light; others (and empty) emit none.
+     */
+    public static int getCoreLight(ItemStack stack) {
+        if (stack.isEmpty()) return 0;
+        ResourceLocation registryName = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (registryName == null || !registryName.getNamespace().equals(ShowerCore.MODID)) return 0;
+        switch (registryName.getPath()) {
+            case "hot_water_core":
+            case "peony_bath_core":
+            case "honey_bath_core":
+                return 12;
+            default:
+                return 0;
+        }
     }
 
     public static SimpleParticleType getParticleForCore(ItemStack stack) {

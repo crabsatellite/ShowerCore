@@ -45,8 +45,47 @@ public class BathtubBlockEntity extends BlockEntity {
     public void setCustomFluidId(@Nullable ResourceLocation customFluidId) {
         this.customFluidId = customFluidId;
         setChanged();
-        if (level != null && !level.isClientSide) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        if (level != null) {
+            // BathtubBlock#hasDynamicLightEmission returns true and getLightEmission depends
+            // on this BE's customFluidId. The light engine has no way to know the emission
+            // changed unless we explicitly ask it to recheck, so do so on both sides.
+            level.getLightEngine().checkBlock(getBlockPos());
+            if (!level.isClientSide) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        // Saved chunks load BE data AFTER the chunk's initial light pass, so the recheck
+        // we do in setCustomFluidId never fired during the load that produced the cached
+        // lightmap. Re-trigger here so a luminous custom fluid lights its bathtub on world
+        // re-entry without requiring a neighboring block update.
+        if (level != null && customFluidId != null) {
+            level.getLightEngine().checkBlock(getBlockPos());
+        }
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries) {
+        super.handleUpdateTag(tag, registries);
+        // Bulk chunk-data path: client-side recheck after the chunk's lightmap has been built.
+        if (level != null && level.isClientSide && customFluidId != null) {
+            level.getLightEngine().checkBlock(getBlockPos());
+        }
+    }
+
+    @Override
+    public void onDataPacket(net.minecraft.network.Connection net,
+                             ClientboundBlockEntityDataPacket pkt,
+                             net.minecraft.core.HolderLookup.Provider registries) {
+        super.onDataPacket(net, pkt, registries);
+        // Single-BE update path (live pour into an already-loaded chunk): handleUpdateTag
+        // does NOT fire here, so we need an explicit recheck for emissive custom fluids.
+        if (level != null && level.isClientSide && customFluidId != null) {
+            level.getLightEngine().checkBlock(getBlockPos());
         }
     }
 
