@@ -1,5 +1,7 @@
 package mod.crabmod.showercore;
 
+import mod.crabmod.showercore.testutil.TestSourceUtils;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -95,46 +99,53 @@ class ShowerHeadGeometryNarrowRegressionTest {
                     + "        14\n"
                     + "      ],";
 
+    private static Map<Path, String> variantContents;
+
+    @BeforeAll
+    static void loadVariants() throws IOException {
+        List<Path> variants = listRainShowerHeadVariants();
+        variantContents = new LinkedHashMap<>();
+        for (Path p : variants) {
+            variantContents.put(p, TestSourceUtils.normalize(Files.readString(p)));
+        }
+    }
+
     @Test
     @DisplayName("All rain_shower_head_*.json variants contain the narrowed element 4 (flange)")
-    void allVariantsHaveNarrowedElement4() throws IOException {
+    void allVariantsHaveNarrowedElement4() {
         assertAllVariantsContain(EXPECTED_ELEMENT_4,
                 "element 4 (flange y=-4..-3) narrowed from width 10 to width 6");
     }
 
     @Test
     @DisplayName("All rain_shower_head_*.json variants contain the narrowed element 11 (big stem)")
-    void allVariantsHaveNarrowedElement11() throws IOException {
+    void allVariantsHaveNarrowedElement11() {
         assertAllVariantsContain(EXPECTED_ELEMENT_11,
-                "element 11 (big stem y=-16..-8) narrowed from width 6 to 4, depth 1.5 to 1, front face z=14 → z=14.5");
+                "element 11 (big stem y=-16..-8) narrowed from width 6 to 4, depth 1.5 to 1, "
+                        + "front face z=14 → z=14.5");
     }
 
     @Test
     @DisplayName("All rain_shower_head_*.json variants contain the narrowed element 12 (small flange)")
-    void allVariantsHaveNarrowedElement12() throws IOException {
+    void allVariantsHaveNarrowedElement12() {
         assertAllVariantsContain(EXPECTED_ELEMENT_12,
                 "element 12 (small flange y=-3..-2) front face z=14 → z=14.5");
     }
 
     @Test
     @DisplayName("No variant still contains the OLD (pre-narrow) geometry for elements 4 / 11 / 12")
-    void noVariantHasOldGeometry() throws IOException {
-        List<Path> variants = listRainShowerHeadVariants();
-        assertTrue(variants.size() >= 33,
-                "Expected at least 33 rain_shower_head_*.json variants, found " + variants.size());
+    void noVariantHasOldGeometry() {
+        String old4 = TestSourceUtils.normalize(FORBIDDEN_ELEMENT_4_OLD);
+        String old11 = TestSourceUtils.normalize(FORBIDDEN_ELEMENT_11_OLD);
+        String old12 = TestSourceUtils.normalize(FORBIDDEN_ELEMENT_12_OLD);
 
         List<String> failures = new ArrayList<>();
-        for (Path f : variants) {
-            String content = normalize(Files.readString(f));
-            if (content.contains(normalize(FORBIDDEN_ELEMENT_4_OLD))) {
-                failures.add(f.getFileName() + ": still has OLD element 4 ([3,-4,12.5] → [13,...])");
-            }
-            if (content.contains(normalize(FORBIDDEN_ELEMENT_11_OLD))) {
-                failures.add(f.getFileName() + ": still has OLD element 11 ([5,-16,14])");
-            }
-            if (content.contains(normalize(FORBIDDEN_ELEMENT_12_OLD))) {
-                failures.add(f.getFileName() + ": still has OLD element 12 ([6.01,-3,14])");
-            }
+        for (Map.Entry<Path, String> e : variantContents.entrySet()) {
+            String name = e.getKey().getFileName().toString();
+            String content = e.getValue();
+            if (content.contains(old4)) failures.add(name + ": still has OLD element 4 ([3,-4,12.5] → [13,...])");
+            if (content.contains(old11)) failures.add(name + ": still has OLD element 11 ([5,-16,14])");
+            if (content.contains(old12)) failures.add(name + ": still has OLD element 12 ([6.01,-3,14])");
         }
         assertEquals(0, failures.size(),
                 "Bug W regression — some shower head variants still have pre-narrow geometry:\n"
@@ -143,22 +154,19 @@ class ShowerHeadGeometryNarrowRegressionTest {
 
     @Test
     @DisplayName("At least 33 rain_shower_head_*.json variants exist")
-    void expectedVariantCountPresent() throws IOException {
-        List<Path> variants = listRainShowerHeadVariants();
-        assertTrue(variants.size() >= 33,
-                "Expected at least 33 rain_shower_head_*.json variants, found only " + variants.size());
+    void expectedVariantCountPresent() {
+        assertTrue(variantContents.size() >= 33,
+                "Expected at least 33 rain_shower_head_*.json variants, found only " + variantContents.size() + ".");
     }
 
     // ---- Helpers ----------------------------------------------------------
 
-    private static void assertAllVariantsContain(String expectedFragment, String human) throws IOException {
-        String want = normalize(expectedFragment);
-        List<Path> variants = listRainShowerHeadVariants();
+    private static void assertAllVariantsContain(String expectedFragment, String human) {
+        String want = TestSourceUtils.normalize(expectedFragment);
         List<String> missing = new ArrayList<>();
-        for (Path f : variants) {
-            String content = normalize(Files.readString(f));
-            if (!content.contains(want)) {
-                missing.add(f.getFileName().toString());
+        for (Map.Entry<Path, String> e : variantContents.entrySet()) {
+            if (!e.getValue().contains(want)) {
+                missing.add(e.getKey().getFileName().toString());
             }
         }
         assertEquals(0, missing.size(),
@@ -189,9 +197,5 @@ class ShowerHeadGeometryNarrowRegressionTest {
             cwd = cwd.getParent();
         }
         return MODEL_DIR.toAbsolutePath();
-    }
-
-    private static String normalize(String s) {
-        return s.replace("\r\n", "\n");
     }
 }
