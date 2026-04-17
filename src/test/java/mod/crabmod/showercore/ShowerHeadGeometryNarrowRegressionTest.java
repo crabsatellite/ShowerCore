@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Regression test for Bug W (1.20 Forge port) — the "long" rain shower head's
@@ -103,10 +100,11 @@ class ShowerHeadGeometryNarrowRegressionTest {
 
     @BeforeAll
     static void loadVariants() throws IOException {
-        List<Path> variants = listRainShowerHeadVariants();
+        Path dir = TestSourceUtils.resolveAgainstCwdAncestors(MODEL_DIR, 4);
+        List<Path> variants = TestSourceUtils.listByGlob(dir, "rain_shower_head_*.json");
         variantContents = new LinkedHashMap<>();
         for (Path p : variants) {
-            variantContents.put(p, TestSourceUtils.normalize(Files.readString(p)));
+            variantContents.put(p, TestSourceUtils.normalize(TestSourceUtils.readSource(p)));
         }
     }
 
@@ -175,27 +173,4 @@ class ShowerHeadGeometryNarrowRegressionTest {
                         + "\n\nExpected:\n" + expectedFragment);
     }
 
-    private static List<Path> listRainShowerHeadVariants() throws IOException {
-        Path dir = resolveModelDir();
-        List<Path> out = new ArrayList<>();
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "rain_shower_head_*.json")) {
-            for (Path p : stream) out.add(p);
-        }
-        if (out.isEmpty()) {
-            fail("No rain_shower_head_*.json variants found under " + dir.toAbsolutePath());
-        }
-        return out;
-    }
-
-    private static Path resolveModelDir() {
-        if (Files.isDirectory(MODEL_DIR)) return MODEL_DIR;
-        Path cwd = Paths.get("").toAbsolutePath();
-        for (int i = 0; i < 4; i++) {
-            Path candidate = cwd.resolve(MODEL_DIR);
-            if (Files.isDirectory(candidate)) return candidate;
-            if (cwd.getParent() == null) break;
-            cwd = cwd.getParent();
-        }
-        return MODEL_DIR.toAbsolutePath();
-    }
 }

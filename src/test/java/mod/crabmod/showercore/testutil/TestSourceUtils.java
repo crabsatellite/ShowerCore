@@ -1,9 +1,12 @@
 package mod.crabmod.showercore.testutil;
 
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +27,29 @@ public final class TestSourceUtils {
 
     public static String normalize(String s) {
         return s.replace("\r\n", "\n");
+    }
+
+    public static Path resolveAgainstCwdAncestors(Path relative, int maxAncestors) {
+        if (Files.isDirectory(relative)) return relative;
+        Path cwd = Paths.get("").toAbsolutePath();
+        for (int i = 0; i < maxAncestors; i++) {
+            Path candidate = cwd.resolve(relative);
+            if (Files.isDirectory(candidate)) return candidate;
+            if (cwd.getParent() == null) break;
+            cwd = cwd.getParent();
+        }
+        return relative.toAbsolutePath();
+    }
+
+    public static List<Path> listByGlob(Path dir, String glob) throws IOException {
+        List<Path> out = new ArrayList<>();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, glob)) {
+            for (Path p : stream) out.add(p);
+        }
+        if (out.isEmpty()) {
+            fail("No files matching '" + glob + "' under " + dir.toAbsolutePath());
+        }
+        return out;
     }
 
     public static String extractMethodBody(String source, Pattern sig, String humanName) {

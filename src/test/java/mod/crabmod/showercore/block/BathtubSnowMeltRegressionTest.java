@@ -46,10 +46,6 @@ class BathtubSnowMeltRegressionTest {
     @Test
     @DisplayName("BathtubBlock.getTicker is overridden and returns a ticker for BATHTUB_BLOCK_ENTITY only")
     void getTickerIsOverridden() {
-        assertTrue(GET_TICKER_SIG.matcher(source).find(),
-                "BathtubBlock must override 'public <T extends BlockEntity> BlockEntityTicker<T> getTicker(...)'. "
-                        + "Without this override no serverTick ever fires and Bug U regresses.");
-
         assertTrue(Pattern.compile("level\\s*\\.\\s*isClientSide").matcher(getTickerBody).find(),
                 "getTicker must early-return for level.isClientSide.");
         assertTrue(Pattern.compile("BATHTUB_BLOCK_ENTITY").matcher(getTickerBody).find(),
@@ -59,6 +55,13 @@ class BathtubSnowMeltRegressionTest {
     @Test
     @DisplayName("serverTick runs every 80 ticks, staggered by pos.asLong()")
     void serverTickRunsEvery80TicksStaggered() {
+        Pattern fullSig = Pattern.compile(
+                "private\\s+static\\s+void\\s+serverTick\\s*\\(\\s*Level\\s+\\w+\\s*,"
+                        + "\\s*BlockPos\\s+\\w+\\s*,\\s*BlockState\\s+\\w+\\s*,"
+                        + "\\s*BathtubBlockEntity\\s+\\w+\\s*\\)");
+        assertTrue(fullSig.matcher(source).find(),
+                "private static void serverTick(Level, BlockPos, BlockState, BathtubBlockEntity) must exist.");
+
         assertTrue(Pattern.compile("%\\s*80L?\\s*!=\\s*0").matcher(serverTickBody).find(),
                 "serverTick must be gated by '... % 80 != 0'.");
         assertTrue(Pattern.compile("pos\\s*\\.\\s*asLong\\s*\\(\\s*\\)").matcher(serverTickBody).find(),

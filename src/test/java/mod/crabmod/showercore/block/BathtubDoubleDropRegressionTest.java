@@ -60,18 +60,21 @@ class BathtubDoubleDropRegressionTest {
     }
 
     @Test
-    @DisplayName("playerWillDestroy clears the neighbor half with setBlock(AIR, flag=35)")
+    @DisplayName("playerWillDestroy clears the neighbor half with setBlock(AIR, ...) and flag 35 is used for survival")
     void playerWillDestroyClearsNeighborWithFlag35() {
         Pattern call = Pattern.compile(
                 "level\\s*\\.\\s*setBlock\\s*\\(\\s*\\w+\\s*,"
-                        + "\\s*Blocks\\s*\\.\\s*AIR\\s*\\.\\s*defaultBlockState\\s*\\(\\s*\\)\\s*,"
-                        + "\\s*35\\s*\\)");
+                        + "\\s*Blocks\\s*\\.\\s*AIR\\s*\\.\\s*defaultBlockState\\s*\\(\\s*\\)");
         assertTrue(call.matcher(body).find(),
                 "playerWillDestroy must call 'level.setBlock(<neighborPos>, "
-                        + "Blocks.AIR.defaultBlockState(), 35)'. Flag 35 = UPDATE_SUPPRESS_DROPS(32) | "
-                        + "UPDATE_CLIENTS(2) | UPDATE_NEIGHBORS(1). If the flag is changed (e.g. to 3 "
-                        + "without the suppress-drops bit), the neighbor half will drop a second bathtub "
-                        + "— Bug V regression.");
+                        + "Blocks.AIR.defaultBlockState(), <flag>)' to clear the other half.");
+
+        assertTrue(Pattern.compile("\\b35\\b").matcher(body).find(),
+                "Flag 35 = UPDATE_SUPPRESS_DROPS(32) | UPDATE_CLIENTS(2) | UPDATE_NEIGHBORS(1) must appear "
+                        + "in playerWillDestroy — the survival-path flag that lets the updateShape cascade "
+                        + "run through destroyBlock to produce the single NBT-preserving drop. If this is "
+                        + "changed to 3 (without the suppress-drops bit), the neighbor half will drop a "
+                        + "second bathtub via the setBlock call itself — Bug V regression.");
     }
 
     @Test
@@ -123,5 +126,19 @@ class BathtubDoubleDropRegressionTest {
                 "playerWillDestroy must still call 'super.playerWillDestroy(...)' (4 args) so the vanilla "
                         + "drop pipeline runs for the MINED half. 1.20 signature is void, so this is a "
                         + "bare statement rather than a return.");
+    }
+
+    @Test
+    @DisplayName("Creative path uses flag 51 (= 35 | UPDATE_KNOWN_SHAPE) to suppress the cascade — Bug CD fix")
+    void playerWillDestroyUsesFlag51InCreative() {
+        Pattern creative = Pattern.compile(
+                "player\\s*\\.\\s*isCreative\\s*\\(\\s*\\)\\s*\\?\\s*51\\s*:\\s*35");
+        assertTrue(creative.matcher(body).find(),
+                "playerWillDestroy must branch the setBlock flag on player.isCreative(): "
+                        + "'player.isCreative() ? 51 : 35'. Flag 51 adds UPDATE_KNOWN_SHAPE(16) so the "
+                        + "updateNeighbourShapes cascade is suppressed. Without this, cascade's "
+                        + "destroyBlock(THIS, drop=true, null) runs with entity=null, bypasses the "
+                        + "creative-player check in getDrops, and dupes a bathtub on every creative break — "
+                        + "Bug CD regression.");
     }
 }

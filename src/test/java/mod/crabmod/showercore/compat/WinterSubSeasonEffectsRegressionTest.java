@@ -47,6 +47,10 @@ class WinterSubSeasonEffectsRegressionTest {
 
     private static final Pattern ENTITY_INSIDE_SIG = Pattern.compile("\\bvoid\\s+entityInside\\s*\\(");
 
+    /** Chars of entityInside body to scan backward from the getWinterSubSeason call for guard clauses.
+     *  400 ≈ 15 source lines, which comfortably covers the instanceof + tickCount % 100 gate. */
+    private static final int GUARD_WINDOW_CHARS = 400;
+
     private static String compatSource;
     private static String bathtubSource;
     private static String entityInsideBody;
@@ -123,7 +127,7 @@ class WinterSubSeasonEffectsRegressionTest {
         int callIdx = entityInsideBody.indexOf("ShowerCoreCompat.getWinterSubSeason");
         assertNotEquals(-1, callIdx, "getWinterSubSeason call not found.");
 
-        int windowStart = Math.max(0, callIdx - 400);
+        int windowStart = Math.max(0, callIdx - GUARD_WINDOW_CHARS);
         String guardWindow = entityInsideBody.substring(windowStart, callIdx);
 
         assertTrue(Pattern.compile("instanceof\\s+LivingEntity").matcher(guardWindow).find(),
