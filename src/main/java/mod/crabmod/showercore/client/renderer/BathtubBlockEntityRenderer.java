@@ -31,7 +31,7 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
     @Override
     public void render(BathtubBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         BlockState state = pBlockEntity.getBlockState();
-        if (state.getValue(BathtubBlock.LIQUID) != BathtubBlock.LiquidType.CUSTOM) {
+        if (state.getValue(BathtubBlock.LIQUID) == BathtubBlock.LiquidType.EMPTY) {
             return;
         }
 
@@ -41,7 +41,6 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
         Fluid fluid = fluidStack.getFluid();
         IClientFluidTypeExtensions fluidTypeExtensions = IClientFluidTypeExtensions.of(fluid);
         ResourceLocation stillTexture = fluidTypeExtensions.getStillTexture(fluidStack);
-        if (stillTexture == null) return;
 
         // Lava is emissive in vanilla; use full-bright so the drop/surface don't appear dim in
         // dark rooms. Also covers FLOWING_LAVA for parity with BathtubBlock.entityInside.

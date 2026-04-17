@@ -656,19 +656,21 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     if (!level.isClientSide) {
       BedPart bedpart = state.getValue(PART);
 
-      // Destroy the other half silently regardless of which part was mined / which game mode.
-      // Without this, mining the HEAD triggers the FOOT's updateShape -> updateOrDestroy path
-      // which calls destroyBlock(drop=true, player=null), duplicating the drop — and bypassing
-      // the correct-tool check so the bathtub drops even with bare hands.
       BlockPos neighborPos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
       BlockState neighborState = level.getBlockState(neighborPos);
       if (neighborState.is(this) && neighborState.getValue(PART) != bedpart) {
-        level.setBlock(neighborPos, Blocks.AIR.defaultBlockState(), 35);
+        // Survival (flag 35 = UPDATE_SUPPRESS_DROPS | UPDATE_CLIENTS | UPDATE_NEIGHBORS):
+        //   allows the updateNeighbourShapes cascade, which fires destroyBlock on THIS half
+        //   and produces the single NBT-preserving drop via BathtubBlockEntity.
+        // Creative (flag 51 = 35 | UPDATE_KNOWN_SHAPE 16):
+        //   suppresses the cascade; otherwise cascade's destroyBlock(THIS, drop=true, null)
+        //   bypasses the creative-player check in getDrops (entity is null) and dupes a bathtub.
+        int flags = player.isCreative() ? 51 : 35;
+        level.setBlock(neighborPos, Blocks.AIR.defaultBlockState(), flags);
         level.levelEvent(player, 2001, neighborPos, Block.getId(neighborState));
       }
 
       if (bedpart == BedPart.HEAD) {
-          // Remove Faucet Entity if HEAD is broken
           level.getEntitiesOfClass(FaucetInteractionEntity.class, new net.minecraft.world.phys.AABB(pos)).forEach(Entity::discard);
       }
     }

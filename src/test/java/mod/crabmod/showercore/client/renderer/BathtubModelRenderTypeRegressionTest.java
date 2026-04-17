@@ -1,5 +1,6 @@
 package mod.crabmod.showercore.client.renderer;
 
+import mod.crabmod.showercore.testutil.TestSourceUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,131 +18,98 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * Resource-level regression test for Bug #6: bathtub block model render type.
+ * Resource-level regression test for bathtub block model render types.
  *
- * <p><b>Bug under regression:</b> Bathtub block models that contain a fluid
- * plane previously declared {@code "render_type": "translucent"} at the top
- * level of the model JSON. This caused the OPAQUE walls of the bathtub to
- * render in the translucent pass, producing a depth-sort bug where adjacent
- * water sources made the bathtub walls appear see-through.
+ * <p>Bathtub models come in two families:
+ * <ul>
+ *   <li><b>Fluid-containing</b> ({@code bathtub_*_head.json}, {@code bathtub_*_foot.json},
+ *       {@code bathtub_*_head_running.json}) — these include a fluid surface quad using
+ *       {@code #fluid} / {@code water_still} with {@code tintindex: 0}. They MUST use
+ *       {@code "render_type": "translucent"} so the fluid has proper alpha blending;
+ *       {@code cutout} forces binary alpha and makes the fluid fully opaque.</li>
+ *   <li><b>Empty</b> ({@code bathtub_*_head_empty.json}, {@code bathtub_*_foot_empty.json})
+ *       — no fluid element. These use {@code "render_type": "cutout"} so the solid walls
+ *       render in the opaque pass without depth-sort artifacts.</li>
+ * </ul>
  *
- * <p><b>Fix:</b> All non-empty bathtub model JSON files in
- * {@code assets/showercore/models/block/bathtub_*.json} were changed from
- * {@code "render_type": "translucent"} to {@code "render_type": "cutout"}.
- * The {@code _empty} variants were already {@code cutout}. Child models that
- * inherit from a parent (e.g. {@code bathtub_acacia.json} → parent
- * {@code bathtub_white.json}) do not declare {@code render_type} and inherit
- * from the parent.
- *
- * <p><b>Why file-content-based:</b> Minecraft classes (e.g. {@code BlockModel},
- * {@code RenderType}) are not on the unit-test classpath, so we can't load or
- * render the models behaviorally. This test enforces the fix as a textual
- * invariant over the model JSON resources: no bathtub model may declare the
- * translucent render type.
+ * <p>All 33 color/material variants inherit from the white root models, so only the
+ * root models declare {@code render_type}; changing the root propagates everywhere.
  */
 class BathtubModelRenderTypeRegressionTest {
 
     private static final Path MODELS_DIR = Paths.get(
             "src", "main", "resources", "assets", "showercore", "models", "block");
 
-    /** Whitespace-tolerant match for {@code "render_type": "translucent"}. */
     private static final Pattern TRANSLUCENT_DECLARATION =
             Pattern.compile("\"render_type\"\\s*:\\s*\"translucent\"");
 
-    /** Whitespace-tolerant match for {@code "render_type": "cutout"}. */
     private static final Pattern CUTOUT_DECLARATION =
             Pattern.compile("\"render_type\"\\s*:\\s*\"cutout\"");
 
     @Test
-    @DisplayName("No bathtub_*.json model declares render_type \"translucent\"")
-    void noBathtubModelDeclaresTranslucentRenderType() throws IOException {
-        List<Path> bathtubModels = collectBathtubModels();
-
-        assertTrue(
-                bathtubModels.size() >= 100,
-                "Expected to find at least 100 bathtub_*.json model files under "
-                        + MODELS_DIR.toAbsolutePath() + " (sanity guard against the resource "
-                        + "directory being renamed or moved, which would make this test pass "
-                        + "trivially) — found " + bathtubModels.size() + ".");
-
-        List<String> offenders = new ArrayList<>();
-        for (Path model : bathtubModels) {
-            String content = Files.readString(model);
-            if (TRANSLUCENT_DECLARATION.matcher(content).find()) {
-                offenders.add(model.getFileName().toString());
+    @DisplayName("Fluid-containing root models (head/foot/head_running) declare translucent")
+    void fluidModelsAreTranslucent() throws IOException {
+        String[] fluidModels = {
+                "bathtub_white_head.json",
+                "bathtub_white_foot.json",
+                "bathtub_white_head_running.json"
+        };
+        for (String name : fluidModels) {
+            Path model = MODELS_DIR.resolve(name);
+            if (!Files.isRegularFile(model)) {
+                fail(name + " not found at " + model.toAbsolutePath());
             }
+            String content = Files.readString(model);
+            assertTrue(TRANSLUCENT_DECLARATION.matcher(content).find(),
+                    name + " must declare \"render_type\": \"translucent\" so the fluid "
+                            + "surface has proper alpha blending. Using cutout makes the fluid "
+                            + "fully opaque.");
+            assertFalse(CUTOUT_DECLARATION.matcher(content).find(),
+                    name + " must NOT declare cutout — the fluid quad needs translucent.");
         }
-
-        assertTrue(
-                offenders.isEmpty(),
-                "The following bathtub model JSON files declare \"render_type\": "
-                        + "\"translucent\", which re-introduces Bug #6 (opaque bathtub walls "
-                        + "rendered in the translucent pass appear see-through next to water): "
-                        + offenders + ". Change them to \"cutout\".");
     }
 
     @Test
-    @DisplayName("At least one bathtub model declares render_type \"cutout\" (positive sanity)")
-    void atLeastOneBathtubModelDeclaresCutoutRenderType() throws IOException {
-        List<Path> bathtubModels = collectBathtubModels();
-
-        boolean anyCutout = false;
-        for (Path model : bathtubModels) {
-            String content = Files.readString(model);
-            if (CUTOUT_DECLARATION.matcher(content).find()) {
-                anyCutout = true;
-                break;
+    @DisplayName("Empty/faucet root models (head_empty/foot_empty/head_faucet) declare cutout")
+    void emptyModelsAreCutout() throws IOException {
+        String[] emptyModels = {
+                "bathtub_white_head_empty.json",
+                "bathtub_white_foot_empty.json",
+                "bathtub_white_head_faucet.json"
+        };
+        for (String name : emptyModels) {
+            Path model = MODELS_DIR.resolve(name);
+            if (!Files.isRegularFile(model)) {
+                fail(name + " not found at " + model.toAbsolutePath());
             }
+            String content = Files.readString(model);
+            assertTrue(CUTOUT_DECLARATION.matcher(content).find(),
+                    name + " must declare \"render_type\": \"cutout\" — no fluid element, "
+                            + "so walls should stay in the opaque pass.");
+            assertFalse(TRANSLUCENT_DECLARATION.matcher(content).find(),
+                    name + " must NOT declare translucent — wall-only models have no fluid "
+                            + "surface and gain nothing from the translucent pass.");
         }
-
-        assertTrue(
-                anyCutout,
-                "Expected at least one bathtub_*.json to declare \"render_type\": \"cutout\" — "
-                        + "none found. The Bug #6 fix requires bathtub models with fluid planes "
-                        + "to use the cutout render type so opaque walls stay in the solid pass.");
     }
 
     @Test
-    @DisplayName("bathtub_white_head.json (canonical known-bad sample) declares render_type \"cutout\"")
-    void bathtubWhiteHeadDeclaresCutoutRenderType() throws IOException {
-        Path canonical = MODELS_DIR.resolve("bathtub_white_head.json");
-        if (!Files.isRegularFile(canonical)) {
-            fail("Canonical sample bathtub_white_head.json not found at "
-                    + canonical.toAbsolutePath() + " (cwd=" + Paths.get("").toAbsolutePath()
-                    + "). This file was the known-bad sample for Bug #6 and must exist so the "
-                    + "regression can be locked down.");
-        }
-
-        String content = Files.readString(canonical);
-
-        assertFalse(
-                TRANSLUCENT_DECLARATION.matcher(content).find(),
-                "bathtub_white_head.json must NOT declare \"render_type\": \"translucent\" — "
-                        + "this is the canonical known-bad sample for Bug #6.");
-        assertTrue(
-                CUTOUT_DECLARATION.matcher(content).find(),
-                "bathtub_white_head.json must declare \"render_type\": \"cutout\" — this is "
-                        + "the canonical known-bad sample for Bug #6 and its render type is "
-                        + "the explicit fix being regression-tested.");
+    @DisplayName("At least 100 bathtub_*.json models exist (sanity guard)")
+    void bathtubModelCountSanity() throws IOException {
+        List<Path> models = collectBathtubModels();
+        assertTrue(models.size() >= 100,
+                "Expected at least 100 bathtub_*.json model files under "
+                        + MODELS_DIR.toAbsolutePath() + " — found " + models.size()
+                        + ". If the count dropped, a variant was deleted.");
     }
 
-    // ---- Helpers ----------------------------------------------------------
-
-    /**
-     * Walks {@link #MODELS_DIR} and returns every regular file whose file name
-     * matches {@code bathtub_*.json}. Fails the test if the directory does not
-     * exist.
-     */
     private static List<Path> collectBathtubModels() throws IOException {
         if (!Files.isDirectory(MODELS_DIR)) {
             fail("Bathtub models directory not found at " + MODELS_DIR.toAbsolutePath()
                     + " (cwd=" + Paths.get("").toAbsolutePath() + ")");
         }
-
         List<Path> results = new ArrayList<>();
         try (Stream<Path> stream = Files.walk(MODELS_DIR)) {
-            stream
-                    .filter(Files::isRegularFile)
+            stream.filter(Files::isRegularFile)
                     .filter(p -> {
                         String name = p.getFileName().toString();
                         return name.startsWith("bathtub_") && name.endsWith(".json");
