@@ -535,7 +535,15 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
            }
        }
 
-       // Update the custom fluid ID on the BlockEntity
+       boolean running = state.getValue(RUNNING);
+       if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
+           running = false;
+       }
+       // setBlock must run BEFORE setCustomFluidId so the light engine's recheck
+       // (triggered inside setCustomFluidId) sees the updated LIQUID=CUSTOM state
+       // and computes non-zero luminance for emissive custom fluids.
+       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
+
        BlockEntity be = level.getBlockEntity(pos);
        if (be instanceof BathtubBlockEntity bathtubBe) {
            if (newLiquid == LiquidType.CUSTOM) {
@@ -548,12 +556,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                bathtubBe.setCustomFluidId(null);
            }
        }
-
-       boolean running = state.getValue(RUNNING);
-       if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
-           running = false;
-       }
-       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
    }
 
 
