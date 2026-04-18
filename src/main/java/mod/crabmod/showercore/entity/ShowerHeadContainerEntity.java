@@ -286,12 +286,14 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
                 addStackingEffect(entity, MobEffects.REGENERATION, 400, 1);
                 cureNegativeEffects(entity);
             }
-            // Hunger: 1 every 15s (300 ticks)
+            // Saturation BUFF + hunger top-up: every 15s (300 ticks).
+            // Visible 100-tick (5s) Saturation so the HUD icon appears once per cycle,
+            // and the one-shot eat() call still refills hunger when not full.
             if (gameTime - data.getLong("showercore.last.milk_hunger") >= 300) {
                 if (entity instanceof net.minecraft.world.entity.player.Player player && player.getFoodData().needsFood()) {
                     player.getFoodData().eat(1, 2.0F);
                 }
-                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, false, true));
+                entity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 100, 0, true, true, true));
                 data.putLong("showercore.last.milk_hunger", gameTime);
             }
             break;

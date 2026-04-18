@@ -11,8 +11,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
 
 public class SeatEntity extends Entity {
     public SeatEntity(EntityType<?> type, Level level) {
@@ -53,7 +58,7 @@ public class SeatEntity extends Entity {
                      BathtubBlock.LiquidType liquid = state.getValue(BathtubBlock.LIQUID);
                      for (Entity passenger : this.getPassengers()) {
                          if (passenger instanceof LivingEntity living) {
-                             applyBathEffects(living, liquid);
+                             applyBathEffects(living, liquid, this.level(), pos);
                          }
                      }
                  }
@@ -61,7 +66,7 @@ public class SeatEntity extends Entity {
         }
     }
 
-    public static void applyBathEffects(LivingEntity entity, BathtubBlock.LiquidType liquid) {
+    public static void applyBathEffects(LivingEntity entity, BathtubBlock.LiquidType liquid, Level level, BlockPos pos) {
         if (entity.level().isClientSide) return;
 
         long gameTime = entity.level().getGameTime();
@@ -130,6 +135,20 @@ public class SeatEntity extends Entity {
                 if (shouldCleanse) {
                     ShowerHeadContainerEntity.cureNegativeEffects(entity);
                     entity.removeEffect(MobEffects.BAD_OMEN);
+                }
+            }
+            case CUSTOM -> {
+                // Honey/other hotBath custom fluids land here (not in the named cases above).
+                // Dispatch to hotBath's CustomFluidAPI so sitting applies the same effects as
+                // standing inside the tub (see BathtubBlock#entityInside CUSTOM branch).
+                if (shouldRefreshBuffs && entity instanceof ServerPlayer serverPlayer) {
+                    BlockEntity be = level.getBlockEntity(pos);
+                    if (be instanceof BathtubBlockEntity bathtubBe) {
+                        ResourceLocation fluidId = bathtubBe.getCustomFluidId();
+                        if (fluidId != null) {
+                            CustomFluidAPI.applyFluidEffects(serverPlayer, fluidId);
+                        }
+                    }
                 }
             }
             default -> {}

@@ -490,7 +490,7 @@ public class BlocksRegister {
           "bathtub_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
   public static final DeferredHolder<Block, Block> HOT_WATER_CORE =
-      registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_WOOD));
+      registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));
 
   public static final DeferredHolder<Block, Block> HERBAL_BATH_CORE =
       registerBlock("herbal_bath_core", () -> new HerbalBathCoreBlock(COMMON_PROPERTIES_CORE));

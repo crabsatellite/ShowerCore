@@ -322,6 +322,42 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
 
+      // Empty bucket on a filled bathtub: pick up the fluid instead of falling through
+      // to FAIL (which used to leave the player unable to drain custom fluids).
+      if (itemstack.getItem() == Items.BUCKET) {
+          BlockEntity be = level.getBlockEntity(pos);
+          if (be instanceof BathtubBlockEntity bathtubBe && bathtubBe.getFluidTank().getFluidAmount() >= 1000) {
+              if (!level.isClientSide) {
+                  ResourceLocation customId = bathtubBe.getCustomFluidId();
+                  ItemStack bucketOut;
+                  if (customId != null) {
+                      bucketOut = CustomFluidAPI.createBucket(customId);
+                  } else {
+                      FluidStack drained = bathtubBe.getFluidTank().getFluid();
+                      bucketOut = new ItemStack(drained.getFluid().getBucket());
+                      if (bucketOut.isEmpty()) {
+                          bucketOut = new ItemStack(Items.WATER_BUCKET);
+                      }
+                  }
+                  bathtubBe.getFluidTank().setFluid(FluidStack.EMPTY);
+                  bathtubBe.setCustomFluidId(null);
+                  syncFluidToOtherPart(level, pos, state, FluidStack.EMPTY);
+                  updateLiquidState(level, pos, state, FluidStack.EMPTY);
+                  if (!player.isCreative()) {
+                      itemstack.shrink(1);
+                      if (itemstack.isEmpty()) {
+                          player.setItemInHand(hand, bucketOut);
+                      } else if (!player.getInventory().add(bucketOut)) {
+                          player.drop(bucketOut, false);
+                      }
+                  }
+                  level.playSound(null, pos, SoundEvents.BUCKET_FILL,
+                          net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+              }
+              return ItemInteractionResult.sidedSuccess(level.isClientSide);
+          }
+      }
+
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
           if (!level.isClientSide) {
               Entity occupantToAsk = null;
@@ -616,7 +652,15 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
            }
        }
 
-       // Store the custom fluid ID in the block entity
+       boolean running = state.getValue(RUNNING);
+       if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
+           running = false;
+       }
+       // setBlock must run BEFORE setCustomFluidId so the light engine's recheck
+       // (triggered inside setCustomFluidId) sees the updated LIQUID=CUSTOM state
+       // and computes non-zero luminance for emissive custom fluids.
+       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
+
        BlockEntity be = level.getBlockEntity(pos);
        if (be instanceof BathtubBlockEntity bathtubBe) {
            if (newLiquid == LiquidType.CUSTOM) {
@@ -625,12 +669,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                bathtubBe.setCustomFluidId(null);
            }
        }
-
-       boolean running = state.getValue(RUNNING);
-       if (newLiquid == LiquidType.EMPTY && fluid.isEmpty()) {
-           running = false;
-       }
-       level.setBlock(pos, state.setValue(LIQUID, newLiquid).setValue(RUNNING, running), 3);
    }
 
 
@@ -787,7 +825,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       if (!level.isClientSide
               && entity instanceof LivingEntity living
               && entity.tickCount % 20 == 0) {
-          SeatEntity.applyBathEffects(living, liquid);
+          SeatEntity.applyBathEffects(living, liquid, level, pos);
       }
 
       // === Hot bathtub interactions (server-side only) ===

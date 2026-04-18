@@ -11,11 +11,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(DirtinessHandler.class)
 public class DirtinessHandlerMixin {
 
-    // Only trigger hotBath's fast dirtiness drop for built-in cores / shower heads. CUSTOM-fluid
-    // bathtubs use ShowerCore's own (slower) dirtiness path so pack authors can tune cleaning speed.
     @Inject(method = "isInHotBathFluid", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isInHotBathFluid(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
-        if (CoreUtils.isPlayerInShowerCoreHotWaterNonCustom(player)) {
+        if (CoreUtils.isPlayerInShowerCoreHotWaterNonCustom(player)
+                || CoreUtils.isEntityInHotCustomBathtub(player)) {
             cir.setReturnValue(true);
         }
     }

@@ -182,7 +182,7 @@ public class HoneyBathCoreBlockEntity extends BlockEntity {
     if (!list.isEmpty()) {
       for (Player player : list) {
         if (pPos.closerThan(player.blockPosition(), (double) j)) {
-          player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 260, 1, false, false));
+          player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 260, 3, false, false));
           // Dirtiness cleaning from bath core (area effect, slower than direct bathing)
           // Called every 40 ticks. 0.08 = 8% per call -> 13 calls to fully clean -> 520 ticks (~26s)
           // Compare: direct bathing = 20s standing still, 15s moving
