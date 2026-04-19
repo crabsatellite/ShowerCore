@@ -452,16 +452,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   return InteractionResult.sidedSuccess(level.isClientSide);
               }
 
-              // If the player clicked the bathtub with a bucket-like item but no fluid
-              // interaction succeeded (bathtub already full, incompatible fluid, empty
-              // bucket on empty bathtub, etc.), CONSUME the click via FAIL instead of
-              // passing through. Otherwise vanilla BucketItem.use() runs next and places
-              // fluid in the adjacent block — in creative mode this lets the player spawn
-              // unlimited fluid in neighboring grids by repeatedly right-clicking.
+              // Bucket-like click that didn't produce a fluid transfer (bathtub full,
+              // incompatible fluid, empty bucket on empty bathtub, etc.). Return CONSUME
+              // so consumesAction() short-circuits MultiPlayerGameMode.performUseItemOn.
+              // FAIL is NOT a hard stop here: FAIL.consumesAction()==false, so the chain
+              // falls through to itemstack.useOn (PASS by default for BucketItem), then
+              // Minecraft.startUseItem continues to gameMode.useItem → BucketItem.use,
+              // which places fluid in the block adjacent to the bathtub (creative dupe).
               if (itemstack.getItem() instanceof BucketItem
                       || itemstack.getItem() instanceof CustomFluidBucketItem
                       || CustomFluidAPI.hasCustomFluid(itemstack)) {
-                  return InteractionResult.FAIL;
+                  return InteractionResult.CONSUME;
               }
           }
       }
