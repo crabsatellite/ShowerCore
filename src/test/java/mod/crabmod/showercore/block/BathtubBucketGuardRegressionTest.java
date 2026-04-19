@@ -1,10 +1,11 @@
 package mod.crabmod.showercore.block;
 
+import mod.crabmod.showercore.testutil.TestSourceUtils;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Matcher;
@@ -13,15 +14,14 @@ import java.util.regex.Pattern;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Source-level regression test for Bug #7 in {@code BathtubBlock#useItemOn}.
  *
- * <p><b>Bug under regression:</b> Previously, when the player right-clicked a
- * bathtub with a bucket-like item and the fluid interaction could not complete
- * (e.g. the bathtub was already full, an empty bucket on an empty bathtub,
- * incompatible fluid type), {@code useItemOn} fell through and returned
+ * <p><b>Bug under regression:</b> When the player right-clicked a bathtub with
+ * a bucket-like item and the fluid interaction could not complete (e.g. the
+ * bathtub was already full, an empty bucket on an empty bathtub, incompatible
+ * fluid type), {@code useItemOn} fell through and returned
  * {@code ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION}. That return
  * value lets vanilla {@code BucketItem.use()} fire next, which places the
  * held fluid in the adjacent (targeted) block. In creative mode the bucket
@@ -33,36 +33,60 @@ import static org.junit.jupiter.api.Assertions.fail;
  * whether the held item is a bucket-like type — {@code BucketItem},
  * {@code CustomFluidBucketItem}, or an item carrying a custom fluid via
  * {@code CustomFluidAPI.hasCustomFluid(...)} — and returns
- * {@code ItemInteractionResult.FAIL} to CONSUME the click instead of passing
- * it through to the vanilla default bucket use path. Non-bucket items still
- * fall through to {@code PASS_TO_DEFAULT_BLOCK_INTERACTION} at the end.
+ * {@code ItemInteractionResult.CONSUME} to short-circuit the interaction chain
+ * at MultiPlayerGameMode.performUseItemOn's {@code consumesAction()} check.
+ *
+ * <p><b>Why not FAIL:</b> {@code ItemInteractionResult.FAIL} has
+ * {@code consumesAction() == false}, so {@code MultiPlayerGameMode#performUseItemOn}
+ * falls through to {@code itemstack.useOn(ctx)} which returns
+ * {@code InteractionResult.PASS} for BucketItem (BucketItem overrides
+ * {@code use(...)} but NOT {@code useOn(...)}). That PASS then bypasses the
+ * {@code if (result == FAIL) return;} guard in {@code Minecraft#startUseItem},
+ * and the chain proceeds to {@code gameMode.useItem} → {@code BucketItem.use} →
+ * adjacent-block fluid placement — the exact dupe Bug #7 describes. Only
+ * {@code CONSUME}/{@code SUCCESS}/{@code sidedSuccess} (all of which have
+ * {@code consumesAction()==true}) actually stop the chain.
  *
  * <p><b>Why file-content-based:</b> Minecraft classes (e.g. {@code BucketItem},
  * {@code ItemInteractionResult}, {@code Player}, {@code BlockState}) are not on
  * the unit-test classpath, so we can't exercise {@code useItemOn} behaviorally.
  * This test enforces the fix as a textual invariant on the {@code useItemOn}
  * method body: the bucket-type guard must exist, cover all three bucket forms,
- * sit inside the {@code BathtubBlockEntity} branch, and appear BEFORE the
- * single remaining {@code PASS_TO_DEFAULT_BLOCK_INTERACTION} fall-through.
+ * sit inside the {@code BathtubBlockEntity} branch, return a consumesAction
+ * result (not FAIL), and appear BEFORE the single remaining
+ * {@code PASS_TO_DEFAULT_BLOCK_INTERACTION} fall-through.
  */
 class BathtubBucketGuardRegressionTest {
 
-    private static final Path SOURCE = Paths.get(
+    private static final Path BATHTUB_SOURCE = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore", "block", "BathtubBlock.java");
 
-    @Test
-    @DisplayName("useItemOn body contains ItemInteractionResult.FAIL BEFORE the final PASS_TO_DEFAULT_BLOCK_INTERACTION")
-    void useItemOnContainsBucketGuardBeforeFinalPass() throws IOException {
-        String body = extractUseItemOnBody(readSource());
+    // Match the useItemOn signature tolerantly: return type may be
+    // 'ItemInteractionResult' or fully-qualified, modifiers may vary.
+    private static final Pattern USE_ITEM_ON_SIG = Pattern.compile(
+            "\\bItemInteractionResult\\s+useItemOn\\s*\\(");
 
-        int failIdx = body.indexOf("ItemInteractionResult.FAIL");
-        assertNotEquals(-1, failIdx,
-                "useItemOn must contain 'ItemInteractionResult.FAIL' as the guard return for "
-                        + "bucket-like items whose fluid interaction failed. Without this guard, "
-                        + "the method falls through to PASS_TO_DEFAULT_BLOCK_INTERACTION and "
-                        + "vanilla BucketItem.use() places fluid in the adjacent block — in "
-                        + "creative mode this enables infinite fluid spawning by repeatedly "
-                        + "right-clicking a full bathtub (Bug #7).");
+    private static String body;
+
+    @BeforeAll
+    static void loadSource() throws IOException {
+        String source = TestSourceUtils.readSource(BATHTUB_SOURCE);
+        body = TestSourceUtils.extractMethodBody(source, USE_ITEM_ON_SIG, "BathtubBlock.useItemOn");
+    }
+
+    @Test
+    @DisplayName("useItemOn body contains ItemInteractionResult.CONSUME BEFORE the final PASS_TO_DEFAULT_BLOCK_INTERACTION")
+    void useItemOnContainsBucketGuardBeforeFinalPass() {
+        int consumeIdx = body.indexOf("ItemInteractionResult.CONSUME");
+        assertNotEquals(-1, consumeIdx,
+                "useItemOn must contain 'ItemInteractionResult.CONSUME' as the guard return for "
+                        + "bucket-like items whose fluid interaction failed. CONSUME has "
+                        + "consumesAction()==true so MultiPlayerGameMode.performUseItemOn "
+                        + "short-circuits before falling through to itemstack.useOn. Returning "
+                        + "FAIL here is insufficient: FAIL.consumesAction()==false, so the chain "
+                        + "falls through to BucketItem's default useOn (PASS), which bypasses "
+                        + "Minecraft.startUseItem's FAIL guard and reaches gameMode.useItem → "
+                        + "BucketItem.use → fluid placement in the adjacent block (Bug #7 dupe).");
 
         int lastPassIdx = body.lastIndexOf("return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION");
         assertNotEquals(-1, lastPassIdx,
@@ -70,20 +94,18 @@ class BathtubBucketGuardRegressionTest {
                         + "fall-through for non-bucket items that the bathtub does not handle.");
 
         assertTrue(
-                failIdx < lastPassIdx,
-                "The 'ItemInteractionResult.FAIL' guard must appear BEFORE the final "
+                consumeIdx < lastPassIdx,
+                "The 'ItemInteractionResult.CONSUME' guard must appear BEFORE the final "
                         + "'return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION' so "
                         + "bucket-like items are caught and the click is consumed. Found "
-                        + "FAIL at body-index " + failIdx + " and final PASS at body-index "
+                        + "CONSUME at body-index " + consumeIdx + " and final PASS at body-index "
                         + lastPassIdx + ". If the guard was moved AFTER the fall-through, the "
                         + "Bug #7 exploit is reopened.");
     }
 
     @Test
     @DisplayName("Bucket guard checks all three bucket-like types (BucketItem, CustomFluidBucketItem, hasCustomFluid)")
-    void bucketGuardChecksAllThreeBucketTypes() throws IOException {
-        String body = extractUseItemOnBody(readSource());
-
+    void bucketGuardChecksAllThreeBucketTypes() {
         Pattern bucketItem = Pattern.compile(
                 "instanceof\\s+BucketItem\\b");
         Pattern customFluidBucket = Pattern.compile(
@@ -116,9 +138,7 @@ class BathtubBucketGuardRegressionTest {
 
     @Test
     @DisplayName("useItemOn body has exactly ONE trailing PASS_TO_DEFAULT_BLOCK_INTERACTION return")
-    void useItemOnHasExactlyOneFinalPassReturn() throws IOException {
-        String body = extractUseItemOnBody(readSource());
-
+    void useItemOnHasExactlyOneFinalPassReturn() {
         // Count all PASS_TO_DEFAULT_BLOCK_INTERACTION returns anywhere in the body.
         // At the time this test was written there are exactly two:
         //   1) Rubber Duck early-out (held item is RUBBER_DUCK) — this PASSes through
@@ -166,88 +186,49 @@ class BathtubBucketGuardRegressionTest {
 
     @Test
     @DisplayName("Bucket guard sits inside or after the 'if (be instanceof BathtubBlockEntity bathtubBe)' block")
-    void bucketGuardIsInsideBathtubBlockEntityCheck() throws IOException {
-        String body = extractUseItemOnBody(readSource());
-
+    void bucketGuardIsInsideBathtubBlockEntityCheck() {
         int bathtubBeIdx = body.indexOf("BathtubBlockEntity bathtubBe");
         assertNotEquals(-1, bathtubBeIdx,
                 "Could not locate the 'BathtubBlockEntity bathtubBe' pattern binding in "
                         + "useItemOn. The fluid-interaction branch that contains the guard must "
                         + "begin with 'if (be instanceof BathtubBlockEntity bathtubBe)'.");
 
-        int failIdx = body.indexOf("ItemInteractionResult.FAIL");
-        assertNotEquals(-1, failIdx,
-                "Could not locate 'ItemInteractionResult.FAIL' in useItemOn body (see "
+        int consumeIdx = body.indexOf("ItemInteractionResult.CONSUME");
+        assertNotEquals(-1, consumeIdx,
+                "Could not locate 'ItemInteractionResult.CONSUME' in useItemOn body (see "
                         + "useItemOnContainsBucketGuardBeforeFinalPass for details).");
 
         assertTrue(
-                bathtubBeIdx < failIdx,
-                "The bucket guard ('ItemInteractionResult.FAIL') must appear AFTER the "
+                bathtubBeIdx < consumeIdx,
+                "The bucket guard ('ItemInteractionResult.CONSUME') must appear AFTER the "
                         + "'BathtubBlockEntity bathtubBe' pattern binding so it only runs when the "
                         + "target is actually a bathtub block entity (and thus after all fluid "
                         + "interaction attempts). Found BathtubBlockEntity-binding at body-index "
-                        + bathtubBeIdx + " and FAIL at body-index " + failIdx + ". Hoisting the "
-                        + "guard above the BathtubBlockEntity branch would FAIL on rubber-duck / "
-                        + "empty-hand / sit-on-bathtub interactions, breaking other features.");
+                        + bathtubBeIdx + " and CONSUME at body-index " + consumeIdx + ". Hoisting "
+                        + "the guard above the BathtubBlockEntity branch would affect rubber-duck "
+                        + "/ empty-hand / sit-on-bathtub interactions.");
     }
 
-    // ---- Helpers ----------------------------------------------------------
-
-    private static String readSource() throws IOException {
-        if (!Files.isRegularFile(SOURCE)) {
-            fail("BathtubBlock.java not found at " + SOURCE.toAbsolutePath()
-                    + " (cwd=" + Paths.get("").toAbsolutePath() + ")");
-        }
-        return Files.readString(SOURCE);
-    }
-
-    /**
-     * Returns the body (between the opening and matching closing brace) of
-     * {@code useItemOn}. Fails the test if the method can't be located or its
-     * braces are unbalanced. The opening brace is located by scanning forward
-     * from the method signature, so method-parameter parentheses / generics do
-     * not interfere.
-     */
-    private static String extractUseItemOnBody(String source) {
-        // Match the useItemOn signature tolerantly: return type may be
-        // 'ItemInteractionResult' or fully-qualified, modifiers may vary.
-        Pattern sigPattern = Pattern.compile(
-                "\\bItemInteractionResult\\s+useItemOn\\s*\\(");
-        Matcher sigMatcher = sigPattern.matcher(source);
-        if (!sigMatcher.find()) {
-            fail("Could not locate 'ItemInteractionResult useItemOn(' signature in BathtubBlock.java");
-        }
-        int sigIdx = sigMatcher.start();
-
-        // Skip past the parameter list to find the opening brace of the body.
-        int parenOpen = source.indexOf('(', sigIdx);
-        assertNotEquals(-1, parenOpen, "useItemOn signature without opening paren");
-        int pDepth = 1;
-        int j = parenOpen + 1;
-        while (j < source.length() && pDepth > 0) {
-            char c = source.charAt(j);
-            if (c == '(') pDepth++;
-            else if (c == ')') pDepth--;
-            j++;
-        }
-        if (pDepth != 0) {
-            fail("Unbalanced parentheses in useItemOn parameter list");
-        }
-
-        int openBrace = source.indexOf('{', j);
-        assertNotEquals(-1, openBrace, "useItemOn signature without opening body brace");
-
-        int depth = 1;
-        int i = openBrace + 1;
-        while (i < source.length() && depth > 0) {
-            char c = source.charAt(i);
-            if (c == '{') depth++;
-            else if (c == '}') depth--;
-            i++;
-        }
-        if (depth != 0) {
-            fail("Unbalanced braces while extracting useItemOn body");
-        }
-        return source.substring(openBrace + 1, i - 1);
+    @Test
+    @DisplayName("useItemOn body must NOT return ItemInteractionResult.FAIL from the bucket guard (Bug #7 regression)")
+    void useItemOnMustNotReturnFailFromBucketGuard() {
+        // FAIL from the block is NOT a hard stop. MultiPlayerGameMode.performUseItemOn
+        // checks iteminteractionresult.consumesAction() first, and FAIL.consumesAction()
+        // is false — so the chain falls through to itemstack.useOn(ctx). BucketItem
+        // doesn't override useOn; default Item.useOn returns PASS. That PASS propagates
+        // back as the return of gameMode.useItemOn, bypassing Minecraft.startUseItem's
+        // 'if (result == FAIL) return;' guard. The chain then hits gameMode.useItem →
+        // BucketItem.use → emptyContents at hit.relative(hit.getDirection()) = adjacent
+        // block. Creative mode doesn't decrement the bucket stack, so the dupe repeats
+        // on every click. Returning CONSUME (or SUCCESS / sidedSuccess) — anything with
+        // consumesAction()==true — short-circuits at the first consumesAction check.
+        assertTrue(
+                !body.contains("ItemInteractionResult.FAIL"),
+                "useItemOn must NOT contain 'ItemInteractionResult.FAIL'. FAIL has "
+                        + "consumesAction()==false, so returning it from the bucket guard does "
+                        + "NOT stop the interaction chain in MultiPlayerGameMode — it falls "
+                        + "through to itemstack.useOn (PASS) and then to BucketItem.use, which "
+                        + "places fluid in the adjacent block (Bug #7 dupe in creative mode). "
+                        + "Use ItemInteractionResult.CONSUME instead.");
     }
 }
