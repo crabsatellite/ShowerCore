@@ -81,7 +81,7 @@
   "tooltip.showercore.rubber_duck.usage.push": "§6Clic derecho: §rEmpujar Pato de Goma",
   "tooltip.showercore.rubber_duck.usage.pickup": "§6Shift + Clic derecho con mano vacía: §rRecoger Pato de Goma",
   "tooltip.showercore.bathtub.usage.sit": "§6Clic derecho con mano vacía: §rSentarse en la Bañera",
-  "tooltip.showercore.bathtub.usage.toggle": "§6Shift + Clic derecho con mano vacía (Grifo): §rAlternar Grifo",
+  "tooltip.showercore.bathtub.usage.toggle": "§6Clic derecho en el grifo con mano vacía: §rAlternar Grifo",
   "tooltip.showercore.bathtub.usage.fill": "§6Clic derecho con Cubo: §rLlenar/Vaciar Fluido",
   "tooltip.showercore.bathtub.usage.duck": "§6Clic derecho con Pato de Goma: §rColocar Pato de Goma",
   "item.showercore.rubber_duck": "Pato de Goma",
