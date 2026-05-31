@@ -193,7 +193,7 @@ tasks.named('processResources', ProcessResources).configure {
         expand replaceProperties + [project: project]
     }
 
-    from(project.projectDir) {
+    from('imgs') {
         include 'icon.png'
     }
 }
