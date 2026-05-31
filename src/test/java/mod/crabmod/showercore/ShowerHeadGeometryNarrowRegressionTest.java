@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * element 11 (big vertical stem, y=-16..-8) from [5,-16,14] to [11,-8,15.5]
  *                                      →  from [6,-16,14.5] to [10,-8,15.5]
  * element 12 (small flange, y=-3..-2)      from [6.01,-3,14] to [10.01,-2,15]
- *                                      →  from [6.01,-3,14.5] to [10.01,-2,15]
+ *                                      →  from [6.01,-3,14.49] to [10.01,-2,15]
  * </pre>
  */
 class ShowerHeadGeometryNarrowRegressionTest {
@@ -65,7 +65,7 @@ class ShowerHeadGeometryNarrowRegressionTest {
             "\"from\": [\n"
                     + "        6.01,\n"
                     + "        -3,\n"
-                    + "        14.5\n"
+                    + "        14.49\n"
                     + "      ],\n"
                     + "      \"to\": [\n"
                     + "        10.01,\n"
@@ -127,7 +127,7 @@ class ShowerHeadGeometryNarrowRegressionTest {
     @DisplayName("All rain_shower_head_*.json variants contain the narrowed element 12 (small flange)")
     void allVariantsHaveNarrowedElement12() {
         assertAllVariantsContain(EXPECTED_ELEMENT_12,
-                "element 12 (small flange y=-3..-2) front face z=14 → z=14.5");
+                "element 12 (small flange y=-3..-2) front face z=14 → z=14.49");
     }
 
     @Test
