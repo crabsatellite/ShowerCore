@@ -1,5 +1,5 @@
 {
-  "parent": "showercore:block/bathtub_white_head_empty",
+  "parent": "showercore:block/template/bathtub_head_empty",
   "textures": {
     "0": "minecraft:block/oak_planks",
     "1": "minecraft:block/black_concrete",
