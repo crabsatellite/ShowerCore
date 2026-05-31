@@ -3,6 +3,7 @@ package mod.crabmod.showercore.client.renderer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import mod.crabmod.showercore.testutil.ModelJsonTestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,17 +20,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Validates the structural integrity of bathtub _head_faucet model files.
- *
- * <p>The _head_faucet model contains bathtub walls + faucet spout geometry but
- * NO fluid surface — fluid rendering is exclusively handled by the BER.
- * All 33 color variants must exist, be valid JSON, and inherit correctly from
- * the white root model.
- *
- * <p>Past bugs:
- * <ul>
- *   <li>16 variant _head_faucet files had truncated JSON ({@code "textures": })
- *       causing MalformedJsonException and cascading FileNotFoundException.</li>
- * </ul>
+ * The production variants are texture wrappers over a shared template.
  */
 class BathtubFaucetModelValidityTest {
 
@@ -40,9 +28,8 @@ class BathtubFaucetModelValidityTest {
             "src", "main", "resources", "assets", "showercore", "models", "block");
 
     private static final String ROOT_MODEL = "bathtub_white_head_faucet.json";
-    private static final String ROOT_PARENT_REF = "showercore:block/bathtub_white_head_faucet";
+    private static final String EXPECTED_PARENT_REF = "showercore:block/template/bathtub_head_faucet";
 
-    /** All 33 color/material variants. */
     private static final String[] ALL_VARIANTS = {
             "white", "black", "orange", "magenta", "light_blue", "yellow", "lime",
             "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red",
@@ -59,9 +46,8 @@ class BathtubFaucetModelValidityTest {
             Path model = MODELS_DIR.resolve(filename);
             assertTrue(Files.isRegularFile(model),
                     filename + " must exist at " + model.toAbsolutePath());
-            String content = Files.readString(model);
             try {
-                JsonParser.parseString(content).getAsJsonObject();
+                JsonParser.parseString(Files.readString(model)).getAsJsonObject();
             } catch (Exception e) {
                 fail(filename + " is not valid JSON: " + e.getMessage());
             }
@@ -69,48 +55,38 @@ class BathtubFaucetModelValidityTest {
     }
 
     @Test
-    @DisplayName("Root _head_faucet model uses render_type=cutout (no fluid elements)")
+    @DisplayName("Resolved _head_faucet model uses render_type=cutout")
     void rootModelUsesCutout() throws IOException {
-        Path root = MODELS_DIR.resolve(ROOT_MODEL);
-        String content = Files.readString(root);
-        JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+        JsonObject json = ModelJsonTestUtils.resolveBlockModel(MODELS_DIR, ROOT_MODEL);
         assertEquals("cutout", json.get("render_type").getAsString(),
-                ROOT_MODEL + " must use render_type=cutout since it has no fluid elements "
-                        + "(the BER renders the fluid surface via RenderType.translucent).");
+                ROOT_MODEL + " must resolve render_type=cutout since it has no fluid elements.");
     }
 
     @Test
-    @DisplayName("Root _head_faucet model has exactly 6 elements (4 walls + faucet handle + spout)")
+    @DisplayName("Resolved _head_faucet model has exactly 6 elements")
     void rootModelHasSixElements() throws IOException {
-        Path root = MODELS_DIR.resolve(ROOT_MODEL);
-        String content = Files.readString(root);
-        JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+        JsonObject json = ModelJsonTestUtils.resolveBlockModel(MODELS_DIR, ROOT_MODEL);
         JsonArray elements = json.getAsJsonArray("elements");
-        assertNotNull(elements, ROOT_MODEL + " must have an 'elements' array.");
+        assertNotNull(elements, ROOT_MODEL + " must resolve an 'elements' array.");
         assertEquals(6, elements.size(),
-                ROOT_MODEL + " must have exactly 6 elements: 4 walls + faucet handle + spout. "
-                        + "Found " + elements.size());
+                ROOT_MODEL + " must resolve exactly 6 elements: 4 walls + faucet handle + spout.");
     }
 
     @Test
-    @DisplayName("Root _head_faucet model does NOT contain fluid elements (no tintindex, no #fluid)")
+    @DisplayName("Resolved _head_faucet model does not contain fluid elements")
     void rootModelHasNoFluidElements() throws IOException {
-        Path root = MODELS_DIR.resolve(ROOT_MODEL);
-        String content = Files.readString(root);
-        assertFalse(content.contains("tintindex"),
-                ROOT_MODEL + " must NOT have tintindex — fluid tinting is done by the BER.");
-        assertFalse(content.contains("#fluid"),
-                ROOT_MODEL + " must NOT reference #fluid texture — no fluid in this model.");
+        String resolved = ModelJsonTestUtils.resolveBlockModel(MODELS_DIR, ROOT_MODEL).toString();
+        assertFalse(resolved.contains("tintindex"),
+                ROOT_MODEL + " must not have tintindex; fluid tinting is done by the BER.");
+        assertFalse(resolved.contains("#fluid"),
+                ROOT_MODEL + " must not reference #fluid texture; no fluid is in this model.");
     }
 
     @Test
-    @DisplayName("Root _head_faucet model has faucet spout element at [7,11,3]..[9,12,4]")
+    @DisplayName("Resolved _head_faucet model has faucet spout element at [7,11,3]..[9,12,4]")
     void rootModelHasFaucetSpoutElement() throws IOException {
-        Path root = MODELS_DIR.resolve(ROOT_MODEL);
-        String content = Files.readString(root);
-        JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+        JsonObject json = ModelJsonTestUtils.resolveBlockModel(MODELS_DIR, ROOT_MODEL);
         JsonArray elements = json.getAsJsonArray("elements");
-        // The last element should be the faucet spout drop at [7,11,3]..[9,12,4]
         JsonObject spout = elements.get(5).getAsJsonObject();
         JsonArray from = spout.getAsJsonArray("from");
         JsonArray to = spout.getAsJsonArray("to");
@@ -123,58 +99,44 @@ class BathtubFaucetModelValidityTest {
     }
 
     @Test
-    @DisplayName("Non-white variant models inherit from the white root _head_faucet")
-    void variantModelsInheritFromWhiteRoot() throws IOException {
+    @DisplayName("All variant _head_faucet models inherit from the optimized template")
+    void variantModelsInheritFromTemplate() throws IOException {
         for (String variant : ALL_VARIANTS) {
-            if ("white".equals(variant)) continue;
             String filename = "bathtub_" + variant + "_head_faucet.json";
-            Path model = MODELS_DIR.resolve(filename);
-            String content = Files.readString(model);
-            JsonObject json = JsonParser.parseString(content).getAsJsonObject();
-            assertTrue(json.has("parent"),
-                    filename + " must have a 'parent' field.");
-            assertEquals(ROOT_PARENT_REF, json.get("parent").getAsString(),
-                    filename + " must inherit from '" + ROOT_PARENT_REF + "'.");
+            JsonObject json = ModelJsonTestUtils.readJson(MODELS_DIR.resolve(filename));
+            assertEquals(EXPECTED_PARENT_REF, json.get("parent").getAsString(),
+                    filename + " must inherit from '" + EXPECTED_PARENT_REF + "'.");
         }
     }
 
     @Test
-    @DisplayName("Non-white variant models have texture #0 and particle overrides")
+    @DisplayName("Variant models have texture #0 and particle overrides")
     void variantModelsHaveTextureOverrides() throws IOException {
         for (String variant : ALL_VARIANTS) {
-            if ("white".equals(variant)) continue;
             String filename = "bathtub_" + variant + "_head_faucet.json";
-            Path model = MODELS_DIR.resolve(filename);
-            String content = Files.readString(model);
-            JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+            JsonObject json = ModelJsonTestUtils.readJson(MODELS_DIR.resolve(filename));
             assertTrue(json.has("textures"),
-                    filename + " must have a 'textures' block with color overrides.");
+                    filename + " must have a textures block with material overrides.");
             JsonObject textures = json.getAsJsonObject("textures");
-            assertTrue(textures.has("0"),
-                    filename + " must override texture #0 (bathtub wall material).");
-            assertTrue(textures.has("particle"),
-                    filename + " must override particle texture.");
-            // Texture #0 and particle should reference the same material
+            assertTrue(textures.has("0"), filename + " must override texture #0.");
+            assertTrue(textures.has("particle"), filename + " must override particle texture.");
             assertEquals(textures.get("0").getAsString(), textures.get("particle").getAsString(),
                     filename + " texture #0 and particle must match.");
-            // Must NOT be white_concrete (that's the root default)
-            assertFalse(textures.get("0").getAsString().contains("white_concrete"),
-                    filename + " must NOT use white_concrete — it should use the " + variant + " texture.");
+            if (!"white".equals(variant)) {
+                assertFalse(textures.get("0").getAsString().contains("white_concrete"),
+                        filename + " must use the " + variant + " texture.");
+            }
         }
     }
 
     @Test
-    @DisplayName("Variant models do NOT define their own elements (inherited from root)")
+    @DisplayName("Variant wrappers do not define their own elements")
     void variantModelsHaveNoElements() throws IOException {
         for (String variant : ALL_VARIANTS) {
-            if ("white".equals(variant)) continue;
             String filename = "bathtub_" + variant + "_head_faucet.json";
-            Path model = MODELS_DIR.resolve(filename);
-            String content = Files.readString(model);
-            JsonObject json = JsonParser.parseString(content).getAsJsonObject();
+            JsonObject json = ModelJsonTestUtils.readJson(MODELS_DIR.resolve(filename));
             assertFalse(json.has("elements"),
-                    filename + " must NOT define its own elements — they are inherited "
-                            + "from the white root model via parent.");
+                    filename + " must inherit elements from the shared template.");
         }
     }
 }

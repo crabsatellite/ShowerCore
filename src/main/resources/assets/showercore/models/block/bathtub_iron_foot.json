@@ -1,8 +1,9 @@
 {
-  "parent": "showercore:block/bathtub_white_foot",
+  "parent": "showercore:block/template/bathtub_foot",
   "textures": {
     "0": "minecraft:block/iron_block",
     "1": "minecraft:block/black_concrete",
+    "fluid": "minecraft:block/water_still",
     "particle": "minecraft:block/iron_block"
   }
 }

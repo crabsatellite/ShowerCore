@@ -1,8 +1,9 @@
 {
-  "parent": "showercore:block/bathtub_white_head",
+  "parent": "showercore:block/template/bathtub_head",
   "textures": {
     "0": "minecraft:block/oak_planks",
     "1": "minecraft:block/black_concrete",
+    "fluid": "minecraft:block/water_still",
     "particle": "minecraft:block/oak_planks"
   }
 }
