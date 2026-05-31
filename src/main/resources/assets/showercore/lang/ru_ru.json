@@ -81,7 +81,7 @@
   "tooltip.showercore.rubber_duck.usage.push": "§6ПКМ: §rТолкнуть уточку",
   "tooltip.showercore.rubber_duck.usage.pickup": "§6Shift + ПКМ пустой рукой: §rПодобрать уточку",
   "tooltip.showercore.bathtub.usage.sit": "§6ПКМ пустой рукой: §rСесть в ванну",
-  "tooltip.showercore.bathtub.usage.toggle": "§6Shift + ПКМ пустой рукой (Кран): §rВкл/Выкл Кран",
+  "tooltip.showercore.bathtub.usage.toggle": "§6ПКМ по крану пустой рукой: §rВкл/Выкл кран",
   "tooltip.showercore.bathtub.usage.fill": "§6ПКМ с Ведром: §rНаполнить/Опустошить",
   "tooltip.showercore.bathtub.usage.duck": "§6ПКМ с Резиновой уточкой: §rРазместить уточку",
   "item.showercore.rubber_duck": "Резиновая уточка",

@@ -81,7 +81,7 @@
   "tooltip.showercore.rubber_duck.usage.push": "§6Clic-droit : §rPousser le Canard",
   "tooltip.showercore.rubber_duck.usage.pickup": "§6Maj + Clic-droit à main nue : §rRamasser le Canard",
   "tooltip.showercore.bathtub.usage.sit": "§6Clic-droit à main nue : §rS'asseoir dans la Baignoire",
-  "tooltip.showercore.bathtub.usage.toggle": "§6Maj + Clic-droit à main nue (Robinet) : §rActiver/Désactiver le Robinet",
+  "tooltip.showercore.bathtub.usage.toggle": "§6Clic-droit sur le robinet à main nue : §rActiver/Désactiver le Robinet",
   "tooltip.showercore.bathtub.usage.fill": "§6Clic-droit avec un Seau : §rRemplir/Vider le Fluide",
   "tooltip.showercore.bathtub.usage.duck": "§6Clic-droit avec Canard en Caoutchouc : §rPlacer le Canard",
   "item.showercore.rubber_duck": "Canard en Caoutchouc",
