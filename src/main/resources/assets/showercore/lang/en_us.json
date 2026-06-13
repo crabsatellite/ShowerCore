@@ -71,7 +71,7 @@
   "block.showercore.bathtub_gold": "Bathtub (Gold)",
   "block.showercore.bathtub_copper": "Bathtub (Copper)",
   "block.showercore.bathtub_diamond": "Bathtub (Diamond)",
-  "block.showercore.bathtub_modern": "Modern Bathtub",
+  "block.showercore.bathtub_clawfoot": "Clawfoot Bathtub",
   "message.showercore.need_core": "Requires a Bath Core",
   "tooltip.showercore.contains": "§7Contains: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Right-click with Core:§r Install/Replace Core",

@@ -102,7 +102,7 @@ public class ClientEvent {
         BlocksRegister.BATHTUB_GOLD.get(),
         BlocksRegister.BATHTUB_COPPER.get(),
         BlocksRegister.BATHTUB_DIAMOND.get(),
-        BlocksRegister.BATHTUB_MODERN.get(),
+        BlocksRegister.BATHTUB_CLAWFOOT.get(),
         BlocksRegister.BATHTUB_ORANGE.get(),
         BlocksRegister.BATHTUB_MAGENTA.get(),
         BlocksRegister.BATHTUB_LIGHT_BLUE.get(),

@@ -21,12 +21,12 @@ public class CreativeTabRegister {
           () ->
               CreativeModeTab.builder()
                   .title(Component.translatable("itemGroup.showercore.bathtubs"))
-                  .icon(() -> new ItemStack(BlocksRegister.BATHTUB_MODERN.get()))
+                  .icon(() -> new ItemStack(BlocksRegister.BATHTUB_CLAWFOOT.get()))
                   .displayItems((parameters, output) -> addBathtubs(output::accept))
                   .build());
 
   public static void addBathtubs(Consumer<ItemLike> output) {
-    output.accept(BlocksRegister.BATHTUB_MODERN.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT.get());
     output.accept(BlocksRegister.BATHTUB_WHITE.get());
     output.accept(BlocksRegister.BATHTUB_ORANGE.get());
     output.accept(BlocksRegister.BATHTUB_MAGENTA.get());

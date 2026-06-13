@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "showercore:bathtub_modern"
+          "name": "showercore:bathtub_clawfoot"
         }
       ],
       "conditions": [

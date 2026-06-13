@@ -72,7 +72,7 @@
   "block.showercore.bathtub_gold": "Ванна (Золото)",
   "block.showercore.bathtub_copper": "Ванна (Медь)",
   "block.showercore.bathtub_diamond": "Ванна (Алмаз)",
-  "block.showercore.bathtub_modern": "Современная ванна",
+  "block.showercore.bathtub_clawfoot": "Ванна на ножках",
   "message.showercore.need_core": "Требуется Ядро Ванны",
   "tooltip.showercore.contains": "§7Содержит: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6ПКМ с Ядром:§r Установить/Заменить Ядро",

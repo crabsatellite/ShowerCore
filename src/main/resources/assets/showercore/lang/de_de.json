@@ -72,7 +72,7 @@
   "block.showercore.bathtub_gold": "Badewanne (Gold)",
   "block.showercore.bathtub_copper": "Badewanne (Kupfer)",
   "block.showercore.bathtub_diamond": "Badewanne (Diamant)",
-  "block.showercore.bathtub_modern": "Moderne Badewanne",
+  "block.showercore.bathtub_clawfoot": "Klauenfuß-Badewanne",
   "message.showercore.need_core": "Benötigt einen Badekern",
   "tooltip.showercore.contains": "§7Enthält: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Rechtsklick mit Kern:§r Kern installieren/ersetzen",
