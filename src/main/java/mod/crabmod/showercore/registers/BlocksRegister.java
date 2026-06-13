@@ -489,6 +489,10 @@ public class BlocksRegister {
       registerBlock(
           "bathtub_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
+  public static final RegistryObject<Block> BATHTUB_MODERN =
+      registerBlock(
+          "bathtub_modern", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
   public static final RegistryObject<Block> HOT_WATER_CORE =
       registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));
 
