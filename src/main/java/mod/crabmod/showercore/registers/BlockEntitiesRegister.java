@@ -176,6 +176,7 @@ public class BlockEntitiesRegister {
              bathtubBlocks.add(BlocksRegister.BATHTUB_GOLD.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_COPPER.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_DIAMOND.get());
+             bathtubBlocks.add(BlocksRegister.BATHTUB_MODERN.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_ORANGE.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_MAGENTA.get());
              bathtubBlocks.add(BlocksRegister.BATHTUB_LIGHT_BLUE.get());

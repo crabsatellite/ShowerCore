@@ -1,0 +1,7 @@
+{
+  "parent": "showercore:block/template/bathtub_modern_foot_empty",
+  "textures": {
+    "0": "showercore:block/bathtub/modern",
+    "particle": "showercore:block/bathtub/modern"
+  }
+}

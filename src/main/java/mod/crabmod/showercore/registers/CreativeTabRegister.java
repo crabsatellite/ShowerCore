@@ -1,0 +1,68 @@
+package mod.crabmod.showercore.registers;
+
+import java.util.function.Consumer;
+import mod.crabmod.showercore.ShowerCore;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+public class CreativeTabRegister {
+  public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
+      DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ShowerCore.MODID);
+
+  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> BATHTUBS =
+      CREATIVE_TABS.register(
+          "bathtubs",
+          () ->
+              CreativeModeTab.builder()
+                  .title(Component.translatable("itemGroup.showercore.bathtubs"))
+                  .icon(() -> new ItemStack(BlocksRegister.BATHTUB_MODERN.get()))
+                  .displayItems((parameters, output) -> addBathtubs(output::accept))
+                  .build());
+
+  public static void addBathtubs(Consumer<ItemLike> output) {
+    output.accept(BlocksRegister.BATHTUB_MODERN.get());
+    output.accept(BlocksRegister.BATHTUB_WHITE.get());
+    output.accept(BlocksRegister.BATHTUB_ORANGE.get());
+    output.accept(BlocksRegister.BATHTUB_MAGENTA.get());
+    output.accept(BlocksRegister.BATHTUB_LIGHT_BLUE.get());
+    output.accept(BlocksRegister.BATHTUB_YELLOW.get());
+    output.accept(BlocksRegister.BATHTUB_LIME.get());
+    output.accept(BlocksRegister.BATHTUB_PINK.get());
+    output.accept(BlocksRegister.BATHTUB_GRAY.get());
+    output.accept(BlocksRegister.BATHTUB_LIGHT_GRAY.get());
+    output.accept(BlocksRegister.BATHTUB_CYAN.get());
+    output.accept(BlocksRegister.BATHTUB_PURPLE.get());
+    output.accept(BlocksRegister.BATHTUB_BLUE.get());
+    output.accept(BlocksRegister.BATHTUB_BROWN.get());
+    output.accept(BlocksRegister.BATHTUB_GREEN.get());
+    output.accept(BlocksRegister.BATHTUB_RED.get());
+    output.accept(BlocksRegister.BATHTUB_BLACK.get());
+    output.accept(BlocksRegister.BATHTUB_OAK.get());
+    output.accept(BlocksRegister.BATHTUB_SPRUCE.get());
+    output.accept(BlocksRegister.BATHTUB_BIRCH.get());
+    output.accept(BlocksRegister.BATHTUB_JUNGLE.get());
+    output.accept(BlocksRegister.BATHTUB_ACACIA.get());
+    output.accept(BlocksRegister.BATHTUB_DARK_OAK.get());
+    output.accept(BlocksRegister.BATHTUB_MANGROVE.get());
+    output.accept(BlocksRegister.BATHTUB_CHERRY.get());
+    output.accept(BlocksRegister.BATHTUB_BAMBOO.get());
+    output.accept(BlocksRegister.BATHTUB_CRIMSON.get());
+    output.accept(BlocksRegister.BATHTUB_WARPED.get());
+    output.accept(BlocksRegister.BATHTUB_STONE.get());
+    output.accept(BlocksRegister.BATHTUB_COBBLESTONE.get());
+    output.accept(BlocksRegister.BATHTUB_IRON.get());
+    output.accept(BlocksRegister.BATHTUB_GOLD.get());
+    output.accept(BlocksRegister.BATHTUB_COPPER.get());
+    output.accept(BlocksRegister.BATHTUB_DIAMOND.get());
+  }
+
+  public static void register(IEventBus eventBus) {
+    CREATIVE_TABS.register(eventBus);
+  }
+}

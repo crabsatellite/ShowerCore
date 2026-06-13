@@ -34,6 +34,7 @@
       "showercore:bathtub_stone",
       "showercore:bathtub_warped",
       "showercore:bathtub_white",
+      "showercore:bathtub_modern",
       "showercore:bathtub_yellow",
       "showercore:compact_shower_head_acacia",
       "showercore:compact_shower_head_bamboo",
@@ -116,7 +117,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:hot_water_bucket"]
+            "items": [
+              "hotbath:hot_water_bucket"
+            ]
           }
         ]
       }
@@ -126,7 +129,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:honey_bath_bucket"]
+            "items": [
+              "hotbath:honey_bath_bucket"
+            ]
           }
         ]
       }
@@ -136,7 +141,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:milk_bath_bucket"]
+            "items": [
+              "hotbath:milk_bath_bucket"
+            ]
           }
         ]
       }
@@ -146,7 +153,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:rose_bath_bucket"]
+            "items": [
+              "hotbath:rose_bath_bucket"
+            ]
           }
         ]
       }
@@ -156,7 +165,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:peony_bath_bucket"]
+            "items": [
+              "hotbath:peony_bath_bucket"
+            ]
           }
         ]
       }
@@ -166,7 +177,9 @@
       "conditions": {
         "items": [
           {
-            "items": ["hotbath:herbal_bath_bucket"]
+            "items": [
+              "hotbath:herbal_bath_bucket"
+            ]
           }
         ]
       }
