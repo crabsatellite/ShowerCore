@@ -195,7 +195,7 @@ public class ShowerCore {
       event.accept(BlocksRegister.BATHTUB_GOLD.get());
       event.accept(BlocksRegister.BATHTUB_COPPER.get());
       event.accept(BlocksRegister.BATHTUB_DIAMOND.get());
-      event.accept(BlocksRegister.BATHTUB_MODERN.get());
+      event.accept(BlocksRegister.BATHTUB_CLAWFOOT.get());
       event.accept(ItemRegister.RUBBER_DUCK.get());
   }
 

@@ -72,7 +72,7 @@
   "block.showercore.bathtub_gold": "Banheira (Ouro)",
   "block.showercore.bathtub_copper": "Banheira (Cobre)",
   "block.showercore.bathtub_diamond": "Banheira (Diamante)",
-  "block.showercore.bathtub_modern": "Banheira moderna",
+  "block.showercore.bathtub_clawfoot": "Banheira com pés",
   "message.showercore.need_core": "Requer um Núcleo de Banho",
   "tooltip.showercore.contains": "§7Contém: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6Clique direito com Núcleo:§r Instalar/Substituir Núcleo",

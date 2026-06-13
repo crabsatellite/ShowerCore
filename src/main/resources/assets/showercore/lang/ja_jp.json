@@ -72,7 +72,7 @@
   "block.showercore.bathtub_gold": "バスタブ (金)",
   "block.showercore.bathtub_copper": "バスタブ (銅)",
   "block.showercore.bathtub_diamond": "バスタブ (ダイヤモンド)",
-  "block.showercore.bathtub_modern": "モダンバスタブ",
+  "block.showercore.bathtub_clawfoot": "猫脚バスタブ",
   "message.showercore.need_core": "バスコアが必要です",
   "tooltip.showercore.contains": "§7内容: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6コアを持って右クリック:§r コアを設置/交換",

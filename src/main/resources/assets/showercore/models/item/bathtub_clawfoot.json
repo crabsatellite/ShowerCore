@@ -1,5 +1,5 @@
 {
-  "parent": "showercore:block/bathtub_modern",
+  "parent": "showercore:block/bathtub_clawfoot",
   "display": {
     "gui": {
       "rotation": [

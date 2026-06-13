@@ -71,7 +71,7 @@
   "block.showercore.bathtub_gold": "浴缸（金）",
   "block.showercore.bathtub_copper": "浴缸（銅）",
   "block.showercore.bathtub_diamond": "浴缸（鑽石）",
-  "block.showercore.bathtub_modern": "現代浴缸",
+  "block.showercore.bathtub_clawfoot": "爪足浴缸",
   "message.showercore.need_core": "需要安裝洗浴核心",
   "tooltip.showercore.contains": "§7內含：§r%s",
   "tooltip.showercore.shower_head.usage.install": "§6手持核心右鍵：§r安裝/替換核心",

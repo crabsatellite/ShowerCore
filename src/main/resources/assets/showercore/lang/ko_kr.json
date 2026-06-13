@@ -72,7 +72,7 @@
   "block.showercore.bathtub_gold": "욕조 (금)",
   "block.showercore.bathtub_copper": "욕조 (구리)",
   "block.showercore.bathtub_diamond": "욕조 (다이아몬드)",
-  "block.showercore.bathtub_modern": "모던 욕조",
+  "block.showercore.bathtub_clawfoot": "발 달린 욕조",
   "message.showercore.need_core": "목욕 코어가 필요합니다",
   "tooltip.showercore.contains": "§7포함: §r%s",
   "tooltip.showercore.shower_head.usage.install": "§6코어로 우클릭:§r 코어 설치/교체",
