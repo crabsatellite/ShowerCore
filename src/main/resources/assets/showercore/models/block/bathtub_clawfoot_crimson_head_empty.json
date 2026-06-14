@@ -2,7 +2,6 @@
   "parent": "showercore:block/template/bathtub_clawfoot_head_empty",
   "textures": {
     "body": "minecraft:block/crimson_planks",
-    "metal": "minecraft:block/iron_block",
     "particle": "minecraft:block/crimson_planks"
   }
 }

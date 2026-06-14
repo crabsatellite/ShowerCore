@@ -2,7 +2,6 @@
   "parent": "showercore:block/template/bathtub_clawfoot_foot_empty",
   "textures": {
     "body": "minecraft:block/light_blue_concrete",
-    "metal": "minecraft:block/iron_block",
     "particle": "minecraft:block/light_blue_concrete"
   }
 }

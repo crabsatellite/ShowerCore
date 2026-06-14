@@ -30,7 +30,7 @@
             2,
             7.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "east": {
           "uv": [
@@ -39,7 +39,7 @@
             7,
             6.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "south": {
           "uv": [
@@ -48,7 +48,7 @@
             9,
             6.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "west": {
           "uv": [
@@ -57,7 +57,7 @@
             7,
             6.5
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "up": {
           "uv": [
@@ -66,7 +66,7 @@
             0,
             0
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "down": {
           "uv": [
@@ -75,7 +75,7 @@
             2,
             4
           ],
-          "texture": "#body"
+          "texture": "#base"
         }
       }
     },
@@ -107,7 +107,7 @@
             4,
             4.25
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         },
         "east": {
           "uv": [
@@ -116,7 +116,7 @@
             8.75,
             3.75
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         },
         "south": {
           "uv": [
@@ -125,7 +125,7 @@
             4,
             4.5
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         },
         "west": {
           "uv": [
@@ -134,7 +134,7 @@
             8.75,
             4
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         },
         "up": {
           "uv": [
@@ -143,7 +143,7 @@
             4,
             6.5
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         },
         "down": {
           "uv": [
@@ -152,7 +152,7 @@
             4.5,
             7.75
           ],
-          "texture": "#metal"
+          "texture": "#faucet"
         }
       }
     },
@@ -184,7 +184,7 @@
             7.75,
             5.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -193,7 +193,7 @@
             7.75,
             6
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -202,7 +202,7 @@
             7.75,
             6.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -211,7 +211,7 @@
             7.75,
             7
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -220,7 +220,7 @@
             7.5,
             7.5
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -252,7 +252,7 @@
             7.75,
             7.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -261,7 +261,7 @@
             8,
             0.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -270,7 +270,7 @@
             8,
             1
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -279,7 +279,7 @@
             8,
             1.25
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -288,7 +288,7 @@
             7.75,
             1.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -320,7 +320,7 @@
             8,
             2
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -329,7 +329,7 @@
             8,
             2.25
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -338,7 +338,7 @@
             8,
             2.5
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -347,7 +347,7 @@
             8,
             2.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -356,7 +356,7 @@
             7.75,
             3.25
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -388,7 +388,7 @@
             8,
             3.5
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -397,7 +397,7 @@
             4.25,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -406,7 +406,7 @@
             4.5,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -415,7 +415,7 @@
             4.75,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -424,7 +424,7 @@
             7.75,
             5.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -955,7 +955,7 @@
             8,
             6
           ],
-          "texture": "#metal"
+          "texture": "#button_base"
         },
         "east": {
           "uv": [
@@ -964,7 +964,7 @@
             8,
             6.75
           ],
-          "texture": "#metal"
+          "texture": "#button_base"
         },
         "south": {
           "uv": [
@@ -973,7 +973,7 @@
             8,
             7
           ],
-          "texture": "#metal"
+          "texture": "#button_base"
         },
         "west": {
           "uv": [
@@ -982,7 +982,7 @@
             8,
             7.25
           ],
-          "texture": "#metal"
+          "texture": "#button_base"
         },
         "up": {
           "uv": [
@@ -991,7 +991,7 @@
             7.75,
             7.25
           ],
-          "texture": "#metal"
+          "texture": "#button_base"
         }
       }
     },
@@ -1023,7 +1023,7 @@
             8.125,
             5.25
           ],
-          "texture": "#metal"
+          "texture": "#hot_button"
         },
         "east": {
           "uv": [
@@ -1032,7 +1032,7 @@
             8.125,
             5.5
           ],
-          "texture": "#metal"
+          "texture": "#hot_button"
         },
         "south": {
           "uv": [
@@ -1041,7 +1041,7 @@
             8.25,
             0.75
           ],
-          "texture": "#metal"
+          "texture": "#hot_button"
         },
         "west": {
           "uv": [
@@ -1050,7 +1050,7 @@
             8.25,
             1
           ],
-          "texture": "#metal"
+          "texture": "#hot_button"
         },
         "up": {
           "uv": [
@@ -1059,7 +1059,7 @@
             8,
             1
           ],
-          "texture": "#metal"
+          "texture": "#hot_button"
         }
       }
     },
@@ -1091,7 +1091,7 @@
             8,
             7.75
           ],
-          "texture": "#metal"
+          "texture": "#cold_button"
         },
         "east": {
           "uv": [
@@ -1100,7 +1100,7 @@
             8,
             8
           ],
-          "texture": "#metal"
+          "texture": "#cold_button"
         },
         "south": {
           "uv": [
@@ -1109,7 +1109,7 @@
             8.125,
             4.25
           ],
-          "texture": "#metal"
+          "texture": "#cold_button"
         },
         "west": {
           "uv": [
@@ -1118,7 +1118,7 @@
             8.125,
             4.5
           ],
-          "texture": "#metal"
+          "texture": "#cold_button"
         },
         "up": {
           "uv": [
@@ -1127,9 +1127,17 @@
             7.875,
             4.5
           ],
-          "texture": "#metal"
+          "texture": "#cold_button"
         }
       }
     }
-  ]
+  ],
+  "textures": {
+    "base": "minecraft:block/polished_deepslate",
+    "feet": "minecraft:block/blackstone",
+    "faucet": "minecraft:block/polished_blackstone",
+    "button_base": "minecraft:block/andesite",
+    "hot_button": "minecraft:block/redstone_block",
+    "cold_button": "minecraft:block/lapis_block"
+  }
 }

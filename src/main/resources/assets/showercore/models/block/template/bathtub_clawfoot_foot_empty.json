@@ -30,7 +30,7 @@
             2,
             7.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "east": {
           "uv": [
@@ -39,7 +39,7 @@
             7,
             6.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "south": {
           "uv": [
@@ -48,7 +48,7 @@
             9,
             6.25
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "west": {
           "uv": [
@@ -57,7 +57,7 @@
             7,
             6.5
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "up": {
           "uv": [
@@ -66,7 +66,7 @@
             0,
             0
           ],
-          "texture": "#body"
+          "texture": "#base"
         },
         "down": {
           "uv": [
@@ -75,7 +75,7 @@
             2,
             4
           ],
-          "texture": "#body"
+          "texture": "#base"
         }
       }
     },
@@ -83,12 +83,12 @@
       "from": [
         0,
         0,
-        0
+        14
       ],
       "to": [
         2,
         2,
-        2
+        16
       ],
       "rotation": {
         "angle": 0,
@@ -107,7 +107,7 @@
             7.75,
             5.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -116,7 +116,7 @@
             7.75,
             6
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -125,7 +125,7 @@
             7.75,
             6.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -134,7 +134,7 @@
             7.75,
             7
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -143,7 +143,7 @@
             7.5,
             7.5
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -151,12 +151,12 @@
       "from": [
         14,
         0,
-        0
+        14
       ],
       "to": [
         16,
         2,
-        2
+        16
       ],
       "rotation": {
         "angle": 0,
@@ -175,7 +175,7 @@
             8,
             3.5
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "east": {
           "uv": [
@@ -184,7 +184,7 @@
             4.25,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "south": {
           "uv": [
@@ -193,7 +193,7 @@
             4.5,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "west": {
           "uv": [
@@ -202,7 +202,7 @@
             4.75,
             8
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         },
         "down": {
           "uv": [
@@ -211,7 +211,7 @@
             7.75,
             5.75
           ],
-          "texture": "#metal"
+          "texture": "#feet"
         }
       }
     },
@@ -219,12 +219,12 @@
       "from": [
         0,
         4,
-        2
+        0
       ],
       "to": [
         2,
         16,
-        16
+        14
       ],
       "rotation": {
         "angle": 0,
@@ -287,12 +287,12 @@
       "from": [
         14,
         4,
-        2
+        0
       ],
       "to": [
         16,
         16,
-        16
+        14
       ],
       "rotation": {
         "angle": 0,
@@ -355,12 +355,12 @@
       "from": [
         2,
         4,
-        0
+        14
       ],
       "to": [
         14,
         16,
-        2
+        16
       ],
       "rotation": {
         "angle": 0,
@@ -423,12 +423,12 @@
       "from": [
         0,
         4,
-        2
+        12
       ],
       "to": [
         2.828,
         16.1,
-        4
+        14
       ],
       "rotation": {
         "angle": 45,
@@ -473,12 +473,12 @@
       "from": [
         14,
         4,
-        0
+        14
       ],
       "to": [
         16.828,
         16.1,
-        2
+        16
       ],
       "rotation": {
         "angle": -45,
@@ -519,5 +519,13 @@
         }
       }
     }
-  ]
+  ],
+  "textures": {
+    "base": "minecraft:block/polished_deepslate",
+    "feet": "minecraft:block/blackstone",
+    "faucet": "minecraft:block/polished_blackstone",
+    "button_base": "minecraft:block/andesite",
+    "hot_button": "minecraft:block/redstone_block",
+    "cold_button": "minecraft:block/lapis_block"
+  }
 }
