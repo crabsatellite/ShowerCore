@@ -172,5 +172,14 @@
   "message.showercore.squeezed_in": "비집고 들어갔습니다!",
   "message.showercore.not_in_bathtub": "욕조 안에 있지 않습니다!",
   "message.showercore.request_denied": "요청이 거절되었습니다. 혼자만의 시간인가 봅니다.",
-  "message.showercore.denied_request": "요청을 거절했습니다."
+  "message.showercore.denied_request": "요청을 거절했습니다.",
+  "gui.showercore.filter.bath_cores": "?? ??",
+  "gui.showercore.filter.shower_heads": "??? ??",
+  "gui.showercore.filter.bathtubs": "??",
+  "gui.showercore.filter.clawfoot_bathtubs": "??? ??",
+  "gui.showercore.filter.accessories": "???",
+  "gui.showercore.filter.scroll_up": "?? ??",
+  "gui.showercore.filter.scroll_down": "?? ??",
+  "gui.showercore.filter.enable_all": "?? ShowerCore ?? ??",
+  "gui.showercore.filter.disable_all": "?? ShowerCore ?? ???"
 }

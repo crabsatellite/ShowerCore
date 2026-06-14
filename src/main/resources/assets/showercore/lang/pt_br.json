@@ -172,5 +172,14 @@
   "message.showercore.squeezed_in": "Você se espremeu para entrar!",
   "message.showercore.not_in_bathtub": "Você não está em uma banheira!",
   "message.showercore.request_denied": "Seu pedido foi negado. É uma sessão privada.",
-  "message.showercore.denied_request": "Você negou o pedido."
+  "message.showercore.denied_request": "Você negou o pedido.",
+  "gui.showercore.filter.bath_cores": "Nucleos de banho",
+  "gui.showercore.filter.shower_heads": "Chuveiros",
+  "gui.showercore.filter.bathtubs": "Banheiras",
+  "gui.showercore.filter.clawfoot_bathtubs": "Banheiras com pes",
+  "gui.showercore.filter.accessories": "Acessorios",
+  "gui.showercore.filter.scroll_up": "Categorias anteriores",
+  "gui.showercore.filter.scroll_down": "Proximas categorias",
+  "gui.showercore.filter.enable_all": "Mostrar todas as categorias do ShowerCore",
+  "gui.showercore.filter.disable_all": "Ocultar todas as categorias do ShowerCore"
 }

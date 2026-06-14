@@ -172,5 +172,14 @@
   "message.showercore.squeezed_in": "Tu t'es faufilé dedans !",
   "message.showercore.not_in_bathtub": "Tu n'es pas dans une baignoire !",
   "message.showercore.request_denied": "Ta demande a été refusée. C'est une séance privée.",
-  "message.showercore.denied_request": "Tu as refusé la demande."
+  "message.showercore.denied_request": "Tu as refusé la demande.",
+  "gui.showercore.filter.bath_cores": "Coeurs de bain",
+  "gui.showercore.filter.shower_heads": "Pommes de douche",
+  "gui.showercore.filter.bathtubs": "Baignoires",
+  "gui.showercore.filter.clawfoot_bathtubs": "Baignoires a pieds",
+  "gui.showercore.filter.accessories": "Accessoires",
+  "gui.showercore.filter.scroll_up": "Categories precedentes",
+  "gui.showercore.filter.scroll_down": "Categories suivantes",
+  "gui.showercore.filter.enable_all": "Afficher toutes les categories ShowerCore",
+  "gui.showercore.filter.disable_all": "Masquer toutes les categories ShowerCore"
 }

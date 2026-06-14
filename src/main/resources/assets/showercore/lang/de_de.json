@@ -172,5 +172,14 @@
   "message.showercore.squeezed_in": "Du hast dich reingequetscht!",
   "message.showercore.not_in_bathtub": "Du bist nicht in einer Badewanne!",
   "message.showercore.request_denied": "Deine Anfrage wurde abgelehnt. Das ist eine private Sitzung.",
-  "message.showercore.denied_request": "Du hast die Anfrage abgelehnt."
+  "message.showercore.denied_request": "Du hast die Anfrage abgelehnt.",
+  "gui.showercore.filter.bath_cores": "Badkerne",
+  "gui.showercore.filter.shower_heads": "Duschkoepfe",
+  "gui.showercore.filter.bathtubs": "Badewannen",
+  "gui.showercore.filter.clawfoot_bathtubs": "Klauenfuss-Badewannen",
+  "gui.showercore.filter.accessories": "Zubehoer",
+  "gui.showercore.filter.scroll_up": "Vorherige Kategorien",
+  "gui.showercore.filter.scroll_down": "Naechste Kategorien",
+  "gui.showercore.filter.enable_all": "Alle ShowerCore-Kategorien anzeigen",
+  "gui.showercore.filter.disable_all": "Alle ShowerCore-Kategorien ausblenden"
 }

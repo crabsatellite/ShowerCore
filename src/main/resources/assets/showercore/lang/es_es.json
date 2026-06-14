@@ -172,5 +172,14 @@
   "message.showercore.squeezed_in": "¡Te has colado dentro!",
   "message.showercore.not_in_bathtub": "¡No estás en una bañera!",
   "message.showercore.request_denied": "Tu solicitud fue denegada. Es una sesión privada.",
-  "message.showercore.denied_request": "Has denegado la solicitud."
+  "message.showercore.denied_request": "Has denegado la solicitud.",
+  "gui.showercore.filter.bath_cores": "Nucleos de bano",
+  "gui.showercore.filter.shower_heads": "Cabezales de ducha",
+  "gui.showercore.filter.bathtubs": "Baneras",
+  "gui.showercore.filter.clawfoot_bathtubs": "Baneras con patas",
+  "gui.showercore.filter.accessories": "Accesorios",
+  "gui.showercore.filter.scroll_up": "Categorias anteriores",
+  "gui.showercore.filter.scroll_down": "Categorias siguientes",
+  "gui.showercore.filter.enable_all": "Mostrar todas las categorias de ShowerCore",
+  "gui.showercore.filter.disable_all": "Ocultar todas las categorias de ShowerCore"
 }
