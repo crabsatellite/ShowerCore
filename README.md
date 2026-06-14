@@ -63,6 +63,12 @@ For when standing is just too much effort.
   - **Note:** Don't run away! You must be within **5 blocks** to join.
   - If they accept, things get cozy. If they reject... well, awkward.
 
+### Custom Bathtub Textures
+
+- **Reskin a tub:** Hold **6 or more identical blocks** in your main hand and right-click a bathtub. Survival mode consumes **6 blocks** only when the material actually changes; Creative mode does not consume blocks.
+- **Uses real block textures:** The bathtub reads the source block's normal block/particle texture, so vanilla and modded blocks can be used without shipping extra ShowerCore texture files.
+- **Stored on the placed bathtub:** Reapplying the same block does nothing. Replacing the material does not refund the old blocks. If the source mod is removed, the saved block ID stays, but the bathtub falls back to its original look until that block exists again.
+
 ## 🦆 The Rubber Duck
 
 The true boss of this mod.
@@ -174,6 +180,12 @@ You can tweak the mod to your liking in the config files.
   - (或者使用指令：`/showercore accept_bath <玩家名>` / `/showercore deny_bath <玩家名>`)
   - **注意**：别跑太远！必须在 **5 格** 范围内才能加入。
   - 如果对方接受，恭喜你，挤一挤更健康。如果对方拒绝……呃，这就很尴尬了。
+
+### 自定义浴缸贴图
+
+- **给浴缸换皮：** 主手拿着 **6 个或更多相同方块** 右键浴缸。生存模式只在材质真的改变时消耗 **6 个方块**；创造模式不消耗。
+- **使用真实方块贴图：** 浴缸会读取来源方块自己的方块/粒子贴图，所以原版方块和其他模组方块都可以使用，不需要额外提供 ShowerCore 专用贴图文件。
+- **数据保存在已放置的浴缸上：** 重复使用同一种方块不会发生变化，也不会消耗材料。替换成新材质不会返还旧材料。若来源模组被移除，会保留已保存的方块 ID，但外观回退到原本材质，直到该方块再次存在。
 
 ## 🦆 橡皮鸭 (Rubber Duck)
 
