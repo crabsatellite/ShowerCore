@@ -219,6 +219,16 @@ class BathtubMaterialChangeEconomyRegressionTest {
     }
 
     @Test
+    @DisplayName("Skinned bathtub item data includes the block entity type id")
+    void skinnedBathtubItemDataUsesBlockEntityHelper() throws IOException {
+        String itemSource = TestSourceUtils.readSource(BATHTUB_ITEM_SOURCE);
+        assertTrue(itemSource.contains("BlockItem.setBlockEntityData(stack, BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(), tag)"),
+                "1.21 item components reject BLOCK_ENTITY_DATA without a block entity id when the stack is saved.");
+        assertFalse(itemSource.contains("CustomData.set(DataComponents.BLOCK_ENTITY_DATA, stack, tag)"),
+                "Writing raw BLOCK_ENTITY_DATA without the helper drops the block entity id and crashes on save.");
+    }
+
+    @Test
     @DisplayName("All language tooltips describe the air-right-click rule")
     void materialTooltipDescribesAirRightClickInEveryLanguage() throws IOException {
         List<Path> langFiles = TestSourceUtils.listByGlob(LANG_DIR, "*.json");

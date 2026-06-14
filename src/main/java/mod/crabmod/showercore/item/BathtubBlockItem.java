@@ -2,6 +2,7 @@ package mod.crabmod.showercore.item;
 
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -156,7 +157,7 @@ public class BathtubBlockItem extends BlockItem {
         CustomData customData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
         CompoundTag tag = customData == null ? new CompoundTag() : customData.copyTag();
         tag.putString(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID, materialBlockId.toString());
-        CustomData.set(DataComponents.BLOCK_ENTITY_DATA, stack, tag);
+        BlockItem.setBlockEntityData(stack, BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(), tag);
     }
 
     private static Component getMaterialName(ResourceLocation materialBlockId) {
