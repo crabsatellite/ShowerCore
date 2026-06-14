@@ -5,7 +5,6 @@ import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.registers.BlocksRegister;
-import mod.crabmod.showercore.registers.CreativeTabRegister;
 import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ItemRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
@@ -37,7 +36,6 @@ public class ShowerCore {
   public ShowerCore(IEventBus modEventBus, ModContainer modContainer) {
     ItemRegister.register(modEventBus);
     BlocksRegister.register(modEventBus);
-    CreativeTabRegister.register(modEventBus);
 
     ModEffects.register(modEventBus);
 

@@ -6,10 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -33,6 +35,8 @@ class ShowerCoreModRegistrationTest {
 
     private static final Path SHOWER_CORE_SOURCE = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore", "ShowerCore.java");
+    private static final Path CREATIVE_TAB_REGISTER_SOURCE = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore", "registers", "CreativeTabRegister.java");
 
     private static String source;
 
@@ -71,6 +75,17 @@ class ShowerCoreModRegistrationTest {
                     "ShowerCore constructor must call '" + name + ".register(modEventBus)'. Forgetting "
                             + "any one of these silently removes an entire content category at runtime.");
         }
+    }
+
+    @Test
+    @DisplayName("No separate ShowerCore creative tab is registered")
+    void noSeparateShowerCoreCreativeTabRegistered() {
+        assertFalse(source.contains("CreativeTabRegister"),
+                "ShowerCore must not register its own creative tab. Items are added to the existing "
+                        + "Hot Bath tab so creative mode does not show a second ShowerCore page.");
+        assertFalse(Files.exists(CREATIVE_TAB_REGISTER_SOURCE),
+                "CreativeTabRegister.java must stay deleted; otherwise a second ShowerCore creative "
+                        + "tab can be reintroduced by one constructor call.");
     }
 
     @Test

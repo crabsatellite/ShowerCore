@@ -79,6 +79,8 @@ import com.crabmod.hotbath.custom_fluid.SplashCustomFluidBottleItem;
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final MapCodec<BathtubBlock> CODEC = simpleCodec(BathtubBlock::new);
   private static final int MATERIAL_CHANGE_COST = 6;
+  private static final double LEGACY_SEAT_Y_OFFSET = 0.1D;
+  private static final double CLAWFOOT_SEAT_Y_OFFSET = 0.32D;
 
   @Override
   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
@@ -329,6 +331,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     return part == BedPart.FOOT ? direction : direction.getOpposite();
   }
 
+  public static SeatEntity createSeatEntity(Level level, BlockPos pos, BlockState state) {
+      return new SeatEntity(level, pos.getX() + 0.5, pos.getY() + getSeatYOffset(state), pos.getZ() + 0.5);
+  }
+
+  public static double getSeatYOffset(BlockState state) {
+      ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+      return blockId != null && blockId.getPath().startsWith("bathtub_clawfoot_")
+              ? CLAWFOOT_SEAT_Y_OFFSET
+              : LEGACY_SEAT_Y_OFFSET;
+  }
+
   @Nullable
   private static ResourceLocation getMaterialBlockId(ItemStack stack) {
       CustomData customData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
@@ -523,7 +536,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                           .append(accept).append(" ").append(deny));
                   }
               } else {
-                  SeatEntity seat = new SeatEntity(level, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
+                  SeatEntity seat = createSeatEntity(level, pos, state);
                   level.addFreshEntity(seat);
                   player.startRiding(seat);
               }
@@ -567,7 +580,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                           .append(accept).append(" ").append(deny));
                   }
               } else {
-                  SeatEntity seat = new SeatEntity(level, headPos.getX() + 0.5, headPos.getY() + 0.1, headPos.getZ() + 0.5);
+                  SeatEntity seat = createSeatEntity(level, headPos, level.getBlockState(headPos));
                   level.addFreshEntity(seat);
                   player.startRiding(seat);
               }
