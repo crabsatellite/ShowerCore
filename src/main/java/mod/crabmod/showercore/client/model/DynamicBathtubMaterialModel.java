@@ -3,7 +3,10 @@ package mod.crabmod.showercore.client.model;
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
+import mod.crabmod.showercore.item.BathtubBlockItem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,6 +17,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,9 +39,18 @@ public class DynamicBathtubMaterialModel extends BakedModelWrapper<BakedModel> {
     private static final int INTS_PER_VERTEX = 8;
     private static final int U_OFFSET = 4;
     private static final int V_OFFSET = 5;
+    @Nullable
+    private final ResourceLocation itemMaterialBlockId;
+    private final ItemOverrides overrides;
 
     public DynamicBathtubMaterialModel(BakedModel originalModel) {
+        this(originalModel, null);
+    }
+
+    private DynamicBathtubMaterialModel(BakedModel originalModel, @Nullable ResourceLocation itemMaterialBlockId) {
         super(originalModel);
+        this.itemMaterialBlockId = itemMaterialBlockId;
+        this.overrides = new MaterialItemOverrides(originalModel.getOverrides());
     }
 
     public static boolean shouldWrap(ModelResourceLocation location) {
@@ -63,8 +77,10 @@ public class DynamicBathtubMaterialModel extends BakedModelWrapper<BakedModel> {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand,
                                     ModelData extraData, @Nullable RenderType renderType) {
         List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
-        ResourceLocation materialBlockId = extraData.get(MATERIAL_BLOCK_ID);
-        if (materialBlockId == null || state == null || !(state.getBlock() instanceof BathtubBlock)) {
+        ResourceLocation materialBlockId = itemMaterialBlockId != null ? itemMaterialBlockId : extraData.get(MATERIAL_BLOCK_ID);
+        if (materialBlockId == null
+                || (state != null && !(state.getBlock() instanceof BathtubBlock))
+                || (state == null && itemMaterialBlockId == null)) {
             return quads;
         }
 
@@ -89,6 +105,11 @@ public class DynamicBathtubMaterialModel extends BakedModelWrapper<BakedModel> {
             }
         }
         return changed ? replaced : quads;
+    }
+
+    @Override
+    public ItemOverrides getOverrides() {
+        return overrides;
     }
 
     @Nullable
@@ -132,6 +153,29 @@ public class DynamicBathtubMaterialModel extends BakedModelWrapper<BakedModel> {
             float newV = toSprite.getV0() + relativeV * (toSprite.getV1() - toSprite.getV0());
             vertices[base + U_OFFSET] = Float.floatToRawIntBits(newU);
             vertices[base + V_OFFSET] = Float.floatToRawIntBits(newV);
+        }
+    }
+
+    private class MaterialItemOverrides extends ItemOverrides {
+        private final ItemOverrides delegate;
+
+        private MaterialItemOverrides(ItemOverrides delegate) {
+            this.delegate = delegate;
+        }
+
+        @Nullable
+        @Override
+        public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel level,
+                                  @Nullable LivingEntity entity, int seed) {
+            BakedModel resolved = delegate.resolve(originalModel, stack, level, entity, seed);
+            if (resolved == null) {
+                resolved = originalModel;
+            }
+            ResourceLocation materialBlockId = BathtubBlockItem.getMaterialBlockId(stack);
+            if (materialBlockId == null) {
+                return resolved;
+            }
+            return new DynamicBathtubMaterialModel(resolved, materialBlockId);
         }
     }
 }

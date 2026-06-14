@@ -30,6 +30,10 @@ class BathtubMaterialChangeEconomyRegressionTest {
             "src", "main", "java", "mod", "crabmod", "showercore", "block", "entity", "BathtubBlockEntity.java");
     private static final Path MODEL_SOURCE = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore", "client", "model", "DynamicBathtubMaterialModel.java");
+    private static final Path BATHTUB_ITEM_SOURCE = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore", "item", "BathtubBlockItem.java");
+    private static final Path SERVER_EVENT_SOURCE = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore", "event", "ServerEvent.java");
 
     private static final Pattern TRY_APPLY_SIG = Pattern.compile(
             "\\bItemInteractionResult\\s+tryApplyMaterialFromBlockItem\\s*\\(");
@@ -172,5 +176,52 @@ class BathtubMaterialChangeEconomyRegressionTest {
                 "The dynamic model should cache failed material sprite lookups as Optional.empty.");
         assertTrue(modelSource.contains("return resolved.orElse(null);"),
                 "Unresolved material sprites must return null so the original bathtub model is used.");
+    }
+
+    @Test
+    @DisplayName("Held bathtub items can be skinned from either hand")
+    void heldBathtubItemsCanBeSkinnedFromEitherHand() throws IOException {
+        String itemSource = TestSourceUtils.readSource(BATHTUB_ITEM_SOURCE);
+        assertTrue(itemSource.contains("tryApplyMaterialToHeldBathtub"),
+                "BathtubBlockItem must expose a shared item-skinning helper for direct use and event interception.");
+        assertTrue(itemSource.contains("public InteractionResult useOn(UseOnContext context)"),
+                "Right-clicking a block with the bathtub item must try item skinning before vanilla placement.");
+        assertTrue(itemSource.contains("public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)"),
+                "Right-clicking air with the bathtub item must try item skinning.");
+        assertTrue(itemSource.contains("activeHand == InteractionHand.MAIN_HAND"),
+                "The helper must inspect the opposite hand so either main-hand or offhand bathtub use works.");
+        assertTrue(itemSource.contains("materialStack.shrink(MATERIAL_CHANGE_COST)"),
+                "Held item skinning must still charge the six-block material cost.");
+        assertTrue(itemSource.contains("applyMaterialToOneBathtub"),
+                "Held item skinning must apply NBT to one bathtub item, not an entire stack.");
+    }
+
+    @Test
+    @DisplayName("Main-hand material placement is intercepted when offhand holds a bathtub")
+    void offhandBathtubInterceptsMainHandMaterialPlacement() throws IOException {
+        String serverEventSource = TestSourceUtils.readSource(SERVER_EVENT_SOURCE);
+        assertTrue(serverEventSource.contains("PlayerInteractEvent.RightClickBlock"),
+                "ServerEvent must intercept right-click block before a main-hand material block is placed.");
+        assertTrue(serverEventSource.contains("PlayerInteractEvent.RightClickItem"),
+                "ServerEvent must intercept right-click air for main-hand material plus offhand bathtub.");
+        assertTrue(serverEventSource.contains("BathtubBlockItem.tryApplyMaterialToHeldBathtub"),
+                "The event path must reuse the same held-bathtub material helper as BathtubBlockItem.");
+        assertTrue(serverEventSource.contains("getBlock() instanceof BathtubBlock"),
+                "The held-item event path must not steal clicks from placed bathtub material changes.");
+        assertTrue(serverEventSource.contains("event.setCancellationResult(result)")
+                        && serverEventSource.contains("event.setCanceled(true)"),
+                "Successful held-bathtub skinning must cancel vanilla placement/use of the material stack.");
+    }
+
+    @Test
+    @DisplayName("Bathtub item rendering reads MaterialBlockId from ItemStack NBT")
+    void bathtubItemRenderingReadsStackMaterial() throws IOException {
+        String modelSource = TestSourceUtils.readSource(MODEL_SOURCE);
+        assertTrue(modelSource.contains("getOverrides()"),
+                "DynamicBathtubMaterialModel must override item model resolution.");
+        assertTrue(modelSource.contains("BathtubBlockItem.getMaterialBlockId(stack)"),
+                "Item rendering must read MaterialBlockId from the ItemStack, not only from block entities.");
+        assertTrue(modelSource.contains("itemMaterialBlockId"),
+                "Resolved item models must carry the stack material id into getQuads.");
     }
 }
