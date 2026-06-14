@@ -72,6 +72,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.nbt.CompoundTag;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
+  private static final int MATERIAL_CHANGE_COST = 6;
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
   public static final BooleanProperty RUNNING = BooleanProperty.create("running");
   public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
@@ -370,10 +371,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       if (materialBlockId == null) {
           return InteractionResult.PASS;
       }
+      if (!player.isCreative() && itemstack.getCount() < MATERIAL_CHANGE_COST) {
+          if (!level.isClientSide) {
+              player.displayClientMessage(Component.translatable("message.showercore.bathtub.material.not_enough",
+                      MATERIAL_CHANGE_COST), true);
+          }
+          return InteractionResult.sidedSuccess(level.isClientSide);
+      }
       if (!level.isClientSide) {
           boolean changed = setMaterialForConnectedParts(level, pos, state, materialBlockId);
           if (changed && !player.isCreative()) {
-              itemstack.shrink(1);
+              itemstack.shrink(MATERIAL_CHANGE_COST);
           }
           level.playSound(null, pos, materialBlock.defaultBlockState().getSoundType().getPlaceSound(),
                   net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
