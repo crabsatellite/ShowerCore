@@ -1,7 +1,6 @@
 package mod.crabmod.showercore.event;
 
 import mod.crabmod.showercore.ShowerCore;
-import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.entity.ShowerHeadContainerEntity;
 import mod.crabmod.showercore.item.BathtubBlockItem;
 import net.minecraft.world.InteractionResult;
@@ -30,25 +29,8 @@ public class ServerEvent {
     }
 
     @SubscribeEvent
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        handleHeldBathtubMaterialUse(event);
-    }
-
-    @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         handleHeldBathtubMaterialUse(event);
-    }
-
-    private static void handleHeldBathtubMaterialUse(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getLevel().getBlockState(event.getPos()).getBlock() instanceof BathtubBlock) {
-            return;
-        }
-        InteractionResult result = BathtubBlockItem.tryApplyMaterialToHeldBathtub(
-                event.getLevel(), event.getEntity(), event.getHand());
-        if (result.consumesAction()) {
-            event.setCancellationResult(result);
-            event.setCanceled(true);
-        }
     }
 
     private static void handleHeldBathtubMaterialUse(PlayerInteractEvent.RightClickItem event) {

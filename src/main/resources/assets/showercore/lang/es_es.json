@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6Clic derecho con mano vacía: §rSentarse en la Bañera",
   "tooltip.showercore.bathtub.usage.toggle": "§6Clic derecho en el grifo con mano vacía: §rAlternar Grifo",
   "tooltip.showercore.bathtub.usage.fill": "§6Clic derecho con Cubo: §rLlenar/Vaciar Fluido",
-  "tooltip.showercore.bathtub.usage.material": "§6Mano principal con 6+ bloques: §rConsumir 6 bloques y cambiar material",
+  "tooltip.showercore.bathtub.usage.material": "§6Bañera + 6+ bloques en ambas manos, clic derecho al aire: §rConsumir 6 bloques y cambiar material",
   "message.showercore.bathtub.material.not_enough": "Necesitas al menos %s bloques iguales para cambiar el material de la bañera.",
   "tooltip.showercore.bathtub.usage.duck": "§6Clic derecho con Pato de Goma: §rColocar Pato de Goma",
   "item.showercore.rubber_duck": "Pato de Goma",

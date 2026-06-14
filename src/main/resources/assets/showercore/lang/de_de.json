@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6Rechtsklick mit leerer Hand: §rIn Badewanne setzen",
   "tooltip.showercore.bathtub.usage.toggle": "§6Rechtsklick auf Wasserhahn mit leerer Hand: §rWasserhahn umschalten",
   "tooltip.showercore.bathtub.usage.fill": "§6Rechtsklick mit Eimer: §rFlüssigkeit füllen/leeren",
-  "tooltip.showercore.bathtub.usage.material": "§6Haupthand mit 6+ Blöcken: §r6 Blöcke verbrauchen und Material ändern",
+  "tooltip.showercore.bathtub.usage.material": "§6Badewanne + 6+ Blöcke in beiden Händen, Rechtsklick in die Luft: §r6 Blöcke verbrauchen und Material ändern",
   "message.showercore.bathtub.material.not_enough": "Du brauchst mindestens %s gleiche Blöcke, um das Badewannenmaterial zu ändern.",
   "tooltip.showercore.bathtub.usage.duck": "§6Rechtsklick mit Gummiente: §rGummiente platzieren",
   "item.showercore.rubber_duck": "Gummiente",
