@@ -20,6 +20,7 @@ import mod.crabmod.showercore.particle.ShowerParticle;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
 import mod.crabmod.showercore.client.renderer.BathtubBlockEntityRenderer;
+import mod.crabmod.showercore.client.model.DynamicBathtubMaterialModel;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.registers.EntityRegister;
 import mod.crabmod.showercore.registers.ParticleRegister;
@@ -27,6 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.SuspendedTownParticle;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -46,6 +48,15 @@ import com.crabmod.hotbath.custom_fluid.CustomFluidAPI;
     bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
+
+  @SubscribeEvent
+  public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
+    DynamicBathtubMaterialModel.clearCache();
+    event.getModels().replaceAll((location, model) ->
+        DynamicBathtubMaterialModel.shouldWrap(location)
+            ? new DynamicBathtubMaterialModel(model)
+            : model);
+  }
 
   @SubscribeEvent
   public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
