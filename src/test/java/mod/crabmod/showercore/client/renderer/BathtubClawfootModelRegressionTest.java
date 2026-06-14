@@ -82,6 +82,34 @@ class BathtubClawfootModelRegressionTest {
     }
 
     @Test
+    @DisplayName("Split clawfoot corner rotations stay anchored to their own boxes")
+    void splitCornerRotationsStayAnchoredToTheirOwnBoxes() throws IOException {
+        for (String template : new String[] {
+                "bathtub_clawfoot_head_empty.json",
+                "bathtub_clawfoot_head_faucet.json",
+                "bathtub_clawfoot_foot_empty.json"
+        }) {
+            JsonObject model = readTemplate(template);
+            for (JsonElement element : model.getAsJsonArray("elements")) {
+                JsonObject box = element.getAsJsonObject();
+                if (!box.has("rotation")) {
+                    continue;
+                }
+                JsonObject rotation = box.getAsJsonObject("rotation");
+                if (!"y".equals(rotation.get("axis").getAsString())
+                        || Math.abs(rotation.get("angle").getAsDouble()) < 0.0001) {
+                    continue;
+                }
+                double originZ = rotation.getAsJsonArray("origin").get(2).getAsDouble();
+                double fromZ = box.getAsJsonArray("from").get(2).getAsDouble();
+                double toZ = box.getAsJsonArray("to").get(2).getAsDouble();
+                assertTrue(originZ >= fromZ - 0.0001 && originZ <= toZ + 0.0001,
+                        template + " has a rotated corner whose origin is outside its own z range.");
+            }
+        }
+    }
+
+    @Test
     @DisplayName("Clawfoot templates define vanilla fixed decoration textures")
     void templatesDefineFixedDecorationTextures() throws IOException {
         for (String template : CLAWFOOT_TEMPLATES) {
