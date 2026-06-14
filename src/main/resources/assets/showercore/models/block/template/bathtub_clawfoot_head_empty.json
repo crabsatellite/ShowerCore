@@ -440,12 +440,12 @@
         1.5
       ],
       "rotation": {
-        "angle": 45,
+        "angle": -45,
         "axis": "y",
         "origin": [
           13,
           4,
-          15
+          1
         ]
       },
       "faces": {
@@ -499,12 +499,12 @@
         3.5
       ],
       "rotation": {
-        "angle": -45,
+        "angle": 45,
         "axis": "y",
         "origin": [
           1,
           4,
-          13
+          3
         ]
       },
       "faces": {
