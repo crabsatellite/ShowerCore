@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6素手で右クリック: §rバスタブに座る",
   "tooltip.showercore.bathtub.usage.toggle": "§6素手で蛇口を右クリック: §r蛇口の切り替え",
   "tooltip.showercore.bathtub.usage.fill": "§6バケツを持って右クリック: §r液体を入れる/出す",
-  "tooltip.showercore.bathtub.usage.material": "§6ブロックを持って右クリック: §r素材を変更",
+  "tooltip.showercore.bathtub.usage.material": "§6ブロックで右クリック: §rブロックを消費して素材を変更",
   "tooltip.showercore.bathtub.usage.duck": "§6ラバーダックを持って右クリック: §rラバーダックを置く",
   "item.showercore.rubber_duck": "ラバーダック",
   "entity.showercore.rubber_duck": "ラバーダック",

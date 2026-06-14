@@ -116,7 +116,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6Empty Hand Right Click: §rSit in Bathtub",
   "tooltip.showercore.bathtub.usage.toggle": "§6Right Click Faucet with Empty Hand: §rToggle Faucet",
   "tooltip.showercore.bathtub.usage.fill": "§6Right Click with Bucket: §rFill/Empty Fluid",
-  "tooltip.showercore.bathtub.usage.material": "§6Right Click with Block: §rChange Material",
+  "tooltip.showercore.bathtub.usage.material": "§6Right Click with Block: §rConsume Block and Change Material",
   "tooltip.showercore.bathtub.usage.duck": "§6Right Click with Rubber Duck: §rPlace Rubber Duck",
   "item.showercore.rubber_duck": "Rubber Duck",
   "entity.showercore.rubber_duck": "Rubber Duck",

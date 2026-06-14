@@ -116,7 +116,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6空手右鍵：§r坐入浴缸",
   "tooltip.showercore.bathtub.usage.toggle": "§6空手右鍵龍頭：§r開關水龍頭",
   "tooltip.showercore.bathtub.usage.fill": "§6手持液體桶右鍵：§r加註/取出液體",
-  "tooltip.showercore.bathtub.usage.material": "§6手持方塊右鍵：§r更換材質",
+  "tooltip.showercore.bathtub.usage.material": "§6手持方塊右鍵：§r消耗方塊並更換材質",
   "tooltip.showercore.bathtub.usage.duck": "§6手持小黃鴨右鍵：§r放置小黃鴨",
   "item.showercore.rubber_duck": "小黃鴨",
   "entity.showercore.rubber_duck": "小黃鴨",
