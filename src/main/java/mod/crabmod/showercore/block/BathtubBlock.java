@@ -78,6 +78,7 @@ import com.crabmod.hotbath.custom_fluid.SplashCustomFluidBottleItem;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
   public static final MapCodec<BathtubBlock> CODEC = simpleCodec(BathtubBlock::new);
+  private static final int MATERIAL_CHANGE_COST = 6;
 
   @Override
   protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
@@ -392,10 +393,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       if (materialBlockId == null) {
           return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
+      if (!player.isCreative() && itemstack.getCount() < MATERIAL_CHANGE_COST) {
+          if (!level.isClientSide) {
+              player.displayClientMessage(Component.translatable("message.showercore.bathtub.material.not_enough",
+                      MATERIAL_CHANGE_COST), true);
+          }
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
+      }
       if (!level.isClientSide) {
           boolean changed = setMaterialForConnectedParts(level, pos, state, materialBlockId);
           if (changed && !player.isCreative()) {
-              itemstack.shrink(1);
+              itemstack.shrink(MATERIAL_CHANGE_COST);
           }
           SoundEvent sound = materialBlock.defaultBlockState().getSoundType().getPlaceSound();
           level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
