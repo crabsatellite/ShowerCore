@@ -110,6 +110,29 @@ class BathtubClawfootModelRegressionTest {
     }
 
     @Test
+    @DisplayName("Clawfoot rounded corners stay on the outside rim")
+    void roundedCornersStayOnOutsideRim() throws IOException {
+        JsonObject full = readTemplate("bathtub_clawfoot.json");
+        assertRotatedBoundsTouch(full, 9, 0, 0, Double.NaN, Double.NaN);
+        assertRotatedBoundsTouch(full, 10, Double.NaN, Double.NaN, 16, 32);
+        assertRotatedBoundsTouch(full, 11, 0, Double.NaN, Double.NaN, 32);
+        assertRotatedBoundsTouch(full, 12, Double.NaN, 0, 16, Double.NaN);
+
+        for (String template : new String[] {
+                "bathtub_clawfoot_head_empty.json",
+                "bathtub_clawfoot_head_faucet.json"
+        }) {
+            JsonObject head = readTemplate(template);
+            assertRotatedBoundsTouch(head, 6, Double.NaN, 0, 16, Double.NaN);
+            assertRotatedBoundsTouch(head, 7, 0, 0, Double.NaN, Double.NaN);
+        }
+
+        JsonObject foot = readTemplate("bathtub_clawfoot_foot_empty.json");
+        assertRotatedBoundsTouch(foot, 6, 0, Double.NaN, Double.NaN, 16);
+        assertRotatedBoundsTouch(foot, 7, Double.NaN, Double.NaN, 16, 16);
+    }
+
+    @Test
     @DisplayName("Clawfoot templates define vanilla fixed decoration textures")
     void templatesDefineFixedDecorationTextures() throws IOException {
         for (String template : CLAWFOOT_TEMPLATES) {
@@ -183,6 +206,56 @@ class BathtubClawfootModelRegressionTest {
         JsonObject element = model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject();
         assertEquals(texture, element.getAsJsonObject("faces").getAsJsonObject(face).get("texture").getAsString(),
                 "Element " + elementIndex + " " + face + " face texture");
+    }
+
+    private static void assertRotatedBoundsTouch(JsonObject model, int elementIndex,
+                                                 double minX, double minZ, double maxX, double maxZ) {
+        double[] bounds = rotatedXZBounds(model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject());
+        if (!Double.isNaN(minX)) {
+            assertCoordEquals(bounds[0], minX, "Element " + elementIndex + " min x");
+        }
+        if (!Double.isNaN(minZ)) {
+            assertCoordEquals(bounds[1], minZ, "Element " + elementIndex + " min z");
+        }
+        if (!Double.isNaN(maxX)) {
+            assertCoordEquals(bounds[2], maxX, "Element " + elementIndex + " max x");
+        }
+        if (!Double.isNaN(maxZ)) {
+            assertCoordEquals(bounds[3], maxZ, "Element " + elementIndex + " max z");
+        }
+    }
+
+    private static double[] rotatedXZBounds(JsonObject element) {
+        JsonArray from = element.getAsJsonArray("from");
+        JsonArray to = element.getAsJsonArray("to");
+        JsonObject rotation = element.getAsJsonObject("rotation");
+        JsonArray origin = rotation.getAsJsonArray("origin");
+        double angle = Math.toRadians(rotation.get("angle").getAsDouble());
+        double originX = origin.get(0).getAsDouble();
+        double originZ = origin.get(2).getAsDouble();
+        double[] xs = { from.get(0).getAsDouble(), to.get(0).getAsDouble() };
+        double[] zs = { from.get(2).getAsDouble(), to.get(2).getAsDouble() };
+        double minX = Double.POSITIVE_INFINITY;
+        double minZ = Double.POSITIVE_INFINITY;
+        double maxX = Double.NEGATIVE_INFINITY;
+        double maxZ = Double.NEGATIVE_INFINITY;
+        for (double x : xs) {
+            for (double z : zs) {
+                double dx = x - originX;
+                double dz = z - originZ;
+                double rotatedX = originX + dx * Math.cos(angle) + dz * Math.sin(angle);
+                double rotatedZ = originZ - dx * Math.sin(angle) + dz * Math.cos(angle);
+                minX = Math.min(minX, rotatedX);
+                minZ = Math.min(minZ, rotatedZ);
+                maxX = Math.max(maxX, rotatedX);
+                maxZ = Math.max(maxZ, rotatedZ);
+            }
+        }
+        return new double[] { minX, minZ, maxX, maxZ };
+    }
+
+    private static void assertCoordEquals(double actual, double expected, String message) {
+        assertTrue(Math.abs(actual - expected) < 0.001, message + " expected " + expected + " but was " + actual);
     }
 
     private static boolean coordsEqual(JsonArray actual, double x, double y, double z) {
