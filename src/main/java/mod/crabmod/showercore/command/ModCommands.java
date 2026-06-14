@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.commands.arguments.EntityArgument;
 import mod.crabmod.showercore.ShowerCore;
+import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -47,10 +48,10 @@ public class ModCommands {
                             BlockPos seatPos = seat.blockPosition();
                             
                             // Let's try to find the BathtubBlock at the seat's position
-                            if (level.getBlockState(seatPos).getBlock() instanceof mod.crabmod.showercore.block.BathtubBlock) {
+                            if (level.getBlockState(seatPos).getBlock() instanceof BathtubBlock) {
                                 net.minecraft.world.level.block.state.BlockState state = level.getBlockState(seatPos);
-                                net.minecraft.core.Direction facing = state.getValue(mod.crabmod.showercore.block.BathtubBlock.FACING);
-                                net.minecraft.world.level.block.state.properties.BedPart part = state.getValue(mod.crabmod.showercore.block.BathtubBlock.PART);
+                                net.minecraft.core.Direction facing = state.getValue(BathtubBlock.FACING);
+                                net.minecraft.world.level.block.state.properties.BedPart part = state.getValue(BathtubBlock.PART);
                                 
                                 BlockPos targetPos;
                                 if (part == net.minecraft.world.level.block.state.properties.BedPart.HEAD) {
@@ -68,8 +69,14 @@ public class ModCommands {
                                      return 0;
                                 }
 
+                                net.minecraft.world.level.block.state.BlockState targetState = level.getBlockState(targetPos);
+                                if (!(targetState.getBlock() instanceof BathtubBlock)) {
+                                    context.getSource().sendFailure(Component.translatable("message.showercore.not_in_bathtub"));
+                                    return 0;
+                                }
+
                                 // Spawn seat at target position
-                                SeatEntity targetSeat = new SeatEntity(level, targetPos.getX() + 0.5, targetPos.getY() + 0.1, targetPos.getZ() + 0.5);
+                                SeatEntity targetSeat = BathtubBlock.createSeatEntity(level, targetPos, targetState);
                                 level.addFreshEntity(targetSeat);
                                 requester.startRiding(targetSeat);
                                 
