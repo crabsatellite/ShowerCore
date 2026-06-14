@@ -177,9 +177,10 @@
   "gui.showercore.filter.shower_heads": "??? ??",
   "gui.showercore.filter.bathtubs": "??",
   "gui.showercore.filter.clawfoot_bathtubs": "??? ??",
+  "gui.showercore.filter.hot_bath_fluids": "Hot Bath 유체",
   "gui.showercore.filter.accessories": "???",
   "gui.showercore.filter.scroll_up": "?? ??",
   "gui.showercore.filter.scroll_down": "?? ??",
-  "gui.showercore.filter.enable_all": "?? ShowerCore ?? ??",
-  "gui.showercore.filter.disable_all": "?? ShowerCore ?? ???"
+  "gui.showercore.filter.enable_all": "모든 필터 분류 표시",
+  "gui.showercore.filter.disable_all": "모든 필터 분류 숨기기"
 }

@@ -177,9 +177,10 @@
   "gui.showercore.filter.shower_heads": "Duschkoepfe",
   "gui.showercore.filter.bathtubs": "Badewannen",
   "gui.showercore.filter.clawfoot_bathtubs": "Klauenfuss-Badewannen",
+  "gui.showercore.filter.hot_bath_fluids": "Hot-Bath-Fluide",
   "gui.showercore.filter.accessories": "Zubehoer",
   "gui.showercore.filter.scroll_up": "Vorherige Kategorien",
   "gui.showercore.filter.scroll_down": "Naechste Kategorien",
-  "gui.showercore.filter.enable_all": "Alle ShowerCore-Kategorien anzeigen",
-  "gui.showercore.filter.disable_all": "Alle ShowerCore-Kategorien ausblenden"
+  "gui.showercore.filter.enable_all": "Alle Filterkategorien anzeigen",
+  "gui.showercore.filter.disable_all": "Alle Filterkategorien ausblenden"
 }

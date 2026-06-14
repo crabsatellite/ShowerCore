@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashSet;
@@ -34,6 +35,8 @@ class CreativeFilterSidebarRegressionTest {
             "widget", "CreativeFilterIconButton.java");
     private static final Path TAG_ROOT = Paths.get(
             "src", "main", "resources", "data", "showercore", "tags", "items", "creative");
+    private static final Path LANG_ROOT = Paths.get(
+            "src", "main", "resources", "assets", "showercore", "lang");
 
     @Test
     @DisplayName("Client setup registers the in-tab creative filter sidebar")
@@ -54,11 +57,40 @@ class CreativeFilterSidebarRegressionTest {
                 "The sidebar must attach to Hot Bath's existing creative tab, not a new ShowerCore tab.");
         assertTrue(source.contains("captureBaseTabItems"),
                 "The filter must snapshot the original Hot Bath tab contents before replacing the menu.");
-        assertTrue(source.contains("!showerCoreItems.contains(stack.getItem())"),
+        assertTrue(source.contains("!filteredItems.contains(stack.getItem())"),
                 "Hot Bath or third-party items in the same tab must remain visible while ShowerCore "
                         + "categories are filtered.");
         assertTrue(source.contains("menu.items.clear()") && source.contains("menu.items.addAll(newItems)"),
                 "Changing category buttons must rebuild the current creative menu items.");
+    }
+
+    @Test
+    @DisplayName("Hot Bath host-tab containers are categorized as copied ItemStacks")
+    void hotBathHostItemsAreCategorizedAsStacks() throws IOException {
+        String source = TestSourceUtils.readSource(FILTER_EVENT_SOURCE);
+
+        assertTrue(source.contains("HOT_BATH_NAMESPACE = \"hotbath\""),
+                "The sidebar must explicitly recognize Hot Bath host-tab items.");
+        assertTrue(source.contains("Component.translatable(\"gui.showercore.filter.hot_bath_fluids\")"),
+                "Hot Bath buckets and bottles need their own visible filter tab.");
+        assertTrue(source.contains("ItemRegister.HOT_WATER_BUCKET.get()"),
+                "The Hot Bath fluid tab should use a real Hot Bath bucket icon.");
+        assertTrue(source.contains("captureHostCategoryStacks(screen)"),
+                "Host-tab stacks must be classified before the base list is captured.");
+        assertTrue(source.contains("path.endsWith(\"_bucket\") || path.endsWith(\"_bottle\")"),
+                "All Hot Bath bucket and bottle item ids should enter the fluid filter.");
+        assertTrue(source.contains("\"bath_herb\".equals(id.getPath())"),
+                "Hot Bath's bath herb should be moved into the existing accessories filter.");
+        assertTrue(source.contains("private final List<ItemStack> stacks = new ArrayList<>()"),
+                "Filters must store ItemStacks, not only Items.");
+        assertTrue(source.contains("public void add(ItemStack stack)") &&
+                        source.contains("this.stacks.add(stack.copy())"),
+                "Captured Hot Bath custom-fluid stacks must be copied with their data intact.");
+        assertTrue(source.contains("categorizedStacks.add(stack.copy())") &&
+                        source.contains("newItems.add(stack.copy())"),
+                "Rebuilding the creative menu must preserve the categorized stack data.");
+        assertFalse(source.contains("for (Item item : categorizedItems)"),
+                "The creative filter must not recreate categorized entries from bare Items.");
     }
 
     @Test
@@ -99,12 +131,15 @@ class CreativeFilterSidebarRegressionTest {
         assertTrue(iconButtonSource.contains("super(x, y, 20, 20, CommonComponents.EMPTY"));
         assertTrue(iconButtonSource.contains("drawChevronUp"));
         assertTrue(iconButtonSource.contains("drawChevronDown"));
-        assertTrue(iconButtonSource.contains("drawPlus"));
-        assertTrue(iconButtonSource.contains("drawMinus"));
+        assertTrue(iconButtonSource.contains("drawAllCategories"));
+        assertTrue(iconButtonSource.contains("drawNoCategories"));
+        assertTrue(iconButtonSource.contains("drawCategoryGrid"));
+        assertFalse(iconButtonSource.contains("drawPlus"));
+        assertFalse(iconButtonSource.contains("drawMinus"));
     }
 
     @Test
-    @DisplayName("All five creative filter item tags are declared")
+    @DisplayName("All ShowerCore-backed creative filter item tags are declared")
     void creativeFilterTagsDeclared() throws IOException {
         String source = TestSourceUtils.readSource(TAG_SOURCE);
 
@@ -116,6 +151,24 @@ class CreativeFilterSidebarRegressionTest {
                 "creative/accessories")) {
             assertTrue(source.contains("\"" + tag + "\""),
                     "Missing ShowerCore item tag declaration for " + tag);
+        }
+    }
+
+    @Test
+    @DisplayName("Every locale names the Hot Bath fluid filter and neutral global controls")
+    void allLocalesNameHotBathFilterAndNeutralControls() throws IOException {
+        try (var paths = Files.list(LANG_ROOT)) {
+            for (Path path : paths.filter(p -> p.getFileName().toString().endsWith(".json")).toList()) {
+                String source = TestSourceUtils.readSource(path);
+                assertTrue(source.contains("\"gui.showercore.filter.hot_bath_fluids\""),
+                        "Missing Hot Bath fluid filter name in " + path.getFileName());
+                assertFalse(Pattern.compile(
+                                "\"gui\\.showercore\\.filter\\.(enable_all|disable_all)\"\\s*:\\s*\"[^\"]*ShowerCore")
+                        .matcher(source)
+                        .find(),
+                        "Global filter-control tooltip should not say it only affects ShowerCore in "
+                                + path.getFileName());
+            }
         }
     }
 
