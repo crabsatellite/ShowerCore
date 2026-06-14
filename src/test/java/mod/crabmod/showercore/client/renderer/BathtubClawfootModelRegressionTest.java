@@ -59,7 +59,7 @@ class BathtubClawfootModelRegressionTest {
         JsonObject foot = readTemplate("bathtub_clawfoot_foot_empty.json");
         JsonObject full = readTemplate("bathtub_clawfoot.json");
 
-        assertElementTexture(head, 0, "#base");
+        assertBaseElementUsesBodyInteriorFloor(head);
         assertElementTexture(head, 1, "#faucet");
         assertElementTexture(head, 2, "#feet");
         assertElementTexture(head, 3, "#feet");
@@ -67,11 +67,11 @@ class BathtubClawfootModelRegressionTest {
         assertElementTexture(head, 10, "#hot_button");
         assertElementTexture(head, 11, "#cold_button");
 
-        assertElementTexture(foot, 0, "#base");
+        assertBaseElementUsesBodyInteriorFloor(foot);
         assertElementTexture(foot, 1, "#feet");
         assertElementTexture(foot, 2, "#feet");
 
-        assertElementTexture(full, 0, "#base");
+        assertBaseElementUsesBodyInteriorFloor(full);
         assertElementTexture(full, 1, "#faucet");
         for (int i = 2; i <= 5; i++) {
             assertElementTexture(full, i, "#feet");
@@ -170,6 +170,19 @@ class BathtubClawfootModelRegressionTest {
                 "Element " + elementIndex + " should use a single texture slot.");
         assertTrue(elementTextures(element).contains(texture),
                 "Element " + elementIndex + " must use " + texture + ".");
+    }
+
+    private static void assertBaseElementUsesBodyInteriorFloor(JsonObject model) {
+        assertFaceTexture(model, 0, "up", "#body");
+        for (String face : new String[] { "north", "east", "south", "west", "down" }) {
+            assertFaceTexture(model, 0, face, "#base");
+        }
+    }
+
+    private static void assertFaceTexture(JsonObject model, int elementIndex, String face, String texture) {
+        JsonObject element = model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject();
+        assertEquals(texture, element.getAsJsonObject("faces").getAsJsonObject(face).get("texture").getAsString(),
+                "Element " + elementIndex + " " + face + " face texture");
     }
 
     private static boolean coordsEqual(JsonArray actual, double x, double y, double z) {
