@@ -26,6 +26,12 @@ class CreativeFilterSidebarRegressionTest {
     private static final Path TAG_SOURCE = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore", "common",
             "ShowerCoreItemTags.java");
+    private static final Path TAG_BUTTON_SOURCE = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore", "client", "gui",
+            "widget", "CreativeFilterTagButton.java");
+    private static final Path ICON_BUTTON_SOURCE = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore", "client", "gui",
+            "widget", "CreativeFilterIconButton.java");
     private static final Path TAG_ROOT = Paths.get(
             "src", "main", "resources", "data", "showercore", "tags", "item", "creative");
     private static final Path LEGACY_TAG_ROOT = Paths.get(
@@ -55,6 +61,48 @@ class CreativeFilterSidebarRegressionTest {
                         + "categories are filtered.");
         assertTrue(source.contains("menu.items.clear()") && source.contains("menu.items.addAll(newItems)"),
                 "Changing category buttons must rebuild the current creative menu items.");
+    }
+
+    @Test
+    @DisplayName("Creative filter sidebar uses MrCrayfish-style side tabs and icon controls")
+    void sidebarUsesSideTabsAndIconControls() throws IOException {
+        String eventSource = TestSourceUtils.readSource(FILTER_EVENT_SOURCE);
+        String tagButtonSource = TestSourceUtils.readSource(TAG_BUTTON_SOURCE);
+        String iconButtonSource = TestSourceUtils.readSource(ICON_BUTTON_SOURCE);
+
+        assertTrue(eventSource.contains("new CreativeFilterIconButton("),
+                "Filter controls should be icon buttons, not text buttons.");
+        for (String icon : List.of("SCROLL_UP", "SCROLL_DOWN", "ENABLE_ALL", "DISABLE_ALL")) {
+            assertTrue(eventSource.contains("CreativeFilterIconButton.Icon." + icon),
+                    "Missing filter control icon " + icon);
+        }
+        assertFalse(eventSource.contains("Button.builder"));
+        assertFalse(eventSource.contains("Component.literal(\"^\")"));
+        assertFalse(eventSource.contains("Component.literal(\"v\")"));
+        assertFalse(eventSource.contains("Component.literal(\"+\")"));
+        assertFalse(eventSource.contains("Component.literal(\"-\")"));
+        assertTrue(eventSource.contains("this.guiLeft - 28"));
+        assertTrue(eventSource.contains("this.guiTop + 29 * (i - startIndex) + 10"));
+        assertTrue(eventSource.contains("this.guiLeft - 22"));
+        assertTrue(eventSource.contains("this.guiTop - 12"));
+        assertTrue(eventSource.contains("this.guiTop + 127"));
+        assertTrue(eventSource.contains("this.guiLeft - 50"));
+        assertTrue(eventSource.contains("this.guiTop + 32"));
+
+        assertTrue(tagButtonSource.contains("SELECTED_WIDTH = 32"));
+        assertTrue(tagButtonSource.contains("UNSELECTED_WIDTH = 28"));
+        assertTrue(tagButtonSource.contains("TAB_HEIGHT = 28"));
+        assertTrue(tagButtonSource.contains("super(x, y, SELECTED_WIDTH, TAB_HEIGHT"));
+        assertTrue(tagButtonSource.contains("this.toggled ? SELECTED_WIDTH : UNSELECTED_WIDTH"));
+        assertTrue(tagButtonSource.contains("graphics.renderItem(this.icon, x + 8, y + 6)"));
+        assertFalse(tagButtonSource.contains("tab_top_selected"));
+        assertFalse(tagButtonSource.contains("blitSprite"));
+
+        assertTrue(iconButtonSource.contains("super(x, y, 20, 20, CommonComponents.EMPTY"));
+        assertTrue(iconButtonSource.contains("drawChevronUp"));
+        assertTrue(iconButtonSource.contains("drawChevronDown"));
+        assertTrue(iconButtonSource.contains("drawPlus"));
+        assertTrue(iconButtonSource.contains("drawMinus"));
     }
 
     @Test
