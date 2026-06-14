@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6ПКМ пустой рукой: §rСесть в ванну",
   "tooltip.showercore.bathtub.usage.toggle": "§6ПКМ по крану пустой рукой: §rВкл/Выкл кран",
   "tooltip.showercore.bathtub.usage.fill": "§6ПКМ с Ведром: §rНаполнить/Опустошить",
-  "tooltip.showercore.bathtub.usage.material": "§6ПКМ с 6+ блоками: §rПотратить 6 блоков и сменить материал",
+  "tooltip.showercore.bathtub.usage.material": "§6В основной руке 6+ блоков: §rПотратить 6 блоков и сменить материал",
   "message.showercore.bathtub.material.not_enough": "Нужно минимум %s одинаковых блоков, чтобы сменить материал ванны.",
   "tooltip.showercore.bathtub.usage.duck": "§6ПКМ с Резиновой уточкой: §rРазместить уточку",
   "item.showercore.rubber_duck": "Резиновая уточка",

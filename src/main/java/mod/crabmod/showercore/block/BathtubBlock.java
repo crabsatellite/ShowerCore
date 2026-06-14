@@ -351,6 +351,22 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       return changed;
   }
 
+  private boolean materialMatchesConnectedParts(BlockGetter level, BlockPos pos, BlockState state, @Nullable ResourceLocation materialBlockId) {
+      boolean matches = materialMatchesAt(level, pos, materialBlockId);
+      Direction direction = state.getValue(FACING);
+      BedPart part = state.getValue(PART);
+      BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
+      return matches && materialMatchesAt(level, otherPos, materialBlockId);
+  }
+
+  private boolean materialMatchesAt(BlockGetter level, BlockPos pos, @Nullable ResourceLocation materialBlockId) {
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
+          return java.util.Objects.equals(bathtubEntity.getMaterialBlockId(), materialBlockId);
+      }
+      return true;
+  }
+
   private boolean setMaterialAt(Level level, BlockPos pos, @Nullable ResourceLocation materialBlockId) {
       BlockEntity blockEntity = level.getBlockEntity(pos);
       if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
@@ -381,7 +397,10 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
               : materialBlock.defaultBlockState().getSoundType(level, pos, entity);
   }
 
-  private ItemInteractionResult tryApplyMaterialFromBlockItem(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player) {
+  private ItemInteractionResult tryApplyMaterialFromBlockItem(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand) {
+      if (hand != InteractionHand.MAIN_HAND) {
+          return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+      }
       if (!(itemstack.getItem() instanceof BlockItem blockItem)) {
           return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
@@ -392,6 +411,9 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       ResourceLocation materialBlockId = BuiltInRegistries.BLOCK.getKey(materialBlock);
       if (materialBlockId == null) {
           return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+      }
+      if (materialMatchesConnectedParts(level, pos, state, materialBlockId)) {
+          return ItemInteractionResult.sidedSuccess(level.isClientSide);
       }
       if (!player.isCreative() && itemstack.getCount() < MATERIAL_CHANGE_COST) {
           if (!level.isClientSide) {
@@ -405,8 +427,10 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           if (changed && !player.isCreative()) {
               itemstack.shrink(MATERIAL_CHANGE_COST);
           }
-          SoundEvent sound = materialBlock.defaultBlockState().getSoundType().getPlaceSound();
-          level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
+          if (changed) {
+              SoundEvent sound = materialBlock.defaultBlockState().getSoundType().getPlaceSound();
+              level.playSound(null, pos, sound, net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
+          }
       }
       return ItemInteractionResult.sidedSuccess(level.isClientSide);
   }
@@ -459,7 +483,7 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           }
       }
 
-      ItemInteractionResult materialResult = tryApplyMaterialFromBlockItem(itemstack, state, level, pos, player);
+      ItemInteractionResult materialResult = tryApplyMaterialFromBlockItem(itemstack, state, level, pos, player, hand);
       if (materialResult != ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION) {
           return materialResult;
       }
