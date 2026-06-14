@@ -12,7 +12,7 @@
       "url": "https://github.com/crabsatellite/ShowerCore"
     },
     "1.1.0": {
-      "changes": "Compatible with HotBath 4.0.0, fixed known bugs",
+      "changes": "Compatible with HotBath 4.0.0; added clawfoot bathtubs; added dynamic bathtub material reskins using 6 matching blocks; optimized bathtub model resources; improved localized tooltips and fixed known rendering/interaction bugs",
       "url": "https://github.com/crabsatellite/ShowerCore"
     }
   },
@@ -22,7 +22,7 @@
       "url": "https://github.com/crabsatellite/ShowerCore"
     },
     "1.1.0": {
-      "changes": "Compatible with HotBath 4.0.0, fixed known bugs",
+      "changes": "Compatible with HotBath 4.0.0; added clawfoot bathtubs; added dynamic bathtub material reskins using 6 matching blocks; optimized bathtub model resources; improved localized tooltips and fixed known rendering/interaction bugs",
       "url": "https://github.com/crabsatellite/ShowerCore"
     }
   }
