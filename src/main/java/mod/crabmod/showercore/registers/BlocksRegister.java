@@ -11,6 +11,7 @@ import mod.crabmod.showercore.block.bath_core.milk_bath_core.MilkBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreBlock;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlock;
 import mod.crabmod.showercore.item.BathtubBlockItem;
+import mod.crabmod.showercore.item.ShowerHeadBlockItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -649,6 +650,9 @@ public class BlocksRegister {
     return ItemRegister.ITEMS.register(
         name, () -> {
             T b = block.get();
+            if (b instanceof ShowerHeadBlock) {
+                return new ShowerHeadBlockItem(b, new Item.Properties());
+            }
             if (b instanceof BathtubBlock) {
                 return new BathtubBlockItem(b, new Item.Properties());
             }

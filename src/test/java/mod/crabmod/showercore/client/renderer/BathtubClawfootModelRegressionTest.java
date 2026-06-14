@@ -82,6 +82,14 @@ class BathtubClawfootModelRegressionTest {
     }
 
     @Test
+    @DisplayName("Clawfoot faucet bases stay outside the bowl interior")
+    void faucetBasesStayOutsideBowlInterior() throws IOException {
+        assertElementFromX(readTemplate("bathtub_clawfoot.json"), 1, 14);
+        assertElementFromX(readTemplate("bathtub_clawfoot_head_empty.json"), 1, 14);
+        assertElementFromX(readTemplate("bathtub_clawfoot_head_faucet.json"), 1, 14);
+    }
+
+    @Test
     @DisplayName("Split clawfoot corner rotations stay anchored to their own boxes")
     void splitCornerRotationsStayAnchoredToTheirOwnBoxes() throws IOException {
         for (String template : new String[] {
@@ -193,6 +201,12 @@ class BathtubClawfootModelRegressionTest {
                 "Element " + elementIndex + " should use a single texture slot.");
         assertTrue(elementTextures(element).contains(texture),
                 "Element " + elementIndex + " must use " + texture + ".");
+    }
+
+    private static void assertElementFromX(JsonObject model, int elementIndex, double expectedX) {
+        JsonObject element = model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject();
+        assertCoordEquals(element.getAsJsonArray("from").get(0).getAsDouble(), expectedX,
+                "Element " + elementIndex + " from x");
     }
 
     private static void assertBaseElementUsesBodyInteriorFloor(JsonObject model) {

@@ -171,5 +171,14 @@
   "message.showercore.squeezed_in": "You squeezed in!",
   "message.showercore.not_in_bathtub": "You are not in a bathtub!",
   "message.showercore.request_denied": "Your request was denied. It's a private session.",
-  "message.showercore.denied_request": "You denied the request."
+  "message.showercore.denied_request": "You denied the request.",
+  "gui.showercore.filter.bath_cores": "Bath Cores",
+  "gui.showercore.filter.shower_heads": "Shower Heads",
+  "gui.showercore.filter.bathtubs": "Bathtubs",
+  "gui.showercore.filter.clawfoot_bathtubs": "Clawfoot Bathtubs",
+  "gui.showercore.filter.accessories": "Accessories",
+  "gui.showercore.filter.scroll_up": "Previous categories",
+  "gui.showercore.filter.scroll_down": "Next categories",
+  "gui.showercore.filter.enable_all": "Show all ShowerCore categories",
+  "gui.showercore.filter.disable_all": "Hide all ShowerCore categories"
 }

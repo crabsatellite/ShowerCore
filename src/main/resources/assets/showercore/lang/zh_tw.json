@@ -171,5 +171,14 @@
   "message.showercore.squeezed_in": "你擠進去了！",
   "message.showercore.not_in_bathtub": "你不在浴缸裡！",
   "message.showercore.request_denied": "對方拒絕了你的請求。這是私人時間。",
-  "message.showercore.denied_request": "你拒絕了請求。"
+  "message.showercore.denied_request": "你拒絕了請求。",
+  "gui.showercore.filter.bath_cores": "????",
+  "gui.showercore.filter.shower_heads": "??",
+  "gui.showercore.filter.bathtubs": "??",
+  "gui.showercore.filter.clawfoot_bathtubs": "????",
+  "gui.showercore.filter.accessories": "??",
+  "gui.showercore.filter.scroll_up": "?????",
+  "gui.showercore.filter.scroll_down": "?????",
+  "gui.showercore.filter.enable_all": "???? ShowerCore ??",
+  "gui.showercore.filter.disable_all": "???? ShowerCore ??"
 }

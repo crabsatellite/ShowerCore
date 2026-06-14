@@ -1,6 +1,7 @@
 package mod.crabmod.showercore;
 
 import com.mojang.logging.LogUtils;
+import mod.crabmod.showercore.client.event.CreativeFilterScreenEvents;
 import mod.crabmod.showercore.effect.ModEffects;
 import mod.crabmod.showercore.event.ClientEvent;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
@@ -236,6 +237,7 @@ public class ShowerCore {
   public static class ClientModEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+      NeoForge.EVENT_BUS.register(new CreativeFilterScreenEvents());
     }
   }
 }
