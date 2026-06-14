@@ -1,24 +1,59 @@
 package mod.crabmod.showercore.item;
 
+import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
+import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BathtubBlockItem extends BlockItem {
+    private static final int MATERIAL_CHANGE_COST = 6;
+
     public BathtubBlockItem(Block block, Properties properties) {
         super(block, properties);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Player player = context.getPlayer();
+        if (player != null) {
+            InteractionResult materialResult = tryApplyMaterialToHeldBathtub(context.getLevel(), player, context.getHand());
+            if (materialResult.consumesAction()) {
+                return materialResult;
+            }
+        }
+        return super.useOn(context);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        InteractionResult materialResult = tryApplyMaterialToHeldBathtub(level, player, hand);
+        if (materialResult.consumesAction()) {
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        }
+        return InteractionResultHolder.pass(stack);
     }
 
     @Override
@@ -37,12 +72,99 @@ public class BathtubBlockItem extends BlockItem {
     }
 
     @Nullable
-    private static ResourceLocation getMaterialBlockId(ItemStack stack) {
+    public static ResourceLocation getMaterialBlockId(ItemStack stack) {
         CompoundTag tag = BlockItem.getBlockEntityData(stack);
         if (tag == null || !tag.contains(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID)) {
             return null;
         }
         return ResourceLocation.tryParse(tag.getString(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID));
+    }
+
+    public static InteractionResult tryApplyMaterialToHeldBathtub(Level level, Player player, InteractionHand activeHand) {
+        InteractionHand otherHand = activeHand == InteractionHand.MAIN_HAND
+                ? InteractionHand.OFF_HAND
+                : InteractionHand.MAIN_HAND;
+        ItemStack activeStack = player.getItemInHand(activeHand);
+        ItemStack otherStack = player.getItemInHand(otherHand);
+
+        if (activeStack.getItem() instanceof BathtubBlockItem && isMaterialStack(otherStack)) {
+            return applyMaterial(level, player, activeHand, otherHand);
+        }
+        if (otherStack.getItem() instanceof BathtubBlockItem && isMaterialStack(activeStack)) {
+            return applyMaterial(level, player, otherHand, activeHand);
+        }
+        return InteractionResult.PASS;
+    }
+
+    private static boolean isMaterialStack(ItemStack stack) {
+        if (!(stack.getItem() instanceof BlockItem blockItem)) {
+            return false;
+        }
+        Block materialBlock = blockItem.getBlock();
+        return !(materialBlock instanceof BathtubBlock) && materialBlock != Blocks.AIR;
+    }
+
+    private static InteractionResult applyMaterial(Level level, Player player, InteractionHand bathtubHand, InteractionHand materialHand) {
+        ItemStack bathtubStack = player.getItemInHand(bathtubHand);
+        ItemStack materialStack = player.getItemInHand(materialHand);
+        if (!(bathtubStack.getItem() instanceof BathtubBlockItem)
+                || !(materialStack.getItem() instanceof BlockItem blockItem)) {
+            return InteractionResult.PASS;
+        }
+
+        Block materialBlock = blockItem.getBlock();
+        if (materialBlock instanceof BathtubBlock || materialBlock == Blocks.AIR) {
+            return InteractionResult.PASS;
+        }
+
+        ResourceLocation materialBlockId = ForgeRegistries.BLOCKS.getKey(materialBlock);
+        if (materialBlockId == null) {
+            return InteractionResult.PASS;
+        }
+        if (Objects.equals(getMaterialBlockId(bathtubStack), materialBlockId)) {
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        if (!player.isCreative() && materialStack.getCount() < MATERIAL_CHANGE_COST) {
+            if (!level.isClientSide) {
+                player.displayClientMessage(Component.translatable("message.showercore.bathtub.material.not_enough",
+                        MATERIAL_CHANGE_COST), true);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        if (!level.isClientSide) {
+            applyMaterialToOneBathtub(player, bathtubHand, bathtubStack, materialBlockId);
+            if (!player.isCreative()) {
+                materialStack.shrink(MATERIAL_CHANGE_COST);
+            }
+            SoundEvent sound = materialBlock.defaultBlockState().getSoundType().getPlaceSound();
+            level.playSound(null, player.blockPosition(), sound, SoundSource.BLOCKS, 0.7F, 1.0F);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private static void applyMaterialToOneBathtub(Player player, InteractionHand bathtubHand,
+                                                  ItemStack bathtubStack, ResourceLocation materialBlockId) {
+        if (bathtubStack.getCount() <= 1) {
+            setMaterialBlockId(bathtubStack, materialBlockId);
+            return;
+        }
+
+        ItemStack remainder = bathtubStack.copy();
+        remainder.setCount(bathtubStack.getCount() - 1);
+        ItemStack skinnedBathtub = bathtubStack.copy();
+        skinnedBathtub.setCount(1);
+        setMaterialBlockId(skinnedBathtub, materialBlockId);
+        player.setItemInHand(bathtubHand, skinnedBathtub);
+        if (!player.getInventory().add(remainder)) {
+            player.drop(remainder, false);
+        }
+    }
+
+    private static void setMaterialBlockId(ItemStack stack, ResourceLocation materialBlockId) {
+        CompoundTag tag = BlockItem.getBlockEntityData(stack);
+        tag = tag == null ? new CompoundTag() : tag.copy();
+        tag.putString(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID, materialBlockId.toString());
+        BlockItem.setBlockEntityData(stack, BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(), tag);
     }
 
     private static Component getMaterialName(ResourceLocation materialBlockId) {
