@@ -176,9 +176,10 @@
   "gui.showercore.filter.shower_heads": "Shower Heads",
   "gui.showercore.filter.bathtubs": "Bathtubs",
   "gui.showercore.filter.clawfoot_bathtubs": "Clawfoot Bathtubs",
+  "gui.showercore.filter.hot_bath_fluids": "Hot Bath Fluids",
   "gui.showercore.filter.accessories": "Accessories",
   "gui.showercore.filter.scroll_up": "Previous categories",
   "gui.showercore.filter.scroll_down": "Next categories",
-  "gui.showercore.filter.enable_all": "Show all ShowerCore categories",
-  "gui.showercore.filter.disable_all": "Hide all ShowerCore categories"
+  "gui.showercore.filter.enable_all": "Show all filter categories",
+  "gui.showercore.filter.disable_all": "Hide all filter categories"
 }

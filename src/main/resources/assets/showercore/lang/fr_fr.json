@@ -177,9 +177,10 @@
   "gui.showercore.filter.shower_heads": "Pommes de douche",
   "gui.showercore.filter.bathtubs": "Baignoires",
   "gui.showercore.filter.clawfoot_bathtubs": "Baignoires a pieds",
+  "gui.showercore.filter.hot_bath_fluids": "Fluides Hot Bath",
   "gui.showercore.filter.accessories": "Accessoires",
   "gui.showercore.filter.scroll_up": "Categories precedentes",
   "gui.showercore.filter.scroll_down": "Categories suivantes",
-  "gui.showercore.filter.enable_all": "Afficher toutes les categories ShowerCore",
-  "gui.showercore.filter.disable_all": "Masquer toutes les categories ShowerCore"
+  "gui.showercore.filter.enable_all": "Afficher toutes les categories du filtre",
+  "gui.showercore.filter.disable_all": "Masquer toutes les categories du filtre"
 }

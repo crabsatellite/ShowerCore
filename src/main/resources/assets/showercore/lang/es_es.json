@@ -177,9 +177,10 @@
   "gui.showercore.filter.shower_heads": "Cabezales de ducha",
   "gui.showercore.filter.bathtubs": "Baneras",
   "gui.showercore.filter.clawfoot_bathtubs": "Baneras con patas",
+  "gui.showercore.filter.hot_bath_fluids": "Fluidos de Hot Bath",
   "gui.showercore.filter.accessories": "Accesorios",
   "gui.showercore.filter.scroll_up": "Categorias anteriores",
   "gui.showercore.filter.scroll_down": "Categorias siguientes",
-  "gui.showercore.filter.enable_all": "Mostrar todas las categorias de ShowerCore",
-  "gui.showercore.filter.disable_all": "Ocultar todas las categorias de ShowerCore"
+  "gui.showercore.filter.enable_all": "Mostrar todas las categorias del filtro",
+  "gui.showercore.filter.disable_all": "Ocultar todas las categorias del filtro"
 }

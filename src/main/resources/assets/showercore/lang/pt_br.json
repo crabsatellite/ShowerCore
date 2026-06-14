@@ -177,9 +177,10 @@
   "gui.showercore.filter.shower_heads": "Chuveiros",
   "gui.showercore.filter.bathtubs": "Banheiras",
   "gui.showercore.filter.clawfoot_bathtubs": "Banheiras com pes",
+  "gui.showercore.filter.hot_bath_fluids": "Fluidos Hot Bath",
   "gui.showercore.filter.accessories": "Acessorios",
   "gui.showercore.filter.scroll_up": "Categorias anteriores",
   "gui.showercore.filter.scroll_down": "Proximas categorias",
-  "gui.showercore.filter.enable_all": "Mostrar todas as categorias do ShowerCore",
-  "gui.showercore.filter.disable_all": "Ocultar todas as categorias do ShowerCore"
+  "gui.showercore.filter.enable_all": "Mostrar todas as categorias do filtro",
+  "gui.showercore.filter.disable_all": "Ocultar todas as categorias do filtro"
 }

@@ -176,9 +176,10 @@
   "gui.showercore.filter.shower_heads": "??",
   "gui.showercore.filter.bathtubs": "??",
   "gui.showercore.filter.clawfoot_bathtubs": "????",
+  "gui.showercore.filter.hot_bath_fluids": "Hot Bath流體",
   "gui.showercore.filter.accessories": "??",
   "gui.showercore.filter.scroll_up": "?????",
   "gui.showercore.filter.scroll_down": "?????",
-  "gui.showercore.filter.enable_all": "???? ShowerCore ??",
-  "gui.showercore.filter.disable_all": "???? ShowerCore ??"
+  "gui.showercore.filter.enable_all": "顯示全部篩選分類",
+  "gui.showercore.filter.disable_all": "隱藏全部篩選分類"
 }

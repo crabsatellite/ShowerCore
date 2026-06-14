@@ -34,11 +34,14 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 
 public class CreativeFilterScreenEvents {
   private static final int VISIBLE_FILTERS = 4;
+  private static final String HOT_BATH_NAMESPACE = "hotbath";
   private static int startIndex;
 
   private List<TagFilter> filters;
   private List<CreativeFilterTagButton> buttons;
   private List<ItemStack> baseTabItems;
+  private TagFilter hotBathFluidsFilter;
+  private TagFilter accessoriesFilter;
   private Button btnScrollUp;
   private Button btnScrollDown;
   private Button btnEnableAll;
@@ -221,10 +224,11 @@ public class CreativeFilterScreenEvents {
     if (this.baseTabItems != null) {
       return;
     }
-    Set<Item> showerCoreItems = this.getFilteredItems();
+    this.captureHostCategoryStacks(screen);
+    Set<Item> filteredItems = this.getFilteredItems();
     this.baseTabItems = new ArrayList<>();
     for (ItemStack stack : screen.getMenu().items) {
-      if (!stack.isEmpty() && !showerCoreItems.contains(stack.getItem())) {
+      if (!stack.isEmpty() && !filteredItems.contains(stack.getItem())) {
         this.baseTabItems.add(stack.copy());
       }
     }
@@ -232,10 +236,12 @@ public class CreativeFilterScreenEvents {
 
   private void updateItems(CreativeModeInventoryScreen screen) {
     CreativeModeInventoryScreen.ItemPickerMenu menu = screen.getMenu();
-    LinkedHashSet<Item> categorizedItems = new LinkedHashSet<>();
+    List<ItemStack> categorizedStacks = new ArrayList<>();
     for (TagFilter filter : this.filters) {
       if (filter.isEnabled()) {
-        categorizedItems.addAll(filter.getItems());
+        for (ItemStack stack : filter.getStacks()) {
+          categorizedStacks.add(stack.copy());
+        }
       }
     }
 
@@ -245,8 +251,8 @@ public class CreativeFilterScreenEvents {
         newItems.add(stack.copy());
       }
     }
-    for (Item item : categorizedItems) {
-      newItems.add(new ItemStack(item));
+    for (ItemStack stack : categorizedStacks) {
+      newItems.add(stack.copy());
     }
 
     menu.items.clear();
@@ -258,14 +264,26 @@ public class CreativeFilterScreenEvents {
   private Set<Item> getFilteredItems() {
     LinkedHashSet<Item> items = new LinkedHashSet<>();
     for (TagFilter filter : this.filters) {
-      items.addAll(filter.getItems());
+      for (ItemStack stack : filter.getStacks()) {
+        items.add(stack.getItem());
+      }
     }
     return items;
   }
 
   private void compileItems() {
+    TagFilter hotBathFluids =
+        new TagFilter(
+            Component.translatable("gui.showercore.filter.hot_bath_fluids"),
+            new ItemStack(com.crabmod.hotbath.registers.ItemRegister.HOT_WATER_BUCKET.get()));
+    TagFilter accessories =
+        new TagFilter(
+            ShowerCoreItemTags.ACCESSORIES,
+            Component.translatable("gui.showercore.filter.accessories"),
+            new ItemStack(ItemRegister.RUBBER_DUCK.get()));
     TagFilter[] compiledFilters =
         new TagFilter[] {
+          hotBathFluids,
           new TagFilter(
               ShowerCoreItemTags.BATH_CORES,
               Component.translatable("gui.showercore.filter.bath_cores"),
@@ -282,10 +300,7 @@ public class CreativeFilterScreenEvents {
               ShowerCoreItemTags.CLAWFOOT_BATHTUBS,
               Component.translatable("gui.showercore.filter.clawfoot_bathtubs"),
               new ItemStack(BlocksRegister.BATHTUB_CLAWFOOT_WHITE.get())),
-          new TagFilter(
-              ShowerCoreItemTags.ACCESSORIES,
-              Component.translatable("gui.showercore.filter.accessories"),
-              new ItemStack(ItemRegister.RUBBER_DUCK.get()))
+          accessories
         };
 
     BuiltInRegistries.ITEM.stream()
@@ -301,19 +316,32 @@ public class CreativeFilterScreenEvents {
                                 .forEach(
                                     tagKey -> {
                                       for (TagFilter filter : compiledFilters) {
-                                        if (Objects.equals(tagKey, filter.getTag())) {
+                                        if (filter.getTag() != null
+                                            && Objects.equals(tagKey, filter.getTag())) {
                                           filter.add(item);
                                         }
                                       }
                                     })));
 
     for (TagFilter filter : compiledFilters) {
-      if (filter.getItems().isEmpty()) {
+      if (filter.getTag() != null && filter.getStacks().isEmpty()) {
         this.addFallbackItems(filter);
       }
     }
 
+    this.hotBathFluidsFilter = hotBathFluids;
+    this.accessoriesFilter = accessories;
     this.filters = new ArrayList<>(Arrays.asList(compiledFilters));
+  }
+
+  private void captureHostCategoryStacks(CreativeModeInventoryScreen screen) {
+    for (ItemStack stack : screen.getMenu().items) {
+      if (this.isHotBathFluidContainer(stack)) {
+        this.hotBathFluidsFilter.add(stack);
+      } else if (this.isHotBathAccessory(stack)) {
+        this.accessoriesFilter.add(stack);
+      }
+    }
   }
 
   private void addFallbackItems(TagFilter filter) {
@@ -331,6 +359,22 @@ public class CreativeFilterScreenEvents {
   private static boolean isShowerCoreItem(Item item) {
     ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
     return id != null && ShowerCore.MODID.equals(id.getNamespace());
+  }
+
+  private boolean isHotBathFluidContainer(ItemStack stack) {
+    ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+    if (id == null || !HOT_BATH_NAMESPACE.equals(id.getNamespace())) {
+      return false;
+    }
+    String path = id.getPath();
+    return path.endsWith("_bucket") || path.endsWith("_bottle");
+  }
+
+  private boolean isHotBathAccessory(ItemStack stack) {
+    ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+    return id != null
+        && HOT_BATH_NAMESPACE.equals(id.getNamespace())
+        && "bath_herb".equals(id.getPath());
   }
 
   private static boolean fallbackMatches(TagKey<Item> tag, String path) {
@@ -353,11 +397,15 @@ public class CreativeFilterScreenEvents {
   }
 
   public static class TagFilter {
-    private final List<Item> items = new ArrayList<>();
+    private final List<ItemStack> stacks = new ArrayList<>();
     private final TagKey<Item> tag;
     private final Component name;
     private final ItemStack icon;
     private boolean enabled = true;
+
+    private TagFilter(Component name, ItemStack icon) {
+      this(null, name, icon);
+    }
 
     private TagFilter(TagKey<Item> tag, Component name, ItemStack icon) {
       this.tag = tag;
@@ -386,15 +434,21 @@ public class CreativeFilterScreenEvents {
     }
 
     public void add(Item item) {
-      this.items.add(item);
+      this.add(new ItemStack(item));
     }
 
     public void add(Block block) {
-      this.items.add(Item.byBlock(block));
+      this.add(Item.byBlock(block));
     }
 
-    public List<Item> getItems() {
-      return this.items;
+    public void add(ItemStack stack) {
+      if (!stack.isEmpty()) {
+        this.stacks.add(stack.copy());
+      }
+    }
+
+    public List<ItemStack> getStacks() {
+      return this.stacks;
     }
   }
 }
