@@ -134,6 +134,10 @@ class CreativeFilterSidebarRegressionTest {
         assertTrue(iconButtonSource.contains("drawAllCategories"));
         assertTrue(iconButtonSource.contains("drawNoCategories"));
         assertTrue(iconButtonSource.contains("drawCategoryGrid"));
+        assertTrue(iconButtonSource.contains("ENABLE_MARK_COLOR = 0xFF55FF55"));
+        assertTrue(iconButtonSource.contains("DISABLE_MARK_COLOR = 0xFFFF5555"));
+        assertTrue(iconButtonSource.contains("drawCheckMark"));
+        assertTrue(iconButtonSource.contains("drawXMark"));
         assertFalse(iconButtonSource.contains("drawPlus"));
         assertFalse(iconButtonSource.contains("drawMinus"));
     }
