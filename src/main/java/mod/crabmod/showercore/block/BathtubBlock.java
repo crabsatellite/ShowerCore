@@ -72,7 +72,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.nbt.CompoundTag;
 
 public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBlock {
-  private static final int MATERIAL_CHANGE_COST = 6;
   private static final double LEGACY_SEAT_Y_OFFSET = 0.1D;
   private static final double CLAWFOOT_SEAT_Y_OFFSET = 0.32D;
   public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -332,42 +331,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       return ResourceLocation.tryParse(tag.getString(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID));
   }
 
-  private boolean setMaterialForConnectedParts(Level level, BlockPos pos, BlockState state, @Nullable ResourceLocation materialBlockId) {
-      boolean changed = setMaterialAt(level, pos, materialBlockId);
-      Direction direction = state.getValue(FACING);
-      BedPart part = state.getValue(PART);
-      BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
-      changed |= setMaterialAt(level, otherPos, materialBlockId);
-      return changed;
-  }
-
-  private boolean materialMatchesConnectedParts(BlockGetter level, BlockPos pos, BlockState state, @Nullable ResourceLocation materialBlockId) {
-      boolean matches = materialMatchesAt(level, pos, materialBlockId);
-      Direction direction = state.getValue(FACING);
-      BedPart part = state.getValue(PART);
-      BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
-      return matches && materialMatchesAt(level, otherPos, materialBlockId);
-  }
-
-  private boolean materialMatchesAt(BlockGetter level, BlockPos pos, @Nullable ResourceLocation materialBlockId) {
-      BlockEntity blockEntity = level.getBlockEntity(pos);
-      if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
-          return java.util.Objects.equals(bathtubEntity.getMaterialBlockId(), materialBlockId);
-      }
-      return true;
-  }
-
-  private boolean setMaterialAt(Level level, BlockPos pos, @Nullable ResourceLocation materialBlockId) {
-      BlockEntity blockEntity = level.getBlockEntity(pos);
-      if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
-          if (!java.util.Objects.equals(bathtubEntity.getMaterialBlockId(), materialBlockId)) {
-              bathtubEntity.setMaterialBlockId(materialBlockId);
-              return true;
-          }
-      }
-      return false;
-  }
-
   @Nullable
   private static Block getMaterialBlock(BlockGetter level, BlockPos pos) {
       BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -388,46 +351,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
               : materialBlock.defaultBlockState().getSoundType(level, pos, entity);
   }
 
-  private InteractionResult tryApplyMaterialFromBlockItem(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand) {
-      if (hand != InteractionHand.MAIN_HAND) {
-          return InteractionResult.PASS;
-      }
-      if (!(itemstack.getItem() instanceof BlockItem blockItem)) {
-          return InteractionResult.PASS;
-      }
-      Block materialBlock = blockItem.getBlock();
-      if (materialBlock instanceof BathtubBlock || materialBlock == Blocks.AIR) {
-          return InteractionResult.PASS;
-      }
-      ResourceLocation materialBlockId = ForgeRegistries.BLOCKS.getKey(materialBlock);
-      if (materialBlockId == null) {
-          return InteractionResult.PASS;
-      }
-      if (materialMatchesConnectedParts(level, pos, state, materialBlockId)) {
-          return InteractionResult.sidedSuccess(level.isClientSide);
-      }
-      if (!player.isCreative() && itemstack.getCount() < MATERIAL_CHANGE_COST) {
-          if (!level.isClientSide) {
-              player.displayClientMessage(Component.translatable("message.showercore.bathtub.material.not_enough",
-                      MATERIAL_CHANGE_COST), true);
-          }
-          return InteractionResult.sidedSuccess(level.isClientSide);
-      }
-      if (!level.isClientSide) {
-          boolean changed = setMaterialForConnectedParts(level, pos, state, materialBlockId);
-          if (changed && !player.isCreative()) {
-              itemstack.shrink(MATERIAL_CHANGE_COST);
-          }
-          if (changed) {
-              level.playSound(null, pos, materialBlock.defaultBlockState().getSoundType().getPlaceSound(),
-                      net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
-          }
-      }
-      return InteractionResult.sidedSuccess(level.isClientSide);
-  }
-
-
-
   @Override
   public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
       ItemStack itemstack = player.getItemInHand(hand);
@@ -435,11 +358,6 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       // Place Rubber Duck
       if (itemstack.getItem() == mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get()) {
           return InteractionResult.PASS;
-      }
-
-      InteractionResult materialResult = tryApplyMaterialFromBlockItem(itemstack, state, level, pos, player, hand);
-      if (materialResult != InteractionResult.PASS) {
-          return materialResult;
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {

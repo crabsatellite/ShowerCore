@@ -17,7 +17,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -32,18 +31,6 @@ public class BathtubBlockItem extends BlockItem {
 
     public BathtubBlockItem(Block block, Properties properties) {
         super(block, properties);
-    }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        Player player = context.getPlayer();
-        if (player != null) {
-            InteractionResult materialResult = tryApplyMaterialToHeldBathtub(context.getLevel(), player, context.getHand());
-            if (materialResult.consumesAction()) {
-                return materialResult;
-            }
-        }
-        return super.useOn(context);
     }
 
     @Override

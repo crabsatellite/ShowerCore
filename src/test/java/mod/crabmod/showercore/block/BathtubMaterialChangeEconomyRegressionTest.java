@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Source-level regression gates for dynamic bathtub material changes.
  *
- * <p>The material system is economy-sensitive: it lets any block skin a bathtub,
- * so the server-side interaction must not make expensive appearances cheaper
- * than the old six-block recipes, must not double-charge through offhand/mainhand
- * corner cases, and must not refund old material on replacement.
+ * <p>Material changes are item crafting, not placed-block mutation: players must
+ * hold a bathtub and the material in opposite hands, then right-click air. Placed
+ * bathtubs keep their saved material data for rendering/sound, but cannot be
+ * reskinned by right-clicking them with a block.
  */
 class BathtubMaterialChangeEconomyRegressionTest {
 
@@ -34,51 +35,82 @@ class BathtubMaterialChangeEconomyRegressionTest {
             "src", "main", "java", "mod", "crabmod", "showercore", "item", "BathtubBlockItem.java");
     private static final Path SERVER_EVENT_SOURCE = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore", "event", "ServerEvent.java");
+    private static final Path LANG_DIR = Paths.get(
+            "src", "main", "resources", "assets", "showercore", "lang");
 
-    private static final Pattern TRY_APPLY_SIG = Pattern.compile(
-            "\\bInteractionResult\\s+tryApplyMaterialFromBlockItem\\s*\\(");
+    private static final Pattern ITEM_APPLY_SIG = Pattern.compile(
+            "\\bInteractionResult\\s+applyMaterial\\s*\\(");
     private static final Pattern GET_MATERIAL_BLOCK_SIG = Pattern.compile(
             "\\bBlock\\s+getMaterialBlock\\s*\\(");
 
     private static String bathtubSource;
-    private static String materialBody;
+    private static String itemSource;
+    private static String itemApplyBody;
+    private static String serverEventSource;
 
     @BeforeAll
     static void loadSource() throws IOException {
         bathtubSource = TestSourceUtils.readSource(BATHTUB_SOURCE);
-        materialBody = TestSourceUtils.extractMethodBody(
-                bathtubSource, TRY_APPLY_SIG, "BathtubBlock.tryApplyMaterialFromBlockItem");
+        itemSource = TestSourceUtils.readSource(BATHTUB_ITEM_SOURCE);
+        itemApplyBody = TestSourceUtils.extractMethodBody(
+                itemSource, ITEM_APPLY_SIG, "BathtubBlockItem.applyMaterial");
+        serverEventSource = TestSourceUtils.readSource(SERVER_EVENT_SOURCE);
+    }
+
+    @Test
+    @DisplayName("Placed bathtubs cannot be reskinned by right-clicking with a block")
+    void placedBathtubSkinningIsDisabled() {
+        assertFalse(bathtubSource.contains("tryApplyMaterialFromBlockItem"),
+                "BathtubBlock must not expose a placed-block material change path.");
+        assertFalse(bathtubSource.contains("setMaterialForConnectedParts"),
+                "Placed bathtub halves must not be mutated by material block right-clicks.");
+        assertFalse(serverEventSource.contains("PlayerInteractEvent.RightClickBlock"),
+                "Held-bathtub skinning must not intercept right-click block events.");
+        assertFalse(itemSource.contains("useOn(UseOnContext"),
+                "BathtubBlockItem must not skin items from useOn; that would trigger while targeting blocks.");
+    }
+
+    @Test
+    @DisplayName("Held bathtub material changes are air-right-click only")
+    void heldBathtubSkinningIsAirRightClickOnly() {
+        assertTrue(itemSource.contains("public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)"),
+                "Right-clicking air with a bathtub item must try item skinning.");
+        assertTrue(serverEventSource.contains("PlayerInteractEvent.RightClickItem"),
+                "Main-hand material plus offhand bathtub needs the air right-click item event.");
+        assertTrue(serverEventSource.contains("BathtubBlockItem.tryApplyMaterialToHeldBathtub"),
+                "The event path must reuse the same held-bathtub material helper as BathtubBlockItem.");
+        assertTrue(serverEventSource.contains("event.setCancellationResult(result)")
+                        && serverEventSource.contains("event.setCanceled(true)"),
+                "Successful held-bathtub skinning must consume the air-use event.");
     }
 
     @Test
     @DisplayName("Material changes cost exactly six source blocks")
     void materialChangeCostIsSixBlocks() {
-        assertTrue(
-                bathtubSource.contains("private static final int MATERIAL_CHANGE_COST = 6;"),
-                "Dynamic material changes must stay aligned with the old bathtub recipes: "
+        assertTrue(itemSource.contains("private static final int MATERIAL_CHANGE_COST = 6;"),
+                "Held bathtub material changes must stay aligned with the old bathtub recipes: "
                         + "survival players need and spend six matching source blocks.");
     }
 
     @Test
-    @DisplayName("Only the main hand may trigger a material change")
-    void materialChangeIsMainHandOnly() {
-        int handGuard = materialBody.indexOf("hand != InteractionHand.MAIN_HAND");
-        int blockItem = materialBody.indexOf("itemstack.getItem() instanceof BlockItem");
-        assertNotEquals(-1, handGuard,
-                "tryApplyMaterialFromBlockItem must reject offhand calls. This prevents a "
-                        + "main-hand bathtub item plus offhand material from triggering a hidden "
-                        + "second interaction path.");
-        assertNotEquals(-1, blockItem,
-                "The material interaction must still gate on a held BlockItem.");
-        assertTrue(handGuard < blockItem,
-                "The main-hand guard must run before inspecting/charging the held block item.");
+    @DisplayName("Held bathtub items can be skinned from either hand")
+    void heldBathtubItemsCanBeSkinnedFromEitherHand() {
+        assertTrue(itemSource.contains("tryApplyMaterialToHeldBathtub"),
+                "BathtubBlockItem must expose a shared item-skinning helper for direct use and event interception.");
+        assertTrue(itemSource.contains("activeHand == InteractionHand.MAIN_HAND"),
+                "The helper must inspect the opposite hand so either main-hand or offhand bathtub use works.");
+        assertTrue(itemSource.contains("applyMaterial(level, player, activeHand, otherHand)"),
+                "A main-hand bathtub plus offhand material must work.");
+        assertTrue(itemSource.contains("applyMaterial(level, player, otherHand, activeHand)"),
+                "An offhand bathtub plus main-hand material must work.");
+        assertTrue(itemSource.contains("applyMaterialToOneBathtub"),
+                "Held item skinning must apply NBT to one bathtub item, not an entire stack.");
     }
 
     @Test
     @DisplayName("Bathtub items cannot be used as material sources")
     void bathtubItemsAreNotMaterialSources() {
-        assertTrue(
-                materialBody.contains("materialBlock instanceof BathtubBlock"),
+        assertTrue(itemApplyBody.contains("materialBlock instanceof BathtubBlock"),
                 "A bathtub BlockItem must never count as a source material. Otherwise players "
                         + "could create confusing bathtub-on-bathtub interaction paths.");
     }
@@ -86,66 +118,56 @@ class BathtubMaterialChangeEconomyRegressionTest {
     @Test
     @DisplayName("Reapplying the same material is a no-op before any cost check or mutation")
     void reapplyingSameMaterialIsFreeNoOp() {
-        int sameMaterial = materialBody.indexOf("materialMatchesConnectedParts");
-        int countCheck = materialBody.indexOf("itemstack.getCount() < MATERIAL_CHANGE_COST");
-        int setMaterial = materialBody.indexOf("setMaterialForConnectedParts");
+        int sameMaterial = itemApplyBody.indexOf("Objects.equals(getMaterialBlockId(bathtubStack), materialBlockId)");
+        int countCheck = itemApplyBody.indexOf("materialStack.getCount() < MATERIAL_CHANGE_COST");
+        int setMaterial = itemApplyBody.indexOf("applyMaterialToOneBathtub");
         assertNotEquals(-1, sameMaterial,
-                "The material path must detect when both bathtub halves already have the "
-                        + "requested material.");
+                "The held item path must detect when the bathtub item already has the requested material.");
         assertNotEquals(-1, countCheck,
-                "The material path must check the held stack count before mutation.");
+                "The held item path must check the live material stack count before mutation.");
         assertNotEquals(-1, setMaterial,
-                "The material path must mutate both connected bathtub halves together.");
+                "The held item path must mutate the bathtub item NBT.");
         assertTrue(sameMaterial < countCheck,
-                "Reapplying the same material should be a no-op and should not demand six "
-                        + "blocks just to do nothing.");
+                "Reapplying the same material should be a no-op and should not demand six blocks.");
         assertTrue(sameMaterial < setMaterial,
-                "The same-material no-op must happen before setMaterialForConnectedParts so it "
-                        + "cannot consume items or resend block updates.");
+                "The same-material no-op must happen before item NBT mutation.");
     }
 
     @Test
-    @DisplayName("Insufficient stacks consume the click before any material mutation")
+    @DisplayName("Insufficient stacks consume the air click before any material mutation")
     void insufficientStackStopsBeforeMutation() {
-        int countCheck = materialBody.indexOf("itemstack.getCount() < MATERIAL_CHANGE_COST");
-        int setMaterial = materialBody.indexOf("setMaterialForConnectedParts");
+        int countCheck = itemApplyBody.indexOf("materialStack.getCount() < MATERIAL_CHANGE_COST");
+        int setMaterial = itemApplyBody.indexOf("applyMaterialToOneBathtub");
         assertTrue(countCheck >= 0 && setMaterial >= 0 && countCheck < setMaterial,
-                "The server must check the live ItemStack count before changing block entity "
-                        + "NBT. If the player dropped or otherwise lost items before the server "
-                        + "handles the click, the change must not go through.");
-        assertTrue(
-                materialBody.contains("message.showercore.bathtub.material.not_enough"),
+                "The server must check the live ItemStack count before changing bathtub item NBT.");
+        assertTrue(itemApplyBody.contains("message.showercore.bathtub.material.not_enough"),
                 "Insufficient material should produce a clear player-facing message.");
-        assertTrue(
-                materialBody.contains("return InteractionResult.sidedSuccess(level.isClientSide);"),
-                "Insufficient material must consume the interaction so vanilla/offhand placement "
-                        + "does not run after the failed skin attempt.");
+        assertTrue(itemApplyBody.contains("return InteractionResult.sidedSuccess"),
+                "Insufficient material must consume the air interaction so a later vanilla use does not run.");
     }
 
     @Test
     @DisplayName("Survival item shrink is gated by an actual material change")
     void shrinkOnlyWhenMaterialActuallyChanges() {
-        Pattern shrinkGate = Pattern.compile(
-                "if\\s*\\(\\s*changed\\s*&&\\s*!player\\.isCreative\\(\\)\\s*\\)\\s*\\{\\s*"
-                        + "itemstack\\.shrink\\(MATERIAL_CHANGE_COST\\)\\s*;",
-                Pattern.DOTALL);
-        assertTrue(shrinkGate.matcher(materialBody).find(),
-                "The source stack must shrink by MATERIAL_CHANGE_COST only after "
-                        + "setMaterialForConnectedParts reports a real change, and never in "
-                        + "creative mode.");
+        int setMaterial = itemApplyBody.indexOf("applyMaterialToOneBathtub");
+        int shrink = itemApplyBody.indexOf("materialStack.shrink(MATERIAL_CHANGE_COST)");
+        int creativeGuard = itemApplyBody.indexOf("if (!player.isCreative())");
+        assertTrue(setMaterial >= 0 && shrink >= 0 && setMaterial < shrink,
+                "The source stack must shrink only after the bathtub item NBT is changed.");
+        assertTrue(creativeGuard >= 0 && creativeGuard < shrink,
+                "Creative mode must not be charged material blocks.");
     }
 
     @Test
     @DisplayName("Replacing material does not refund the previous material")
     void replacingMaterialDoesNotRefundOldMaterial() {
-        assertFalse(materialBody.contains("popResource("),
-                "Material replacement must not drop the old material; otherwise players could "
-                        + "farm materials by swapping skins.");
-        assertFalse(materialBody.contains("spawnAtLocation("),
+        assertFalse(itemApplyBody.contains("popResource("),
+                "Material replacement must not drop the old material; otherwise players could farm materials.");
+        assertFalse(itemApplyBody.contains("spawnAtLocation("),
                 "Material replacement must not spawn the old material as an item.");
-        assertFalse(materialBody.contains("Containers.dropItemStack"),
+        assertFalse(itemApplyBody.contains("Containers.dropItemStack"),
                 "Material replacement must not drop container/item-stack refunds.");
-        assertFalse(materialBody.contains("player.addItem"),
+        assertFalse(itemApplyBody.contains("player.addItem"),
                 "Material replacement must not add the previous material back to the player.");
     }
 
@@ -154,11 +176,9 @@ class BathtubMaterialChangeEconomyRegressionTest {
     void missingMaterialModFallsBackWithoutPurgingNbt() throws IOException {
         String getMaterialBlockBody = TestSourceUtils.extractMethodBody(
                 bathtubSource, GET_MATERIAL_BLOCK_SIG, "BathtubBlock.getMaterialBlock");
-        assertTrue(
-                getMaterialBlockBody.contains("return null;"),
+        assertTrue(getMaterialBlockBody.contains("orElse(null)") || getMaterialBlockBody.contains("return null;"),
                 "Missing material blocks must fall back to the bathtub's normal sound/model behavior.");
-        assertFalse(
-                getMaterialBlockBody.contains("setMaterialBlockId(null)"),
+        assertFalse(getMaterialBlockBody.contains("setMaterialBlockId(null)"),
                 "A missing material block should not purge MaterialBlockId. Keeping the id lets "
                         + "the skin come back if the source mod is reinstalled.");
 
@@ -179,41 +199,6 @@ class BathtubMaterialChangeEconomyRegressionTest {
     }
 
     @Test
-    @DisplayName("Held bathtub items can be skinned from either hand")
-    void heldBathtubItemsCanBeSkinnedFromEitherHand() throws IOException {
-        String itemSource = TestSourceUtils.readSource(BATHTUB_ITEM_SOURCE);
-        assertTrue(itemSource.contains("tryApplyMaterialToHeldBathtub"),
-                "BathtubBlockItem must expose a shared item-skinning helper for direct use and event interception.");
-        assertTrue(itemSource.contains("public InteractionResult useOn(UseOnContext context)"),
-                "Right-clicking a block with the bathtub item must try item skinning before vanilla placement.");
-        assertTrue(itemSource.contains("public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)"),
-                "Right-clicking air with the bathtub item must try item skinning.");
-        assertTrue(itemSource.contains("activeHand == InteractionHand.MAIN_HAND"),
-                "The helper must inspect the opposite hand so either main-hand or offhand bathtub use works.");
-        assertTrue(itemSource.contains("materialStack.shrink(MATERIAL_CHANGE_COST)"),
-                "Held item skinning must still charge the six-block material cost.");
-        assertTrue(itemSource.contains("applyMaterialToOneBathtub"),
-                "Held item skinning must apply NBT to one bathtub item, not an entire stack.");
-    }
-
-    @Test
-    @DisplayName("Main-hand material placement is intercepted when offhand holds a bathtub")
-    void offhandBathtubInterceptsMainHandMaterialPlacement() throws IOException {
-        String serverEventSource = TestSourceUtils.readSource(SERVER_EVENT_SOURCE);
-        assertTrue(serverEventSource.contains("PlayerInteractEvent.RightClickBlock"),
-                "ServerEvent must intercept right-click block before a main-hand material block is placed.");
-        assertTrue(serverEventSource.contains("PlayerInteractEvent.RightClickItem"),
-                "ServerEvent must intercept right-click air for main-hand material plus offhand bathtub.");
-        assertTrue(serverEventSource.contains("BathtubBlockItem.tryApplyMaterialToHeldBathtub"),
-                "The event path must reuse the same held-bathtub material helper as BathtubBlockItem.");
-        assertTrue(serverEventSource.contains("getBlock() instanceof BathtubBlock"),
-                "The held-item event path must not steal clicks from placed bathtub material changes.");
-        assertTrue(serverEventSource.contains("event.setCancellationResult(result)")
-                        && serverEventSource.contains("event.setCanceled(true)"),
-                "Successful held-bathtub skinning must cancel vanilla placement/use of the material stack.");
-    }
-
-    @Test
     @DisplayName("Bathtub item rendering reads MaterialBlockId from ItemStack NBT")
     void bathtubItemRenderingReadsStackMaterial() throws IOException {
         String modelSource = TestSourceUtils.readSource(MODEL_SOURCE);
@@ -223,5 +208,31 @@ class BathtubMaterialChangeEconomyRegressionTest {
                 "Item rendering must read MaterialBlockId from the ItemStack, not only from block entities.");
         assertTrue(modelSource.contains("itemMaterialBlockId"),
                 "Resolved item models must carry the stack material id into getQuads.");
+    }
+
+    @Test
+    @DisplayName("All language tooltips describe the air-right-click rule")
+    void materialTooltipDescribesAirRightClickInEveryLanguage() throws IOException {
+        List<Path> langFiles = TestSourceUtils.listByGlob(LANG_DIR, "*.json");
+        List<String> obsoletePhrases = List.of(
+                "Main Hand with 6+ Blocks",
+                "主手手持 6",
+                "メインハンド",
+                "주 손에 블록",
+                "Haupthand mit 6+",
+                "Mano principal con 6+",
+                "Main principale avec 6+",
+                "Mão principal com 6+",
+                "В основной руке 6+"
+        );
+        for (Path langFile : langFiles) {
+            String source = TestSourceUtils.readSource(langFile);
+            assertTrue(source.contains("\"tooltip.showercore.bathtub.usage.material\""),
+                    langFile.getFileName() + " must define the material usage tooltip.");
+            for (String obsolete : obsoletePhrases) {
+                assertFalse(source.contains(obsolete),
+                        langFile.getFileName() + " still describes the old placed/main-hand material rule.");
+            }
+        }
     }
 }
