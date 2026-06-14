@@ -84,23 +84,23 @@ class BathtubClawfootModelRegressionTest {
     }
 
     @Test
-    @DisplayName("Clawfoot faucet controls stay outside the bowl wall")
-    void faucetControlsStayOutsideBowlWall() throws IOException {
+    @DisplayName("Clawfoot faucet controls stay attached to the right rim")
+    void faucetControlsStayAttachedToRightRim() throws IOException {
         JsonObject full = readTemplate("bathtub_clawfoot.json");
-        assertElementFromX(full, 1, 16.0625);
-        assertElementFromX(full, 14, 16.5625);
-        assertElementFromX(full, 15, 16.5625);
-        assertElementFromX(full, 16, 16.5625);
+        assertElementXRange(full, 1, 12.5, 15.5);
+        assertElementXRange(full, 14, 13, 15);
+        assertElementXRange(full, 15, 13, 15);
+        assertElementXRange(full, 16, 13, 15);
 
         for (String template : new String[] {
                 "bathtub_clawfoot_head_empty.json",
                 "bathtub_clawfoot_head_faucet.json"
         }) {
             JsonObject head = readTemplate(template);
-            assertElementFromX(head, 1, 16.0625);
-            assertElementFromX(head, 9, 16.5625);
-            assertElementFromX(head, 10, 16.5625);
-            assertElementFromX(head, 11, 16.5625);
+            assertElementXRange(head, 1, 12.5, 15.5);
+            assertElementXRange(head, 9, 13, 15);
+            assertElementXRange(head, 10, 13, 15);
+            assertElementXRange(head, 11, 13, 15);
         }
     }
 
@@ -227,10 +227,12 @@ class BathtubClawfootModelRegressionTest {
                 "Element " + elementIndex + " must use " + texture + ".");
     }
 
-    private static void assertElementFromX(JsonObject model, int elementIndex, double expectedX) {
+    private static void assertElementXRange(JsonObject model, int elementIndex, double expectedFromX, double expectedToX) {
         JsonObject element = model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject();
-        assertCoordEquals(element.getAsJsonArray("from").get(0).getAsDouble(), expectedX,
+        assertCoordEquals(element.getAsJsonArray("from").get(0).getAsDouble(), expectedFromX,
                 "Element " + elementIndex + " from x");
+        assertCoordEquals(element.getAsJsonArray("to").get(0).getAsDouble(), expectedToX,
+                "Element " + elementIndex + " to x");
     }
 
     private static List<String> decorativeCoplanarConflicts(JsonObject model) {
