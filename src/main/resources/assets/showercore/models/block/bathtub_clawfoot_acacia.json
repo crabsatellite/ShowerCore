@@ -1,0 +1,8 @@
+{
+  "parent": "showercore:block/template/bathtub_clawfoot",
+  "textures": {
+    "body": "minecraft:block/acacia_planks",
+    "metal": "minecraft:block/iron_block",
+    "particle": "minecraft:block/acacia_planks"
+  }
+}

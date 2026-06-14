@@ -1,0 +1,8 @@
+{
+  "parent": "showercore:block/template/bathtub_clawfoot_head_faucet",
+  "textures": {
+    "body": "minecraft:block/jungle_planks",
+    "metal": "minecraft:block/iron_block",
+    "particle": "minecraft:block/jungle_planks"
+  }
+}

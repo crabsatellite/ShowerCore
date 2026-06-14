@@ -1,8 +1,0 @@
-{
-  "parent": "showercore:block/template/bathtub_clawfoot_foot_empty",
-  "textures": {
-    "body": "minecraft:block/quartz_block_bottom",
-    "metal": "minecraft:block/iron_block",
-    "particle": "minecraft:block/quartz_block_bottom"
-  }
-}

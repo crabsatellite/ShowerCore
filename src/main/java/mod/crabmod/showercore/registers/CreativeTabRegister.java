@@ -21,12 +21,11 @@ public class CreativeTabRegister {
           () ->
               CreativeModeTab.builder()
                   .title(Component.translatable("itemGroup.showercore.bathtubs"))
-                  .icon(() -> new ItemStack(BlocksRegister.BATHTUB_CLAWFOOT.get()))
+                  .icon(() -> new ItemStack(BlocksRegister.BATHTUB_CLAWFOOT_WHITE.get()))
                   .displayItems((parameters, output) -> addBathtubs(output::accept))
                   .build());
 
   public static void addBathtubs(Consumer<ItemLike> output) {
-    output.accept(BlocksRegister.BATHTUB_CLAWFOOT.get());
     output.accept(BlocksRegister.BATHTUB_WHITE.get());
     output.accept(BlocksRegister.BATHTUB_ORANGE.get());
     output.accept(BlocksRegister.BATHTUB_MAGENTA.get());
@@ -60,6 +59,39 @@ public class CreativeTabRegister {
     output.accept(BlocksRegister.BATHTUB_GOLD.get());
     output.accept(BlocksRegister.BATHTUB_COPPER.get());
     output.accept(BlocksRegister.BATHTUB_DIAMOND.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_WHITE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_ORANGE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_MAGENTA.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_LIGHT_BLUE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_YELLOW.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_LIME.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_PINK.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_GRAY.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_LIGHT_GRAY.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_CYAN.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_PURPLE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_BLUE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_BROWN.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_GREEN.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_RED.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_BLACK.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_OAK.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_SPRUCE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_BIRCH.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_JUNGLE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_ACACIA.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_DARK_OAK.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_MANGROVE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_CHERRY.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_BAMBOO.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_CRIMSON.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_WARPED.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_STONE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_COBBLESTONE.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_IRON.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_GOLD.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_COPPER.get());
+    output.accept(BlocksRegister.BATHTUB_CLAWFOOT_DIAMOND.get());
   }
 
   public static void register(IEventBus eventBus) {
