@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import mod.crabmod.showercore.ShowerCore;
+import mod.crabmod.showercore.client.gui.widget.CreativeFilterIconButton;
 import mod.crabmod.showercore.client.gui.widget.CreativeFilterTagButton;
 import mod.crabmod.showercore.common.ShowerCoreItemTags;
 import mod.crabmod.showercore.registers.BlocksRegister;
 import mod.crabmod.showercore.registers.ItemRegister;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.core.NonNullList;
@@ -79,10 +79,10 @@ public class CreativeFilterScreenEvents {
 
       event.addListener(
           this.btnScrollUp =
-              createControlButton(
+              new CreativeFilterIconButton(
                   this.guiLeft - 22,
                   this.guiTop - 12,
-                  Component.literal("^"),
+                  CreativeFilterIconButton.Icon.SCROLL_UP,
                   Component.translatable("gui.showercore.filter.scroll_up"),
                   button -> {
                     if (startIndex > 0) {
@@ -93,10 +93,10 @@ public class CreativeFilterScreenEvents {
 
       event.addListener(
           this.btnScrollDown =
-              createControlButton(
+              new CreativeFilterIconButton(
                   this.guiLeft - 22,
                   this.guiTop + 127,
-                  Component.literal("v"),
+                  CreativeFilterIconButton.Icon.SCROLL_DOWN,
                   Component.translatable("gui.showercore.filter.scroll_down"),
                   button -> {
                     if (startIndex <= this.filters.size() - VISIBLE_FILTERS - 1) {
@@ -107,10 +107,10 @@ public class CreativeFilterScreenEvents {
 
       event.addListener(
           this.btnEnableAll =
-              createControlButton(
+              new CreativeFilterIconButton(
                   this.guiLeft - 50,
                   this.guiTop + 10,
-                  Component.literal("+"),
+                  CreativeFilterIconButton.Icon.ENABLE_ALL,
                   Component.translatable("gui.showercore.filter.enable_all"),
                   button -> {
                     this.filters.forEach(filter -> filter.setEnabled(true));
@@ -120,10 +120,10 @@ public class CreativeFilterScreenEvents {
 
       event.addListener(
           this.btnDisableAll =
-              createControlButton(
+              new CreativeFilterIconButton(
                   this.guiLeft - 50,
                   this.guiTop + 32,
-                  Component.literal("-"),
+                  CreativeFilterIconButton.Icon.DISABLE_ALL,
                   Component.translatable("gui.showercore.filter.disable_all"),
                   button -> {
                     this.filters.forEach(filter -> filter.setEnabled(false));
@@ -149,13 +149,6 @@ public class CreativeFilterScreenEvents {
         this.lastTab = tab;
       }
     }
-  }
-
-  private static Button createControlButton(
-      int x, int y, Component message, Component tooltip, Button.OnPress onPress) {
-    Button button = Button.builder(message, onPress).bounds(x, y, 20, 20).build();
-    button.setTooltip(Tooltip.create(tooltip));
-    return button;
   }
 
   private void onSwitchCreativeTab(CreativeModeTab tab, CreativeModeInventoryScreen screen) {
@@ -210,7 +203,7 @@ public class CreativeFilterScreenEvents {
     this.buttons.forEach(button -> button.visible = false);
     for (int i = startIndex; i < startIndex + VISIBLE_FILTERS && i < this.buttons.size(); i++) {
       CreativeFilterTagButton button = this.buttons.get(i);
-      button.setY(this.guiTop + 29 * (i - startIndex) + 11);
+      button.setY(this.guiTop + 29 * (i - startIndex) + 10);
       button.visible = true;
     }
     this.btnScrollUp.active = startIndex > 0;
