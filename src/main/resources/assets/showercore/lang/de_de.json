@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6Rechtsklick mit leerer Hand: §rIn Badewanne setzen",
   "tooltip.showercore.bathtub.usage.toggle": "§6Rechtsklick auf Wasserhahn mit leerer Hand: §rWasserhahn umschalten",
   "tooltip.showercore.bathtub.usage.fill": "§6Rechtsklick mit Eimer: §rFlüssigkeit füllen/leeren",
-  "tooltip.showercore.bathtub.usage.material": "§6Rechtsklick mit Block: §rMaterial ändern",
+  "tooltip.showercore.bathtub.usage.material": "§6Rechtsklick mit Block: §rBlock verbrauchen und Material ändern",
   "tooltip.showercore.bathtub.usage.duck": "§6Rechtsklick mit Gummiente: §rGummiente platzieren",
   "item.showercore.rubber_duck": "Gummiente",
   "entity.showercore.rubber_duck": "Gummiente",

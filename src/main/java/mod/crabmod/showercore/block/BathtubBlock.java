@@ -18,6 +18,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -358,6 +359,25 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           }
       }
       return false;
+  }
+
+  @Nullable
+  private static Block getMaterialBlock(BlockGetter level, BlockPos pos) {
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof BathtubBlockEntity bathtubEntity && bathtubEntity.getMaterialBlockId() != null) {
+          return BuiltInRegistries.BLOCK.getOptional(bathtubEntity.getMaterialBlockId())
+                  .filter(block -> !(block instanceof BathtubBlock) && block != Blocks.AIR)
+                  .orElse(null);
+      }
+      return null;
+  }
+
+  @Override
+  public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+      Block materialBlock = getMaterialBlock(level, pos);
+      return materialBlock == null
+              ? super.getSoundType(state, level, pos, entity)
+              : materialBlock.defaultBlockState().getSoundType(level, pos, entity);
   }
 
   private ItemInteractionResult tryApplyMaterialFromBlockItem(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player) {

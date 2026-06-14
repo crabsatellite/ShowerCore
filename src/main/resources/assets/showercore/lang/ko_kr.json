@@ -117,7 +117,7 @@
   "tooltip.showercore.bathtub.usage.sit": "§6빈손으로 우클릭: §r욕조에 앉기",
   "tooltip.showercore.bathtub.usage.toggle": "§6빈손으로 수도꼭지 우클릭: §r수도꼭지 켜기/끄기",
   "tooltip.showercore.bathtub.usage.fill": "§6양동이로 우클릭: §r액체 채우기/비우기",
-  "tooltip.showercore.bathtub.usage.material": "§6블록을 들고 우클릭: §r재질 변경",
+  "tooltip.showercore.bathtub.usage.material": "§6블록을 들고 우클릭: §r블록을 소비해 재질 변경",
   "tooltip.showercore.bathtub.usage.duck": "§6러버 덕으로 우클릭: §r러버 덕 배치",
   "item.showercore.rubber_duck": "러버 덕",
   "entity.showercore.rubber_duck": "러버 덕",
