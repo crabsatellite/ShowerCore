@@ -489,10 +489,137 @@ public class BlocksRegister {
       registerBlock(
           "bathtub_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
 
-  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT =
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_WHITE =
       registerBlock(
-          "bathtub_clawfoot", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+          "bathtub_clawfoot_white", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
 
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_ORANGE =
+      registerBlock(
+          "bathtub_clawfoot_orange", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_MAGENTA =
+      registerBlock(
+          "bathtub_clawfoot_magenta", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_LIGHT_BLUE =
+      registerBlock(
+          "bathtub_clawfoot_light_blue", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_YELLOW =
+      registerBlock(
+          "bathtub_clawfoot_yellow", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_LIME =
+      registerBlock(
+          "bathtub_clawfoot_lime", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_PINK =
+      registerBlock(
+          "bathtub_clawfoot_pink", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_GRAY =
+      registerBlock(
+          "bathtub_clawfoot_gray", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_LIGHT_GRAY =
+      registerBlock(
+          "bathtub_clawfoot_light_gray", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_CYAN =
+      registerBlock(
+          "bathtub_clawfoot_cyan", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_PURPLE =
+      registerBlock(
+          "bathtub_clawfoot_purple", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_BLUE =
+      registerBlock(
+          "bathtub_clawfoot_blue", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_BROWN =
+      registerBlock(
+          "bathtub_clawfoot_brown", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_GREEN =
+      registerBlock(
+          "bathtub_clawfoot_green", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_RED =
+      registerBlock(
+          "bathtub_clawfoot_red", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_BLACK =
+      registerBlock(
+          "bathtub_clawfoot_black", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_OAK =
+      registerBlock(
+          "bathtub_clawfoot_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_SPRUCE =
+      registerBlock(
+          "bathtub_clawfoot_spruce", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_BIRCH =
+      registerBlock(
+          "bathtub_clawfoot_birch", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_JUNGLE =
+      registerBlock(
+          "bathtub_clawfoot_jungle", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_ACACIA =
+      registerBlock(
+          "bathtub_clawfoot_acacia", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_DARK_OAK =
+      registerBlock(
+          "bathtub_clawfoot_dark_oak", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_MANGROVE =
+      registerBlock(
+          "bathtub_clawfoot_mangrove", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_CHERRY =
+      registerBlock(
+          "bathtub_clawfoot_cherry", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_BAMBOO =
+      registerBlock(
+          "bathtub_clawfoot_bamboo", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_CRIMSON =
+      registerBlock(
+          "bathtub_clawfoot_crimson", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_WARPED =
+      registerBlock(
+          "bathtub_clawfoot_warped", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_WOOD));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_STONE =
+      registerBlock(
+          "bathtub_clawfoot_stone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_COBBLESTONE =
+      registerBlock(
+          "bathtub_clawfoot_cobblestone", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_IRON =
+      registerBlock(
+          "bathtub_clawfoot_iron", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_GOLD =
+      registerBlock(
+          "bathtub_clawfoot_gold", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_COPPER =
+      registerBlock(
+          "bathtub_clawfoot_copper", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
+
+  public static final DeferredHolder<Block, Block> BATHTUB_CLAWFOOT_DIAMOND =
+      registerBlock(
+          "bathtub_clawfoot_diamond", () -> new BathtubBlock(COMMON_PROPERTIES_BATHTUB_METAL));
   public static final DeferredHolder<Block, Block> HOT_WATER_CORE =
       registerBlock("hot_water_core", () -> new HotWaterCoreBlock(COMMON_PROPERTIES_CORE));
 
