@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -82,11 +84,33 @@ class BathtubClawfootModelRegressionTest {
     }
 
     @Test
-    @DisplayName("Clawfoot faucet bases stay outside the bowl interior")
-    void faucetBasesStayOutsideBowlInterior() throws IOException {
-        assertElementFromX(readTemplate("bathtub_clawfoot.json"), 1, 14);
-        assertElementFromX(readTemplate("bathtub_clawfoot_head_empty.json"), 1, 14);
-        assertElementFromX(readTemplate("bathtub_clawfoot_head_faucet.json"), 1, 14);
+    @DisplayName("Clawfoot faucet controls stay outside the bowl wall")
+    void faucetControlsStayOutsideBowlWall() throws IOException {
+        JsonObject full = readTemplate("bathtub_clawfoot.json");
+        assertElementFromX(full, 1, 16.0625);
+        assertElementFromX(full, 14, 16.5625);
+        assertElementFromX(full, 15, 16.5625);
+        assertElementFromX(full, 16, 16.5625);
+
+        for (String template : new String[] {
+                "bathtub_clawfoot_head_empty.json",
+                "bathtub_clawfoot_head_faucet.json"
+        }) {
+            JsonObject head = readTemplate(template);
+            assertElementFromX(head, 1, 16.0625);
+            assertElementFromX(head, 9, 16.5625);
+            assertElementFromX(head, 10, 16.5625);
+            assertElementFromX(head, 11, 16.5625);
+        }
+    }
+
+    @Test
+    @DisplayName("Clawfoot decorative controls do not share coplanar faces")
+    void decorativeControlsDoNotShareCoplanarFaces() throws IOException {
+        for (String template : CLAWFOOT_TEMPLATES) {
+            List<String> conflicts = decorativeCoplanarConflicts(readTemplate(template));
+            assertTrue(conflicts.isEmpty(), template + " has decorative coplanar overlaps: " + conflicts);
+        }
     }
 
     @Test
@@ -207,6 +231,67 @@ class BathtubClawfootModelRegressionTest {
         JsonObject element = model.getAsJsonArray("elements").get(elementIndex).getAsJsonObject();
         assertCoordEquals(element.getAsJsonArray("from").get(0).getAsDouble(), expectedX,
                 "Element " + elementIndex + " from x");
+    }
+
+    private static List<String> decorativeCoplanarConflicts(JsonObject model) {
+        List<String> conflicts = new ArrayList<>();
+        JsonArray elements = model.getAsJsonArray("elements");
+        for (int i = 0; i < elements.size(); i++) {
+            JsonObject left = elements.get(i).getAsJsonObject();
+            if (!isAxisAligned(left)) {
+                continue;
+            }
+            for (int j = i + 1; j < elements.size(); j++) {
+                JsonObject right = elements.get(j).getAsJsonObject();
+                if (!isAxisAligned(right) || (!isDecorative(left) && !isDecorative(right))) {
+                    continue;
+                }
+                for (int axis = 0; axis < 3; axis++) {
+                    collectCoplanarConflicts(conflicts, left, right, i, j, axis);
+                }
+            }
+        }
+        return conflicts;
+    }
+
+    private static void collectCoplanarConflicts(List<String> conflicts, JsonObject left, JsonObject right,
+                                                 int leftIndex, int rightIndex, int axis) {
+        String[] sides = { "from", "to" };
+        int otherA = (axis + 1) % 3;
+        int otherB = (axis + 2) % 3;
+        for (String leftSide : sides) {
+            for (String rightSide : sides) {
+                double plane = left.getAsJsonArray(leftSide).get(axis).getAsDouble();
+                if (!coordEquals(plane, right.getAsJsonArray(rightSide).get(axis).getAsDouble())) {
+                    continue;
+                }
+                if (rangesOverlap(left, right, otherA) && rangesOverlap(left, right, otherB)) {
+                    conflicts.add("#" + leftIndex + " " + leftSide + " shares axis " + axis
+                            + " plane with #" + rightIndex + " " + rightSide);
+                }
+            }
+        }
+    }
+
+    private static boolean rangesOverlap(JsonObject left, JsonObject right, int axis) {
+        double leftFrom = left.getAsJsonArray("from").get(axis).getAsDouble();
+        double leftTo = left.getAsJsonArray("to").get(axis).getAsDouble();
+        double rightFrom = right.getAsJsonArray("from").get(axis).getAsDouble();
+        double rightTo = right.getAsJsonArray("to").get(axis).getAsDouble();
+        return Math.max(leftFrom, rightFrom) < Math.min(leftTo, rightTo) - 0.0001;
+    }
+
+    private static boolean isAxisAligned(JsonObject element) {
+        return !element.has("rotation")
+                || Math.abs(element.getAsJsonObject("rotation").get("angle").getAsDouble()) < 0.0001;
+    }
+
+    private static boolean isDecorative(JsonObject element) {
+        Set<String> textures = elementTextures(element);
+        return textures.contains("#faucet")
+                || textures.contains("#button_base")
+                || textures.contains("#hot_button")
+                || textures.contains("#cold_button");
     }
 
     private static void assertBaseElementUsesBodyInteriorFloor(JsonObject model) {
