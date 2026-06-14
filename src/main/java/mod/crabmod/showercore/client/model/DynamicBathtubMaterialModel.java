@@ -72,13 +72,22 @@ public class DynamicBathtubMaterialModel extends BakedModelWrapper<BakedModel> {
     }
 
     @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand) {
+        return replaceMaterialQuads(super.getQuads(state, side, rand), state, itemMaterialBlockId);
+    }
+
+    @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand,
                                     ModelData extraData, @Nullable RenderType renderType) {
         List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
         ResourceLocation materialBlockId = itemMaterialBlockId != null ? itemMaterialBlockId : extraData.get(MATERIAL_BLOCK_ID);
+        return replaceMaterialQuads(quads, state, materialBlockId);
+    }
+
+    private List<BakedQuad> replaceMaterialQuads(List<BakedQuad> quads, @Nullable BlockState state,
+                                                 @Nullable ResourceLocation materialBlockId) {
         if (materialBlockId == null
-                || (state != null && !(state.getBlock() instanceof BathtubBlock))
-                || (state == null && itemMaterialBlockId == null)) {
+                || (state != null && !(state.getBlock() instanceof BathtubBlock))) {
             return quads;
         }
 

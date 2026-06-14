@@ -103,6 +103,10 @@ class BathtubMaterialChangeEconomyRegressionTest {
                 "A main-hand bathtub plus offhand material must work.");
         assertTrue(itemSource.contains("applyMaterial(level, player, otherHand, activeHand)"),
                 "An offhand bathtub plus main-hand material must work.");
+        assertTrue(itemSource.contains("ItemStack materialStack = player.getItemInHand(materialHand)"),
+                "The material stack must be read from the resolved material hand, including offhand material.");
+        assertTrue(itemSource.contains("InteractionResultHolder.sidedSuccess(player.getItemInHand(hand)"),
+                "BathtubBlockItem.use must return the current hand stack after NBT mutation or stack splitting.");
         assertTrue(itemSource.contains("applyMaterialToOneBathtub"),
                 "Held item skinning must apply NBT to one bathtub item, not an entire stack.");
     }
@@ -204,6 +208,10 @@ class BathtubMaterialChangeEconomyRegressionTest {
         String modelSource = TestSourceUtils.readSource(MODEL_SOURCE);
         assertTrue(modelSource.contains("getOverrides()"),
                 "DynamicBathtubMaterialModel must override item model resolution.");
+        assertTrue(modelSource.contains("public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand)"),
+                "Item and dropped-item rendering use the vanilla three-argument getQuads path.");
+        assertTrue(modelSource.contains("replaceMaterialQuads(super.getQuads(state, side, rand), state, itemMaterialBlockId)"),
+                "The vanilla item getQuads path must apply the same material sprite replacement.");
         assertTrue(modelSource.contains("BathtubBlockItem.getMaterialBlockId(stack)"),
                 "Item rendering must read MaterialBlockId from the ItemStack, not only from block entities.");
         assertTrue(modelSource.contains("itemMaterialBlockId"),

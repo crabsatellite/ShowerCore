@@ -35,12 +35,11 @@ public class BathtubBlockItem extends BlockItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
         InteractionResult materialResult = tryApplyMaterialToHeldBathtub(level, player, hand);
         if (materialResult.consumesAction()) {
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide);
         }
-        return InteractionResultHolder.pass(stack);
+        return InteractionResultHolder.pass(player.getItemInHand(hand));
     }
 
     @Override
