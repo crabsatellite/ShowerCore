@@ -259,6 +259,20 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       level.blockUpdated(pos, Blocks.AIR);
       state.updateNeighbourShapes(level, pos, 3);
 
+      ResourceLocation materialBlockId = getMaterialBlockId(stack);
+      BlockEntity footBe = level.getBlockEntity(pos);
+      if (footBe instanceof BathtubBlockEntity footBathtub) {
+          if (materialBlockId != null) {
+              footBathtub.setMaterialBlockId(materialBlockId);
+          } else {
+              materialBlockId = footBathtub.getMaterialBlockId();
+          }
+      }
+      BlockEntity headBe = level.getBlockEntity(blockpos);
+      if (headBe instanceof BathtubBlockEntity headBathtub) {
+          headBathtub.setMaterialBlockId(materialBlockId);
+      }
+
       // Spawn Faucet Entity
       Direction facing = state.getValue(FACING);
       double x = blockpos.getX();
@@ -293,6 +307,58 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
     return part == BedPart.FOOT ? direction : direction.getOpposite();
   }
 
+  @Nullable
+  private static ResourceLocation getMaterialBlockId(ItemStack stack) {
+      CompoundTag tag = BlockItem.getBlockEntityData(stack);
+      if (tag == null || !tag.contains(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID)) {
+          return null;
+      }
+      return ResourceLocation.tryParse(tag.getString(BathtubBlockEntity.TAG_MATERIAL_BLOCK_ID));
+  }
+
+  private boolean setMaterialForConnectedParts(Level level, BlockPos pos, BlockState state, @Nullable ResourceLocation materialBlockId) {
+      boolean changed = setMaterialAt(level, pos, materialBlockId);
+      Direction direction = state.getValue(FACING);
+      BedPart part = state.getValue(PART);
+      BlockPos otherPos = part == BedPart.FOOT ? pos.relative(direction) : pos.relative(direction.getOpposite());
+      changed |= setMaterialAt(level, otherPos, materialBlockId);
+      return changed;
+  }
+
+  private boolean setMaterialAt(Level level, BlockPos pos, @Nullable ResourceLocation materialBlockId) {
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
+          if (!java.util.Objects.equals(bathtubEntity.getMaterialBlockId(), materialBlockId)) {
+              bathtubEntity.setMaterialBlockId(materialBlockId);
+              return true;
+          }
+      }
+      return false;
+  }
+
+  private InteractionResult tryApplyMaterialFromBlockItem(ItemStack itemstack, BlockState state, Level level, BlockPos pos, Player player) {
+      if (!(itemstack.getItem() instanceof BlockItem blockItem)) {
+          return InteractionResult.PASS;
+      }
+      Block materialBlock = blockItem.getBlock();
+      if (materialBlock instanceof BathtubBlock || materialBlock == Blocks.AIR) {
+          return InteractionResult.PASS;
+      }
+      ResourceLocation materialBlockId = ForgeRegistries.BLOCKS.getKey(materialBlock);
+      if (materialBlockId == null) {
+          return InteractionResult.PASS;
+      }
+      if (!level.isClientSide) {
+          boolean changed = setMaterialForConnectedParts(level, pos, state, materialBlockId);
+          if (changed && !player.isCreative()) {
+              itemstack.shrink(1);
+          }
+          level.playSound(null, pos, materialBlock.defaultBlockState().getSoundType().getPlaceSound(),
+                  net.minecraft.sounds.SoundSource.BLOCKS, 0.7F, 1.0F);
+      }
+      return InteractionResult.sidedSuccess(level.isClientSide);
+  }
+
 
 
   @Override
@@ -302,6 +368,11 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       // Place Rubber Duck
       if (itemstack.getItem() == mod.crabmod.showercore.registers.ItemRegister.RUBBER_DUCK.get()) {
           return InteractionResult.PASS;
+      }
+
+      InteractionResult materialResult = tryApplyMaterialFromBlockItem(itemstack, state, level, pos, player);
+      if (materialResult != InteractionResult.PASS) {
+          return materialResult;
       }
 
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
@@ -575,6 +646,17 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       return Collections.singletonList(stack);
     }
     return super.getDrops(state, params);
+  }
+
+  @Override
+  public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+      ItemStack stack = super.getCloneItemStack(level, pos, state);
+      BlockEntity blockEntity = level.getBlockEntity(pos);
+      if (blockEntity instanceof BathtubBlockEntity bathtubEntity) {
+          CompoundTag tag = bathtubEntity.saveWithoutMetadata();
+          BlockItem.setBlockEntityData(stack, blockEntity.getType(), tag);
+      }
+      return stack;
   }
 
   @Override

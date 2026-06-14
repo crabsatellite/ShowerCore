@@ -24,6 +24,7 @@ import java.util.Optional;
 
 public class BathtubBlockEntity extends BlockEntity {
     private static final String TAG_CUSTOM_FLUID_ID = "CustomFluidId";
+    public static final String TAG_MATERIAL_BLOCK_ID = "MaterialBlockId";
 
     private final FluidTank fluidTank = new FluidTank(1000) {
         @Override
@@ -38,6 +39,8 @@ public class BathtubBlockEntity extends BlockEntity {
 
     @Nullable
     private ResourceLocation customFluidId;
+    @Nullable
+    private ResourceLocation materialBlockId;
 
     public BathtubBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntitiesRegister.BATHTUB_BLOCK_ENTITY.get(), pos, state);
@@ -59,6 +62,23 @@ public class BathtubBlockEntity extends BlockEntity {
             if (!level.isClientSide) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+        }
+    }
+
+    @Nullable
+    public ResourceLocation getMaterialBlockId() {
+        return materialBlockId;
+    }
+
+    public void setMaterialBlockId(@Nullable ResourceLocation materialBlockId) {
+        if (java.util.Objects.equals(this.materialBlockId, materialBlockId)) {
+            return;
+        }
+        this.materialBlockId = materialBlockId;
+        setChanged();
+        requestModelDataUpdate();
+        if (level != null && !level.isClientSide) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     }
 
@@ -110,6 +130,12 @@ public class BathtubBlockEntity extends BlockEntity {
         } else {
             customFluidId = null;
         }
+        if (tag.contains(TAG_MATERIAL_BLOCK_ID)) {
+            materialBlockId = ResourceLocation.tryParse(tag.getString(TAG_MATERIAL_BLOCK_ID));
+        } else {
+            materialBlockId = null;
+        }
+        requestModelDataUpdate();
     }
 
     @Override
@@ -118,6 +144,9 @@ public class BathtubBlockEntity extends BlockEntity {
         fluidTank.writeToNBT(tag);
         if (customFluidId != null) {
             tag.putString(TAG_CUSTOM_FLUID_ID, customFluidId.toString());
+        }
+        if (materialBlockId != null) {
+            tag.putString(TAG_MATERIAL_BLOCK_ID, materialBlockId.toString());
         }
     }
 

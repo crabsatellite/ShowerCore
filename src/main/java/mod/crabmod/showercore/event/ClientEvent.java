@@ -14,6 +14,7 @@ import mod.crabmod.showercore.block.bath_core.peony_bath_core.PeonyBathCoreModel
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreBlockEntityRenderer;
 import mod.crabmod.showercore.block.bath_core.rose_bath_core.RoseBathCoreModelLayers;
 import mod.crabmod.showercore.particle.ShowerParticle;
+import mod.crabmod.showercore.client.model.DynamicBathtubMaterialModel;
 import mod.crabmod.showercore.registers.BlockEntitiesRegister;
 import mod.crabmod.showercore.client.renderer.SeatEntityRenderer;
 import mod.crabmod.showercore.client.renderer.BathtubBlockEntityRenderer;
@@ -24,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EnchantmentTableParticle;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,6 +45,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
     bus = Mod.EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public class ClientEvent {
+
+  @SubscribeEvent
+  public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
+    DynamicBathtubMaterialModel.clearCache();
+    event.getModels().replaceAll((location, model) ->
+        DynamicBathtubMaterialModel.shouldWrap(location)
+            ? new DynamicBathtubMaterialModel(model)
+            : model);
+  }
 
   @SubscribeEvent
   public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
