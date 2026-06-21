@@ -1,6 +1,8 @@
 package mod.crabmod.showercore.item;
 
+import mod.crabmod.showercore.block.BathtubBlock;
 import mod.crabmod.showercore.entity.RubberDuckEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -49,6 +52,7 @@ public class RubberDuckItem extends Item {
         if (direction.getAxis().isHorizontal()) {
             pos = pos.add(direction.getStepX() * 0.25, 0, direction.getStepZ() * 0.25);
         }
+        pos = bathtubAwarePlacementPosition(level, context.getClickedPos(), pos);
 
         RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
         duck.setYRot(context.getRotation());
@@ -91,6 +95,7 @@ public class RubberDuckItem extends Item {
                 if (direction.getAxis().isHorizontal()) {
                     pos = pos.add(direction.getStepX() * 0.25, 0, direction.getStepZ() * 0.25);
                 }
+                pos = bathtubAwarePlacementPosition(level, blockHitResult.getBlockPos(), pos);
 
                 RubberDuckEntity duck = new RubberDuckEntity(level, pos.x, pos.y, pos.z);
                 duck.setYRot(player.getYRot());
@@ -112,5 +117,13 @@ public class RubberDuckItem extends Item {
                 return InteractionResultHolder.pass(itemstack);
             }
         }
+    }
+
+    private static Vec3 bathtubAwarePlacementPosition(Level level, BlockPos clickedPos, Vec3 pos) {
+        BlockState clickedState = level.getBlockState(clickedPos);
+        if (clickedState.getBlock() instanceof BathtubBlock) {
+            return new Vec3(pos.x, clickedPos.getY() + BathtubBlock.duckFloatSurfaceFor(clickedState), pos.z);
+        }
+        return pos;
     }
 }
