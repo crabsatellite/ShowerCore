@@ -15,19 +15,23 @@ class BathtubWaterLevelRegressionTest {
     private static final Path RENDERER = Paths.get(
             "src", "main", "java", "mod", "crabmod", "showercore",
             "client", "renderer", "BathtubBlockEntityRenderer.java");
+    private static final Path WATER_GEOMETRY = Paths.get(
+            "src", "main", "java", "mod", "crabmod", "showercore",
+            "block", "BathtubWaterGeometry.java");
 
     @Test
     @DisplayName("Clawfoot bathtubs render a higher fluid surface than legacy tubs")
     void clawfootBathtubsUseHigherFluidSurface() throws IOException {
-        String source = Files.readString(RENDERER);
+        String rendererSource = Files.readString(RENDERER);
+        String geometrySource = Files.readString(WATER_GEOMETRY);
 
-        assertTrue(source.contains("DEFAULT_WATER_LEVEL = 0.6f"),
+        assertTrue(geometrySource.contains("DEFAULT_WATER_LEVEL = 0.6f"),
                 "Legacy bathtub water level should remain unchanged.");
-        assertTrue(source.contains("CLAWFOOT_WATER_LEVEL = 0.74f"),
+        assertTrue(geometrySource.contains("CLAWFOOT_WATER_LEVEL = 0.74f"),
                 "Clawfoot bathtubs need a higher water surface to match their taller bowl.");
-        assertTrue(source.contains("startsWith(\"bathtub_clawfoot_\")"),
+        assertTrue(rendererSource.contains("BathtubBlock.isClawfootBathtub(state)"),
                 "The higher water level must be scoped to clawfoot bathtub block ids.");
-        assertTrue(source.contains("waterLevelFor(state)"),
+        assertTrue(rendererSource.contains("BathtubBlock.waterLevelFor(state)"),
                 "The renderer should use the block-state-specific water level.");
     }
 }

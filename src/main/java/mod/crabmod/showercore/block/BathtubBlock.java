@@ -319,7 +319,15 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
       return isClawfootBathtub(state) ? CLAWFOOT_SEAT_Y_OFFSET : LEGACY_SEAT_Y_OFFSET;
   }
 
-  private static boolean isClawfootBathtub(BlockState state) {
+  public static float waterLevelFor(BlockState state) {
+      return BathtubWaterGeometry.waterLevel(isClawfootBathtub(state));
+  }
+
+  public static float duckFloatSurfaceFor(BlockState state) {
+      return BathtubWaterGeometry.duckFloatSurface(isClawfootBathtub(state));
+  }
+
+  public static boolean isClawfootBathtub(BlockState state) {
       ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
       return blockId != null && blockId.getPath().startsWith("bathtub_clawfoot_");
   }

@@ -87,7 +87,7 @@ public class RubberDuckEntity extends Entity {
                                  }
                              }
 
-                             double height = (double)((float)l + 0.65F);
+                             double height = (double) l + mod.crabmod.showercore.block.BathtubBlock.duckFloatSurfaceFor(blockState);
                              if (height >= aabb.minY) {
                                  fluidHeight = Math.max(fluidHeight, height - aabb.minY);
                              }

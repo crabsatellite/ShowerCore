@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,9 +24,6 @@ import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix4f;
 
 public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBlockEntity> {
-    private static final float DEFAULT_WATER_LEVEL = 0.6f;
-    private static final float CLAWFOOT_WATER_LEVEL = 0.74f;
-
     public BathtubBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
     }
 
@@ -77,8 +73,8 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
         VertexConsumer builder = pBufferSource.getBuffer(RenderType.translucent());
         Matrix4f matrix = pPoseStack.last().pose();
 
-        boolean clawfoot = isClawfootBathtub(state);
-        float y = waterLevelFor(state);
+        boolean clawfoot = BathtubBlock.isClawfootBathtub(state);
+        float y = BathtubBlock.waterLevelFor(state);
         float minU = sprite.getU0();
         float maxU = sprite.getU1();
         float minV = sprite.getV0();
@@ -130,17 +126,6 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
             case EAST:
             default:    return BathtubDropGeometry.FaucetSide.EAST;
         }
-    }
-
-    private static float waterLevelFor(BlockState state) {
-        return isClawfootBathtub(state) ? CLAWFOOT_WATER_LEVEL : DEFAULT_WATER_LEVEL;
-    }
-
-    private static boolean isClawfootBathtub(BlockState state) {
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        return blockId != null
-                && "showercore".equals(blockId.getNamespace())
-                && blockId.getPath().startsWith("bathtub_clawfoot_");
     }
 
     private void renderDropCube(VertexConsumer builder, Matrix4f matrix,
