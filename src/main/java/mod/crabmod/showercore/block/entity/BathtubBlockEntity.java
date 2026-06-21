@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -55,13 +56,7 @@ public class BathtubBlockEntity extends BlockEntity {
         this.customFluidId = customFluidId;
         setChanged();
         if (level != null) {
-            // BathtubBlock#hasDynamicLightEmission returns true and getLightEmission depends
-            // on this BE's customFluidId. The light engine has no way to know the emission
-            // changed unless we explicitly ask it to recheck, so do so on both sides.
-            level.getLightEngine().checkBlock(getBlockPos());
-            if (!level.isClientSide) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
+            refreshCustomFluidLighting(true);
         }
     }
 
@@ -90,7 +85,7 @@ public class BathtubBlockEntity extends BlockEntity {
         // lightmap. Re-trigger here so a luminous custom fluid lights its bathtub on world
         // re-entry without requiring a neighboring block update.
         if (level != null && customFluidId != null) {
-            level.getLightEngine().checkBlock(getBlockPos());
+            refreshCustomFluidLighting(true);
         }
     }
 
@@ -99,7 +94,7 @@ public class BathtubBlockEntity extends BlockEntity {
         super.handleUpdateTag(tag);
         // Bulk chunk-data path: client-side recheck after the chunk's lightmap has been built.
         if (level != null && level.isClientSide && customFluidId != null) {
-            level.getLightEngine().checkBlock(getBlockPos());
+            refreshCustomFluidLighting(false);
         }
     }
 
@@ -110,7 +105,20 @@ public class BathtubBlockEntity extends BlockEntity {
         // Single-BE update path (live pour into an already-loaded chunk): handleUpdateTag
         // does NOT fire here, so we need an explicit recheck for emissive custom fluids.
         if (level != null && level.isClientSide && customFluidId != null) {
-            level.getLightEngine().checkBlock(getBlockPos());
+            refreshCustomFluidLighting(false);
+        }
+    }
+
+    private void refreshCustomFluidLighting(boolean notifyServerClients) {
+        if (level == null) {
+            return;
+        }
+        if (level.isClientSide) {
+            level.setBlocksDirty(getBlockPos(), Blocks.AIR.defaultBlockState(), getBlockState());
+        }
+        level.getLightEngine().checkBlock(getBlockPos());
+        if (notifyServerClients && !level.isClientSide) {
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     }
 

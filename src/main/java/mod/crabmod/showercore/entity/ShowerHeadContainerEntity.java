@@ -325,7 +325,7 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     }
   }
 
-  private static void addStackingEffect(LivingEntity entity, MobEffect effect, int durationIncrement, int amplifier) {
+  static void addStackingEffect(LivingEntity entity, MobEffect effect, int durationIncrement, int amplifier) {
     CompoundTag data = entity.getPersistentData();
     String key = "showercore.last_stack." + effect.getDescriptionId();
     long gameTime = entity.level().getGameTime();
@@ -342,10 +342,19 @@ public class ShowerHeadContainerEntity extends BaseShowerHeadBlockEntity {
     entity.addEffect(new MobEffectInstance(effect, newDuration, amplifier, true, false));
   }
 
-  private static void cureNegativeEffects(LivingEntity entity) {
+  static void cureNegativeEffects(LivingEntity entity) {
     entity.removeEffect(MobEffects.POISON);
     entity.removeEffect(MobEffects.WITHER);
     entity.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+    entity.removeEffect(MobEffects.WEAKNESS);
+    entity.removeEffect(MobEffects.CONFUSION);
+    entity.removeEffect(MobEffects.BLINDNESS);
+    entity.removeEffect(MobEffects.HUNGER);
+  }
+
+  static void cureNegativeEffectsExceptSlow(LivingEntity entity) {
+    entity.removeEffect(MobEffects.POISON);
+    entity.removeEffect(MobEffects.WITHER);
     entity.removeEffect(MobEffects.WEAKNESS);
     entity.removeEffect(MobEffects.CONFUSION);
     entity.removeEffect(MobEffects.BLINDNESS);

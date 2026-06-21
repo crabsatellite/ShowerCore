@@ -362,6 +362,46 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           return InteractionResult.PASS;
       }
 
+      // Empty bucket on a filled bathtub: pick up the stored fluid directly.
+      // Forge's generic FluidUtil path cannot reconstruct hotBath custom-fluid buckets
+      // from the shared dynamic fluid stack, so custom fluids need their saved id.
+      if (itemstack.getItem() == Items.BUCKET) {
+          BlockEntity be = level.getBlockEntity(pos);
+          if (be instanceof BathtubBlockEntity bathtubBe && bathtubBe.getFluidTank().getFluidAmount() >= 1000) {
+              if (!level.isClientSide) {
+                  ResourceLocation customId = bathtubBe.getCustomFluidId();
+                  ItemStack bucketOut;
+                  if (customId != null) {
+                      bucketOut = CustomFluidAPI.createBucket(customId);
+                  } else {
+                      FluidStack drained = bathtubBe.getFluidTank().getFluid();
+                      bucketOut = new ItemStack(drained.getFluid().getBucket());
+                      if (bucketOut.isEmpty()) {
+                          bucketOut = new ItemStack(Items.WATER_BUCKET);
+                      }
+                  }
+
+                  bathtubBe.getFluidTank().setFluid(FluidStack.EMPTY);
+                  bathtubBe.setCustomFluidId(null);
+                  syncFluidToOtherPart(level, pos, state, FluidStack.EMPTY);
+                  updateLiquidState(level, pos, state, FluidStack.EMPTY);
+
+                  if (!player.isCreative()) {
+                      itemstack.shrink(1);
+                      if (itemstack.isEmpty()) {
+                          player.setItemInHand(hand, bucketOut);
+                      } else if (!player.getInventory().add(bucketOut)) {
+                          player.drop(bucketOut, false);
+                      }
+                  }
+
+                  level.playSound(null, pos, SoundEvents.BUCKET_FILL,
+                          net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+              }
+              return InteractionResult.sidedSuccess(level.isClientSide);
+          }
+      }
+
       if (itemstack.isEmpty() && state.getValue(PART) == BedPart.HEAD) {
           if (!level.isClientSide) {
               Entity occupantToAsk = null;
@@ -750,6 +790,15 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
                   }
               }
           }
+      }
+
+      // Apply vanilla bath effects to entities standing in the bathtub. This shares
+      // the seated path's effect table and cadence, so standing and sitting behave
+      // consistently without refreshing effect icons every tick.
+      if (!level.isClientSide
+              && entity instanceof LivingEntity living
+              && entity.tickCount % 20 == 0) {
+          SeatEntity.applyBathEffects(living, liquid, level, pos);
       }
 
       // === Hot bathtub interactions (server-side only) ===
