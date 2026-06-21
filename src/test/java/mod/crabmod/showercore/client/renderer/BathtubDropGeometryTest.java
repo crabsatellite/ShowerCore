@@ -33,6 +33,8 @@ class BathtubDropGeometryTest {
     private static final float EPS = 1e-6f;
     private static final float EXPECTED_FY1 = 10f / 16f;
     private static final float EXPECTED_FY2 = 11f / 16f;
+    private static final float CLAWFOOT_FY1 = 14f / 16f;
+    private static final float CLAWFOOT_FY2 = 15f / 16f;
 
     // ---- Geometry tests (one per facing) ---------------------------------
 
@@ -98,6 +100,46 @@ class BathtubDropGeometryTest {
         assertEquals(11f / 16f, b[4], EPS);
     }
 
+    @Test
+    @DisplayName("Legacy overload preserves old NORTH-facing short-end drop bounds")
+    void legacyOverloadPreservesOldDropBounds() {
+        float[] oldApi = BathtubDropGeometry.computeDropBounds(FaucetSide.NORTH);
+        float[] newApi = BathtubDropGeometry.computeDropBounds(FaucetSide.NORTH, false);
+        assertArrayEquals(oldApi, newApi, EPS);
+    }
+
+    @Test
+    @DisplayName("Clawfoot NORTH-facing tub: drop sits under the right-rim faucet")
+    void clawfootDropBounds_rightSideEast() {
+        float[] b = BathtubDropGeometry.computeDropBounds(FaucetSide.EAST, true);
+        assertBounds(b, CLAWFOOT_FY1, CLAWFOOT_FY2,
+                12.5f / 16f, 13.5f / 16f, 9f / 16f, 11f / 16f);
+    }
+
+    @Test
+    @DisplayName("Clawfoot EAST-facing tub: right-rim drop rotates to the south side")
+    void clawfootDropBounds_rightSideSouth() {
+        float[] b = BathtubDropGeometry.computeDropBounds(FaucetSide.SOUTH, true);
+        assertBounds(b, CLAWFOOT_FY1, CLAWFOOT_FY2,
+                5f / 16f, 7f / 16f, 12.5f / 16f, 13.5f / 16f);
+    }
+
+    @Test
+    @DisplayName("Clawfoot SOUTH-facing tub: right-rim drop rotates to the west side")
+    void clawfootDropBounds_rightSideWest() {
+        float[] b = BathtubDropGeometry.computeDropBounds(FaucetSide.WEST, true);
+        assertBounds(b, CLAWFOOT_FY1, CLAWFOOT_FY2,
+                2.5f / 16f, 3.5f / 16f, 5f / 16f, 7f / 16f);
+    }
+
+    @Test
+    @DisplayName("Clawfoot WEST-facing tub: right-rim drop rotates to the north side")
+    void clawfootDropBounds_rightSideNorth() {
+        float[] b = BathtubDropGeometry.computeDropBounds(FaucetSide.NORTH, true);
+        assertBounds(b, CLAWFOOT_FY1, CLAWFOOT_FY2,
+                9f / 16f, 11f / 16f, 2.5f / 16f, 3.5f / 16f);
+    }
+
     // ---- Gating tests: 4 boolean combinations of (isHead, running) --------
 
     @Test
@@ -147,6 +189,14 @@ class BathtubDropGeometryTest {
         assertTrue(source.contains("BathtubDropGeometry.computeDropBounds("),
                 () -> "BathtubBlockEntityRenderer must call BathtubDropGeometry.computeDropBounds(...) "
                         + "to size/position the drop cube. File: " + rendererPath);
+
+        assertTrue(source.contains("facing.getClockWise()"),
+                () -> "Clawfoot bathtubs put the faucet on the right rim, so the renderer must use "
+                        + "FACING.getClockWise() for clawfoot drop placement. File: " + rendererPath);
+
+        assertTrue(source.contains("computeDropBounds(toFaucetSide(faucetSide), clawfoot)"),
+                () -> "Renderer must pass the clawfoot flag into BathtubDropGeometry.computeDropBounds "
+                        + "so clawfoot drops use side-rim coordinates. File: " + rendererPath);
     }
 
     // ---- Helpers ----------------------------------------------------------
@@ -175,8 +225,14 @@ class BathtubDropGeometryTest {
 
     private static void assertBounds(float[] b, float expectedFx1, float expectedFx2,
                                      float expectedFz1, float expectedFz2) {
+        assertBounds(b, EXPECTED_FY1, EXPECTED_FY2, expectedFx1, expectedFx2, expectedFz1, expectedFz2);
+    }
+
+    private static void assertBounds(float[] b, float expectedFy1, float expectedFy2,
+                                     float expectedFx1, float expectedFx2,
+                                     float expectedFz1, float expectedFz2) {
         assertEquals(6, b.length, "bounds array must be {fx1,fy1,fz1,fx2,fy2,fz2}");
-        float[] expected = {expectedFx1, EXPECTED_FY1, expectedFz1, expectedFx2, EXPECTED_FY2, expectedFz2};
+        float[] expected = {expectedFx1, expectedFy1, expectedFz1, expectedFx2, expectedFy2, expectedFz2};
         assertArrayEquals(expected, b, EPS,
                 () -> "expected " + java.util.Arrays.toString(expected) + " got " + java.util.Arrays.toString(b));
     }
