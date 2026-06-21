@@ -8,6 +8,7 @@ import com.crabmod.hotbath.custom_fluid.CustomFluidDefinition;
 import com.crabmod.hotbath.custom_fluid.DynamicFluidRegistry;
 import com.crabmod.hotbath.custom_fluid.SplashCustomFluidBottleItem;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
+import mod.crabmod.showercore.entity.FaucetInteractionGeometry;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -277,23 +278,22 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
           headBathtub.setMaterialBlockId(materialBlockId);
       }
 
-      // Spawn Faucet Entity
-      Direction facing = state.getValue(FACING);
-      double x = blockpos.getX();
-      double y = blockpos.getY();
-      double z = blockpos.getZ();
-      
-      switch (facing) {
-          case NORTH: x += 0.5; y += 0.78; z += 0.125; break;
-          case SOUTH: x += 0.5; y += 0.78; z += 0.875; break;
-          case WEST: x += 0.125; y += 0.78; z += 0.5; break;
-          case EAST: x += 0.875; y += 0.78; z += 0.5; break;
-          default: break;
-      }
-      
-      FaucetInteractionEntity faucet = new FaucetInteractionEntity(level, x, y, z);
-      level.addFreshEntity(faucet);
+      spawnFaucetInteractionEntities(level, blockpos, state);
     }
+  }
+
+  private static void spawnFaucetInteractionEntities(Level level, BlockPos headPos, BlockState state) {
+      Direction facing = state.getValue(FACING);
+      Direction right = facing.getClockWise();
+      Direction towardFoot = facing.getOpposite();
+      for (double[] local : FaucetInteractionGeometry.hitboxOrigins(isClawfootBathtub(state))) {
+          double x = FaucetInteractionGeometry.worldX(
+                  headPos.getX(), right.getStepX(), towardFoot.getStepX(), local[0], local[2]);
+          double y = FaucetInteractionGeometry.worldY(headPos.getY(), local[1]);
+          double z = FaucetInteractionGeometry.worldZ(
+                  headPos.getZ(), right.getStepZ(), towardFoot.getStepZ(), local[0], local[2]);
+          level.addFreshEntity(new FaucetInteractionEntity(level, x, y, z));
+      }
   }
 
   @Override
@@ -316,10 +316,12 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
   }
 
   public static double getSeatYOffset(BlockState state) {
+      return isClawfootBathtub(state) ? CLAWFOOT_SEAT_Y_OFFSET : LEGACY_SEAT_Y_OFFSET;
+  }
+
+  private static boolean isClawfootBathtub(BlockState state) {
       ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
-      return blockId != null && blockId.getPath().startsWith("bathtub_clawfoot_")
-              ? CLAWFOOT_SEAT_Y_OFFSET
-              : LEGACY_SEAT_Y_OFFSET;
+      return blockId != null && blockId.getPath().startsWith("bathtub_clawfoot_");
   }
 
   @Nullable

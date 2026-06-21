@@ -2,6 +2,7 @@ package mod.crabmod.showercore.registers;
 
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
+import mod.crabmod.showercore.entity.FaucetInteractionGeometry;
 import mod.crabmod.showercore.entity.SeatEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -20,7 +21,7 @@ public class EntityRegister {
 
     public static final RegistryObject<EntityType<FaucetInteractionEntity>> FAUCET_ENTITY = ENTITY_TYPES.register("faucet",
             () -> EntityType.Builder.<FaucetInteractionEntity>of(FaucetInteractionEntity::new, MobCategory.MISC)
-                    .sized(0.25F, 0.25F)
+                    .sized((float) FaucetInteractionGeometry.ENTITY_WIDTH, (float) FaucetInteractionGeometry.ENTITY_HEIGHT)
                     .build("faucet"));
 
     public static final RegistryObject<EntityType<mod.crabmod.showercore.entity.RubberDuckEntity>> RUBBER_DUCK = ENTITY_TYPES.register("rubber_duck",
