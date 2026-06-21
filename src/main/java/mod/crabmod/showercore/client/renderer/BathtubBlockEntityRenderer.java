@@ -73,6 +73,7 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
         VertexConsumer builder = pBufferSource.getBuffer(RenderType.translucent());
         Matrix4f matrix = pPoseStack.last().pose();
 
+        boolean clawfoot = isClawfootBathtub(state);
         float y = waterLevelFor(state);
         float minU = sprite.getU0();
         float maxU = sprite.getU1();
@@ -104,14 +105,13 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
         addVertex(builder, matrix, x2, y, z2, maxU, maxV, red, green, blue, alpha, lightForFluid);
         addVertex(builder, matrix, x2, y, z1, maxU, minV, red, green, blue, alpha, lightForFluid);
 
-        // Running faucet drop: small water box right under the faucet spout on the HEAD side.
-        // Mirrors the geometry used by the bathtub_*_head_running model (elements at [7,10,3]..[9,11,4]),
-        // so non-CUSTOM liquids already show this via the block model. For CUSTOM we draw it here
-        // because the CUSTOM blockstate uses the head_empty model that lacks the running geometry.
+        // Running faucet drop: small fluid box right below the faucet spout on the HEAD side.
+        // The BER owns fluid rendering for every non-empty liquid; block models provide only
+        // the tub and faucet geometry.
         if (BathtubDropGeometry.shouldRenderDrop(part == BedPart.HEAD, state.getValue(BathtubBlock.RUNNING))) {
-            // Faucet is on the face opposite the connected side.
-            Direction faucetSide = connectedSide.getOpposite();
-            float[] b = BathtubDropGeometry.computeDropBounds(toFaucetSide(faucetSide));
+            // Legacy faucets sit on the short end; clawfoot faucets sit on the right rim.
+            Direction faucetSide = clawfoot ? facing.getClockWise() : connectedSide.getOpposite();
+            float[] b = BathtubDropGeometry.computeDropBounds(toFaucetSide(faucetSide), clawfoot);
             renderDropCube(builder, matrix, b[0], b[1], b[2], b[3], b[4], b[5],
                     sprite, red, green, blue, alpha, lightForFluid);
         }
@@ -131,12 +131,14 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
     }
 
     private static float waterLevelFor(BlockState state) {
+        return isClawfootBathtub(state) ? CLAWFOOT_WATER_LEVEL : DEFAULT_WATER_LEVEL;
+    }
+
+    private static boolean isClawfootBathtub(BlockState state) {
         ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         return blockId != null
                 && "showercore".equals(blockId.getNamespace())
-                && blockId.getPath().startsWith("bathtub_clawfoot_")
-                ? CLAWFOOT_WATER_LEVEL
-                : DEFAULT_WATER_LEVEL;
+                && blockId.getPath().startsWith("bathtub_clawfoot_");
     }
 
     private void renderDropCube(VertexConsumer builder, Matrix4f matrix,
