@@ -1,5 +1,13 @@
 # ShowerCore 测试清单
 
+## Issue Regression Gate
+
+- GitHub issue fixes for player-facing gameplay, item, block, entity, fluid, inventory, or placement behavior must have Minecraft runtime coverage before the fix is treated as verified.
+- Prefer a `runGameTestServer` GameTest that exercises the real player/world path. Source scanning and ordinary JUnit tests are useful support, but they are not enough by themselves for issue-reported gameplay regressions.
+- Visual-only client rendering regressions need either a real-client screenshot/video or a deterministic render harness. Do not use Windows UI control as the default verification method.
+- For bathtub, material skinning, fluid, rubber-duck, faucet, and double-block regressions, verify both supported branches with `test` and `runGameTestServer`.
+- Record the exact commands and the GameTest pass/fail result in the release, PR, or issue note.
+
 ## 1. 洗浴喷头 (Shower Head) 交互测试
 
 ### 1.1 核心安装与替换
