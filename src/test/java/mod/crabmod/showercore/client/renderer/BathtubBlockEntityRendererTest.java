@@ -1,6 +1,7 @@
 package mod.crabmod.showercore.client.renderer;
 
 import mod.crabmod.showercore.client.renderer.BathtubDropGeometry.FaucetSide;
+import mod.crabmod.showercore.block.BathtubWaterGeometry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BathtubBlockEntityRendererTest {
 
     private static final float EPS = 1e-6f;
-    private static final float EXPECTED_FY1 = 10f / 16f;
+    private static final float EXPECTED_FY1 = BathtubWaterGeometry.DEFAULT_WATER_LEVEL;
     private static final float EXPECTED_FY2 = 11f / 16f;
-    private static final float CLAWFOOT_FY1 = 14f / 16f;
+    private static final float CLAWFOOT_FY1 = BathtubWaterGeometry.CLAWFOOT_WATER_LEVEL;
     private static final float CLAWFOOT_FY2 = 15f / 16f;
 
     // ---- Geometry tests (one per facing) ---------------------------------
@@ -59,7 +60,7 @@ class BathtubBlockEntityRendererTest {
     }
 
     @Test
-    @DisplayName("Y bounds (10/16..11/16) are identical for all 4 facings")
+    @DisplayName("Y bounds extend legacy drops from water surface to faucet spout")
     void dropBounds_yConstantAcrossFacings() {
         for (FaucetSide s : FaucetSide.values()) {
             float[] b = BathtubDropGeometry.computeDropBounds(s);
@@ -79,16 +80,15 @@ class BathtubBlockEntityRendererTest {
             boolean wideX = Math.abs(dx - 2f / 16f) < EPS && Math.abs(dz - 1f / 16f) < EPS;
             boolean wideZ = Math.abs(dz - 2f / 16f) < EPS && Math.abs(dx - 1f / 16f) < EPS;
             assertTrue(wideX || wideZ, "Unexpected footprint for " + s + ": dx=" + dx + " dz=" + dz);
-            assertEquals(1f / 16f, dy, EPS, "height for " + s);
+            assertEquals(EXPECTED_FY2 - EXPECTED_FY1, dy, EPS, "height for " + s);
         }
     }
 
     @Test
-    @DisplayName("Drop is at y=10/16..11/16 exactly (matches model element y=[10,11])")
+    @DisplayName("Drop extends from legacy water surface to faucet spout")
     void dropBounds_yMatchesModelElement() {
         float[] b = BathtubDropGeometry.computeDropBounds(FaucetSide.NORTH);
-        // from=[7,10,3] to=[9,11,4] in model space (1/16 units)
-        assertEquals(10f / 16f, b[1], EPS);
+        assertEquals(BathtubWaterGeometry.DEFAULT_WATER_LEVEL, b[1], EPS);
         assertEquals(11f / 16f, b[4], EPS);
     }
 

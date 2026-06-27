@@ -45,6 +45,9 @@ class RubberDuckBathtubPlacementRegressionTest {
                 "RubberDuckItem.use must adjust POV placement when clicking a bathtub block.");
         assertTrue(source.contains("clickedPos.getY() + BathtubBlock.duckFloatSurfaceFor(clickedState)"),
                 "Bathtub duck placement must use the same float surface as duck buoyancy.");
+        assertTrue(source.contains("BathtubWaterGeometry.duckSafeLocalCoordinate"),
+                "Bathtub duck placement must clamp X/Z away from rim walls so edge clicks do not "
+                        + "spawn the duck intersecting clawfoot bathtub walls.");
     }
 
     @Test
