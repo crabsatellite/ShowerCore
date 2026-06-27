@@ -1,5 +1,7 @@
 package mod.crabmod.showercore.client.renderer;
 
+import mod.crabmod.showercore.block.BathtubWaterGeometry;
+
 /**
  * Pure-math helpers for the running-faucet drop visual drawn by
  * {@link BathtubBlockEntityRenderer} when a bathtub has liquid and
@@ -34,7 +36,7 @@ public final class BathtubDropGeometry {
         final float dropHalfWidth = 1f / 16f;
         final float dropDepth = 1f / 16f;
         final float dropOffset = 3f / 16f;
-        final float fy1 = 10f / 16f;
+        final float fy1 = BathtubWaterGeometry.DEFAULT_WATER_LEVEL;
         final float fy2 = 11f / 16f;
         float fx1, fx2, fz1, fz2;
         switch (faucetSide) {
@@ -64,7 +66,7 @@ public final class BathtubDropGeometry {
         final float localRight2 = 13.5f / 16f;
         final float localTowardFoot1 = 9f / 16f;
         final float localTowardFoot2 = 11f / 16f;
-        final float fy1 = 14f / 16f;
+        final float fy1 = BathtubWaterGeometry.CLAWFOOT_WATER_LEVEL;
         final float fy2 = 15f / 16f;
 
         FaucetSide towardFoot = clockWise(faucetSide);

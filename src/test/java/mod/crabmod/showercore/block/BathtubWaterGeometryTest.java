@@ -21,4 +21,12 @@ class BathtubWaterGeometryTest {
         assertEquals(0.65f, BathtubWaterGeometry.duckFloatSurface(false), EPS);
         assertEquals(0.79f, BathtubWaterGeometry.duckFloatSurface(true), EPS);
     }
+
+    @Test
+    @DisplayName("Rubber Duck placement clamps away from bathtub rim walls")
+    void duckSafeLocalCoordinateStaysInsideBasin() {
+        assertEquals(6.0D / 16.0D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.05D), EPS);
+        assertEquals(0.5D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.5D), EPS);
+        assertEquals(10.0D / 16.0D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.95D), EPS);
+    }
 }
