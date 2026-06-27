@@ -28,5 +28,7 @@ class BathtubWaterGeometryTest {
         assertEquals(6.0D / 16.0D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.05D), EPS);
         assertEquals(0.5D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.5D), EPS);
         assertEquals(10.0D / 16.0D, BathtubWaterGeometry.duckSafeLocalCoordinate(0.95D), EPS);
+        assertEquals(10.0D + 6.0D / 16.0D, BathtubWaterGeometry.duckSafeWorldCoordinate(10, 10.05D), EPS);
+        assertEquals(10.0D + 10.0D / 16.0D, BathtubWaterGeometry.duckSafeWorldCoordinate(10, 10.95D), EPS);
     }
 }

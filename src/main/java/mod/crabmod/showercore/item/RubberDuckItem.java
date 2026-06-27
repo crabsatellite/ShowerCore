@@ -1,7 +1,6 @@
 package mod.crabmod.showercore.item;
 
 import mod.crabmod.showercore.block.BathtubBlock;
-import mod.crabmod.showercore.block.BathtubWaterGeometry;
 import mod.crabmod.showercore.entity.RubberDuckEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -123,12 +122,7 @@ public class RubberDuckItem extends Item {
     private static Vec3 bathtubAwarePlacementPosition(Level level, BlockPos clickedPos, Vec3 pos) {
         BlockState clickedState = level.getBlockState(clickedPos);
         if (clickedState.getBlock() instanceof BathtubBlock) {
-            double localX = BathtubWaterGeometry.duckSafeLocalCoordinate(pos.x - clickedPos.getX());
-            double localZ = BathtubWaterGeometry.duckSafeLocalCoordinate(pos.z - clickedPos.getZ());
-            return new Vec3(
-                    clickedPos.getX() + localX,
-                    clickedPos.getY() + BathtubBlock.duckFloatSurfaceFor(clickedState),
-                    clickedPos.getZ() + localZ);
+            return BathtubBlock.duckPlacementFor(clickedPos, clickedState, pos);
         }
         return pos;
     }
