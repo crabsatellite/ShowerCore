@@ -42,6 +42,7 @@ import com.crabmod.hotbath.registers.ParticleRegister;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.network.chat.ClickEvent;
@@ -325,6 +326,13 @@ public class BathtubBlock extends HorizontalDirectionalBlock implements EntityBl
 
   public static float duckFloatSurfaceFor(BlockState state) {
       return BathtubWaterGeometry.duckFloatSurface(isClawfootBathtub(state));
+  }
+
+  public static Vec3 duckPlacementFor(BlockPos pos, BlockState state, Vec3 requestedPos) {
+      return new Vec3(
+              BathtubWaterGeometry.duckSafeWorldCoordinate(pos.getX(), requestedPos.x),
+              pos.getY() + duckFloatSurfaceFor(state),
+              BathtubWaterGeometry.duckSafeWorldCoordinate(pos.getZ(), requestedPos.z));
   }
 
   public static boolean isClawfootBathtub(BlockState state) {

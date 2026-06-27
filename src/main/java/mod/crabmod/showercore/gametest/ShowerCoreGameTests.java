@@ -3,6 +3,7 @@ package mod.crabmod.showercore.gametest;
 import com.mojang.authlib.GameProfile;
 import mod.crabmod.showercore.ShowerCore;
 import mod.crabmod.showercore.block.BathtubBlock;
+import mod.crabmod.showercore.block.BathtubWaterGeometry;
 import mod.crabmod.showercore.block.entity.BathtubBlockEntity;
 import mod.crabmod.showercore.entity.FaucetInteractionEntity;
 import mod.crabmod.showercore.entity.RubberDuckEntity;
@@ -74,7 +75,7 @@ public final class ShowerCoreGameTests {
     }
 
     @GameTest(template = EMPTY_TEMPLATE, timeoutTicks = 80)
-    public static void clawfoot_bathtub_fills_with_water_bucket_and_places_duck_on_surface(GameTestHelper helper) {
+    public static void clawfoot_bathtub_fills_with_water_bucket_and_places_edge_duck_inside_basin(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
         BlockPos footPos = helper.absolutePos(BATHTUB_FOOT_POS);
         BlockPos headPos = placeBathtub(level, footPos, BlocksRegister.BATHTUB_CLAWFOOT_WHITE.get(), ItemStack.EMPTY);
@@ -92,12 +93,18 @@ public final class ShowerCoreGameTests {
                 "foot liquid blockstate");
 
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ItemRegister.RUBBER_DUCK.get()));
-        helper.useBlock(BATHTUB_FOOT_POS, player, hitTop(footPos));
+        helper.useBlock(BATHTUB_FOOT_POS, player, hitAt(footPos, Direction.UP, 0.05D, 1.0D, 0.95D));
 
         List<RubberDuckEntity> ducks = level.getEntitiesOfClass(RubberDuckEntity.class, new AABB(footPos).inflate(1.0D));
         assertEquals(1, ducks.size(), "rubber duck count");
+        RubberDuckEntity duck = ducks.get(0);
+        assertNear(footPos.getX() + BathtubWaterGeometry.DUCK_SAFE_LOCAL_MIN,
+                duck.getX(), 0.001D, "rubber duck clamped x");
         assertNear(footPos.getY() + BathtubBlock.duckFloatSurfaceFor(level.getBlockState(footPos)),
-                ducks.get(0).getY(), 0.001D, "rubber duck surface y");
+                duck.getY(), 0.001D, "rubber duck surface y");
+        assertNear(footPos.getZ() + BathtubWaterGeometry.DUCK_SAFE_LOCAL_MAX,
+                duck.getZ(), 0.001D, "rubber duck clamped z");
+        assertDuckInsideBasin(footPos, duck);
         helper.succeed();
     }
 
@@ -233,6 +240,24 @@ public final class ShowerCoreGameTests {
 
     private static BlockHitResult hitTop(BlockPos pos) {
         return new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false);
+    }
+
+    private static BlockHitResult hitAt(BlockPos pos, Direction direction, double localX, double localY, double localZ) {
+        return new BlockHitResult(
+                new Vec3(pos.getX() + localX, pos.getY() + localY, pos.getZ() + localZ),
+                direction, pos, false);
+    }
+
+    private static void assertDuckInsideBasin(BlockPos pos, RubberDuckEntity duck) {
+        AABB box = duck.getBoundingBox();
+        double minX = pos.getX() + 2.0D / 16.0D;
+        double maxX = pos.getX() + 14.0D / 16.0D;
+        double minZ = pos.getZ() + 2.0D / 16.0D;
+        double maxZ = pos.getZ() + 14.0D / 16.0D;
+        assertTrue(box.minX >= minX - 0.001D, "rubber duck min x stays inside bathtub basin");
+        assertTrue(box.maxX <= maxX + 0.001D, "rubber duck max x stays inside bathtub basin");
+        assertTrue(box.minZ >= minZ - 0.001D, "rubber duck min z stays inside bathtub basin");
+        assertTrue(box.maxZ <= maxZ + 0.001D, "rubber duck max z stays inside bathtub basin");
     }
 
     private static ItemStack bathtubStack(Block block, String materialBlockId) {

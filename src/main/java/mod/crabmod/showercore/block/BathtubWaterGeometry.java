@@ -21,4 +21,8 @@ public final class BathtubWaterGeometry {
     public static double duckSafeLocalCoordinate(double coordinate) {
         return Math.max(DUCK_SAFE_LOCAL_MIN, Math.min(DUCK_SAFE_LOCAL_MAX, coordinate));
     }
+
+    public static double duckSafeWorldCoordinate(int blockCoordinate, double worldCoordinate) {
+        return blockCoordinate + duckSafeLocalCoordinate(worldCoordinate - blockCoordinate);
+    }
 }

@@ -35,19 +35,17 @@ class RubberDuckBathtubPlacementRegressionTest {
     }
 
     @Test
-    @DisplayName("Duck item placement snaps bathtub clicks to the bathtub float surface")
-    void duckPlacementUsesBathtubAwarePosition() throws IOException {
+    @DisplayName("Duck item placement delegates bathtub clicks to shared bathtub placement geometry")
+    void duckPlacementUsesSharedBathtubPlacementGeometry() throws IOException {
         String source = TestSourceUtils.readSource(DUCK_ITEM);
 
         assertTrue(source.contains("bathtubAwarePlacementPosition(level, context.getClickedPos(), pos)"),
                 "RubberDuckItem.useOn must adjust placement when clicking a bathtub block.");
         assertTrue(source.contains("bathtubAwarePlacementPosition(level, blockHitResult.getBlockPos(), pos)"),
                 "RubberDuckItem.use must adjust POV placement when clicking a bathtub block.");
-        assertTrue(source.contains("clickedPos.getY() + BathtubBlock.duckFloatSurfaceFor(clickedState)"),
-                "Bathtub duck placement must use the same float surface as duck buoyancy.");
-        assertTrue(source.contains("BathtubWaterGeometry.duckSafeLocalCoordinate"),
-                "Bathtub duck placement must clamp X/Z away from rim walls so edge clicks do not "
-                        + "spawn the duck intersecting clawfoot bathtub walls.");
+        assertTrue(source.contains("BathtubBlock.duckPlacementFor(clickedPos, clickedState, pos)"),
+                "RubberDuckItem must delegate bathtub placement to BathtubBlock so item placement "
+                        + "and in-game bathtub interaction cannot drift apart.");
     }
 
     @Test
