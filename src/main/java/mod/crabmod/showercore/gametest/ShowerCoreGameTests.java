@@ -75,6 +75,21 @@ public final class ShowerCoreGameTests {
     }
 
     @GameTest(template = EMPTY_TEMPLATE, timeoutTicks = 80)
+    public static void standard_bathtub_water_survives_client_sync_for_renderer(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        BlockPos footPos = helper.absolutePos(BATHTUB_FOOT_POS);
+        BlockPos headPos = placeBathtub(level, footPos, BlocksRegister.BATHTUB_GREEN.get(), ItemStack.EMPTY);
+
+        Player player = survivalPlayer(level);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        helper.useBlock(BATHTUB_FOOT_POS, player, hitTop(footPos));
+
+        assertWaterRenderStateRoundTrip(level, footPos, "standard bathtub foot");
+        assertWaterRenderStateRoundTrip(level, headPos, "standard bathtub head");
+        helper.succeed();
+    }
+
+    @GameTest(template = EMPTY_TEMPLATE, timeoutTicks = 80)
     public static void clawfoot_bathtub_fills_with_water_bucket_and_places_edge_duck_inside_basin(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
         BlockPos footPos = helper.absolutePos(BATHTUB_FOOT_POS);
@@ -236,6 +251,20 @@ public final class ShowerCoreGameTests {
             throw new GameTestAssertException(message + ": expected bathtub block entity at " + pos);
         }
         return bathtub;
+    }
+
+    private static void assertWaterRenderStateRoundTrip(ServerLevel level, BlockPos pos, String message) {
+        BlockState state = level.getBlockState(pos);
+        BathtubBlockEntity serverBathtub = bathtubAt(level, pos, message);
+        assertEquals(BathtubBlock.LiquidType.WATER, state.getValue(BathtubBlock.LIQUID),
+                message + " liquid blockstate");
+        assertEquals(1000, serverBathtub.getFluidTank().getFluidAmount(), message + " server water amount");
+        assertEquals(Fluids.WATER, serverBathtub.getFluidTank().getFluid().getFluid(), message + " server fluid");
+
+        BathtubBlockEntity clientBathtub = new BathtubBlockEntity(pos, state);
+        clientBathtub.handleUpdateTag(serverBathtub.getUpdateTag());
+        assertEquals(1000, clientBathtub.getFluidTank().getFluidAmount(), message + " synced water amount");
+        assertEquals(Fluids.WATER, clientBathtub.getFluidTank().getFluid().getFluid(), message + " synced fluid");
     }
 
     private static BlockHitResult hitTop(BlockPos pos) {

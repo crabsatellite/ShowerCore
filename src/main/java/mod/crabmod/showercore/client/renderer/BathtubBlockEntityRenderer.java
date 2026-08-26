@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -70,7 +70,11 @@ public class BathtubBlockEntityRenderer implements BlockEntityRenderer<BathtubBl
 
         pPoseStack.pushPose();
 
-        VertexConsumer builder = pBufferSource.getBuffer(RenderType.translucent());
+        // Block entities render before the chunk translucent pass. In Fabulous graphics, the
+        // chunk translucent render type targets LevelRenderer's translucent framebuffer, but
+        // that framebuffer is cleared after the block-entity batch is flushed. The vanilla
+        // block-entity translucent sheet is flushed on the correct side of that clear.
+        VertexConsumer builder = pBufferSource.getBuffer(Sheets.translucentCullBlockSheet());
         Matrix4f matrix = pPoseStack.last().pose();
 
         boolean clawfoot = BathtubBlock.isClawfootBathtub(state);
