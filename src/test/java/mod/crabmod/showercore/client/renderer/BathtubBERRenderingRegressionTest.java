@@ -41,8 +41,12 @@ class BathtubBERRenderingRegressionTest {
     private static final Pattern NULL_TEXTURE_GUARD =
             Pattern.compile("stillTexture\\s*==\\s*null");
 
-    /** Matches {@code RenderType.translucent()} — the BER must use translucent for proper alpha. */
-    private static final Pattern TRANSLUCENT_RENDER_TYPE =
+    /** Matches the block-entity translucent sheet that survives the Fabulous render pipeline. */
+    private static final Pattern BLOCK_ENTITY_TRANSLUCENT_SHEET =
+            Pattern.compile("Sheets\\.translucentCullBlockSheet\\(\\)");
+
+    /** Matches the chunk translucent target that Fabulous clears after block entities render. */
+    private static final Pattern UNSAFE_CHUNK_TRANSLUCENT_TYPE =
             Pattern.compile("RenderType\\.translucent\\(\\)");
 
     /** Matches {@code getStillTexture} — the BER must fetch the texture from the FluidType. */
@@ -69,12 +73,17 @@ class BathtubBERRenderingRegressionTest {
     }
 
     @Test
-    @DisplayName("BER uses RenderType.translucent() for the fluid surface buffer")
-    void usesTranslucentRenderType() throws IOException {
+    @DisplayName("BER uses the block-entity translucent sheet so water survives Fabulous rendering")
+    void usesFabulousSafeBlockEntityTranslucentSheet() throws IOException {
         String source = TestSourceUtils.readSource(BER_SOURCE);
-        assertTrue(TRANSLUCENT_RENDER_TYPE.matcher(source).find(),
-                "BathtubBlockEntityRenderer must use RenderType.translucent() so the "
-                        + "custom fluid surface has proper alpha blending.");
+        assertTrue(BLOCK_ENTITY_TRANSLUCENT_SHEET.matcher(source).find(),
+                "BathtubBlockEntityRenderer must use Sheets.translucentCullBlockSheet() so "
+                        + "fluid geometry is flushed as block-entity transparency and remains "
+                        + "visible when Fabulous clears its chunk-translucent framebuffer.");
+        assertFalse(UNSAFE_CHUNK_TRANSLUCENT_TYPE.matcher(source).find(),
+                "BathtubBlockEntityRenderer must not submit fluid geometry to "
+                        + "RenderType.translucent(); Fabulous clears that target after the "
+                        + "block-entity batch, erasing the bathtub water.");
     }
 
     @Test
