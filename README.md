@@ -2,6 +2,22 @@
 
 # ShowerCore 🚿
 
+<!-- PROMO-VIDEO:START -->
+
+**Build a bathroom worth coming home to. Functional shower heads, six buff-granting cores, customizable bathtubs, shared baths and a floating rubber duck extend Hot Bath.**
+
+`Forge 1.20.1` · `NeoForge 1.21.1`
+
+[![Watch the trailer](https://i.ytimg.com/vi/iOpgwCFBCWI/maxresdefault.jpg)](https://www.youtube.com/watch?v=iOpgwCFBCWI)
+
+▶ [Watch the trailer](https://www.youtube.com/watch?v=iOpgwCFBCWI) · 0:55 · 1080p · English captions, music and effects
+
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/showercore) · [Modrinth](https://modrinth.com/mod/showercore) · [GitHub](https://github.com/crabsatellite/ShowerCore)
+
+Requires [Hot Bath](https://www.curseforge.com/minecraft/mc-mods/hotbath).
+
+<!-- PROMO-VIDEO:END -->
+
 **[English]**
 
 Welcome to **ShowerCore**! Tired of smelling like a zombie after a long mining trip? Want to gain superpowers just by standing under some water? You've come to the right place. This mod turns your boring hygiene routine into a magical, buff-granting experience.
